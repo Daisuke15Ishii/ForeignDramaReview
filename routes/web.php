@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('/home');
+    return view('/index');
 });
 
 
@@ -43,13 +43,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 /*　これより下の記述は、画面表示のテスト確認用　*/
 Route::group(['prefix' => 'about'], function(){
     Route::get('/', function () {
-        return view('/about/home');
+        return view('/about/index');
     });
     Route::get('/info', function () {
         return view('/about/info/index');
     });
     Route::get('/terms-of-service', function () {
-        return view('/about/terms-of-service/home');
+        return view('/about/terms-of-service/index');
     });
     Route::get('/contact', function () {
         return view('/about/contact/create');
