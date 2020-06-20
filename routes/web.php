@@ -64,3 +64,12 @@ Route::group(['prefix' => 'user/register'], function(){
         return view('/user/register/complete');
     });
 });
+
+Route::group(['prefix' => 'drama/dramaID'], function(){
+    Route::get('/', function () {
+        return view('/drama/dramaID/index');
+    });
+    Route::post('/', function () {
+        return view('/drama/dramaID/index');
+    });
+});

@@ -26,45 +26,50 @@
     </head>
     <body>
         <header>
-            <div class="">
+            <div class="" style="background: #00ff00;">
                 {{-- 画面上部の帯 --}}
-                <div class="">
+                <div class="container">
                     {{-- divでコンテンツ幅を指定 --}}
-                    <div class="">
-                        <p>みんなで海外ドラマをレビューしよう</p>
-                        
-                        <!-- Authentication Links -->
-                        {{-- ログインしていなかったら「ゲストさん」「新規登録画面へのリンク」「ログインボタン」を表示 --}}
-                        @guest
-                            <span class="">ゲストさん</span>
-                            <a href="{{ route('register') }}">新規アカウント登録</a>
-                            <a class="nav-link" href="{{ route('login') }}"><img src="" alt="ログイン"></a>
-                        {{-- ログインしていたら「ユーザー名」「マイページへのリンク」「ログアウトボタン」を表示 --}}
-                        @else
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}<span class="">さん</span>
-                        </a>
-                        <a href="#">マイページ</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                            <img src="" alt="ログアウト">
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                        @endguest
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <p>みんなで海外ドラマをレビューしよう</p>
+                            
+                            <!-- Authentication Links -->
+                            {{-- ログインしていなかったら「ゲストさん」「新規登録画面へのリンク」「ログインボタン」を表示 --}}
+                            @guest
+                                <span class="">ゲストさん</span>
+                                <a href="{{ route('register') }}">新規アカウント登録</a>
+                                <a class="nav-link" href="{{ route('login') }}"><img src="" alt="ログイン"></a>
+                            {{-- ログインしていたら「ユーザー名」「マイページへのリンク」「ログアウトボタン」を表示 --}}
+                            @else
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}<span class="">さん</span>
+                            </a>
+                            <a href="#">マイページ</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                <img src="" alt="ログアウト">
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @endguest
+                            
+                        </div>
                     </div>
                 </div>
-                
+            </div>
+
+            <div class="container">
                 {{-- ロゴタイトル、検索バー --}}
-                <div class="">
-                    <div class="">
+                <div class="row">
+                    <div class="col-md-3">
                         <a class="" href="{{ url('/') }}">
                             <img src="" alt="ロゴとサイトタイトル">
                         </a>
                     </div>
-                    <div class="">
+                    <div class="col-md-9">
                         <form action="" method="get">
                             <div class="form-group row">
                                 <div class="">
@@ -89,22 +94,24 @@
                 {{-- ナビゲーションバー --}}
                 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                     <div class="container">
-                        <div class="">
-                            <div class="">
-                                <a class="" href="{{ url('/') }}">トップページ</a>
-                            </div>
-                            <div class="">
-                                <a class="" href="#">作品条件検索</a>
-                            </div>
-                            <div class="">
-                                <a class="" href="#">最新レビュー</a>
-                            </div>
-                            <div class="">
-                                <a class="" href="#">おすすめドラマ</a>
-                            </div>
-                            <div class="">
-                                <a class="" href="#">サイト情報</a>
-                            </div>
+                        <div class="collapse navbar-collapse justify-content-center">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/') }}">トップページ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">作品条件検索</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">最新レビュー</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">おすすめドラマ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">サイト情報</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </nav>
@@ -115,5 +122,6 @@
                         <a href="{{ url('/') }}">トップページ</a> &raquo;
                     </p>
                 </div>
+                
             </div>
         </header>
