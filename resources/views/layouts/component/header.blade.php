@@ -70,7 +70,7 @@
                         </a>
                     </div>
                     <div class="col-md-9">
-                        <form action="" method="get">
+                        <form action="{{ url('/search/result') }}" method="get">
                             <div class="form-group row">
                                 <div class="">
                                     <select name="data[mode]" class="" id="mode">
@@ -100,7 +100,7 @@
                                     <a class="nav-link" href="{{ url('/') }}">トップページ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">作品条件検索</a>
+                                    <a class="nav-link" href="{{ url('/search/') }}">作品条件検索</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">最新レビュー</a>
@@ -109,7 +109,7 @@
                                     <a class="nav-link" href="#">おすすめドラマ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">サイト情報</a>
+                                    <a class="nav-link" href="{{ url('/about') }}">サイト情報</a>
                                 </li>
                             </ul>
                         </div>

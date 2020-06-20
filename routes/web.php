@@ -72,4 +72,27 @@ Route::group(['prefix' => 'drama/dramaID'], function(){
     Route::post('/', function () {
         return view('/drama/dramaID/index');
     });
+    Route::get('/review/reviewID', function () {
+        return view('/drama/dramaID/review/reviewID/index');
+    });
+    Route::post('/review/reviewID', function () {
+        return view('/drama/dramaID/review/reviewID/index');
+    });
+    
+});
+
+
+Route::group(['prefix' => 'search'], function(){
+    Route::get('/', function () {
+        return view('/search/index');
+    });
+    Route::post('/', function () {
+        return view('/search//index');
+    });
+    Route::get('/result', function () {
+        return view('/search/result/index');
+    });
+    Route::post('/result', function () {
+        return view('/search/result/index');
+    });
 });

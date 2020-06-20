@@ -15,16 +15,16 @@
                             <li><a href="{{ route('register') }}">新規アカウント登録</a></li>
                         </ul>
                     </li>
-                    <li class="list-inline-item"><a href="#">作品条件検索</a>
+                    <li class="list-inline-item"><a href="{{ url('/search') }}">作品条件検索</a>
                     <li class="list-inline-item"><a href="#">最新レビュー</a>
                     <li class="list-inline-item"><a href="#">おすすめドラマ</a>
-                    <li class="list-inline-item"><a href="#">サイト情報</a>
+                    <li class="list-inline-item"><a href="{{ url('/about') }}">サイト情報</a>
                         <ul>
-                            <li><a href="#">サイト概要</a></li>
-                            <li><a href="#">お知らせ</a></li>
+                            <li><a href="{{ url('/about') }}">サイト概要</a></li>
+                            <li><a href="{{ url('/about/info') }}">お知らせ</a></li>
                             <li><a href="#">ガイドライン</a></li>
-                            <li><a href="#">利用規約等</a></li>
-                            <li><a href="#">お問合せ</a></li>
+                            <li><a href="{{ url('/about/terms-of-service/') }}">利用規約等</a></li>
+                            <li><a href="{{ url('/about/contact') }}">お問合せ</a></li>
                         </ul>
                     </li>
                 </ul>
