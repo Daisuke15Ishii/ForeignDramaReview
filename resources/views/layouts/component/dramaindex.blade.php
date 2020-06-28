@@ -1,7 +1,9 @@
                 <div class="row" style="border:dotted 1px">
                     <div class="col-md-3">
                         <div class="">
-                            <a href="{{ url('/drama/dramaID') }}"><img src="#" width="190" height="260" alt="作品画像" title="作品タイトル"></a>
+                            <a href="{{ url('/drama/dramaID') }}">
+                                <p class="eyecatch"><img src="{{ secure_asset('images/1.png') }}" alt="作品画像" title="作品タイトル"></p>
+                            </a>
                         </div>
                         <small>&copy; 2008-2013 Sony Pictures Television Inc.</small>
                     </div>
