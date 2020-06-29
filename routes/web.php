@@ -110,3 +110,23 @@ Route::group(['prefix' => 'drama/dramaID/review', 'middleware' => 'auth'], funct
         return view('/drama/dramaID/review/reviewID/index');
     });
 });
+
+
+Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
+    Route::get('/profile/edit', function () {
+        return view('/user/mypage/profile/edit');
+    });
+    Route::post('/profile/edit', function () {
+        return view('/user/mypage/profile/edit');
+    });
+    Route::get('/setting/edit', function () {
+        return view('/user/mypage/setting/edit');
+    });
+    Route::post('/setting/edit', function () {
+        return view('/user/mypage/setting/complete');
+    });
+    Route::get('/setting/complete', function () {
+        return view('/');
+    });
+
+});

@@ -1,4 +1,4 @@
-                <div class="row" style="border:dotted 1px">
+                <div class="row my-4" style="border:dotted 1px">
                     <div class="col-md-3">
                         <div class="">
                             <a href="{{ url('/drama/dramaID') }}">

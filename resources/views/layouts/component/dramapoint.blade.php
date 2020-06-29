@@ -1,7 +1,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="">
-                            <img src="#" width="190" height="260" alt="作品画像" title="作品タイトル">
+                            <img src="{{ secure_asset('images/1.png') }}" width="190" height="260" alt="作品画像" title="作品タイトル">
                         </div>
                         <small>&copy; 2008-2013 Sony Pictures Television Inc.</small>
                         <p>タイトル：<cite>ブレイキング・バッド(Breaking Bad)</cite></p>
