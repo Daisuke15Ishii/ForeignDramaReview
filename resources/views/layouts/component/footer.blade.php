@@ -10,7 +10,7 @@
             <div class="col-md-9">
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="{{ url('/') }}">トップページ</a></li>
-                    <li class="list-inline-item"><a href="#">マイページ</a>
+                    <li class="list-inline-item"><a href="{{ url('/user/mypage') }}">マイページ</a>
                         <ul>
                             <li><a href="{{ route('register') }}">新規アカウント登録</a></li>
                         </ul>

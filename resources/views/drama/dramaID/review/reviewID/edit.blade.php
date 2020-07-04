@@ -1,13 +1,13 @@
 @extends('layouts.member')
 
 {{-- データベース作成後にタイトル修正予定 --}}
-@section('title', 'レビュー投稿｜ブレイキング・バッド　シーズン1｜洋ドラ会議(仮)')
+@section('title', 'レビュー編集｜ブレイキング・バッド　シーズン1｜洋ドラ会議(仮)')
 
 {{-- データベース作成後に諸々修正予定(とりあえず文章を手入力) --}}
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white">
-            <h1>ブレイキング・バッド　シーズン１のレビュー投稿</h1>
+            <h1>ブレイキング・バッド　シーズン１のレビューを編集</h1>
             {{-- 色々後回し。現在はcreate.blade.phpと全く同じ --}}
             <form method="POST" action="{{ url('/drama/dramaID/review') }}">
                 @csrf

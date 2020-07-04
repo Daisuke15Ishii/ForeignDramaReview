@@ -80,6 +80,14 @@ Route::group(['prefix' => 'drama/dramaID'], function(){
     });
 });
 
+Route::group(['prefix' => 'drama/review'], function(){
+    Route::get('/', function () {
+        return view('/drama/review/index');
+    });
+    Route::post('/', function () {
+        return view('/drama/review/index');
+    });
+});
 
 Route::group(['prefix' => 'search'], function(){
     Route::get('/', function () {
@@ -96,6 +104,18 @@ Route::group(['prefix' => 'search'], function(){
     });
 });
 
+
+Route::group(['prefix' => 'user/userID'], function(){
+    Route::get('/', function () {
+        return view('/user/userID/index');
+    });
+    Route::post('/', function () {
+        return view('/user/userID/index');
+    });
+});
+
+
+
 Route::group(['prefix' => 'drama/dramaID/review', 'middleware' => 'auth'], function(){
     Route::get('/', function () {
         return view('/drama/dramaID/review/create');
@@ -103,10 +123,10 @@ Route::group(['prefix' => 'drama/dramaID/review', 'middleware' => 'auth'], funct
     Route::post('/', function () {
         return view('/drama/dramaID/review/create');
     });
-    Route::get('/review/reviewID/edit', function () {
+    Route::get('/reviewID/edit', function () {
         return view('/drama/dramaID/review/reviewID/edit');
     });
-    Route::post('/review/reviewID', function () {
+    Route::post('/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
     });
 });
@@ -127,6 +147,25 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     });
     Route::get('/setting/complete', function () {
         return view('/');
+    });
+
+    Route::get('/', function () {
+        return view('/user/mypage/index');
+    });
+    Route::post('/', function () {
+        return view('/user/mypage/index');
+    });
+    Route::get('/drama', function () {
+        return view('/user/mypage/drama/index');
+    });
+    Route::post('/drama', function () {
+        return view('/user/mypage/drama/index');
+    });
+    Route::get('/drama/favorite', function () {
+        return view('/user/mypage/drama/favorite/index');
+    });
+    Route::post('/drama/favorite', function () {
+        return view('/user/mypage/drama/favorite/index');
     });
 
 });

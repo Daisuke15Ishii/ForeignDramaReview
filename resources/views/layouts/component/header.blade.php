@@ -9,7 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         {{-- 各ページごとにtitleタグを入れるために@yieldで空けておきます。 --}}
-        <title>@yield('title')</title>
+        <title>@yield('title')｜洋ドラ会議(仮)</title>
         
         {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
@@ -45,7 +45,7 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}<span class="">さん</span>
                             </a>
-                            <a href="#">マイページ</a>
+                            <a href="{{ url('/user/mypage') }}">マイページ</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
