@@ -66,9 +66,7 @@ Route::group(['prefix' => 'user/register'], function(){
 });
 
 Route::group(['prefix' => 'drama/dramaID'], function(){
-    Route::get('/', function () {
-        return view('/drama/dramaID/index');
-    });
+    Route::get('/', 'drama\dramaID\DramaIDController@index');
     Route::post('/', function () {
         return view('/drama/dramaID/index');
     });

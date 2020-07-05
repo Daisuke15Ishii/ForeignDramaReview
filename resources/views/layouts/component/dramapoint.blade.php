@@ -1,15 +1,15 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="">
-                            <img src="{{ secure_asset('images/1.png') }}" width="190" height="260" alt="作品画像" title="作品タイトル">
+                            <p class="eyecatch" width="190" height="260"><img src="{{ secure_asset('images/1.png') }}" alt="{{ $items->title }}画像" title="{{ $items->title }}"></p>
                         </div>
-                        <small>&copy; 2008-2013 Sony Pictures Television Inc.</small>
-                        <p>タイトル：<cite>ブレイキング・バッド(Breaking Bad)</cite></p>
-                        <p>出演者：ライアン・クランストン、アーロン・ポール</p>
-                        <p>監督等：ヴィンス・ギリガン</p>
-                        <p>国：アメリカ</p>
-                        <p>放映日：2008年1月～</p>
-                        <p>話数：7話</p>
+                        <small>&copy; 2008-2013 {{ $items->copyright }}</small>
+                        <p>タイトル：<cite>{{ $items->title }}({{ $items->title_en }})</cite></p>
+                        <p>出演者：{{ $items->cast1 }}、{{ $items->cast2 }}、{{ $items->cast3 }}</p>
+                        <p>監督等：{{ $items->staff }}</p>
+                        <p>国：{{ $items->country }}</p>
+                        <p>放映日：{{ $items->onair }}年月～</p>
+                        <p>話数：{{ $items->number }}話</p>
                         <p>ジャンル：犯罪</p>
                     </div>
                     <div class="col-md-9 bg-warning">
