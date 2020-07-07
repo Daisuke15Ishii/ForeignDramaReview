@@ -67,9 +67,9 @@ Route::group(['prefix' => 'user/register'], function(){
 
 Route::group(['prefix' => 'drama/dramaID'], function(){
     Route::get('/', 'drama\dramaID\DramaIDController@index');
-    Route::post('/', function () {
-        return view('/drama/dramaID/index');
-    });
+    //postはまだ未作成なので、取り合えず@indexへ
+    Route::post('/', 'drama\dramaID\DramaIDController@index');
+    
     Route::get('/review/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
     });

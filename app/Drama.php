@@ -19,4 +19,22 @@ class Drama extends Model
     );
     
     //他のモデルに関連付けを後で実装
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    public function score()
+    {
+        return $this->hasOne('App\Score');
+    }
+
+
+/*　利用不可(usersテーブルにreview_idカラムがないので紐づけ出来ない？)
+    public function reviewUsers()
+    {
+        return $this->hasManyThrough('App\User','App\Review');
+    }
+*/
+
 }

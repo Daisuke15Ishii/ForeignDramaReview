@@ -4,7 +4,12 @@ namespace App\Http\Controllers\drama\dramaID;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Drama;
+use App\Review;
+use App\User;
+use App\Score;
+
 
 class DramaIDController extends Controller
 {

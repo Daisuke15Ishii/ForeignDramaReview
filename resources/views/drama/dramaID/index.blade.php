@@ -36,10 +36,13 @@
                             </select>
                         </div>
                         <div class="row">
+                            @foreach($items->reviews()->get() as $review)
+                                @include('layouts.component.review')
+                            @endforeach
+                            
+                           
                             {{-- @foreachでサイト各レビューを引っ張ってくる予定 --}}
-                            @include('layouts.component.review')
-                            @include('layouts.component.review')
-                            @include('layouts.component.review')
+                            {{-- @include('layouts.component.review') --}}
                             ここにペジネーション配置
                         </div>
                     </div>

@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
         
         {{-- この章の後半で作成するCSSを読み込みます --}}
-        <link rel="stylesheet" href="{{ secure_asset('css/front.css') }}">
+        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
     </head>
     <body>
         <header>

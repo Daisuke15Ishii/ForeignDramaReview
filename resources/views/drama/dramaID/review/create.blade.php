@@ -165,7 +165,7 @@
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <h3>レビュー内容</h3>
-                                <textarea name="" cols="100" rows="20" id="" placeholder="感想を自由に書きましょう！"></textarea>
+                                <textarea name="" class="col-md-12" col="20" id="" placeholder="感想を自由に書きましょう！"></textarea>
                             </div>
                             <div class="col-md-12 mx-auto">
                                 <label>
