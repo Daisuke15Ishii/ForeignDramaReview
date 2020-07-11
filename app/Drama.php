@@ -29,6 +29,21 @@ class Drama extends Model
         return $this->hasOne('App\Score');
     }
 
+    public function favorites()
+    {
+        return $this->hasMany('App\Favorite');
+    }
+    
+    public function favoritesUser()
+    {
+        return $this->belongsToMany('App\User','favorites','drama_id');
+    }
+
+    public function janre()
+    {
+        return $this->belongsToMany('App\Janre');
+    }
+
 
 /*　利用不可(usersテーブルにreview_idカラムがないので紐づけ出来ない？)
     public function reviewUsers()

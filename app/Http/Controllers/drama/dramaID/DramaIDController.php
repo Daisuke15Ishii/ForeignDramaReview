@@ -9,7 +9,8 @@ use App\Drama;
 use App\Review;
 use App\User;
 use App\Score;
-
+use App\Favorite;
+use App\Like;
 
 class DramaIDController extends Controller
 {

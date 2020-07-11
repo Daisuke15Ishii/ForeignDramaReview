@@ -30,7 +30,7 @@ class Score extends Model
     );
     
     //他のモデルに関連付けを後で実装
-    public function dramas()
+    public function drama()
     {
       return $this->belongsTo('App\Drama');
     }

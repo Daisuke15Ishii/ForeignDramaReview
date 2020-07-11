@@ -36,9 +36,20 @@ class Review extends Model
       return $this->belongsTo('App\User');
     }
     
-    public function dramas()
+    public function drama()
     {
       return $this->belongsTo('App\Drama');
     }
+
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+    
+    public function likesUser()
+    {
+        return $this->belongsToMany('App\User','likes','review_id');
+    }
+    
    
 }

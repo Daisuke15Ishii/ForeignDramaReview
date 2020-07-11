@@ -26,6 +26,13 @@
                                 @csrf
                                 <input type="submit" value="マイページに作品登録">
                             </form>
+                            {{-- 確認テスト用の表示 --}}
+                            
+                            @guest
+                                お気に入り登録の有無：なし(ゲスト)
+                            @else
+                                お気に入り登録の有無：{{ $items->favorites()->where('user_id',Auth::user()->id)->first()->favorite }}
+                            @endguest
                         </div>
                         <div class="row">
                         総合評価の中央値：<span class="bg-secondary">{{ sprintf('%.2f', $items->score()->first()->median_total_evaluation) }}点</span>(レビュー評価数：{{ $items->score()->first()->reviews }}人)
