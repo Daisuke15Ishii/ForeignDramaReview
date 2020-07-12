@@ -19,7 +19,7 @@ class Favorite extends Model
         'stop' => 'boolean|required',
         'uncategorized' => 'boolean|required',
         'favorite' => 'boolean|required',
-        'comment' => 'size:100'
+        'comment' => 'max:100'
 
     );
     

@@ -115,12 +115,11 @@ Route::group(['prefix' => 'user/userID'], function(){
 
 
 Route::group(['prefix' => 'drama/dramaID/review', 'middleware' => 'auth'], function(){
-    Route::get('/', function () {
-        return view('/drama/dramaID/review/create');
-    });
-    Route::post('/', function () {
-        return view('/drama/dramaID/review/create');
-    });
+    Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add');
+    Route::post('/', 'drama\dramaID\review\DramaIDReviewController@create');
+//    Route::post('/', function () {
+//        return view('/drama/dramaID/review/create');
+//    });
     Route::get('/reviewID/edit', function () {
         return view('/drama/dramaID/review/reviewID/edit');
     });

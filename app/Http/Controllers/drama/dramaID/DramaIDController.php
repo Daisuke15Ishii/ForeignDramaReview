@@ -27,8 +27,8 @@ class DramaIDController extends Controller
     
     public function index(Request $request){
         //画面表示確認のため仮設定
-        $items = Drama::where('id', 1)->first();
-        return view('drama.dramaID.index', ['items' => $items]);
+        $drama = Drama::where('id', 1)->first();
+        return view('drama.dramaID.index', ['drama' => $drama]);
     }
     
     public function edit(Request $request){

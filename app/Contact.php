@@ -14,6 +14,6 @@ class Contact extends Model
         'name_kana' => 'required',
         'phone' => 'required|numeric|digits-between:9,15', //ハイフン不要
         'mail' => 'required|email',
-        'comment' => 'required|size:4000',
+        'comment' => 'required|max:4000',
     );
 }

@@ -15,8 +15,8 @@ class Request extends Model
         'title' => 'required',
         'season' => 'required',
         'cast' => 'string|size:100',
-        'country' => 'string|size:50',
-        'comment' => 'size:500',
+        'country' => 'string|max:50',
+        'comment' => 'max:500',
         'url' => 'url' //参考URL
     );
 
