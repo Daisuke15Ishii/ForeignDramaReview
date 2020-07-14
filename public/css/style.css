@@ -6,3 +6,12 @@ img {
     height: 1.1em;
     width: auto;
 }
+
+.like {
+    height: 1.5em;
+    width: auto;
+}
+
+.person {
+    width: 80%;
+}

@@ -7,143 +7,153 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white">
-            <h1>ブレイキング・バッド　シーズン１のレビューを編集</h1>
+            <h1>{{ $drama->title }} シーズン{{ $drama->season }}のレビューを編集</h1>
             {{-- 色々後回し。現在はcreate.blade.phpと全く同じ --}}
-            <form method="POST" action="{{ url('/drama/dramaID/review') }}">
+            <form action="{{ action('drama\dramaID\review\DramaIDReviewController@create') }}" method="POST">
                 @csrf
+                {{-- 保留、仮入力。hiddenにid等を記述するのは辞めた方が良いかも--}}
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="drama_id" value="{{ $drama->id }}">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="">
-                            <img src="#" width="190" height="260" alt="作品画像" title="作品タイトル">
+                            <p class="eyecatch overflow-hidden col-md-12"><img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}"></p>
                         </div>
-                        <small>&copy; 2008-2013 Sony Pictures Television Inc.</small>
+                        <small>&copy; {{ $drama->copyright }}</small>
                     </div>
                     <div class="col-md-9 bg-warning">
+                        @if(count($errors) > 0)
+                            <ull>
+                                @foreach($errors->all() as $e)
+                                    <li>{{ $e }}</li>
+                                @endforeach
+                            </ull>
+                        @endif
+                        
                         <div class="row">
                             <div class="form-group col-md-9">
-                                <label for="totalpoint" class="bg-secondary">総合評価</label>
-                                    <select  id="totalpoint" name="" class="">
-                                        <option value="100">100点</option>
-                                        <option value="99">99点</option>
-                                        <option value="2">2点</option>
-                                        <option value="1">1点</option>
+                                <label for="total_evaluation" class="bg-secondary">総合評価</label>
+                                    <select id="total_evaluation" name="total_evaluation">
+                                        <option value="">点数選択</option>
+                                        @for($i = 100; $i > 0; $i--)
+                                            <option value="{{ $i }}">{{ $i }}点</option>
+                                        @endfor
                                     </select>
-                                <label for="totalpoint" class="bg-secondary">★★★★★</label>
+                                <label for="total_evaluation" class="bg-secondary">★★★★★</label>
                             </div>
                             <div class="checkbox col-md-3">
-                                <input type="checkbox" id="favorite" name="favorite">
+                                <input type="checkbox" id="favorite" name="favorite"  value="1">
                                 <label for="favorite" class="bg-secondary">お気に入り登録</label>
                             </div>
                         </div>
                         
                         <div class="row form-inline">
                             <div class="form-group col-md-6">
-                                <label for="status" class="control-label bg-secondary">現在の進捗</label>
-                                <select class="form-control" id="status" name="status">
-                                    <option value="watched" selected>視聴済</option>
-                                    <option value="watching">視聴中</option>
-                                    <option value="wantto">視聴断念</option>
-                                    <option value="not">未視聴</option>
-                                    {{-- マイページからの削除方法については検討中。下記は仮設定 --}}
-                                    <option value="delete">未視聴(マイページから削除)</option>
+                                <label for="progress" class="control-label bg-secondary">現在の進捗</label>
+                                <select class="form-control" id="progress" name="progress">
+                                    <option value="0" selected>未分類</option>
+                                    <option value="4">視聴済</option>
+                                    <option value="3">視聴中</option>
+                                    <option value="2">視聴断念</option>
+                                    <option value="1">未視聴</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="voice" class="control-label bg-secondary">字幕・吹替</label>
-                                <select class="form-control" id="voice" name="voice">
-                                    <option value="dub" selected>吹替</option>
-                                    <option value="sub">字幕</option>
+                                <label for="subtitles" class="control-label bg-secondary">字幕・吹替</label>
+                                <select class="form-control" id="subtitles" name="subtitles">
+                                    <option value="0" selected>吹替</option>
+                                    <option value="1">字幕</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="row form-inline">
                             <div class="form-group col-md-6">
-                                <label for="story" class="control-label bg-secondary">シナリオの評価</label>
-                                <select class="form-control" id="story" name="story">
-                                    <option value="5" selected>★★★★★</option>
+                                <label for="story_evaluation" class="control-label bg-secondary">シナリオの評価</label>
+                                <select class="form-control" id="story_evaluation" name="story_evaluation">
+                                    <option value="5.0">5.0</option>
                                     <option value="4.5">4.5</option>
-                                    <option value="4.0">★★★★</option>
+                                    <option value="4.0">4.0</option>
                                     <option value="3.5">3.5</option>
-                                    <option value="3.0">★★★</option>
+                                    <option value="3.0" selected>3.0</option>
                                     <option value="2.5">2.5</option>
-                                    <option value="2.0">★★</option>
+                                    <option value="2.0">2.0</option>
                                     <option value="1.5">1.5</option>
-                                    <option value="1.0">★</option>
+                                    <option value="1.0">1.0</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="character" class="control-label bg-secondary">キャラの評価</label>
-                                <select class="form-control" id="character" name="character">
-                                    <option value="5" selected>★★★★★</option>
+                                <label for="char_evaluation" class="control-label bg-secondary">キャラの評価</label>
+                                <select class="form-control" id="char_evaluation" name="char_evaluation">
+                                    <option value="5.0">5.0</option>
                                     <option value="4.5">4.5</option>
-                                    <option value="4.0">★★★★</option>
+                                    <option value="4.0">4.0</option>
                                     <option value="3.5">3.5</option>
-                                    <option value="3.0">★★★</option>
+                                    <option value="3.0" selected>3.0</option>
                                     <option value="2.5">2.5</option>
-                                    <option value="2.0">★★</option>
+                                    <option value="2.0">2.0</option>
                                     <option value="1.5">1.5</option>
-                                    <option value="1.0">★</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-inline">
-                            <div class="form-group col-md-6">
-                                <label for="world" class="control-label bg-secondary">世界観の評価</label>
-                                <select class="form-control" id="world" name="world">
-                                    <option value="5" selected>★★★★★</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="4.0">★★★★</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="3.0">★★★</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="2.0">★★</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="1.0">★</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="visual" class="control-label bg-secondary">映像美の評価</label>
-                                <select class="form-control" id="visual" name="visual">
-                                    <option value="5" selected>★★★★★</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="4.0">★★★★</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="3.0">★★★</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="2.0">★★</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="1.0">★</option>
+                                    <option value="1.0">1.0</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row form-inline">
                             <div class="form-group col-md-6">
-                                <label for="actor" class="control-label bg-secondary">演者の評価</label>
-                                <select class="form-control" id="actor" name="actor">
-                                    <option value="5" selected>★★★★★</option>
+                                <label for="world_evaluation" class="control-label bg-secondary">世界観の評価</label>
+                                <select class="form-control" id="world_evaluation" name="world_evaluation">
+                                    <option value="5.0">5.0</option>
                                     <option value="4.5">4.5</option>
-                                    <option value="4.0">★★★★</option>
+                                    <option value="4.0">4.0</option>
                                     <option value="3.5">3.5</option>
-                                    <option value="3.0">★★★</option>
+                                    <option value="3.0" selected>3.0</option>
                                     <option value="2.5">2.5</option>
-                                    <option value="2.0">★★</option>
+                                    <option value="2.0">2.0</option>
                                     <option value="1.5">1.5</option>
-                                    <option value="1.0">★</option>
+                                    <option value="1.0">1.0</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="music" class="control-label bg-secondary">音楽の評価</label>
-                                <select class="form-control" id="music" name="music">
-                                    <option value="5" selected>★★★★★</option>
+                                <label for="visual_evaluation" class="control-label bg-secondary">映像美の評価</label>
+                                <select class="form-control" id="visual_evaluation" name="visual_evaluation">
+                                    <option value="5.0">5.0</option>
                                     <option value="4.5">4.5</option>
-                                    <option value="4.0">★★★★</option>
+                                    <option value="4.0">4.0</option>
                                     <option value="3.5">3.5</option>
-                                    <option value="3.0">★★★</option>
+                                    <option value="3.0" selected>3.0</option>
                                     <option value="2.5">2.5</option>
-                                    <option value="2.0">★★</option>
+                                    <option value="2.0">2.0</option>
                                     <option value="1.5">1.5</option>
-                                    <option value="1.0">★</option>
+                                    <option value="1.0">1.0</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-inline">
+                            <div class="form-group col-md-6">
+                                <label for="cast_evaluation" class="control-label bg-secondary">演者の評価</label>
+                                <select class="form-control" id="cast_evaluation" name="cast_evaluation">
+                                    <option value="5.0">5.0</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="4.0">4.0</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="3.0" selected>3.0</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="2.0">2.0</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="1.0">1.0</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="music_evaluation" class="control-label bg-secondary">音楽の評価</label>
+                                <select class="form-control" id="music_evaluation" name="music_evaluation">
+                                    <option value="5.0">5.0</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="4.0">4.0</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="3.0" selected>3.0</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="2.0">2.0</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="1.0">1.0</option>
                                 </select>
                             </div>
                         </div>
@@ -151,30 +161,26 @@
                     {{-- ここにdiv="col-md-12"を記述した方が良いかもしれない--}}
                     <input type="submit" value="点数評価のみを保存する" class="mx-auto">
                 </div>
-            </form>
-            <hr>
-
-            <form method="POST" action="{{ url('/drama/dramaID/review') }}">
-                @csrf
+                <hr>
                 <div class="row">
                     <div class="col-md-11 mx-auto bg-warning">
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <h2>レビュータイトル</h2>
-                                <input type="text" value="" maxlength="80" name="" placeholder="最も伝えたいポイントは何ですか？" size="80">
+                                <input type="text" value="{{ old('review_title') }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <h3>レビュー内容</h3>
-                                <textarea name="" cols="100" rows="20" id="" placeholder="感想を自由に書きましょう！"></textarea>
+                                <textarea name="review_comment" class="col-md-12" col="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
                             </div>
                             <div class="col-md-12 mx-auto">
                                 <label>
-                                    <span class="bg-secondary">レビューにネタバレあり</span><input type="radio" name="netabare" value="exist" checked>
+                                    <span class="bg-secondary">レビューにネタバレあり</span><input type="radio" name="spoiler_alert" value="1" checked>
                                 </label>
                                 <label>
-                                    <span class="bg-secondary">レビューにネタバレなし</span><input type="radio" name="netabare" value="exist">
+                                    <span class="bg-secondary">レビューにネタバレなし</span><input type="radio" name="spoiler_alert" value="0">
                                 </label>
                             </div>
                         </div>
@@ -183,13 +189,13 @@
                                 <h3>作品成分分類</h3>
                                 <h4>前作視聴</h4>
                                 <label>
-                                    <span class="bg-secondary">必須</span><input type="radio" name="zentaku" value="necessary">
+                                    <span class="bg-secondary">必須</span><input type="radio" name="previous" value="2">
                                 </label>
                                 <label>
-                                    <span class="bg-secondary">観た方が楽しめる</span><input type="radio" name="zentaku" value="better" checked>
+                                    <span class="bg-secondary">観た方が楽しめる</span><input type="radio" name="previous" value="1" checked>
                                 </label>
                                 <label>
-                                    <span class="bg-secondary">不要</span><input type="radio" name="zentaku" value="unnecessary">
+                                    <span class="bg-secondary">不要</span><input type="radio" name="previous" value="0">
                                 </label>
                             </div>
                         </div>

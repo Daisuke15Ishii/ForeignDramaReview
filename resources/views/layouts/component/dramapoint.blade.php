@@ -25,7 +25,7 @@
                         <div class="row">
                             <h2>総合評価：</h2>
                             {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
-                            <span class="bg-secondary">{{ sprintf('%.2f', $drama->score()->first()->average_total_evaluation) }}点<img src="#" alt="★評価"></span>
+                            <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
                             <form id="" action=""{{ url('/drama/dramaID') }}"" method="POST">
                                 @csrf
                                 <input type="submit" value="マイページに作品登録">
@@ -44,48 +44,58 @@
                         <div class="row">
                             {{-- 下記の各項目評価の表示は、点数によって星の個数で表現。数字で仮表示 --}}
                             <div class="col-md-4">
-                                <p>シナリオの評価：<span class="bg-secondary">{{ $drama->score()->first()->average_story_evaluation }}<img class="star" src="{{ secure_asset('/images/star_yellow.png') }}" alt="★評価"></span></p>
+                                <p>シナリオの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('story_evaluation')) }}<img class="star" src="{{ secure_asset('/images/star_yellow.png') }}" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>演者の評価：<span class="bg-secondary">{{ $drama->score()->first()->average_cast_evaluation }}<img src="#" alt="★評価"></span></p>
+                                <p>演者の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('cast_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>映像美の評価：<span class="bg-secondary">{{ $drama->score()->first()->average_visual_evaluation }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>世界観の評価：<span class="bg-secondary">{{ $drama->score()->first()->average_world_evaluation }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>キャラの評価：<span class="bg-secondary">{{ $drama->score()->first()->average_char_evaluation }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>音楽の評価：<span class="bg-secondary">{{ $drama->score()->first()->average_music_evaluation }}<img src="#" alt="★評価"></span></p>
+                                <p>映像美の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('visual_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <p>作品登録者数：<span class="bg-secondary">{{ $drama->score()->first()->registers }}人</span></p>
+                                <p>世界観の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('world_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>お気に入り登録者数：<span class="bg-secondary">{{ $drama->score()->first()->favorites }}人</span></p>
+                                <p>キャラの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('char_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
+                                <p>音楽の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('music_evaluation')) }}<img src="#" alt="★評価"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>作品登録者数：<span class="bg-secondary">{{ $drama->favorites()->count() }}人</span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>お気に入り登録者数：<span class="bg-secondary">{{ $drama->favorites()->where('favorite',1)->count() }}人</span></p>
+                            </div>
+                            <div class="col-md-4">
+                                {{-- ランキング表示はメソッドだけでは難しいかもしれない --}}
                                 <p>総合評価ランキング：<span class="bg-secondary">{{ $drama->score()->first()->rank_average_total_evaluation }}位</span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>作品成分分類</h3>
-                                今は「人」だが、「％」に変更予定
                                 <ul>
-                                    <li>必須：<span class="bg-secondary">{{ $drama->score()->first()->previous_require }}人</span></li>
-                                    <li>観た方が良い：<span class="bg-secondary">{{ $drama->score()->first()->previous_better }}人</span></li>
-                                    <li>不要：<span class="bg-secondary">{{ $drama->score()->first()->previous_no }}人</span></li>
+                                    <li>必須：<span class="bg-secondary">{{ sprintf('%.1f', $previous_require = $drama->reviews()->where('previous',2)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                                    <li>観た方が良い：<span class="bg-secondary">{{ sprintf('%.1f', $previous_better = $drama->reviews()->where('previous',1)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                                    <li>不要：<span class="bg-secondary">{{ sprintf('%.1f', $previous_no = $drama->reviews()->where('previous',0)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
                                 </ul>
                             </div>
                         </div>
-                        <a href="{{ url('/drama/dramaID/review') }}"><button>レビューを書く！</button></a>
+                        @guest
+                            <a href="{{ route('login') }}"><button>レビューを書く！</button></a>
+                        @else
+                            {{-- レビューを既に投稿したか判定 --}}
+                            @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
+                                <a href="{{ url('/drama/dramaID/review') }}"><button>レビューを書く！</button></a>
+                            @else
+                                {{-- edit画面に飛ばす予定 --}}
+                                <a href="{{ action('drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit', ['review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビューを編集する！</button></a>
+                            @endif
+                        @endguest
                     </div>
                 </div>

@@ -50,11 +50,11 @@
                             <div class="form-group col-md-6">
                                 <label for="progress" class="control-label bg-secondary">現在の進捗</label>
                                 <select class="form-control" id="progress" name="progress">
-                                    <option value="uncategorized" selected>未分類</option>
-                                    <option value="watched">視聴済</option>
-                                    <option value="watching">視聴中</option>
-                                    <option value="stop">視聴断念</option>
-                                    <option value="want">未視聴</option>
+                                    <option value="0" selected>未分類</option>
+                                    <option value="4">視聴済</option>
+                                    <option value="3">視聴中</option>
+                                    <option value="2">視聴断念</option>
+                                    <option value="1">未視聴</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -166,13 +166,13 @@
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <h2>レビュータイトル</h2>
-                                <input type="text" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
+                                <input type="text" value="{{ old('review_title') }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <h3>レビュー内容</h3>
-                                <textarea name="review_comment" class="col-md-12" col="20" placeholder="感想を自由に書きましょう！"></textarea>
+                                <textarea name="review_comment" class="col-md-12" col="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
                             </div>
                             <div class="col-md-12 mx-auto">
                                 <label>
