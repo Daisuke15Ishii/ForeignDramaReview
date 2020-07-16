@@ -15,7 +15,6 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('messages.Name') }}：</label>
-
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -27,76 +26,94 @@
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定(後回し) --}}
+                        {{-- 以下のフォームではerror処理未設定(後回し) --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">名前(名)：</label>
-
+                            <label for="name_kana" class="col-md-4 col-form-label text-md-right">名前(ｶﾅ)：</label>
                             <div class="col-md-6">
-                                <input id="" type="text" class="form-control @error('') is-invalid @enderror" name="" value="{{ old('name') }}" required autocomplete="" autofocus>
+                                <input id="name_kana" type="text" class="form-control @error('') is-invalid @enderror" name="name_kana" value="{{ old('name_kana') }}" required autocomplete="name_kana">
 
-                                @error('')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                @if ($errors->has('name_kana'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('name_kana') }}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
                         
-                        {{-- 以下のフォームではid未設定(後回し) --}}
+                        {{-- 以下のフォームではerror処理未設定(後回し) --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">ペンネーム(サイト内の表示名)：</label>
-
+                            <label for="penname" class="col-md-4 col-form-label text-md-right">ペンネーム(サイト内の表示名)：</label>
                             <div class="col-md-6">
-                                <input id="" type="text" class="form-control @error('') is-invalid @enderror" name="" value="{{ old('name') }}" required autocomplete="" autofocus>
+                                <input id="penname" type="text" class="form-control @error('') is-invalid @enderror" name="penname" value="{{ old('penname') }}" required autocomplete="penname">
 
-                                @error('')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                @if ($errors->has('penname'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('penname') }}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
+                        {{-- 以下のフォームではclass処理未設定(後回し) --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">性別：</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">性別：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
+                                <select name="gender" class="" id="gender">
                                     <option value="male" selected>男性</option>
                                     <option value="female">女性</option>
                                 </select>
+                                @if ($errors->has('gender'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
+                        {{-- 以下のフォームではerror処理未設定(後回し) --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">生年月日：</label>
+                            <div class="col-md-4 text-md-right">生年月日：
+                            </div>
                             <div class="col-md-6">
-                                <label for="">西暦</label>
-                                <select name="" class="" id="">
-                                    <option value="1920">1920</option>
-                                    <option value="2000" selected>2000</option>
-                                </select>
-                                年
-                                <select name="" class="" id="">
-                                    <option value="1">1</option>
-                                    <option value="12" selected>12</option>
-                                </select>
-                                月
+                                <label for="birthyear" class="col-form-label">西暦
+                                    <select name="birthyear" class="" id="birthyear">
+                                        @for($i = Carbon\Carbon::now()->year - 1; $i > Carbon\Carbon::now()->year - 100; $i--)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    年
+                                </label>
+                                <label for="birthmonth" class="col-form-label">
+                                    <select name="birthmonth" class="" id="birthmonth">
+                                        @for($j = 1; $j < 13; $j++)
+                                            <option value="{{ $j }}">{{ $j }}</option>
+                                        @endfor
+                                    </select>
+                                    月
+                                </label>
+                                @if ($errors->has('birthyear'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('birthyear') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('birthmonth'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('birthmonth') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        {{-- 以下のフォームについて 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
+                        {{-- 以下のフォームでは諸々未設定(後回し) --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">アイコン画像：</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-right">アイコン画像：</label>
                             <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="image">
+                                <input type="file" class="form-control-file" id="image" name="image">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('messages.E-Mail Address') }}：</label>
-
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -110,7 +127,6 @@
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('messages.Password') }}：</label>
-
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
@@ -124,7 +140,6 @@
 
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('messages.Confirm Password') }}</label>
-
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>

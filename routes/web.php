@@ -117,15 +117,10 @@ Route::group(['prefix' => 'user/userID'], function(){
 Route::group(['prefix' => 'drama/dramaID/review', 'middleware' => 'auth'], function(){
     Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add');
     Route::post('/', 'drama\dramaID\review\DramaIDReviewController@create');
-//    Route::post('/', function () {
-//        return view('/drama/dramaID/review/create');
-//    });
 
     //後でurlのreviewIDを変数{reviewID}に変更予定
     Route::get('/reviewID/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit')->name("review_edit");
-//    Route::get('/reviewID/edit', function () {
-//        return view('/drama/dramaID/review/reviewID/edit');
-//    });
+    Route::post('reviewID/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update')->name("review_edit");
     Route::post('/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
     });

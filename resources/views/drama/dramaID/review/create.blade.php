@@ -2,15 +2,12 @@
 
 @section('title', 'レビュー投稿｜'.$drama->title . "シーズン" . $drama->season)
 
-{{-- データベース作成後に諸々修正予定(とりあえず文章を手入力) --}}
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white">
             <h1>{{ $drama->title }} シーズン{{ $drama->season }}のレビュー投稿</h1>
-            {{-- フォーム保存方法については後回し --}}
             <form action="{{ action('drama\dramaID\review\DramaIDReviewController@create') }}" method="POST">
                 @csrf
-                {{-- 保留、仮入力。hiddenにid等を記述するのは辞めた方が良いかも--}}
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="drama_id" value="{{ $drama->id }}">
                 <div class="row">
@@ -35,7 +32,7 @@
                                     <select id="total_evaluation" name="total_evaluation">
                                         <option value="">点数選択</option>
                                         @for($i = 100; $i > 0; $i--)
-                                            <option value="{{ $i }}">{{ $i }}点</option>
+                                            <option value="{{ $i }}" @if(old('total_evaluation')=='$i') selected @endif>{{ $i }}点</option>
                                         @endfor
                                     </select>
                                 <label for="total_evaluation" class="bg-secondary">★★★★★</label>

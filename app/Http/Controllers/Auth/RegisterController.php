@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -52,6 +52,17 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+            //追加カラム分
+            'name_kana' => ['required', 'string', 'max:40'],
+            'penname' => ['required', 'string', 'max:40', 'unique:users,penname'],
+            'gender' => ['required', 'in:male,female'],
+            
+            //下記を記述すると上手くいかないので除外
+//            'birthyear' => ['required', 'between:1901,2120'],
+//            'image' => ['image'],
+//            'profile' => ['max:4000'],
+
         ]);
     }
 
@@ -67,6 +78,14 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            
+            //追加カラム分
+            'name_kana' => $data['name_kana'],
+            'penname' => $data['penname'],
+            'gender' => $data['gender'],
+            'birth' => $data['birthyear'] . '-' . $data['birthmonth'] . '-01',
+            'image' => $data['image'],
+//            'profile' => $data['profile'],
         ]);
     }
 }

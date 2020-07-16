@@ -48,7 +48,7 @@
                                                     @endswitch
                                                 </p>
                                                 <p>言語：
-                                                    @if($review->subtitles = 0)
+                                                    @if($review->subtitles == 0)
                                                         吹替
                                                     @else
                                                         字幕

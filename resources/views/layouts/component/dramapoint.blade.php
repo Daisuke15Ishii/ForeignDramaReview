@@ -32,11 +32,15 @@
                             </form>
                             
                             {{-- 確認テスト用の表示 --}}
-                            @guest
-                                お気に入り登録の有無：なし(ゲスト)
+                            @auth
+                                @if(empty($drama->favorites()->where('user_id',Auth::user()->id)->first()))
+                                    お気に入り登録の有無：レビューなし(会員)
+                                @else
+                                    お気に入り登録の有無：{{ $drama->favorites()->where('user_id',Auth::user()->id)->first()->favorite }}
+                                @endif
                             @else
-                                お気に入り登録の有無：{{ $drama->favorites()->where('user_id',Auth::user()->id)->first()->favorite }}
-                            @endguest
+                                お気に入り登録の有無：なし(ゲスト)
+                            @endauth
                         </div>
                         <div class="row">
                         総合評価の中央値：<span class="bg-secondary">{{ sprintf('%.2f', $drama->score()->first()->median_total_evaluation) }}点</span>(レビュー評価数：{{ $drama->score()->first()->reviews }}人)
