@@ -70,7 +70,7 @@
                         </a>
                     </div>
                     <div class="col-md-9">
-                        <form action="{{ url('/search/result') }}" method="get">
+                        <form action="{{ action('search\SearchController@result') }}" method="get">
                             <div class="form-group row">
                                 <div class="">
                                     <select name="data[mode]" class="" id="mode">
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="">
                                     {{--　後でvalue=cond_titleを二重括弧で囲む　--}}
-                                    <input type="text" class="form-control" name="cond_title" value=cond_title>
+                                    <input type="text" class="form-control" name="cond_title" value="">
                                 </div>
                                 <div class="">
                                     {{ csrf_field() }}
@@ -100,7 +100,7 @@
                                     <a class="nav-link" href="{{ url('/') }}">トップページ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/search/') }}">作品条件検索</a>
+                                    <a class="nav-link" href="{{ action('search\SearchController@index') }}">作品条件検索</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">最新レビュー</a>

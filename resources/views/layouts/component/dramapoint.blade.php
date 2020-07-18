@@ -3,7 +3,7 @@
                         <div class="">
                             <p class="eyecatch overflow-hidden col-md-12"><img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}"></p>
                         </div>
-                        <small>&copy; 2008-2013 {{ $drama->copyright }}</small>
+                        <small>&copy; {{ $drama->copyright }}</small>
                         <p>タイトル：<cite>{{ $drama->title }}({{ $drama->title_en }})</cite></p>
                         <p>出演者：{{ $drama->cast1 }}、{{ $drama->cast2 }}、{{ $drama->cast3 }}</p>
                         <p>監督等：{{ $drama->staff }}</p>
@@ -14,7 +14,7 @@
                         @else
                             <p>放映日： 年 月～</p>
                         @endif
-                        <p>話数：{{ $drama->number }}話</p>
+                        <p>話数：全{{ $drama->number }}話</p>
                         <p>ジャンル：
                             @foreach($drama->janre()->get() as $janre)
                                 {{ $janre->janre }}
@@ -43,7 +43,7 @@
                             @endauth
                         </div>
                         <div class="row">
-                        総合評価の中央値：<span class="bg-secondary">{{ sprintf('%.2f', $drama->score()->first()->median_total_evaluation) }}点</span>(レビュー評価数：{{ $drama->score()->first()->reviews }}人)
+                        総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
                         </div>
                         <div class="row">
                             {{-- 下記の各項目評価の表示は、点数によって星の個数で表現。数字で仮表示 --}}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\drama\dramaID;
+namespace App\Http\Controllers\search;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,9 +11,10 @@ use App\User;
 use App\Score;
 use App\Favorite;
 use App\Like;
+use Auth;
 use App\Janre;
 
-class DramaIDController extends Controller
+class SearchController extends Controller
 {
     //
     public function add(){
@@ -25,11 +26,24 @@ class DramaIDController extends Controller
         //メモ
         return redirect('admin/news/create');
     }
-    
+
     public function index(Request $request){
-        //画面表示確認のため仮設定
-        $drama = Drama::where('id', 1)->first();
-        return view('drama.dramaID.index', ['drama' => $drama]);
+        //メモ
+        $janre = Janre::all();
+        return view('search.index', ['janre' => $janre]);
+    }
+
+    public function result(Request $request){
+        $cond_title = $request->cond_title;
+        $janre = Janre::all();
+        if ($cond_title != '') {
+            // 検索されたら検索結果(部分一致)を取得する
+            $drama = Drama::where('title', 'LIKE',  "%{$cond_title}%")->get();
+        } else {
+            // それ以外はすべてのドラマを取得する
+            $drama = Drama::simplePaginate(10);
+        }
+        return view('search.result.index', ['drama' => $drama, 'janre' => $janre, 'cond_title' => $cond_title]);
     }
     
     public function edit(Request $request){
@@ -46,4 +60,6 @@ class DramaIDController extends Controller
         //メモ
         return redirect('admin/news/');
     }
+    
+    
 }

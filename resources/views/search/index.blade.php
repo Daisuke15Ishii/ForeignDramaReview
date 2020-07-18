@@ -1,7 +1,6 @@
 @extends('layouts.front')
 
-{{-- データベース作成後にタイトル修正予定 --}}
-@section('title', '作品条件検索｜洋ドラ会議(仮)')
+@section('title', '作品条件検索')
 
 @section('content')
 <div class="container">
@@ -15,27 +14,24 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">作品名：</label>
-
+                            <label for="title" class="col-md-4 col-form-label text-md-right">作品名：</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}"  autocomplete="title" autofocus>
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
+                        {{-- cast検索はデータベース設計を見直さないと難しい --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">主な出演者：</label>
-
+                            <label for="cast_1" class="col-md-4 col-form-label text-md-right">主な出演者：</label>
                             <div class="col-md-6">
-                                <input id="" type="text" class="form-control @error('') is-invalid @enderror" name="" value="{{ old('name') }}" autocomplete="" autofocus>
+                                <input id="cast_1" type="text" class="form-control @error('cast_1') is-invalid @enderror" name="cast_1" value="{{ old('cast_1') }}" autocomplete="cast_1">
                             </div>
                         </div>
                         
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">国：</label>
+                            <label for="country" class="col-md-4 col-form-label text-md-right">国：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
+                                <select name="country" class="" id="country">
                                     <option value="">国を選択</option>
                                     <option value="America">アメリカ</option>
                                     <option value="England">イギリス</option>
@@ -45,35 +41,37 @@
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">放映開始日：</label>
+                            <div class="col-md-4 col-form-label text-md-right">
+                                放映開始日：
+                            </div>
                             <div class="col-md-6">
-                                <label for="">西暦</label>
-                                <select name="" class="" id="">
-                                    <option value="1920">1920</option>
-                                    <option value="2000" selected>2000</option>
+                                <label for="onair">西暦</label>
+                                <select name="onair1" class="" id="onair1">
+                                    <option value="" selected>選択</option>
+                                    @for($i = Carbon\Carbon::now()->year; $i > 1950; $i--)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
                                 年
-                                <select name="" class="" id="">
+                                <select name="onair2" class="" id="onair2">
+                                    <option value="after" selected>以降</option>
                                     <option value="before">以前</option>
                                     <option value="just">のみ</option>
-                                    <option value="after" selected>以降</option>
                                 </select>
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">ジャンル：</label>
+                            <label for="janre1" class="col-md-4 col-form-label text-md-right">ジャンル：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value="">1つ目を選択</option>
-                                    <option value="">犯罪</option>
-                                    <option value="">家族</option>
-                                    <option value="">恋愛</option>
-                                    <option value="">サスペンス</option>
+                                <select name="janre1" class="" id="janre1">
+                                    <option value="">1つ選択</option>
+                                    @foreach($janre as $janre)
+                                        <option value="{{ $janre }}">{{ $janre->janre }}</option>
+                                    @endforeach
                                 </select>
+                            </div>
                             <label for="" class="col-md-4 col-form-label text-md-right"></label>
                             <div class="col-md-6">
                                 <select name="" class="" id="">
@@ -93,7 +91,6 @@
                                     <option value="">恋愛</option>
                                     <option value="">サスペンス</option>
                                 </select>
-                            </div>
                             </div>
                         </div>
 

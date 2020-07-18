@@ -2,19 +2,24 @@
                     <div class="col-md-3">
                         <div class="">
                             <a href="{{ url('/drama/dramaID') }}">
-                                <p class="eyecatch" width="190" height="260"><img src="{{ secure_asset('images/1.png') }}" alt="作品画像" title="作品タイトル"></p>
+                                <p class="eyecatch" width="190" height="260"><img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}"></p>
                             </a>
                         </div>
-                        <small>&copy; 2008-2013 Sony Pictures Television Inc.</small>
+                        <small>&copy; {{ $drama->copyright }}</small>
                     </div>
                     <div class="col-md-9 bg-warning">
                         <div class="row">
                             <div class="col-md-12 mx-auto">
-                                <h2><a href="{{ url('/drama/dramaID') }}">ブレイキング・バッド　シーズン1</a></h2>
+                                <h2><a href="{{ url('/drama/dramaID') }}">{{ $drama->title }} シーズン{{ $drama->season }}</a></h2>
                             </div>
                             <div class="col-md-8">
                                 <h3 style="display:inline">総合評価：</h3>
-                                <span class="bg-secondary">99.99点<img src="#" alt="★評価"></span>
+                                @if($drama->reviews()->count() !== 0)
+                                    {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
+                                    <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
+                                @else
+                                    <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
+                                @endif
                             </div>
                             <div class="col-md-4">
                                 <form id="" action=""{{ url('/drama/dramaID') }}"" method="POST">
@@ -25,19 +30,49 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                総合評価の中央値：<span class="bg-secondary">99.99点</span>(レビュー評価数：1000人)
+                                @if($drama->reviews()->count() !== 0)
+                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
+                                @else
+                                    総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
+                                @endif
                             </div>
                             <div class="col-md-4">
-                                <p>総合評価ランキング：<span class="bg-secondary">1000位</span></p>
+                                <p>総合評価ランキング：<span class="bg-secondary">●●位</span></p>
                             </div>
                         </div>
-                        <p><span class="">放送開始：2008年1月</span>    <span class="">話数：全7話</span>   <span class="">ジャンル：犯罪</span></p>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <?php $date = $drama->onair; ?>
+                                @if($date)
+                                    <p>{{ date('放映開始：Y年m月', strtotime($date)) }}
+                                @else
+                                    <p>放映開始： 年 月
+                                @endif
+                                @if($drama->number !== null)
+                                    /全{{ $drama->number }}話</p>
+                                @else
+                                    /全--話</p>
+                                @endif
+                            </div>
+                            <div class="col-md-7">
+                                <p class="">ジャンル：
+                                    @foreach($drama->janre()->get() as $janre)
+                                        {{ $janre->janre }}
+                                    @endforeach
+                                </p>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-9">
-                                <p>作品概要：</p>
-                                <blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AD%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%90%E3%83%83%E3%83%89">
-                                <p>舞台は2008年のニューメキシコ州アルバカーキ。偉大な成功を遂げるはずだった天才化学者ウォルター・ホワイトは、人生に敗れ、50歳になる現在、心ならずも高校の化学教師の職に就いている[1]。妊娠中の妻、脳性麻痺の息子、多額の住宅ローンを抱え、洗車場のアルバイトを掛け持ちしていても、なお家計にはゆとりがない。ある日、ステージIIIAの肺癌で余命2～3年と診断され、自身の医療費と家族の経済的安定を確保するために多額の金が必要になる。義弟ハンクや旧友エリオットが費用の援助を買って出るが、あくまで自力で稼ぎたいウォルターはそれらを拒み、代わりにメタンフェタミン（通称メス）の製造・販売に望みをかける。麻薬取引については何も知らず、元教え子の売人ジェシー・ピンクマンを相棒にして、家族に秘密でビジネスを開始。裏社会での名乗りは ｢ハイゼンベルク｣。</p>
-                                </blockquote>
+                                <dl>
+                                    <dt>作品概要</dt>
+                                    <dd>
+                                        <blockquote cite="{{ $drama->url }}">
+                                            <p>{{ \Str::limit($drama->introduction, 250) }}</p>
+                                            引用元：<cite><a href="{{ $drama->url }}">{{ $drama->title }}</a></cite>
+                                        </blockquote>
+                                    </dd>
+                                </dl>
                             </div>
                             <div class="col-md-3">
                                 <a href="{{ url('/drama/dramaID') }}"><button>作品情報を見る</button></a>

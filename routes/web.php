@@ -88,15 +88,18 @@ Route::group(['prefix' => 'drama/review'], function(){
 });
 
 Route::group(['prefix' => 'search'], function(){
-    Route::get('/', function () {
-        return view('/search/index');
-    });
+    Route::get('/', 'search\SearchController@index');
+//    Route::get('/', function () {
+//        return view('/search/index');
+//    });
     Route::post('/', function () {
         return view('/search//index');
     });
-    Route::get('/result', function () {
-        return view('/search/result/index');
-    });
+    
+    Route::get('/result', 'search\SearchController@result');
+//    Route::get('/result', function () {
+//        return view('/search/result/index');
+//    });
     Route::post('/result', function () {
         return view('/search/result/index');
     });
