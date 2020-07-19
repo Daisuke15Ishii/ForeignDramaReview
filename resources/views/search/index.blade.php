@@ -10,13 +10,13 @@
                 <div class="card-header">作品の条件検索</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/search/result') }}">
+                    <form method="GET" action="{{ action('search\SearchController@detailresult') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">作品名：</label>
+                            <label for="cond_title" class="col-md-4 col-form-label text-md-right">作品名：</label>
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}"  autocomplete="title" autofocus>
+                                <input id="cond_title" type="text" class="form-control" name="cond_title" value=""  autocomplete="cond_title" autofocus>
                             </div>
                         </div>
 
@@ -32,11 +32,11 @@
                             <label for="country" class="col-md-4 col-form-label text-md-right">国：</label>
                             <div class="col-md-6">
                                 <select name="country" class="" id="country">
-                                    <option value="">国を選択</option>
-                                    <option value="America">アメリカ</option>
-                                    <option value="England">イギリス</option>
-                                    <option value="France">フランス</option>
-                                    <option value="Germany">ドイツ</option>
+                                    <option value="">全て</option>
+                                    <option value="アメリカ">アメリカ</option>
+                                    <option value="イギリス">イギリス</option>
+                                    <option value="フランス">フランス</option>
+                                    <option value="ドイツ">ドイツ</option>
                                 </select>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="col-md-6">
                                 <label for="onair">西暦</label>
                                 <select name="onair1" class="" id="onair1">
-                                    <option value="" selected>選択</option>
+                                    <option value="" selected>--</option>
                                     @for($i = Carbon\Carbon::now()->year; $i > 1950; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
@@ -63,56 +63,34 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="janre1" class="col-md-4 col-form-label text-md-right">ジャンル：</label>
+                            <p class="col-md-4 col-form-label text-md-right">ジャンル：</p>
                             <div class="col-md-6">
-                                <select name="janre1" class="" id="janre1">
-                                    <option value="">1つ選択</option>
-                                    @foreach($janre as $janre)
-                                        <option value="{{ $janre }}">{{ $janre->janre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <label for="" class="col-md-4 col-form-label text-md-right"></label>
-                            <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value="">2つ目を選択</option>
-                                    <option value="">犯罪</option>
-                                    <option value="">家族</option>
-                                    <option value="">恋愛</option>
-                                    <option value="">サスペンス</option>
-                                </select>
-                            </div>
-                            <label for="" class="col-md-4 col-form-label text-md-right"></label>
-                            <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value="">3つ目を選択</option>
-                                    <option value="">犯罪</option>
-                                    <option value="">家族</option>
-                                    <option value="">恋愛</option>
-                                    <option value="">サスペンス</option>
-                                </select>
+                                @foreach($janre as $janre)
+                                    <label>
+                                        <input type="checkbox" name="janre" value="{{ $janre->janre }}">{{ $janre->janre }}
+                                    </label>
+                                @endforeach
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">総合評価：</label>
+                            <label for="total_evaluation" class="col-md-4 col-form-label text-md-right">総合評価：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
+                                <select id="total_evaluation" name="total_evaluation">
+                                    <option value="">--</option>
+                                    @for($i = 100; $i > 0; $i--)
+                                        <option value="{{ $i }}" @if(old('total_evaluation')=='$i') selected @endif>{{ $i }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">シナリオ：</label>
+                            <label for="story_evaluation" class="col-md-4 col-form-label text-md-right">シナリオ：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
+                                <select name="story_evaluation" class="" id="story_evaluation">
+                                    <option value="" selected>--</option>
+                                    <option value="0">0</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -127,11 +105,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">世界観：</label>
+                            <label for="world_evaluation" class="col-md-4 col-form-label text-md-right">世界観：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
+                                <select name="world_evaluation" class="" id="world_evaluation">
+                                    <option value="" selected>--</option>
+                                    <option value="0">0</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -146,11 +124,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">演者：</label>
+                            <label for="cast_evaluation" class="col-md-4 col-form-label text-md-right">演者：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
+                                <select name="cast_evaluation" class="" id="cast_evaluation">
+                                    <option value="" selected>--</option>
+                                    <option value="0">0</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -165,11 +143,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">キャラ：</label>
+                            <label for="char_evaluation" class="col-md-4 col-form-label text-md-right">キャラ：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
+                                <select name="char_evaluation" class="" id="char_evaluation">
+                                    <option value="" selected>--</option>
+                                    <option value="0">0</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -184,11 +162,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">映像美：</label>
+                            <label for="visual_evaluation" class="col-md-4 col-form-label text-md-right">映像美：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
+                                <select name="visual_evaluation" class="" id="visual_evaluation">
+                                    <option value="" selected>--</option>
+                                    <option value="0">0</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -203,11 +181,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">音楽：</label>
+                            <label for="music_evaluation" class="col-md-4 col-form-label text-md-right">音楽：</label>
                             <div class="col-md-6">
-                                <select name="" class="" id="">
-                                    <option value=""></option>
-                                    <option value="0" selected>0</option>
+                                <select name="music_evaluation" class="" id="music_evaluation">
+                                    <option value="" selected>--</option>
+                                    <option value="0">0</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -221,43 +199,37 @@
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">キーワード検索：</label>
-
+                            <label for="review_comment" class="col-md-4 col-form-label text-md-right">キーワード検索：</label>
                             <div class="col-md-6">
-                                <input id="" type="text" class="form-control @error('') is-invalid @enderror" name="" value="{{ old('name') }}" autocomplete="" autofocus>
+                                <input id="review_comment" type="text" class="form-control @error('review_comment') is-invalid @enderror" name="review_comment" value="{{ old('review_comment') }}" autocomplete="review_comment">
                                 <p>※レビュー内に含まれるキーワード</p>
                             </div>
                         </div>
 
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
                             <span class="col-md-4 text-md-right">前作視聴：</span>
                             <div class="col-md-2">
-                                <label><input type="checkbox" name="zensaku" value="0">必須</label>
+                                <label><input type="checkbox" name="previous" value="2">必須</label>
                             </div>
                             <div class="col-md-2">
-                                <label><input type="checkbox" name="zensaku" value="0">観た方が楽しめる</label>
+                                <label><input type="checkbox" name="previous" value="1">観た方が楽しめる</label>
                             </div>
                             <div class="col-md-2">
-                                <label><input type="checkbox" name="zensaku" value="0">不要</label>
+                                <label><input type="checkbox" name="previous" value="0">不要</label>
                             </div>
                         </div>
 
-
-                        {{-- 以下のフォームではid未設定 、諸々の詳細設定は後回し。完成イメージ的なもの --}}
                         <div class="form-group row">
                             <label for="season1" class="col-md-4 col-form-label text-md-right">シーズン1のみ検索：</label>
                             <div class="col-md-6">
-                                <input type="checkbox" name="season1" value="season1">
+                                <input type="checkbox" name="season1" value="1" @if(old('season1') == '1') checked @endif>
                             </div>
                         </div>
 
-
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-12 offset-md-4">
+                                <button type="submit" class="btn btn-primary mx-auto">
                                     検索開始
                                 </button>
                             </div>

@@ -96,6 +96,8 @@ Route::group(['prefix' => 'search'], function(){
         return view('/search//index');
     });
     
+    //detailresultというURLはないが、コントローラーのルーティングを記述しないとエラーになるため、適当なURLで記述
+    Route::get('/detailresult', 'search\SearchController@detailresult');
     Route::get('/result', 'search\SearchController@result');
 //    Route::get('/result', function () {
 //        return view('/search/result/index');
