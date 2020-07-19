@@ -28,7 +28,7 @@
 
                         {{-- 以下のフォームではerror処理未設定(後回し) --}}
                         <div class="form-group row">
-                            <label for="name_kana" class="col-md-4 col-form-label text-md-right">名前(ｶﾅ)：</label>
+                            <label for="name_kana" class="col-md-4 col-form-label text-md-right">名前(かな)：</label>
                             <div class="col-md-6">
                                 <input id="name_kana" type="text" class="form-control @error('') is-invalid @enderror" name="name_kana" value="{{ old('name_kana') }}" required autocomplete="name_kana">
 

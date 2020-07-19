@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mx-auto bg-white">
-                <h1>"{{ $cond_title }}"の検索結果{{ $drama->count() }}件</h1><span class="">(●●件目を表示)</span>
+                <h1>"{{ $cond_title }}"の検索結果{{ $alldrama->count() }}件</h1><span class="">(●●件目を表示)</span>
                 <div class="">
                     {{-- 右に寄せたい --}}
                     {{-- value適当 --}}
@@ -20,12 +20,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-11 mx-auto">
-                        @foreach($drama as $drama )
+                        @foreach($dramas as $drama )
                             @include('layouts.component.dramaindex')
                         @endforeach
                         
                         {{-- ペジネーション動かない --}}
-                        {{-- $drama->links() --}}
+                        {{ $dramas->links() }}
                     </div>
                 </div>
             </div>

@@ -107,5 +107,291 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+
+        //レコード6
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '1',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2011/10/2',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s1.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード7
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '2',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2012/9/30',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s2.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード8
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '3',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2013/9/29',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s3.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード9
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '4',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2014/10/5',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s4.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード10
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '5',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2015/10/4',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s5.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード11
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '6',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2017/1/15',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s6.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード12
+        $drama = new \App\Drama([
+            'title' => 'ホームランド',
+            'season' => '7',
+            'title_en' => 'HOMELAND',
+            'cast1' => 'クレア・デインズ',
+            'cast2' => 'ダミアン・ルイス',
+            'cast3' => 'マンディ・パティンキン',
+            'staff' => 'ハワード・ゴードン',
+            'country' => 'アメリカ',
+            'onair' => '2018/2/11',
+            'number' => '12',
+            'introduction' => 'アルカーイダとのアメリカ国内での戦いが描かれる。CIAの作戦担当官キャリー・マティソンは、イラクで内通者からアメリカ人戦争捕虜がアルカーイダによって転向させられたとの情報を得る。だが命令違反の作戦を実行したため保護観察下に置かれ、バージニア州ラングレーのCIAテロ対策センターへ異動となる。上司であり、過去に恋愛関係にあったテロ対策センター指揮官デビッド・エスティースが、緊急のブリーフィングのためにキャリーを呼び出し、8年間行方不明であったアメリカ海兵隊軍曹ニコラス・ブロディが、テロリストのアブ・ナジールのアジトから救出されたことを告げる。キャリーは、ブロディが転向した戦争捕虜であると信じるようになる',
+            'image_path' => '/images/HOMELAND_s7.jpg',
+            'copyright' => 'Twentieth Century Fox Home Entertainment LLC.',
+            'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
+        ]);
+        $drama->save();
+        
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '1',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2011/4/17',
+            'number' => '10',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s1.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '2',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2012/4/1',
+            'number' => '10',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s2.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '3',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2013/3/31',
+            'number' => '10',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s3.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '4',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2014/4/6',
+            'number' => '10',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s4.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '5',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2015/4/12',
+            'number' => '10',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s5.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '6',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2016/4/24',
+            'number' => '10',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s6.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '7',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2017/7/16',
+            'number' => '7',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s7.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
+        //レコード
+        $drama = new \App\Drama([
+            'title' => 'ゲーム・オブ・スローンズ',
+            'season' => '8',
+            'title_en' => 'Game of Thrones',
+            'cast1' => 'キット・ハリントン',
+            'cast2' => 'エミリア・クラーク',
+            'cast3' => 'ピーター・ディンクレイジ',
+            'staff' => 'デイヴィッド・ベニオフ',
+            'country' => 'アメリカ',
+            'onair' => '2019/4/14',
+            'number' => '6',
+            'introduction' => '『氷と炎の歌』の物語は、ウェスタロスと呼ばれる大陸と、エッソスと呼ばれる大陸を主とした架空世界を舞台としている。物語には3つの主要な筋があり、次第に絡み合うようになる。第一は諸名家によるウェスタロスの王座を巡る争い、第二はウェスタロスの国境となる巨大な氷の〈壁〉の北での〈異形〉と呼ばれる脅威の増大、第三は13年前の内戦で殺された王の娘であるデナーリス・ターガリエンのウェスタロスへの帰還と玉座を求める野望である。',
+            'image_path' => '/images/game_of_thrones_s8.jpg',
+            'copyright' => 'Home Box Office, Inc. All rights reserved.',
+            'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
+        ]);
+        $drama->save();
+
     }
 }

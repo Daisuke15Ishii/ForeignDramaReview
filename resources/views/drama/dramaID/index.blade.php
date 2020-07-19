@@ -38,9 +38,6 @@
                                 @include('layouts.component.review')
                             @endforeach
                             
-                           
-                            {{-- @foreachでサイト各レビューを引っ張ってくる予定 --}}
-                            {{-- @include('layouts.component.review') --}}
                             ここにペジネーション配置
                         </div>
                     </div>

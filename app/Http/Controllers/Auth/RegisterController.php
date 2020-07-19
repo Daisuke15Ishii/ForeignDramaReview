@@ -59,8 +59,7 @@ class RegisterController extends Controller
             'gender' => ['required', 'in:male,female'],
             
             //下記を記述すると上手くいかないので除外
-//            'birthyear' => ['required', 'between:1901,2120'],
-//            'image' => ['image'],
+            'birthyear' => ['required'],
 //            'profile' => ['max:4000'],
 
         ]);

@@ -38,12 +38,14 @@ class SearchController extends Controller
         $janre = Janre::all();
         if ($cond_title != '') {
             // 検索されたら検索結果(部分一致)を取得する
-            $drama = Drama::where('title', 'LIKE',  "%{$cond_title}%")->get();
+            $drama = Drama::where('title', 'LIKE',  "%{$cond_title}%")->Paginate(5);
+            $alldrama =  Drama::where('title', 'LIKE',  "%{$cond_title}%")->get();
         } else {
             // それ以外はすべてのドラマを取得する
-            $drama = Drama::simplePaginate(10);
+            $drama = Drama::Paginate(5);
+            $alldrama =  Drama::all();
         }
-        return view('search.result.index', ['drama' => $drama, 'janre' => $janre, 'cond_title' => $cond_title]);
+        return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama, 'janre' => $janre, 'cond_title' => $cond_title]);
     }
 
     public function detailresult(Request $request){
@@ -88,17 +90,21 @@ class SearchController extends Controller
         //ジャンル。作成中
         if ($request->janre != '') {
             // 検索されたら絞り込み条件に追加。checkboxから値を複数取得する方法を調べる
-//            $j = $request->janre;
-            $drama = $drama->whereHas('janre', function($q){
-                $q->where('janre', $request->janre);
-//            $drama = $drama->join('janres', 'id' function($q){
+            $j = $request->janre;
+            //「janre」はdramaモデルで定義したjanreメソッド。「use」はwhereHas内に変数を渡すために必要。
+            $drama = $drama->whereHas('janre', function($q) use($j){
+                $q->where('janre', $j);
             });
         }
         
         //総合評価。保留
         if ($request->total_evaluation != '') {
             // 検索されたら絞り込み条件に追加
-            
+            $j = $request->janre;
+            //「janre」はdramaモデルで定義したjanreメソッド。「use」はwhereHas内に変数を渡すために必要。
+            $drama = $drama->whereHas('janre', function($q) use($j){
+                $q->where('janre', $j);
+            });
 //            $drama = $drama->where('total_evaluation', '>=', "{$request->total_evaluation}");
         }
 
@@ -124,10 +130,11 @@ class SearchController extends Controller
         }
         
         //途中でget()するとエラーになるので、最後に一度だけget() or paginate(10)
-        $drama = $drama->get();
+        $alldrama = $drama->get();
+        $drama = $drama->paginate(5);
 
         
-        return view('search.result.index', ['drama' => $drama, 'janre' => $janre, 'cond_title' => $cond_title]);
+        return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama,'janre' => $janre, 'cond_title' => $cond_title]);
     }
     
     public function edit(Request $request){
