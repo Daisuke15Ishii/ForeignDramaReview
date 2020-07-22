@@ -120,7 +120,31 @@ class DramaIDReviewReviewIDController extends Controller
 //        $drama = Drama::where('id', 1)->first();
 //        return view('drama.dramaID.index', ['drama' => $drama]);
     }
+
+    public function like(Request $request, $drama_id){
+        $form = $request->all();
+
+        //レビューにlikeしたときの処理
+        if($request->like == 'いいね！'){
+            $this->validate($request, Like::$rules);
+            $like = new Like;
+            unset($form['_token']);
+            
+            $like->user_id = $request->user_id;
+            $like->review_id = $request->review_id;
+            
+            $like->save();
+            return redirect(route('dramaID_index', ['drama_id' => $like->review()->first()->drama()->first()->id]));
+        }else{
+            //レビューのlikeを取消したときの処理
+            $like = Like::where('user_id', $request->user_id)->where('review_id', $request->review_id)->first();
+            $like->delete();
+            unset($form['_token']);
     
+            return redirect(route('dramaID_index', ['drama_id' => Review::find(($request->review_id))->drama()->first()->id]));
+        }
+    }
+
     public function delete(Request $request){
         //メモ
         return redirect('admin/news');

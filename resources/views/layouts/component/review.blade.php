@@ -15,7 +15,7 @@
                                         {{-- レビュータイトル・本文が投稿されている場合のみタイトル等を表示--}}
                                         @if(isset($review->review_title))
                                             {{-- countメソッドでレビューに対するいいね数を取得 --}}
-                                            <h4>{{ \Str::limit($review->review_title, 100) }}</h4><span class="">({{ $review->likes()->get()->count() }}いいね！)</span>
+                                            <h4>{{ \Str::limit($review->review_title, 100) }}</h4><span class="">({{ $review->likes()->count() }}いいね！)</span>
                                         @endif
                                         <div class="row">
                                             <div class="col-md-10">
@@ -66,15 +66,18 @@
                                             
                                             @auth
                                                 {{-- action内容は保留。取り合えずreturn viewが記述済のdramaID/indexに渡す,アクションでreview_id値を渡す --}}
-                                                <form action="{{ url('/drama/dramaID') }}" method="POST" name="like">
+                                                <form action="{{ route('review_like', ['drama_id' => $drama->id]) }}" method="POST" name="like">
                                                     @csrf
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="review_id" value="{{ $review->id }}">
                                                     <p>
                                                         {{-- 既にいいね済かの判定 --}}
                                                         @if (empty($review->likes()->get()->where('user_id',Auth::user()->id)->first()))
-                                                            このレビューいいね！
-                                                            <input type="image" src="{{ secure_asset('/images/goodjob.jpeg') }}" value="1" name="like" alt="いいね送信" class="like">
+                                                            このレビュー→
+                                                            <input type="submit" value="いいね！" name="like" alt="いいね送信" class="like">
                                                         @else
-                                                            <input type="submit" value="このレビューへのいいね取消" name="like" alt="いいね取消" class="like">
+                                                            このレビュー→
+                                                            <input type="submit" value="いいね取消" name="like" alt="いいね取消" class="like">
                                                         @endif
                                                     </p>
                                                 </form>

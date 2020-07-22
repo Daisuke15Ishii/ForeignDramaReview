@@ -6,7 +6,6 @@
     <div class="row">
         <div class="col-md-12 mx-auto bg-white">
             <h1>{{ $drama->title }} シーズン{{ $drama->season }}のレビューを編集</h1>
-            {{-- 色々後回し。現在はcreate.blade.phpと全く同じ --}}
             <form action="{{ action('drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update', ['drama_id' => $drama->id, 'review_id' => $review->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">

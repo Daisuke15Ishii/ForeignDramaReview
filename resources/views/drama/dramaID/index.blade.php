@@ -13,7 +13,6 @@
                 <div class="row bg-warning">
                     <h3>作品概要</h3>
                     <div class="col-md-12">
-                        <p>{{ $re->drama_id }}</p>
                         <blockquote cite="{{ $drama->url }}">
                             <p>{{ $drama->introduction }}</p>
                             引用元：<cite><a href="{{ $drama->url }}">{{ $drama->title }}</a></cite>

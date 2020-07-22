@@ -69,7 +69,7 @@ Route::group(['prefix' => 'drama/{drama_id}'], function(){
     Route::get('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_index');
     //postはまだ未作成なので、取り合えず@indexへ,nameもエラー切り分けのため別名に
     Route::post('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_ex');
-
+    Route::post('/', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@like')->name("review_like");
 
     Route::get('/review/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
@@ -127,7 +127,7 @@ Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], fu
     //後でurlのreviewIDを変数{reviewID}に変更予定
     Route::get('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit')->name("review_edit");
     Route::post('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update')->name("review_update");
-    Route::post('/reviewID', function () {
+    Route::get('/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
     });
 });

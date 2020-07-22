@@ -31,9 +31,7 @@ class DramaIDController extends Controller
         $drama = Drama::find($drama_id);
         $reviews = $drama->reviews()->paginate(5);
         $allreviews = $drama->reviews()->count();
-        $drama2 = $drama_id;
-        $drama3 = $request->drama_id;
-        return view('drama.dramaID.index', ['drama' => $drama, 'reviews' => $reviews, 'allreviews' => $allreviews, 'drama2' => $drama2, 'drama3' => $drama3, 're' => $request]);
+        return view('drama.dramaID.index', ['drama' => $drama, 'reviews' => $reviews, 'allreviews' => $allreviews]);
     }
     
     public function edit(Request $request){
