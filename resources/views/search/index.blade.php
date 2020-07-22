@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 @foreach($janre as $janre)
                                     <label>
-                                        <input type="checkbox" name="janre" value="{{ $janre->janre }}">{{ $janre->janre }}
+                                        <input type="checkbox" name="janre[]" value="{{ $janre->janre }}">{{ $janre->janre }}
                                     </label>
                                 @endforeach
                             </div>

@@ -1,7 +1,7 @@
                 <div class="row my-4" style="border:dotted 1px">
                     <div class="col-md-3">
                         <div class="">
-                            <a href="{{ url('/drama/dramaID') }}">
+                            <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
                                 <p class="eyecatch" width="190" height="260"><img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}"></p>
                             </a>
                         </div>
@@ -10,13 +10,13 @@
                     <div class="col-md-9 bg-warning">
                         <div class="row">
                             <div class="col-md-12 mx-auto">
-                                <h2><a href="{{ url('/drama/dramaID') }}">{{ $drama->title }} シーズン{{ $drama->season }}</a></h2>
+                                <h2><a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">{{ $drama->title }} シーズン{{ $drama->season }}</a></h2>
                             </div>
                             <div class="col-md-8">
                                 <h3 style="display:inline">総合評価：</h3>
-                                @if($drama->reviews()->count() !== 0)
+                                @if($drama->reviews()->count('total_evaluation') !== 0)
                                     {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
-                                    <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
+                                    <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
                                 @else
                                     <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
                                 @endif
@@ -30,7 +30,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                @if($drama->reviews()->count() !== 0)
+                                @if($drama->reviews()->count('total_evaluation') !== 0)
                                     総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
                                 @else
                                     総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
@@ -75,7 +75,7 @@
                                 </dl>
                             </div>
                             <div class="col-md-3">
-                                <a href="{{ url('/drama/dramaID') }}"><button>作品情報を見る</button></a>
+                                <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}"><button>作品情報を見る</button></a>
                             </div>
                         </div>
                     </div>

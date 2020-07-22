@@ -9,7 +9,7 @@ class Score extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'drama_id' => 'required',
+        'drama_id' => 'required|unique',
 
         //いずれかの評価が入力されている場合、他の評価項目も必須入力
         'average_total_evaluation' => 'between:0,100|numeric|required_with:story_evaluation',

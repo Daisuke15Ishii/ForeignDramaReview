@@ -25,7 +25,11 @@
                         <div class="row">
                             <h2>総合評価：</h2>
                             {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
-                            <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
+                            @if($drama->reviews()->count('total_evaluation') !== 0)
+                                <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
+                            @else
+                                <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
+                            @endif
                             <form id="" action=""{{ url('/drama/dramaID') }}"" method="POST">
                                 @csrf
                                 <input type="submit" value="マイページに作品登録">
@@ -43,29 +47,33 @@
                             @endauth
                         </div>
                         <div class="row">
-                        総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
+                            @if($drama->reviews()->count('total_evaluation') !== 0)
+                                総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
+                            @else
+                                総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
+                            @endif
                         </div>
                         <div class="row">
                             {{-- 下記の各項目評価の表示は、点数によって星の個数で表現。数字で仮表示 --}}
                             <div class="col-md-4">
-                                <p>シナリオの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('story_evaluation')) }}<img class="star" src="{{ secure_asset('/images/star_yellow.png') }}" alt="★評価"></span></p>
+                                <p>シナリオの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('story_evaluation')) }}<img class="star" src="{{ secure_asset('/images/star_yellow.png') }}" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>演者の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('cast_evaluation')) }}<img src="#" alt="★評価"></span></p>
+                                <p>演者の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('cast_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>映像美の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('visual_evaluation')) }}<img src="#" alt="★評価"></span></p>
+                                <p>映像美の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('visual_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <p>世界観の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('world_evaluation')) }}<img src="#" alt="★評価"></span></p>
+                                <p>世界観の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('world_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>キャラの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('char_evaluation')) }}<img src="#" alt="★評価"></span></p>
+                                <p>キャラの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('char_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                             <div class="col-md-4">
-                                <p>音楽の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->get()->avg('music_evaluation')) }}<img src="#" alt="★評価"></span></p>
+                                <p>音楽の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('music_evaluation')) }}<img src="#" alt="★評価"></span></p>
                             </div>
                         </div>
                         <div class="row">
@@ -84,9 +92,21 @@
                             <div class="col-md-12">
                                 <h3>作品成分分類</h3>
                                 <ul>
-                                    <li>必須：<span class="bg-secondary">{{ sprintf('%.1f', $previous_require = $drama->reviews()->where('previous',2)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
-                                    <li>観た方が良い：<span class="bg-secondary">{{ sprintf('%.1f', $previous_better = $drama->reviews()->where('previous',1)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
-                                    <li>不要：<span class="bg-secondary">{{ sprintf('%.1f', $previous_no = $drama->reviews()->where('previous',0)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                                    @if($previous_require = $drama->reviews()->where('previous',2)->count() !== 0)
+                                        <li>必須：<span class="bg-secondary">{{ sprintf('%.1f', $previous_require = $drama->reviews()->where('previous',2)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                                    @else
+                                        <li>必須：<span class="bg-secondary">0%</span></li>
+                                    @endif
+                                    @if($previous_require = $drama->reviews()->where('previous',1)->count() !== 0)
+                                        <li>観た方が良い：<span class="bg-secondary">{{ sprintf('%.1f', $previous_better = $drama->reviews()->where('previous',1)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                                    @else
+                                        <li>観た方が良い：<span class="bg-secondary">0%</span></li>
+                                    @endif
+                                    @if($previous_require = $drama->reviews()->where('previous',0)->count() !== 0)
+                                        <li>不要：<span class="bg-secondary">{{ sprintf('%.1f', $previous_no = $drama->reviews()->where('previous',0)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                                    @else
+                                        <li>不要：<span class="bg-secondary">0%</span></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -95,10 +115,10 @@
                         @else
                             {{-- レビューを既に投稿したか判定 --}}
                             @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
-                                <a href="{{ url('/drama/dramaID/review') }}"><button>レビューを書く！</button></a>
+                                <a href="{{ route('review_add', ['drama_id' => $drama->id]) }}"><button>レビューを書く！</button></a>
                             @else
                                 {{-- edit画面に飛ばす予定 --}}
-                                <a href="{{ action('drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit', ['review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビューを編集する！</button></a>
+                                <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビューを編集する！</button></a>
                             @endif
                         @endguest
                     </div>

@@ -24,7 +24,6 @@
                             @include('layouts.component.dramaindex')
                         @endforeach
                         
-                        {{-- ペジネーション動かない --}}
                         {{ $dramas->links() }}
                     </div>
                 </div>

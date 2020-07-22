@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12 mx-auto bg-white">
             <h1>{{ $drama->title }} シーズン{{ $drama->season }}のレビュー投稿</h1>
-            <form action="{{ action('drama\dramaID\review\DramaIDReviewController@create') }}" method="POST">
+            <form action="{{ action('drama\dramaID\review\DramaIDReviewController@create', ['drama_id' => $drama->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="drama_id" value="{{ $drama->id }}">

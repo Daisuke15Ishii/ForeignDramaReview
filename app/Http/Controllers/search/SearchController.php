@@ -38,8 +38,8 @@ class SearchController extends Controller
         $janre = Janre::all();
         if ($cond_title != '') {
             // 検索されたら検索結果(部分一致)を取得する
-            $drama = Drama::where('title', 'LIKE',  "%{$cond_title}%")->Paginate(5);
-            $alldrama =  Drama::where('title', 'LIKE',  "%{$cond_title}%")->get();
+            $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->Paginate(5);
+            $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->get();
         } else {
             // それ以外はすべてのドラマを取得する
             $drama = Drama::Paginate(5);
@@ -52,8 +52,8 @@ class SearchController extends Controller
         $cond_title = $request->cond_title;
         $janre = Janre::all();
         if ($cond_title != '') {
-            // 検索されたら検索結果(部分一致)を取得する
-            $drama = Drama::where('title', 'LIKE',  "%{$cond_title}%");
+            // 検索されたら検索結果(前方一致)を取得する
+            $drama = Drama::where('title', 'LIKE',  "{$cond_title}%");
         } else {
             // それ以外はすべてのドラマを取得する。paginateは最後にした方が良さそう。collectionに対してwherehasメソッドはないとのエラー
 //            $drama = Drama::simplePaginate(10);
@@ -87,11 +87,11 @@ class SearchController extends Controller
             }
         }
         
-        //ジャンル。作成中
+        //ジャンル
         if ($request->janre != '') {
-            // 検索されたら絞り込み条件に追加。checkboxから値を複数取得する方法を調べる
+            // 検索されたら絞り込み条件に追加
             $j = $request->janre;
-            //「janre」はdramaモデルで定義したjanreメソッド。「use」はwhereHas内に変数を渡すために必要。
+            //「janre」はdramaモデルで定義したjanreメソッド。「use」はwhereHas内に変数を渡すために必要。$jは配列なのでforeachした方が良い？
             $drama = $drama->whereHas('janre', function($q) use($j){
                 $q->where('janre', $j);
             });
@@ -100,11 +100,19 @@ class SearchController extends Controller
         //総合評価。保留
         if ($request->total_evaluation != '') {
             // 検索されたら絞り込み条件に追加
-            $j = $request->janre;
-            //「janre」はdramaモデルで定義したjanreメソッド。「use」はwhereHas内に変数を渡すために必要。
-            $drama = $drama->whereHas('janre', function($q) use($j){
-                $q->where('janre', $j);
-            });
+//            $avg_total = $drama->reviews()->selectraw('drama_id, avg(total_evaluation) as avg_total')->groupby('drama_id')->get();
+
+            $total = $request->total_evaluation;
+            //joinしてselectrawでavg_total作成後、inputのtotalでwhereする、そのdrama_idを本来のデータベースでwhereする
+        $drama = $drama->whereHas('score', function($q) use($total){
+                $q->where('average_total_evaluation', '>=', $total);
+        });
+/*
+            $join_dramas_reveiws = $drama->join('reviews', 'dramas.id', '=', 'reviews.drama_id');
+            $join_dramas_reveiws =$join_dramas_reveiws->select('id')->groupBy('id')->havingRaw('avg(total_evaluation) > ?', [50]);
+            $join_dramas_reveiws =$join_dramas_reveiws->where('avg_total', '>=', $total);
+            $drama = $drama->where('id', $join_dramas_reveiws->get()->id);
+*/
 //            $drama = $drama->where('total_evaluation', '>=', "{$request->total_evaluation}");
         }
 

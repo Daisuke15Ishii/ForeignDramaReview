@@ -80,7 +80,7 @@
                                                 </form>
                                             @endauth
                                             {{-- 違反報告は実装保留 --}}
-                                            <form id="" name="" action=""{{ url('/drama/dramaID/index') }}"" method="POST">
+                                            <form id="" name="" action="{{ url('/drama/dramaID/index') }}" method="POST">
                                                 @csrf
                                                 <input type="submit" value="違反を報告">
                                             </form>

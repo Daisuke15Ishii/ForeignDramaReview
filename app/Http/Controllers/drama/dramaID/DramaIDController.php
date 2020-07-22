@@ -26,10 +26,14 @@ class DramaIDController extends Controller
         return redirect('admin/news/create');
     }
     
-    public function index(Request $request){
+    public function index(Request $request,$drama_id){
         //画面表示確認のため仮設定
-        $drama = Drama::where('id', 1)->first();
-        return view('drama.dramaID.index', ['drama' => $drama]);
+        $drama = Drama::find($drama_id);
+        $reviews = $drama->reviews()->paginate(5);
+        $allreviews = $drama->reviews()->count();
+        $drama2 = $drama_id;
+        $drama3 = $request->drama_id;
+        return view('drama.dramaID.index', ['drama' => $drama, 'reviews' => $reviews, 'allreviews' => $allreviews, 'drama2' => $drama2, 'drama3' => $drama3, 're' => $request]);
     }
     
     public function edit(Request $request){

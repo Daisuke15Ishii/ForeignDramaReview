@@ -65,11 +65,12 @@ Route::group(['prefix' => 'user/register'], function(){
     });
 });
 
-Route::group(['prefix' => 'drama/dramaID'], function(){
-    Route::get('/', 'drama\dramaID\DramaIDController@index');
-    //postはまだ未作成なので、取り合えず@indexへ
-    Route::post('/', 'drama\dramaID\DramaIDController@index');
-    
+Route::group(['prefix' => 'drama/{drama_id}'], function(){
+    Route::get('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_index');
+    //postはまだ未作成なので、取り合えず@indexへ,nameもエラー切り分けのため別名に
+    Route::post('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_ex');
+
+
     Route::get('/review/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
     });
@@ -119,13 +120,13 @@ Route::group(['prefix' => 'user/userID'], function(){
 
 
 
-Route::group(['prefix' => 'drama/dramaID/review', 'middleware' => 'auth'], function(){
-    Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add');
-    Route::post('/', 'drama\dramaID\review\DramaIDReviewController@create');
+Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], function(){
+    Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add')->name('review_add');
+    Route::post('/', 'drama\dramaID\review\DramaIDReviewController@create')->name('review_create');
 
     //後でurlのreviewIDを変数{reviewID}に変更予定
-    Route::get('/reviewID/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit')->name("review_edit");
-    Route::post('reviewID/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update')->name("review_edit");
+    Route::get('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit')->name("review_edit");
+    Route::post('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update')->name("review_update");
     Route::post('/reviewID', function () {
         return view('/drama/dramaID/review/reviewID/index');
     });

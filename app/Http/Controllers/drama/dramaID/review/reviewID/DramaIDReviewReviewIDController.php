@@ -32,7 +32,7 @@ class DramaIDReviewReviewIDController extends Controller
         return redirect('admin/news');
     }
     
-    public function edit(Request $request){
+    public function edit(Request $request, $review_id, $drama_id){
         //メモ
         $review = Review::find($request->review_id);
         if(empty($review)){
@@ -42,14 +42,14 @@ class DramaIDReviewReviewIDController extends Controller
         return view('drama.dramaID.review.reviewID.edit',  ['drama' => $drama, 'review' => $review]);
     }
     
-    public function update(Request $request){
+    public function update(Request $request, $review_id, $drama_id){
         //DramaIDReviewControllerのcreateメソッドとほぼ同じ
         //画面表示確認のため仮設定,とりあえず設定を色々終えているdramaID.indexへ飛ばす
         
         $this->validate($request, Review::$rules);
         //Favoriteモデルのバリデーションをかけるのがフォームの構造上難しい。とりあえず保留
         
-        $review = Review::find($request->id);
+        $review = Review::find($request->review_id);
         $favorite = Favorite::where('user_id', $request->user_id)->where('drama_id', $request->drama_id)->first();
         $form = $request->all();
         if(empty($request['review_title'])){
@@ -115,7 +115,7 @@ class DramaIDReviewReviewIDController extends Controller
         $review->save();
         $favorite->save();
 
-        return redirect('drama/dramaID');
+        return redirect(route('dramaID_index', ['drama_id' => $request->drama_id]));
         
 //        $drama = Drama::where('id', 1)->first();
 //        return view('drama.dramaID.index', ['drama' => $drama]);
