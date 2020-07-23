@@ -90,7 +90,7 @@
                                 <select name="story_evaluation" class="" id="story_evaluation">
                                     <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        <option value="{{ $i/2 }}" @if(old('story_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                        <option value="{{ $i/2 }}" @if(old('story_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>点以上
                             </div>
@@ -102,7 +102,7 @@
                                 <select name="world_evaluation" class="" id="world_evaluation">
                                     <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        <option value="{{ $i/2 }}" @if(old('world_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                        <option value="{{ $i/2 }}" @if(old('world_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>点以上
                             </div>
@@ -114,7 +114,7 @@
                                 <select name="cast_evaluation" class="" id="cast_evaluation">
                                     <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        <option value="{{ $i/2 }}" @if(old('cast_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                        <option value="{{ $i/2 }}" @if(old('cast_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>点以上
                             </div>
@@ -126,7 +126,7 @@
                                 <select name="char_evaluation" class="" id="char_evaluation">
                                     <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        <option value="{{ $i/2 }}" @if(old('char_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                        <option value="{{ $i/2 }}" @if(old('char_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>点以上
                             </div>
@@ -138,7 +138,7 @@
                                 <select name="visual_evaluation" class="" id="visual_evaluation">
                                     <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        <option value="{{ $i/2 }}" @if(old('visual_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                        <option value="{{ $i/2 }}" @if(old('visual_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>点以上
                             </div>
@@ -150,7 +150,7 @@
                                 <select name="music_evaluation" class="" id="music_evaluation">
                                     <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        <option value="{{ $i/2 }}" @if(old('music_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                        <option value="{{ $i/2 }}" @if(old('music_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>点以上
                             </div>

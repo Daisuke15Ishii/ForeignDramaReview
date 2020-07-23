@@ -11,18 +11,114 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //レコード1
-        $user = new \App\User([
-            'name' => 'seeder1',
-            'email' => 'seeder1@gmail.com',
-            'password' => 'seedertest1',
-            'name_kana' => 'シーダーイチ',
-            'penname' => 'seeder1',
-            'gender' => 'female',
-            'birth' => '2000' . '-01' . '-01 00:00:01',
-            'profile' => 'シーダー1のテスト',
-        ]);
-        $user->save();
 
+        //fakerでテストユーザー作成(users,reviews,favorites,likes,followsの各テーブルへ登録)
+        $faker = Faker\Factory::create('ja_JP');
+        for($i=1; $i < 20; $i++){
+            //user作成
+            $user = new \App\User([
+                'name' => $faker->name . '(test)',
+                'email' => $faker->email,
+                'password' => 'fakertest1',
+                'name_kana' => $faker->userName,
+                'penname' => $faker->userName . '(test)',
+                'gender' => $faker->randomElement($gender=['male','female']),
+                'birth' => $faker->dateTimeBetween('-80 years', '-20years')->format('Y-m-d'),
+                'profile' => $faker->paragraph
+            ]);
+            $user->save();
+            
+            
+            
+            //userのレビュー(reviewとfavorite)作成
+            $dramas = \App\Drama::all();
+            foreach($dramas as $drama){
+                if(rand(0,1) == 1){
+                    //乱数が1の場合のみ、reviewとfavoriteレコードを作成
+                    $review = new \App\Review([
+                        'drama_id' => $drama->id,
+                        'user_id' => $user->id,
+                        'total_evaluation' => $faker->numberBetween(0, 100) / 2, //二桁の乱数
+                        'story_evaluation' => $faker->numberBetween(0, 10) / 2, //0～5の乱数(0.5刻み)
+                        'world_evaluation' => $faker->numberBetween(0, 10) / 2,
+                        'cast_evaluation' => $faker->numberBetween(0, 10) / 2,
+                        'char_evaluation' => $faker->numberBetween(0, 10) / 2,
+                        'visual_evaluation' => $faker->numberBetween(0, 10) / 2,
+                        'music_evaluation' => $faker->numberBetween(0, 10) / 2,
+            
+                        'progress' => $faker->numberBetween(0, 4),
+                        'subtitles' => $faker->randomElement($subtitles=['0','1']),
+                        'review_title' => $faker->sentence,
+                        'review_comment' => $faker->paragraph,
+                        'spoiler_alert' => $faker->randomElement($spoiler_alert=['0','1']),
+                        'previous' => $faker->numberBetween(0, 3)
+                    ]);
+                    $review->save();
+    
+                    
+                    //favoriteテーブルに追加
+                    $favorite = new \App\Favorite([
+                        'drama_id' => $drama->id,
+                        'user_id' => $user->id,
+                        'uncategorized' => 0, //初期化で仮入力
+                        'favorite' => $faker->numberBetween(0, 1),
+                        'comment' => $faker->sentence
+                    ]);
+                    switch($review->progress){
+                        case 0:
+                            //未分類
+                            $favorite->uncategorized = 1;
+                            break;
+                        case 1:
+                            //未視聴
+                            $favorite->want = 1;
+                            break;
+                        case 2:
+                            //視聴断念
+                            $favorite->stop = 1;
+                            break;
+                        case 3:
+                            //視聴中
+                            $favorite->watching = 1;
+                            break;
+                        case 4:
+                            //視聴済
+                            $favorite->watched = 1;
+                            break;
+                    }
+                    $favorite->save();
+                }
+            }
+            
+            //like作成
+            $allreviews = \App\Review::all();
+            foreach($allreviews as $re){
+                if(rand(0,1) == 1){
+                    //乱数が1の場合のみ、reviewとfavoriteレコードを作成
+                    $like = new \App\Like([
+                        'user_id' => $user->id,
+                        'review_id' => $re->id
+                    ]);
+                    $like->save();
+                }
+            }
+
+
+            //follow作成
+            $allusers = \App\User::all();
+            foreach($allusers as $us){
+                if(rand(0,1) == 1){
+                    //乱数が1の場合のみ、reviewとfavoriteレコードを作成]
+                    if($us->id !== $user->id){
+                        $follow = new \App\Follow([
+                            //今回新規登録したユーザー「user_id」が「following_user_id」をフォローする
+                            'user_id' => $user->id,
+                            'following_user_id' => $us->id
+                        ]);
+                        $follow->save();
+                    }
+                }
+            }
+        }
     }
 }

@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         // $this->call(DramasTableSeeder::class);
         // $this->call(ReviewsTableSeeder::class);
-        // $this->call(ScoresTableSeeder::class);
         // $this->call(FavoritesTableSeeder::class);
         // $this->call(LikesTableSeeder::class);
         // $this->call(FollowsTableSeeder::class);
@@ -23,5 +22,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(RequestsTableSeeder::class);
         // $this->call(ContactsTableSeeder::class);
         // $this->call(UsersTableSeeder::class);
+         $this->call(ScoresTableSeeder::class);
     }
 }
