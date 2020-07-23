@@ -20,11 +20,10 @@
                             </div>
                         </div>
 
-                        {{-- cast検索はデータベース設計を見直さないと難しい --}}
                         <div class="form-group row">
-                            <label for="cast_1" class="col-md-4 col-form-label text-md-right">主な出演者：</label>
+                            <label for="cast" class="col-md-4 col-form-label text-md-right">主な出演者：</label>
                             <div class="col-md-6">
-                                <input id="cast_1" type="text" class="form-control @error('cast_1') is-invalid @enderror" name="cast_1" value="{{ old('cast_1') }}" autocomplete="cast_1">
+                                <input id="cast" type="text" class="form-control @error('cast') is-invalid @enderror" name="cast" value="{{ old('cast') }}" autocomplete="cast">
                             </div>
                         </div>
                         
@@ -89,17 +88,10 @@
                             <label for="story_evaluation" class="col-md-4 col-form-label text-md-right">シナリオ：</label>
                             <div class="col-md-6">
                                 <select name="story_evaluation" class="" id="story_evaluation">
-                                    <option value="" selected>--</option>
-                                    <option value="0">0</option>
-                                    <option value="1.0">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
+                                    <option value="">--</option>
+                                    @for($i = 10; $i > 0; $i--)
+                                        <option value="{{ $i/2 }}" @if(old('story_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
@@ -108,17 +100,10 @@
                             <label for="world_evaluation" class="col-md-4 col-form-label text-md-right">世界観：</label>
                             <div class="col-md-6">
                                 <select name="world_evaluation" class="" id="world_evaluation">
-                                    <option value="" selected>--</option>
-                                    <option value="0">0</option>
-                                    <option value="1.0">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
+                                    <option value="">--</option>
+                                    @for($i = 10; $i > 0; $i--)
+                                        <option value="{{ $i/2 }}" @if(old('world_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
@@ -127,17 +112,10 @@
                             <label for="cast_evaluation" class="col-md-4 col-form-label text-md-right">演者：</label>
                             <div class="col-md-6">
                                 <select name="cast_evaluation" class="" id="cast_evaluation">
-                                    <option value="" selected>--</option>
-                                    <option value="0">0</option>
-                                    <option value="1.0">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
+                                    <option value="">--</option>
+                                    @for($i = 10; $i > 0; $i--)
+                                        <option value="{{ $i/2 }}" @if(old('cast_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
@@ -146,17 +124,10 @@
                             <label for="char_evaluation" class="col-md-4 col-form-label text-md-right">キャラ：</label>
                             <div class="col-md-6">
                                 <select name="char_evaluation" class="" id="char_evaluation">
-                                    <option value="" selected>--</option>
-                                    <option value="0">0</option>
-                                    <option value="1.0">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
+                                    <option value="">--</option>
+                                    @for($i = 10; $i > 0; $i--)
+                                        <option value="{{ $i/2 }}" @if(old('char_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
@@ -165,17 +136,10 @@
                             <label for="visual_evaluation" class="col-md-4 col-form-label text-md-right">映像美：</label>
                             <div class="col-md-6">
                                 <select name="visual_evaluation" class="" id="visual_evaluation">
-                                    <option value="" selected>--</option>
-                                    <option value="0">0</option>
-                                    <option value="1.0">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
+                                    <option value="">--</option>
+                                    @for($i = 10; $i > 0; $i--)
+                                        <option value="{{ $i/2 }}" @if(old('visual_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
@@ -184,17 +148,10 @@
                             <label for="music_evaluation" class="col-md-4 col-form-label text-md-right">音楽：</label>
                             <div class="col-md-6">
                                 <select name="music_evaluation" class="" id="music_evaluation">
-                                    <option value="" selected>--</option>
-                                    <option value="0">0</option>
-                                    <option value="1.0">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
+                                    <option value="">--</option>
+                                    @for($i = 10; $i > 0; $i--)
+                                        <option value="{{ $i/2 }}" @if(old('music_evaluation')=='$i/2') selected @endif>{{ $i/2 }}</option>
+                                    @endfor
                                 </select>点以上
                             </div>
                         </div>
@@ -208,7 +165,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <span class="col-md-4 text-md-right">前作視聴：</span>
+                            <span class="col-md-4 text-md-right">前作視聴(未実装)：</span>
                             <div class="col-md-2">
                                 <label><input type="checkbox" name="previous" value="2">必須</label>
                             </div>

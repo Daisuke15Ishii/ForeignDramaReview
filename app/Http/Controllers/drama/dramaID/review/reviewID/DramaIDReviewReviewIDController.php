@@ -115,10 +115,29 @@ class DramaIDReviewReviewIDController extends Controller
         $review->save();
         $favorite->save();
 
+        //scoreテーブルの集計値を保存
+        $score = Score::where('drama_id', $request->drama_id)->first();
+        $score->average_total_evaluation = Drama::find($request->drama_id)->reviews()->avg('total_evaluation');
+        $score->median_total_evaluation = Drama::find($request->drama_id)->reviews()->get()->median('total_evaluation');
+        $score->average_story_evaluation = Drama::find($request->drama_id)->reviews()->avg('story_evaluation');
+        $score->average_world_evaluation = Drama::find($request->drama_id)->reviews()->avg('world_evaluation');
+        $score->average_cast_evaluation = Drama::find($request->drama_id)->reviews()->avg('cast_evaluation');
+        $score->average_char_evaluation = Drama::find($request->drama_id)->reviews()->avg('char_evaluation');
+        $score->average_visual_evaluation = Drama::find($request->drama_id)->reviews()->avg('visual_evaluation');
+        $score->average_music_evaluation = Drama::find($request->drama_id)->reviews()->avg('music_evaluation');
+        $score->reviews = Drama::find($request->drama_id)->reviews()->count('total_evaluation');
+        $score->registers = Drama::find($request->drama_id)->reviews()->count();
+        $score->favorites = Drama::find($request->drama_id)->favorites()->where('favorite', 1)->count();
+        //総合ランキングは保留
+        $score->previous_require = Drama::find($request->drama_id)->reviews()->where('previous', 2)->count();
+        $score->previous_better = Drama::find($request->drama_id)->reviews()->where('previous', 1)->count();
+        $score->previous_no = Drama::find($request->drama_id)->reviews()->where('previous', 0)->count();
+
+        $score->save();
+
+
         return redirect(route('dramaID_index', ['drama_id' => $request->drama_id]));
         
-//        $drama = Drama::where('id', 1)->first();
-//        return view('drama.dramaID.index', ['drama' => $drama]);
     }
 
     public function like(Request $request, $drama_id){

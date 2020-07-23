@@ -73,14 +73,14 @@
                         <form action="{{ action('search\SearchController@result') }}" method="get">
                             <div class="form-group row">
                                 <div class="">
-                                    <select name="data[mode]" class="" id="mode">
-                                        <option value="searchDramaByTitle">作品名から検索</option>
-                                        <option value="searchDramaByKeyword">レビューコメントから検索</option>
+                                    <select name="mode" class="" id="mode">
+                                        <option value="modetitle">作品名から検索</option>
+                                        <option value="modecomment">レビューコメントから検索</option>
                                     </select>
                                 </div>
                                 <div class="">
                                     {{--　後でvalue=cond_titleを二重括弧で囲む　--}}
-                                    <input type="text" class="form-control" name="cond_title" value="">
+                                    <input type="text" class="form-control" name="cond_title" value="" autocomplete="cond_title">
                                 </div>
                                 <div class="">
                                     {{ csrf_field() }}

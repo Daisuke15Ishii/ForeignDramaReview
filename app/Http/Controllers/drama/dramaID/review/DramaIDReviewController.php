@@ -105,9 +105,7 @@ class DramaIDReviewController extends Controller
             $score->average_total_evaluation = $request->total_evaluation;
             $score->median_total_evaluation = $request->total_evaluation;
             $score->average_story_evaluation = $request->story_evaluation;
-
             $score->average_story_evaluation = $request->music_evaluation;
-            
             $score->average_world_evaluation = $request->world_evaluation;
             $score->average_cast_evaluation = $request->cast_evaluation;
             $score->average_char_evaluation = $request->char_evaluation;

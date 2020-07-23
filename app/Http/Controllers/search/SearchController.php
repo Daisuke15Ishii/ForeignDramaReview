@@ -36,15 +36,34 @@ class SearchController extends Controller
     public function result(Request $request){
         $cond_title = $request->cond_title;
         $janre = Janre::all();
-        if ($cond_title != '') {
-            // 検索されたら検索結果(部分一致)を取得する
-            $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->Paginate(5);
-            $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->get();
-        } else {
-            // それ以外はすべてのドラマを取得する
-            $drama = Drama::Paginate(5);
-            $alldrama =  Drama::all();
+
+        //タイトルで検索
+        if($request->mode == 'modetitle'){
+            if ($cond_title != '') {
+                // 検索されたら検索結果(部分一致)を取得する
+                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->Paginate(5);
+                $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->get();
+            } else {
+                // それ以外はすべてのドラマを取得する
+                $drama = Drama::Paginate(5);
+                $alldrama =  Drama::all();
+            }
+        }elseif($request->mode == 'modecomment'){
+            //レビューコメントで検索
+            if ($cond_title != '') {
+                // 検索されたら検索結果(部分一致)を取得する
+                $drama = Drama::whereHas('reviews', function($q) use($cond_title){
+                    $q->where('review_comment', 'LIKE',  "%{$cond_title}%");
+                });
+                $alldrama =  $drama->get();
+                $drama = $drama->Paginate(5);
+            } else {
+                // それ以外はすべてのドラマを取得する
+                $drama = Drama::Paginate(5);
+                $alldrama =  Drama::all();
+            }
         }
+
         return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama, 'janre' => $janre, 'cond_title' => $cond_title]);
     }
 
@@ -55,19 +74,24 @@ class SearchController extends Controller
             // 検索されたら検索結果(前方一致)を取得する
             $drama = Drama::where('title', 'LIKE',  "{$cond_title}%");
         } else {
-            // それ以外はすべてのドラマを取得する。paginateは最後にした方が良さそう。collectionに対してwherehasメソッドはないとのエラー
-//            $drama = Drama::simplePaginate(10);
-//            $drama = Drama::all();
+            // それ以外はすべてのドラマを取得する。
             $drama = Drama::where('title', 'LIKE',  "%");
         }
         
-        //ここから下は@resultと異なる
-        //$request->cast1は保留
+
+        //出演者(本来は「janre」のように、出演者テーブルを用意した方が好ましい)
+        if ($request->cast != '') {
+            // 検索されたら絞り込み条件に追加
+            $cast = $request->cast;
+            $drama = $drama->where('cast1', 'LIKE',  "%{$cast}%")->orwhere('cast2', 'LIKE',  "%{$cast}%")->orwhere('cast3', 'LIKE',  "%{$cast}%");
+        }
+
         //国
         if ($request->country != '') {
             // 検索されたら絞り込み条件に追加
             $drama = $drama->where('country', "{$request->country}");
         }
+        
         //放送開始日
         if ($request->onair1 != '') {
             // 検索されたら絞り込み条件に追加
@@ -97,39 +121,99 @@ class SearchController extends Controller
             });
         }
         
-        //総合評価。保留
+        //総合評価
         if ($request->total_evaluation != '') {
             // 検索されたら絞り込み条件に追加
-//            $avg_total = $drama->reviews()->selectraw('drama_id, avg(total_evaluation) as avg_total')->groupby('drama_id')->get();
-
             $total = $request->total_evaluation;
-            //joinしてselectrawでavg_total作成後、inputのtotalでwhereする、そのdrama_idを本来のデータベースでwhereする
-        $drama = $drama->whereHas('score', function($q) use($total){
+            //集計値を保存するテーブル(scores)を用意しないと、集計値を元にした検索機能のコードが複雑化してしまう
+            $drama = $drama->whereHas('score', function($q) use($total){
                 $q->where('average_total_evaluation', '>=', $total);
-        });
-/*
-            $join_dramas_reveiws = $drama->join('reviews', 'dramas.id', '=', 'reviews.drama_id');
-            $join_dramas_reveiws =$join_dramas_reveiws->select('id')->groupBy('id')->havingRaw('avg(total_evaluation) > ?', [50]);
-            $join_dramas_reveiws =$join_dramas_reveiws->where('avg_total', '>=', $total);
-            $drama = $drama->where('id', $join_dramas_reveiws->get()->id);
-*/
-//            $drama = $drama->where('total_evaluation', '>=', "{$request->total_evaluation}");
+            });
         }
 
+        //シナリオ評価
+        if ($request->story_evaluation != '') {
+            // 検索されたら絞り込み条件に追加
+            $story = $request->story_evaluation;
+            $drama = $drama->whereHas('score', function($q) use($story){
+                $q->where('average_story_evaluation', '>=', $story);
+            });
+        }
+        
+        //世界観評価
+        if ($request->world_evaluation != '') {
+            // 検索されたら絞り込み条件に追加
+            $world = $request->world_evaluation;
+            $drama = $drama->whereHas('score', function($q) use($world){
+                $q->where('average_world_evaluation', '>=', $world);
+            });
+        }
+        
+        //演者
+        if ($request->cast_evaluation != '') {
+            // 検索されたら絞り込み条件に追加
+            $cast = $request->cast_evaluation;
+            $drama = $drama->whereHas('score', function($q) use($cast){
+                $q->where('average_cast_evaluation', '>=', $cast);
+            });
+        }
+        
+        //キャラ
+        if ($request->char_evaluation != '') {
+            // 検索されたら絞り込み条件に追加
+            $char = $request->char_evaluation;
+            $drama = $drama->whereHas('score', function($q) use($char){
+                $q->where('average_char_evaluation', '>=', $char);
+            });
+        }
 
-        //キーワード検索。保留
+        //映像美
+        if ($request->visual_evaluation != '') {
+            // 検索されたら絞り込み条件に追加
+            $visual = $request->visual_evaluation;
+            $drama = $drama->whereHas('score', function($q) use($visual){
+                $q->where('average_visual_evaluation', '>=', $visual);
+            });
+        }
+
+        //音楽
+        if ($request->music_evaluation != '') {
+            // 検索されたら絞り込み条件に追加
+            $music = $request->music_evaluation;
+            $drama = $drama->whereHas('score', function($q) use($music){
+                $q->where('average_music_evaluation', '>=', $music);
+            });
+        }
+
+        //キーワード検索
         if ($request->review_comment != '') {
             // 検索されたら絞り込み条件に追加
-            
-//            $drama = $drama->where('total_evaluation', '>=', "{$request->total_evaluation}");
+            $comment = $request->review_comment;
+            $drama = $drama->whereHas('reviews', function($q) use($comment){
+                $q->where('review_comment', 'LIKE',  "%{$comment}%");
+            });
         }
 
-        //前作視聴の有無。保留
+/*
+        //前作視聴の有無。想定通りの動作しないので保留
         if ($request->previous != '') {
             // 検索されたら絞り込み条件に追加
-            
-//            $drama = $drama->where('total_evaluation', '>=', "{$request->total_evaluation}");
+            $previous = $request->previous;
+            $drama = $drama->whereHas('score', function($q) use($previous){
+                //想定通りの動作しないので保留。
+                if($previous == 2){
+                    //「必須」が一番多い。
+                    $q->where('previous_require', 'previous_better')->where('previous_better', '>', 'previous_no');
+                }elseif($previous == 1){
+                    //「観た方が良い」が一番多い
+                    $q->where('previous_better', 'previous_require')->where('previous_better', '>', 'previous_no');
+                }else{
+                    //「不要」が一番多い
+                    $q->where('previous_no', 'previous_require')->where('previous_no', '>', 'previous_better');
+                }
+            });
         }
+*/
 
         //シーズン1のみ検索
         if ($request->season1 == '1') {
@@ -137,11 +221,10 @@ class SearchController extends Controller
             $drama = $drama->where('season', "1");
         }
         
-        //途中でget()するとエラーになるので、最後に一度だけget() or paginate(10)
+        //途中でget()するとエラーになるので、最後に一度だけget() or paginate()
         $alldrama = $drama->get();
         $drama = $drama->paginate(5);
 
-        
         return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama,'janre' => $janre, 'cond_title' => $cond_title]);
     }
     

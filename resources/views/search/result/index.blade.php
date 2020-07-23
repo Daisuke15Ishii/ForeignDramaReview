@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mx-auto bg-white">
-                <h1>"{{ $cond_title }}"の検索結果{{ $alldrama->count() }}件</h1><span class="">(●●件目を表示)</span>
+                <h1>"{{ $cond_title }}"の検索結果{{ $alldrama->count() }}件</h1><span class="">({{ $dramas->firstitem() }}~{{ $dramas->lastitem() }}件目を表示)</span>
                 <div class="">
                     {{-- 右に寄せたい --}}
                     {{-- value適当 --}}
@@ -24,7 +24,7 @@
                             @include('layouts.component.dramaindex')
                         @endforeach
                         
-                        {{ $dramas->links() }}
+                        {{ $dramas->appends(request()->input())->links() }}
                     </div>
                 </div>
             </div>

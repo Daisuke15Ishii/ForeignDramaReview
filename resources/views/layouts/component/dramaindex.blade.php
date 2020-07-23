@@ -16,7 +16,7 @@
                                 <h3 style="display:inline">総合評価：</h3>
                                 @if($drama->reviews()->count('total_evaluation') !== 0)
                                     {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
-                                    <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
+                                    <span class="bg-secondary">{{ sprintf('%.2f', $drama->score()->first()->average_total_evaluation) }}点<img src="#" alt="★評価"></span>
                                 @else
                                     <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
                                 @endif
@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 @if($drama->reviews()->count('total_evaluation') !== 0)
-                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
+                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->score()->first()->median_total_evaluation }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
                                 @else
                                     総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
                                 @endif
