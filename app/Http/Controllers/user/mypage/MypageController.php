@@ -1,20 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\search;
+namespace App\Http\Controllers\user\mypage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Drama;
-use App\Review;
-use App\User;
-use App\Score;
-use App\Favorite;
-use App\Like;
-use Auth;
-use App\Janre;
-
-class SearchController extends Controller
+class MypageController extends Controller
 {
     //
     public function add(){
@@ -28,12 +19,14 @@ class SearchController extends Controller
     }
 
     public function index(Request $request){
-        //メモ
-        $janre = Janre::all();
-        return view('search.index', ['janre' => $janre]);
+        $auth = \Auth::user();
+        $dramas = $auth->favoritesDrama()->get(); //マイページ登録されている作品
+        $reviews = $auth->reviews()->get(); //レビュー投稿した作品
+        return view('user.mypage.index', ['dramas' => $dramas, 'reviews' => $reviews]);
     }
 
     public function result(Request $request){
+        //searchからコピーしただけなので以下不要
         $cond_title = $request->cond_title;
         $janre = Janre::all();
 
@@ -68,6 +61,7 @@ class SearchController extends Controller
     }
 
     public function detailresult(Request $request){
+        //searchからコピーしただけなので以下不要
         $cond_title = $request->cond_title;
         $janre = Janre::all();
         if ($cond_title != '') {

@@ -30,7 +30,7 @@
                             <div class="form-group col-md-9">
                                 <label for="total_evaluation" class="bg-secondary">総合評価</label>
                                     <select id="total_evaluation" name="total_evaluation">
-                                        <option value="">点数選択</option>
+                                        <option value="" @if( $review->total_evaluation == null ) selected @endif>点数選択</option>
                                         @for($i = 100; $i > 0; $i--)
                                             @if( $review->total_evaluation == $i)
                                                 <option value="{{ $i }}" selected>{{ $i }}点</option>
@@ -71,6 +71,7 @@
                             <div class="form-group col-md-6">
                                 <label for="story_evaluation" class="control-label bg-secondary">シナリオの評価</label>
                                 <select class="form-control" id="story_evaluation" name="story_evaluation">
+                                    <option value="" @if( $review->story_evaluation == null ) selected @endif>--</option>
                                     <option value="5.0" @if( $review->story_evaluation == 5.0 ) selected @endif>5.0</option>
                                     <option value="4.5" @if( $review->story_evaluation == 4.5 ) selected @endif>4.5</option>
                                     <option value="4.0" @if( $review->story_evaluation == 4.0 ) selected @endif>4.0</option>
@@ -85,6 +86,7 @@
                             <div class="form-group col-md-6">
                                 <label for="char_evaluation" class="control-label bg-secondary">キャラの評価</label>
                                 <select class="form-control" id="char_evaluation" name="char_evaluation">
+                                    <option value="" @if( $review->char_evaluation == null ) selected @endif>--</option>
                                     <option value="5.0" @if( $review->char_evaluation == 5.0 ) selected @endif>5.0</option>
                                     <option value="4.5" @if( $review->char_evaluation == 4.5 ) selected @endif>4.5</option>
                                     <option value="4.0" @if( $review->char_evaluation == 4.0 ) selected @endif>4.0</option>
@@ -101,6 +103,7 @@
                             <div class="form-group col-md-6">
                                 <label for="world_evaluation" class="control-label bg-secondary">世界観の評価</label>
                                 <select class="form-control" id="world_evaluation" name="world_evaluation">
+                                    <option value="" @if( $review->world_evaluation == null ) selected @endif>--</option>
                                     <option value="5.0" @if( $review->world_evaluation == 5.0 ) selected @endif>5.0</option>
                                     <option value="4.5" @if( $review->world_evaluation == 4.5 ) selected @endif>4.5</option>
                                     <option value="4.0" @if( $review->world_evaluation == 4.0 ) selected @endif>4.0</option>
@@ -115,6 +118,7 @@
                             <div class="form-group col-md-6">
                                 <label for="visual_evaluation" class="control-label bg-secondary">映像美の評価</label>
                                 <select class="form-control" id="visual_evaluation" name="visual_evaluation">
+                                    <option value="" @if( $review->visual_evaluation == null ) selected @endif>--</option>
                                     <option value="5.0" @if( $review->visual_evaluation == 5.0 ) selected @endif>5.0</option>
                                     <option value="4.5" @if( $review->visual_evaluation == 4.5 ) selected @endif>4.5</option>
                                     <option value="4.0" @if( $review->visual_evaluation == 4.0 ) selected @endif>4.0</option>
@@ -131,6 +135,7 @@
                             <div class="form-group col-md-6">
                                 <label for="cast_evaluation" class="control-label bg-secondary">演者の評価</label>
                                 <select class="form-control" id="cast_evaluation" name="cast_evaluation">
+                                    <option value="" @if( $review->cast_evaluation == null ) selected @endif>--</option>
                                     <option value="5.0" @if( $review->cast_evaluation == 5.0 ) selected @endif>5.0</option>
                                     <option value="4.5" @if( $review->cast_evaluation == 4.5 ) selected @endif>4.5</option>
                                     <option value="4.0" @if( $review->cast_evaluation == 4.0 ) selected @endif>4.0</option>
@@ -145,6 +150,7 @@
                             <div class="form-group col-md-6">
                                 <label for="music_evaluation" class="control-label bg-secondary">音楽の評価</label>
                                 <select class="form-control" id="music_evaluation" name="music_evaluation">
+                                    <option value="" @if( $review->music_evaluation == null ) selected @endif>--</option>
                                     <option value="5.0" @if( $review->music_evaluation == 5.0 ) selected @endif>5.0</option>
                                     <option value="4.5" @if( $review->music_evaluation == 4.5 ) selected @endif>4.5</option>
                                     <option value="4.0" @if( $review->music_evaluation == 4.0 ) selected @endif>4.0</option>

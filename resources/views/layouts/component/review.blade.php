@@ -5,7 +5,7 @@
                                         <img src="{{ secure_asset('/images/person.jpeg') }}" alt="user画像" class="person">
                                     </div>
                                     <div class="col-md-10">
-                                        <p><a href="#">{{ $review->user()->first()->name }}</a>さん(仮で本名表示)</p>
+                                        <p><a href="#">{{ $review->user()->first()->penname }}</a></p>
                                         <p>20代・男性</p>
                                         <p>投稿日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at))  }}</p>
                                     </div>

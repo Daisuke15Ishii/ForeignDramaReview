@@ -67,11 +67,8 @@
                             <div class="form-group col-md-6">
                                 <label for="story_evaluation" class="control-label bg-secondary">シナリオの評価</label>
                                 <select class="form-control" id="story_evaluation" name="story_evaluation">
+                                    <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        @if(old('story_evaluation') == ''  &&  $i == 6)
-                                            <option value="{{ $i/2 }}" selected>{{ sprintf('%.1f', $i/2) }}</option>
-                                            @continue
-                                        @endif
                                         <option value="{{ $i/2 }}" @if(old('story_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>
@@ -79,11 +76,8 @@
                             <div class="form-group col-md-6">
                                 <label for="char_evaluation" class="control-label bg-secondary">キャラの評価</label>
                                 <select class="form-control" id="char_evaluation" name="char_evaluation">
+                                    <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        @if(old('char_evaluation') == ''  &&  $i == 6)
-                                            <option value="{{ $i/2 }}" selected>{{ sprintf('%.1f', $i/2) }}</option>
-                                            @continue
-                                        @endif
                                         <option value="{{ $i/2 }}" @if(old('char_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>
@@ -93,11 +87,8 @@
                             <div class="form-group col-md-6">
                                 <label for="world_evaluation" class="control-label bg-secondary">世界観の評価</label>
                                 <select class="form-control" id="world_evaluation" name="world_evaluation">
+                                    <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        @if(old('world_evaluation') == ''  &&  $i == 6)
-                                            <option value="{{ $i/2 }}" selected>{{ sprintf('%.1f', $i/2) }}</option>
-                                            @continue
-                                        @endif
                                         <option value="{{ $i/2 }}" @if(old('world_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>
@@ -105,11 +96,8 @@
                             <div class="form-group col-md-6">
                                 <label for="visual_evaluation" class="control-label bg-secondary">映像美の評価</label>
                                 <select class="form-control" id="visual_evaluation" name="visual_evaluation">
+                                    <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        @if(old('visual_evaluation') == ''  &&  $i == 6)
-                                            <option value="{{ $i/2 }}" selected>{{ sprintf('%.1f', $i/2) }}</option>
-                                            @continue
-                                        @endif
                                         <option value="{{ $i/2 }}" @if(old('visual_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>
@@ -119,11 +107,8 @@
                             <div class="form-group col-md-6">
                                 <label for="cast_evaluation" class="control-label bg-secondary">演者の評価</label>
                                 <select class="form-control" id="cast_evaluation" name="cast_evaluation">
+                                    <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        @if(old('cast_evaluation') == ''  &&  $i == 6)
-                                            <option value="{{ $i/2 }}" selected>{{ sprintf('%.1f', $i/2) }}</option>
-                                            @continue
-                                        @endif
                                         <option value="{{ $i/2 }}" @if(old('cast_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>
@@ -131,11 +116,8 @@
                             <div class="form-group col-md-6">
                                 <label for="music_evaluation" class="control-label bg-secondary">音楽の評価</label>
                                 <select class="form-control" id="music_evaluation" name="music_evaluation">
+                                    <option value="">--</option>
                                     @for($i = 10; $i > 0; $i--)
-                                        @if(old('music_evaluation') == ''  &&  $i == 6)
-                                            <option value="{{ $i/2 }}" selected>{{ sprintf('%.1f', $i/2) }}</option>
-                                            @continue
-                                        @endif
                                         <option value="{{ $i/2 }}" @if(old('music_evaluation')=='$i/2') selected @endif>{{ sprintf('%.1f', $i/2) }}</option>
                                     @endfor
                                 </select>

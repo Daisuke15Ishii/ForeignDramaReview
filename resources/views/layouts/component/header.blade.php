@@ -43,7 +43,7 @@
                             {{-- ログインしていたら「ユーザー名」「マイページへのリンク」「ログアウトボタン」を表示 --}}
                             @else
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}<span class="">さん</span>
+                                {{ Auth::user()->penname }}<span class="">さん</span>
                             </a>
                             <a href="{{ url('/user/mypage') }}">マイページ</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

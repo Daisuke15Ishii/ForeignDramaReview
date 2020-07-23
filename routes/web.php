@@ -67,8 +67,7 @@ Route::group(['prefix' => 'user/register'], function(){
 
 Route::group(['prefix' => 'drama/{drama_id}'], function(){
     Route::get('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_index');
-    //postはまだ未作成なので、取り合えず@indexへ,nameもエラー切り分けのため別名に
-    Route::post('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_ex');
+    //postはfollowしたときのルーティングも必要かも
     Route::post('/', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@like')->name("review_like");
 
     Route::get('/review/reviewID', function () {
@@ -90,19 +89,12 @@ Route::group(['prefix' => 'drama/review'], function(){
 
 Route::group(['prefix' => 'search'], function(){
     Route::get('/', 'search\SearchController@index');
-//    Route::get('/', function () {
-//        return view('/search/index');
-//    });
     Route::post('/', function () {
         return view('/search//index');
     });
     
-    //detailresultというURLはないが、コントローラーのルーティングを記述しないとエラーになるため、適当なURLで記述
     Route::get('/detailresult', 'search\SearchController@detailresult');
     Route::get('/result', 'search\SearchController@result');
-//    Route::get('/result', function () {
-//        return view('/search/result/index');
-//    });
     Route::post('/result', function () {
         return view('/search/result/index');
     });
@@ -150,9 +142,12 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
         return view('/');
     });
 
+/*
     Route::get('/', function () {
         return view('/user/mypage/index');
     });
+*/
+    Route::get('/', 'user\mypage\MypageController@index');
     Route::post('/', function () {
         return view('/user/mypage/index');
     });

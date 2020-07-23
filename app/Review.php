@@ -13,13 +13,13 @@ class Review extends Model
         'user_id' => 'required',
 
         //いずれかの評価が入力されている場合、他の評価項目も必須入力
-        'total_evaluation' => 'between:0,100|numeric|required_with:story_evaluation',
-        'story_evaluation' => 'between:0,5|numeric|required_with:world_evaluation',
-        'world_evaluation' => 'between:0,5|numeric|required_with:cast_evaluation',
-        'cast_evaluation' => 'between:0,5|numeric|required_with:char_evaluation',
-        'char_evaluation' => 'between:0,5|numeric|required_with:visual_evaluation',
-        'visual_evaluation' => 'between:0,5|numeric|required_with:music_evaluation',
-        'music_evaluation' => 'between:0,5|numeric|required_with:total_evaluation',
+        'total_evaluation' => 'nullable|between:0,100|numeric|required_with:story_evaluation|required_with:review_title',
+        'story_evaluation' => 'nullable|between:0,5|numeric|required_with:world_evaluation',
+        'world_evaluation' => 'nullable|between:0,5|numeric|required_with:cast_evaluation',
+        'cast_evaluation' => 'nullable|between:0,5|numeric|required_with:char_evaluation',
+        'char_evaluation' => 'nullable|between:0,5|numeric|required_with:visual_evaluation',
+        'visual_evaluation' => 'nullable|between:0,5|numeric|required_with:music_evaluation',
+        'music_evaluation' => 'nullable|between:0,5|numeric|required_with:total_evaluation',
         'progress' => 'required',
         'subtitles' => 'boolean|required_with:total_evaluation',
         
