@@ -126,15 +126,11 @@ Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], fu
 
 
 Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
-    Route::get('/profile/edit', function () {
-        return view('/user/mypage/profile/edit');
-    });
+    Route::get('/profile/edit', 'user\mypage\MypageProfileController@edit')->name("profile_edit");
     Route::post('/profile/edit', function () {
         return view('/user/mypage/profile/edit');
     });
-    Route::get('/setting/edit', function () {
-        return view('/user/mypage/setting/edit');
-    });
+    Route::get('/setting/edit', 'user\mypage\MypageSettingController@edit')->name("setting_edit");
     Route::post('/setting/edit', function () {
         return view('/user/mypage/setting/complete');
     });

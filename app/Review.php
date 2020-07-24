@@ -51,5 +51,4 @@ class Review extends Model
         return $this->belongsToMany('App\User','likes','review_id');
     }
     
-   
 }

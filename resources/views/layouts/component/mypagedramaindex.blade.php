@@ -14,19 +14,19 @@
                                     </div>
                                     <div class="col-md-8 p-0 m-0">
                                         <p class="p-0 m-0"><a href="{{ url('/drama/dramaID') }}">{{ $drama->title }}　シーズン{{ $drama->season }}</a></p>
-                                        <p class="p-0 m-0">総合評価：{{ $drama->score()->first()->average_total_evaluation }}点<img src="#" alt="評価の星マーク"></p>
+                                        <p class="p-0 m-0">総合評価：{{ $drama->reviews()->where('user_id',Auth::user()->id)->first()->total_evaluation }}点<img src="#" alt="評価の星マーク"></p>
                                         {{-- if文により、既に投稿済みなら編集ボタン、未投稿ならば新規投稿ボタンを表示 --}}
                                         <p class="p-0 m-0">
-                                            <a href="{{ url('/drama/dramaID/review/reviewID') }}">{{ $drama->reviews()->first()->review_title }}</a>
+                                            <a href="{{ url('/drama/dramaID/review/reviewID') }}">{{ \Str::limit($drama->reviews()->where('user_id', Auth::user()->id)->first()->review_title, 50) }}</a>
                                             <button>
-                                                <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->first()->id]) }}">レビュー編集</a>
+                                                <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}">レビュー編集</a>
                                             </button>
                                             {{-- 削除ボタンはどこに置くか検討中 --}}
                                             <button>
-                                                <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->first()->id]) }}">レビュー削除？(js検討)</a>
+                                                <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}">レビュー削除？(js検討)</a>
                                             </button>
                                         </p>
-                                        <p class="p-0 m-0">更新日：{{ date('Y年m月d日', strtotime($drama->reviews()->first()->updated_at)) }} / {{ $drama->reviews()->first()->likes()->count() }}いいね</p>
+                                        <p class="p-0 m-0">更新日：{{ date('Y年m月d日', strtotime($drama->reviews()->where('user_id',Auth::user()->id)->first()->updated_at)) }} / {{ $drama->reviews()->where('user_id',Auth::user()->id)->first()->likes()->count() }}いいね</p>
                                     </div>
                                 </div>
                             </div>

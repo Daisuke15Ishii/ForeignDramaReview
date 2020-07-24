@@ -38,7 +38,7 @@ class ScoresTableSeeder extends Seeder
                     $socre->average_music_evaluation = $drama->reviews()->avg('music_evaluation');
                 }
             }else{
-                //scoreレコードが存在しないとき
+                //scoreレコードが存在しないとき //改良後はdramaレコードがあれば必ずscoreレコードが存在するため以下不要
                 if($drama->reviews()->avg('total_evaluation') !== null){
                     //総合評価のレビュー投稿が1つ以上あるとき
                     $socre = new \App\Score([

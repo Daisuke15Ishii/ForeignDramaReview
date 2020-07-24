@@ -11,6 +11,7 @@ class DramasTableSeeder extends Seeder
      */
     public function run()
     {
+        //dramaレコードを作成すると同時に、scoreテーブルに空のレコードを挿入する
         //レコード1
         $drama = new \App\Drama([
             'title' => 'ブレイキング・バッド',
@@ -30,6 +31,11 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
         //レコード2
         $drama = new \App\Drama([
@@ -50,6 +56,12 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード3
         $drama = new \App\Drama([
             'title' => 'ブレイキング・バッド',
@@ -68,6 +80,12 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/ブレイキング・バッド'
         ]);
         $drama->save();
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
         //レコード4
         $drama = new \App\Drama([
@@ -88,6 +106,12 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード5
         $drama = new \App\Drama([
             'title' => 'ブレイキング・バッド',
@@ -107,6 +131,11 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
         //レコード6
         $drama = new \App\Drama([
@@ -126,7 +155,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード7
         $drama = new \App\Drama([
             'title' => 'ホームランド',
@@ -145,7 +180,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード8
         $drama = new \App\Drama([
             'title' => 'ホームランド',
@@ -164,7 +205,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード9
         $drama = new \App\Drama([
             'title' => 'ホームランド',
@@ -183,7 +230,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード10
         $drama = new \App\Drama([
             'title' => 'ホームランド',
@@ -202,7 +255,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード11
         $drama = new \App\Drama([
             'title' => 'ホームランド',
@@ -221,7 +280,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード12
         $drama = new \App\Drama([
             'title' => 'ホームランド',
@@ -240,7 +305,13 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/HOMELAND_(テレビドラマ)'
         ]);
         $drama->save();
-        
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード
         $drama = new \App\Drama([
             'title' => 'ゲーム・オブ・スローンズ',
@@ -259,6 +330,12 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
         ]);
         $drama->save();
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
         //レコード
         $drama = new \App\Drama([
@@ -279,6 +356,12 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード
         $drama = new \App\Drama([
             'title' => 'ゲーム・オブ・スローンズ',
@@ -297,6 +380,12 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
         ]);
         $drama->save();
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
         //レコード
         $drama = new \App\Drama([
@@ -317,6 +406,12 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード
         $drama = new \App\Drama([
             'title' => 'ゲーム・オブ・スローンズ',
@@ -335,6 +430,12 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
         ]);
         $drama->save();
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
         //レコード
         $drama = new \App\Drama([
@@ -355,6 +456,12 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード
         $drama = new \App\Drama([
             'title' => 'ゲーム・オブ・スローンズ',
@@ -374,6 +481,12 @@ class DramasTableSeeder extends Seeder
         ]);
         $drama->save();
 
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
+
         //レコード
         $drama = new \App\Drama([
             'title' => 'ゲーム・オブ・スローンズ',
@@ -392,6 +505,12 @@ class DramasTableSeeder extends Seeder
             'url' => 'https://ja.wikipedia.org/wiki/ゲーム・オブ・スローンズ'
         ]);
         $drama->save();
+
+        $socre = new \App\Score([
+            'drama_id' => $drama->id,
+            'rank_average_total_evaluation' => '9999' //初期値
+        ]);
+        $socre->save();
 
     }
 }

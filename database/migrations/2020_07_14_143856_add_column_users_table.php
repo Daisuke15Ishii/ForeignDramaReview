@@ -32,12 +32,12 @@ class AddColumnUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('name_kana'); //名前カナ
-            $table->string('penname'); //ペンネーム
-            $table->string('gender'); //性別
-            $table->date('birth')->default('1990/01/01'); //誕生日
-            $table->string('image')->nullable(); //アイコン画像
-            $table->text('profile')->nullable(); //プロフィール文
+            $table->dropcolumn('name_kana'); //名前カナ
+            $table->dropcolumn('penname'); //ペンネーム
+            $table->dropcolumn('gender'); //性別
+            $table->dropcolumn('birth')->default('1990/01/01'); //誕生日
+            $table->dropcolumn('image')->nullable(); //アイコン画像
+            $table->dropcolumn('profile')->nullable(); //プロフィール文
         });
     }
 }

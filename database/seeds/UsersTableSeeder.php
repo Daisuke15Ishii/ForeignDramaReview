@@ -18,13 +18,13 @@ class UsersTableSeeder extends Seeder
             //user作成
             $user = new \App\User([
                 'name' => $faker->name . '(test)',
-                'email' => $faker->email,
+                'email' => $faker->safeEmail,
                 'password' => 'fakertest1',
-                'name_kana' => $faker->userName,
-                'penname' => $faker->userName . '(test)',
+                'name_kana' => $faker->kanaName,
+                'penname' => $faker->kanaName . '(test)',
                 'gender' => $faker->randomElement($gender=['male','female']),
                 'birth' => $faker->dateTimeBetween('-80 years', '-20years')->format('Y-m-d'),
-                'profile' => $faker->paragraph
+                'profile' => $faker->realText(rand(30,200))
             ]);
             $user->save();
             
@@ -38,18 +38,19 @@ class UsersTableSeeder extends Seeder
                     $review = new \App\Review([
                         'drama_id' => $drama->id,
                         'user_id' => $user->id,
-                        'total_evaluation' => $faker->numberBetween(0, 100) / 2, //二桁の乱数
-                        'story_evaluation' => $faker->numberBetween(0, 10) / 2, //0～5の乱数(0.5刻み)
-                        'world_evaluation' => $faker->numberBetween(0, 10) / 2,
-                        'cast_evaluation' => $faker->numberBetween(0, 10) / 2,
-                        'char_evaluation' => $faker->numberBetween(0, 10) / 2,
-                        'visual_evaluation' => $faker->numberBetween(0, 10) / 2,
-                        'music_evaluation' => $faker->numberBetween(0, 10) / 2,
+                        'score_id' => $drama->id, //dramaレコード作成時と同時にscoreレコードも作成するためidは同じ
+                        'total_evaluation' => $faker->numberBetween(10, 100) / 2, //二桁の乱数
+                        'story_evaluation' => $faker->numberBetween(1, 10) / 2, //0～5の乱数(0.5刻み)
+                        'world_evaluation' => $faker->numberBetween(1, 10) / 2,
+                        'cast_evaluation' => $faker->numberBetween(1, 10) / 2,
+                        'char_evaluation' => $faker->numberBetween(1, 10) / 2,
+                        'visual_evaluation' => $faker->numberBetween(1, 10) / 2,
+                        'music_evaluation' => $faker->numberBetween(1, 10) / 2,
             
                         'progress' => $faker->numberBetween(0, 4),
                         'subtitles' => $faker->randomElement($subtitles=['0','1']),
-                        'review_title' => $faker->sentence,
-                        'review_comment' => $faker->paragraph,
+                        'review_title' => $faker->realText(rand(10,40)),
+                        'review_comment' => $faker->realText(rand(30,200)),
                         'spoiler_alert' => $faker->randomElement($spoiler_alert=['0','1']),
                         'previous' => $faker->numberBetween(0, 3)
                     ]);
@@ -60,9 +61,10 @@ class UsersTableSeeder extends Seeder
                     $favorite = new \App\Favorite([
                         'drama_id' => $drama->id,
                         'user_id' => $user->id,
+                        'review_id' => $review->id,
                         'uncategorized' => 0, //初期化で仮入力
                         'favorite' => $faker->numberBetween(0, 1),
-                        'comment' => $faker->sentence
+                        'comment' => $faker->realText(rand(10,200))
                     ]);
                     switch($review->progress){
                         case 0:

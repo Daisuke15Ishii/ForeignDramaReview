@@ -23,17 +23,16 @@
         </div>
         
         <div class="col-md-12 mx-auto bg-white mb-4">
-            {{-- とりあえず手入力。データベース作成後に修正予定 --}}
             <h2>最新投稿レビュー</h2>
-            
-            @foreach($dramas as $drama)
+            {{-- 投稿更新日が新しい順に表示 --}}
+            @foreach(Auth::user()->favoritesDrama()->orderBy('updated_at', 'desc')->get() as $drama)
+                {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
                 @if($loop->odd)
                     {{-- ループが奇数回 --}}
                     <div class="row small my-3">
-                        {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
                         @include('layouts.component.mypagedramaindex')
                 @elseif($loop->even)
-                        {{-- ループが偶数回 --}}
+                    {{-- ループが偶数回 --}}
                         @include('layouts.component.mypagedramaindex')
                     </div>
                 @endif
@@ -47,19 +46,26 @@
         
         {{-- お気に入り作品表示 --}}
         <div class="col-md-12 mx-auto bg-white mb-4">
-            {{-- とりあえず手入力。データベース作成後に修正予定 --}}
             <h2>お気に入り作品</h2>
-            {{-- とりあえず仮でfor文 --}}
-            @for ($i = 1; $i <= 10; $i++)
+            @foreach(Auth::user()->favoritesDrama()->wherehas('favorites', function($q){
+                $q->where('favorite', '1');
+                })->get() as $drama)
                 <div class="row small my-3">
                     {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                    
-                    第{{ $i }}位
-                    余白がたくさんあるので機能追加やデザインを検討中(一言コメント追加？)
+                    {{-- 取り合えずid順？に表示しているだけなので、後で点数順に修正予定 --}}
+                    <div class="col-md-1">
+                        第{{ $loop->iteration }}位
+                    </div>
                     @include('layouts.component.favoritedramaindex')
+                    <div class="col-md-4">
+                        余白がたくさんあるので機能追加やデザインを検討中(一言コメント追加？)
+                    </div>
                 </div>
-            @endfor
-            
+                @if($loop->iteration == 10)
+                    {{-- 10作品だけ表示 --}}
+                    @break
+                @endif
+            @endforeach
             <p class="text-right"><a href="#">お気に入り一覧へ</a></p>
         </div>
         

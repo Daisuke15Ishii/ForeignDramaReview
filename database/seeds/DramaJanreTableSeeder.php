@@ -11,63 +11,47 @@ class DramaJanreTableSeeder extends Seeder
      */
     public function run()
     {
-
-        //レコード1
+/*
+        //レコードを個別に入れるなら下記の通り
         $dramaJanre = new \App\DramaJanre([
             'drama_id' => '1',
             'janre_id' => '1'
         ]);
         $dramaJanre->save();
+*/        
         
-        //レコード2
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '1',
-            'janre_id' => '2'
-        ]);
-        $dramaJanre->save();
+        //ブレイキング・バッド(drama_id=1~5)(janre=1,19,,20,21,26)
+        for($home_id=1; $home_id < 6; $home_id++){
+            $dramaJanre = new \App\DramaJanre([
+                'drama_id' => $home_id,
+                'janre_id' => '1'
+            ]);
+            $dramaJanre->save();
 
-        //レコード3
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '1',
-            'janre_id' => '3'
-        ]);
-        $dramaJanre->save();
+            $dramaJanre = new \App\DramaJanre([
+                'drama_id' => $home_id,
+                'janre_id' => '19'
+            ]);
+            $dramaJanre->save();
 
-        //レコード4
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '1',
-            'janre_id' => '4'
-        ]);
-        $dramaJanre->save();
+            $dramaJanre = new \App\DramaJanre([
+                'drama_id' => $home_id,
+                'janre_id' => '20'
+            ]);
+            $dramaJanre->save();
+            
+            $dramaJanre = new \App\DramaJanre([
+                'drama_id' => $home_id,
+                'janre_id' => '21'
+            ]);
+            $dramaJanre->save();
 
-        //レコード5
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '2',
-            'janre_id' => '1'
-        ]);
-        $dramaJanre->save();
-        
-        //レコード6
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '2',
-            'janre_id' => '2'
-        ]);
-        $dramaJanre->save();
-
-        //レコード7
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '3',
-            'janre_id' => '1'
-        ]);
-        $dramaJanre->save();
-        
-        //レコード8
-        $dramaJanre = new \App\DramaJanre([
-            'drama_id' => '3',
-            'janre_id' => '3'
-        ]);
-        $dramaJanre->save();
-
+            $dramaJanre = new \App\DramaJanre([
+                'drama_id' => $home_id,
+                'janre_id' => '26'
+            ]);
+            $dramaJanre->save();
+        }
 
         //ホームランド(drama_id=6~12)(janre=1,2,21)
         for($home_id=6; $home_id < 13; $home_id++){
