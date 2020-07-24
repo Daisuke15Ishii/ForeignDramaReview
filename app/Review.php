@@ -9,8 +9,9 @@ class Review extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'drama_id' => 'required',
-        'user_id' => 'required',
+        'drama_id' => 'required|exists:dramas,id',
+        'user_id' => 'required|exists:users,id',
+        'score_id' => 'required|exists:scores,id',
 
         //いずれかの評価が入力されている場合、他の評価項目も必須入力
         'total_evaluation' => 'nullable|between:0,100|numeric|required_with:story_evaluation|required_with:review_title',
@@ -25,7 +26,7 @@ class Review extends Model
         
         //下記のいずれかの項目が入力されている場合、他の項目も必須入力
         'review_title' => 'max:100|required_with:review_comment',
-        'review_comment' => 'max:5000|required_with:review_title',
+        'review_comment' => 'max:5000',
         'spoiler_alert' => 'boolean|required_with:review_comment',
         'previous' => 'in:0,1,2|required_with:review_comment'
     );
@@ -49,6 +50,16 @@ class Review extends Model
     public function likesUser()
     {
         return $this->belongsToMany('App\User','likes','review_id');
+    }
+
+    public function score()
+    {
+        return $this->belongsTo('App\Score');
+    }
+
+    public function favorite()
+    {
+        return $this->hasOne('App\Favorite');
     }
     
 }

@@ -10,6 +10,7 @@
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="drama_id" value="{{ $drama->id }}">
+                <input type="hidden" name="score_id" value="{{ $drama->score()->first()->id }}">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="">

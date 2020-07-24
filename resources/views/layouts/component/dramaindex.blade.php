@@ -76,6 +76,17 @@
                             </div>
                             <div class="col-md-3">
                                 <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}"><button>作品情報を見る</button></a>
+                                @guest
+                                    <a href="{{ route('login') }}"><button>レビューを書く！</button></a>
+                                @else
+                                    {{-- レビューを既に投稿したか判定 --}}
+                                    @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
+                                        <a href="{{ route('review_add', ['drama_id' => $drama->id]) }}"><button>レビューを書く！</button></a>
+                                    @else
+                                        {{-- edit画面に飛ばす予定 --}}
+                                        <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビューを編集する！</button></a>
+                                    @endif
+                                @endguest
                             </div>
                         </div>
                     </div>

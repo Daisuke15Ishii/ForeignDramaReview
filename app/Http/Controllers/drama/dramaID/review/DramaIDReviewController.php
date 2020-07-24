@@ -39,6 +39,7 @@ class DramaIDReviewController extends Controller
         
         $review->user_id = $request->user_id;
         $review->drama_id = $request->drama_id;
+        $review->score_id = $request->score_id;
         $review->total_evaluation = $request->total_evaluation;
         $review->story_evaluation = $request->story_evaluation;
         $review->world_evaluation = $request->world_evaluation;
@@ -55,7 +56,7 @@ class DramaIDReviewController extends Controller
 
         $favorite->user_id = $request->user_id;
         $favorite->drama_id = $request->drama_id;
-        
+
         //視聴状況を初期化後、フォーム値を更新
         $favorite->want = 0;
         $favorite->watching = 0;
@@ -95,6 +96,7 @@ class DramaIDReviewController extends Controller
 //        $favorite->comment = $request->comment;
 
         $review->save();
+        $favorite->review_id = $review->id;
         $favorite->save();
 
         //scoreテーブルの集計値を保存

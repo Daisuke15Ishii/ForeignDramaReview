@@ -22,7 +22,7 @@ class MypageController extends Controller
         $auth = \Auth::user();
         $dramas = $auth->favoritesDrama()->get(); //マイページ登録されている作品
         $reviews = $auth->reviews()->get(); //レビュー投稿した作品。これはviewに渡す必要ないかも
-        return view('user.mypage.index', ['dramas' => $dramas, 'reviews' => $reviews]);
+        return view('user.mypage.index', ['reviews' => $reviews]);
     }
 
     public function result(Request $request){

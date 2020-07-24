@@ -25,7 +25,7 @@
         <div class="col-md-12 mx-auto bg-white mb-4">
             <h2>最新投稿レビュー</h2>
             {{-- 投稿更新日が新しい順に表示 --}}
-            @foreach(Auth::user()->favoritesDrama()->orderBy('updated_at', 'desc')->get() as $drama)
+            @foreach(Auth::user()->reviews()->orderBy('updated_at', 'desc')->get() as $review)
                 {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
                 @if($loop->odd)
                     {{-- ループが奇数回 --}}
@@ -47,9 +47,9 @@
         {{-- お気に入り作品表示 --}}
         <div class="col-md-12 mx-auto bg-white mb-4">
             <h2>お気に入り作品</h2>
-            @foreach(Auth::user()->favoritesDrama()->wherehas('favorites', function($q){
+            @foreach(Auth::user()->reviews()->wherehas('favorite', function($q){
                 $q->where('favorite', '1');
-                })->get() as $drama)
+                })->orderby('total_evaluation', 'desc')->get() as $review)
                 <div class="row small my-3">
                     {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
                     {{-- 取り合えずid順？に表示しているだけなので、後で点数順に修正予定 --}}

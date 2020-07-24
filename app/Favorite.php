@@ -11,6 +11,7 @@ class Favorite extends Model
     public static $rules = array(
         'drama_id' => 'required|exists:dramas,id',
         'user_id' => 'required|exists:users,id',
+        'review_id' => 'required|exists:reviews,id',
 
         //いずれかの評価が入力されている場合、他の評価項目も必須入力
         'want' => 'boolean|required',
@@ -34,5 +35,9 @@ class Favorite extends Model
       return $this->belongsTo('App\Drama');
     }
     
+    public function review()
+    {
+      return $this->belongsTo('App\Review');
+    }
     
 }

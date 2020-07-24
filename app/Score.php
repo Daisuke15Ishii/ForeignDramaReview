@@ -35,4 +35,9 @@ class Score extends Model
       return $this->belongsTo('App\Drama');
     }
 
+    public function reviews()
+    {
+      return $this->hasMany('App\Review');
+    }
+
 }

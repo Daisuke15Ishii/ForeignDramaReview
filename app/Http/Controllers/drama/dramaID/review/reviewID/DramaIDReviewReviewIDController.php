@@ -113,6 +113,7 @@ class DramaIDReviewReviewIDController extends Controller
 //        $favorite->comment = $request->comment;
 
         $review->save();
+        $favorite->review_id = $review->id;
         $favorite->save();
 
         //scoreテーブルの集計値を保存
