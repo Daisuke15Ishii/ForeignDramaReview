@@ -3,18 +3,32 @@
 
 <div class="">
     <div class="">
-        <img src="" alt="会員のアイコン">
+        @if(isset(Auth::user()->image_path))
+            <p class=""><img src="{{ secure_asset(Auth::user()->image_path) }}" alt="{{ Auth::user()->penname}}さんアイコン画像" title="{ Auth::user()->penname }さん"></p>
+        @else
+            <p class=""><img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー"></p>
+        @endif
     </div>
     
     <div class="">
-        <span class="">{{ Auth::user()->name }}さん</span><br>
-        
-        {{--　会員情報等から情報を引っ張ってくる(保留)　--}}
-        <p>【↓↓会員情報等から情報を引っ張ってくるが現在は手入力(保留)↓↓】</p>
-        <p>20代・男性</p>
-        <p>フォロー：10人　　フォロワー：10人</p>
-        <p>レビュー投稿数：100</p>
-        <p>いいね取得総数：100</p>
+        <p>{{ Auth::user()->penname }}さん</p>
+        <p>
+            {{ round(Carbon\Carbon::parse(Auth::user()->birth)->age,-1)}}代
+            @if(Auth::user()->gender == 'male')
+                ・男性
+            @elseif(Auth::user()->gender == 'female')
+                ・女性
+            @endif
+        </p>
+        <p>フォロー：{{ Auth::user()->follows()->count() }}人　　フォロワー：{{ Auth::user()->followed()->count() }}人</p>
+        <p>レビュー投稿数：{{ Auth::user()->reviews()->wherenotnull('total_evaluation')->count() }}</p>{{-- マイページに作品登録しただけのレビューを除く --}}
+        <p>
+            いいね取得総数：{{-- 取得したいデータが取れていないので修正予定 --}}
+            {{ $iine = Auth::user()->reviews()->whereHas('likes', function($q){
+                $q->where('user_id', '=',  Auth::user()->id);
+                })->count()
+            }}
+        </p>
         <p><a href="#">プロフィールの表示確認</a></p>
         <p><a href="{{ url('/user/mypage/profile/edit') }}">プロフィール変更</a></p>
         <p>アカウント登録日：2020年6月14日</p>
