@@ -87,4 +87,5 @@ class RegisterController extends Controller
 //            'profile' => $data['profile'],
         ]);
     }
+    
 }

@@ -185,9 +185,9 @@
                             <div class="col-md-12 mx-auto">
                                 <h3>レビュー内容</h3>
                                 @if(isset($review->review_title) )
-                                    <textarea name="review_comment" class="col-md-12" col="20" placeholder="感想を自由に書きましょう！">{{ $review->review_comment }}</textarea>
+                                    <textarea name="review_comment" class="col-md-12" rows="20" placeholder="感想を自由に書きましょう！">{{ $review->review_comment }}</textarea>
                                 @else
-                                    <textarea name="review_comment" class="col-md-12" col="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
+                                    <textarea name="review_comment" class="col-md-12" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
                                 @endif
                             </div>
                             <div class="col-md-12 mx-auto">

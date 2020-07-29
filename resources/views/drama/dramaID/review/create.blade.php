@@ -140,7 +140,7 @@
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <h3>レビュー内容</h3>
-                                <textarea name="review_comment" class="col-md-12" col="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
+                                <textarea name="review_comment" class="col-md-12" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
                             </div>
                             <div class="col-md-12 mx-auto">
                                 <label>
