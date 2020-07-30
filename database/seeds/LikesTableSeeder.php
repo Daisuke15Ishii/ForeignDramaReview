@@ -11,26 +11,24 @@ class LikesTableSeeder extends Seeder
      */
     public function run()
     {
-        //レコード1
-        $like = new \App\Like([
-            'user_id' => '1',
-            'review_id' => '1'
-        ]);
-        $like->save();
         
-        //レコード2
-        $like = new \App\Like([
-            'user_id' => '2',
-            'review_id' => '2'
-        ]);
-        $like->save();
-
-        //レコード3
-        $like = new \App\Like([
-            'user_id' => '1',
-            'review_id' => '3'
-        ]);
-        $like->save();
-        
+        //user_id=xの全レビューに対して、各ユーザーがランダムでlike(いいね)をする
+        $x = 1;
+        $reviews = \App\Review::where('user_id', $x)->get();
+        foreach($reviews as $review){
+            $users = \App\User::all();
+            foreach($users as $user){
+                if(rand(0,1) == 1){
+                    //乱数が1の場合のみ、reviewにいいねをする
+                    if($user->id !== $x){ //自分のレビューにはいいねしない
+                        $like = new \App\Like([
+                            'user_id' => $user->id,
+                            'review_id' => $review->id
+                        ]);
+                        $like->save();
+                    }
+                }
+            }
+        }
     }
 }

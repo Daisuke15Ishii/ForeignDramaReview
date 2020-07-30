@@ -20,3 +20,8 @@ img {
     height: 45;
     width: 60;
 }
+
+.favorite{
+    height: auto;
+    width: 30px;
+}

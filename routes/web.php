@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('/index');
 });
 
+//postは不要。画面確認用
+Route::post('/', function () {
+    return view('/index');
+});
 
 //下記がauth関連のルーティングのデフォルト
 Auth::routes();
@@ -128,24 +132,21 @@ Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], fu
 Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::get('/profile/edit', 'user\mypage\MypageProfileController@edit')->name("profile_edit");
     Route::post('/profile/edit', 'user\mypage\MypageProfileController@update')->name("profile_update");
-/*
-    Route::post('/profile/edit', function () {
-        return view('/user/mypage/profile/edit');
-    });
-*/
-
     Route::get('/setting/edit', 'user\mypage\MypageSettingController@edit')->name("setting_edit");
     Route::post('/setting/edit', 'user\mypage\MypageSettingController@update')->name("setting_update");
+    
     Route::get('/', 'user\mypage\MypageController@index');
     Route::post('/', function () {
         return view('/user/mypage/index');
     });
-    Route::get('/drama', function () {
-        return view('/user/mypage/drama/index');
-    });
+    
+    Route::get('/drama', 'user\mypage\MypageDramaController@index')->name("my_alldrama");
+    Route::post('/drama', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
+/*
     Route::post('/drama', function () {
         return view('/user/mypage/drama/index');
     });
+*/
     Route::get('/drama/favorite', function () {
         return view('/user/mypage/drama/favorite/index');
     });

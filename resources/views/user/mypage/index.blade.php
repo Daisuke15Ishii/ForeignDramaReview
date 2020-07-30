@@ -1,6 +1,5 @@
 @extends('layouts.member')
 
-{{-- データベース作成後にタイトル修正予定 --}}
 @section('title',  Auth::user()->penname . 'さんのマイページ')
 
 {{-- データベース作成後に諸々修正予定(とりあえず文章を手入力) --}}
@@ -31,6 +30,12 @@
                     {{-- ループが奇数回 --}}
                     <div class="row small my-3">
                         @include('layouts.component.mypagedramaindex')
+                    @if($loop->last)
+                        {{-- リストの最後 --}}
+                        <div class="col-md-6 mx-auto">
+                        </div>
+                        @break
+                    @endif
                 @elseif($loop->even)
                     {{-- ループが偶数回 --}}
                         @include('layouts.component.mypagedramaindex')

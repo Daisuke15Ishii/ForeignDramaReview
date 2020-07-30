@@ -1,44 +1,58 @@
 @extends('layouts.member')
 
-{{-- データベース作成後にタイトル修正予定 --}}
-@section('title', 'すべての作品｜マイページ')
+@section('title', 'すべての作品｜' . Auth::user()->penname . 'さんのマイページ')
 
-{{-- データベース作成後に諸々修正予定(とりあえず文章を手入力) --}}
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
-            {{-- とりあえず手入力。データベース作成後に修正予定 --}}
-            <h2>すべての作品(変数でマイページの作品数を表示)<span class="">(1～20件目を表示)</span></h2>
+            <h2>すべての作品({{ $allreviews->count() }}件)<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
             
             {{-- 右寄せしたい --}}
-            <form method="POST" action="{{ url('/user/mypage/drama') }}">
+            <form method="get" action="{{ route('my_alldrama') }}">
                 @csrf
                 <div class="form-group row">
-                    <div class="col-md-3 text-md-right">
-                        <select name="" class="" id="">
-                            <option value="title_desc" selected="selected">タイトル順</option>
-                            <option value="created_desc">投稿日が新しい順</option>
-                            <option value="created_asc">投稿日時が古い順</option>
-                            <option value="point_asc">総合評価が高い順</option>
-                            <option value="point_desc">総合評価が低い順</option>
-                            <option value="like_asc">他いろいろ実装予定</option>
+                    <div class="col-md-12 text-md-right">
+                        <select name="sortby" class="" id="sortby">
+                            <option value="update_desc">投稿日が新しい順</option>
+                            <option value="update_asc">投稿日時が古い順</option>
+                            <option value="title_asc">タイトル昇順</option>
+                            <option value="title_desc">タイトル降順</option>
+                            <option value="total_evaluation_desc">総合評価が高い順</option>
+                            <option value="total_evaluation_asc">総合評価が低い順</option>
+                            <option value="like_desc">いいねが多い順</option>
+                            <option value="like_asc">いいねが少ない順</option>
                         </select>
+                        <input type="submit" value="並び替え">
                     </div>
                 </div>
             </form>
             
-            ここにペジネーション配置
+            {{ $reviews->appends(request()->input())->links() }}
             
-            {{-- とりあえず仮でfor文 --}}
-            @for ($i = 1; $i <= 10; $i++)
-            <div class="row small my-3">
+            @foreach($reviews as $review)
                 {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                @include('layouts.component.mypagedramaindex')
-                @include('layouts.component.mypagedramaindex')
-            </div>
-            @endfor
+                @if($loop->odd)
+                    {{-- ループが奇数回 --}}
+                    <div class="row small my-3">
+                        @include('layouts.component.mypagedramaindex')
+                    @if($loop->last)
+                        {{-- リストの最後 --}}
+                        <div class="col-md-6 mx-auto">
+                        </div>
+                        @break
+                    @endif
+                @elseif($loop->even)
+                    {{-- ループが偶数回 --}}
+                        @include('layouts.component.mypagedramaindex')
+                    </div>
+                @endif
+                @if($loop->iteration == 20)
+                    {{-- 20作品表示 --}}
+                    @break
+                @endif
+            @endforeach
             
-            ここにペジネーション配置
+            {{ $reviews->appends(request()->input())->links() }}
         </div>
         
     </div>

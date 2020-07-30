@@ -4,10 +4,29 @@
                                 <div class="row">
                                     <div class="col-md-2 border-right p-0 m-0">
                                         {{-- 後で考える。灰色の星のボタンを押すとお気に入り登録される。既に登録されている場合は星の画像が光ってる --}}
-                                        <label for="">
-                                            <img src="#" alt="星">
-                                        </label>
-                                        <p>お気に入り</p>
+                                        <form action="{{ route('my_favorite_set') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
+                                            <input type="hidden" name="review_id" value="{{ $review->id }}">
+                                            @if($review->favorite()->first()->favorite !== 1)
+                                                <p class="submit">
+                                                    <input type="hidden" name="favorite" value="1">
+                                                    <input type="image" name="submit" id="favorite" src="{{ asset('/images/star_grey.png') }}" alt="お気に入り登録">
+                                                </p>
+                                                <label for="submit">
+                                                    お気に入り登録
+                                                </label>
+                                            @else
+                                                <p class="submit">
+                                                    <input type="hidden" name="favorite" value="0">
+                                                    <input type="image" name="submit" id="favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り解除">
+                                                </p>
+                                                <label for="submit">
+                                                    お気に入り解除
+                                                </label>
+                                            @endif
+                                        </form>
                                     </div>
                                     <div class="col-md-2 p-0 m-0">
                                         <p class="mypageDrama">
