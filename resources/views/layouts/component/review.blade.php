@@ -6,7 +6,14 @@
                                     </div>
                                     <div class="col-md-7">
                                         <p><a href="#">{{ $review->user()->first()->penname }}</a></p>
-                                        <p>20代・男性</p>
+                                        <p>
+                                            {{ round(Carbon\Carbon::parse($review->user()->first()->birth)->age,-1)}}代
+                                            @if($review->user()->first()->gender == 'male')
+                                                ・男性
+                                            @elseif($review->user()->first()->gender == 'female')
+                                                ・女性
+                                            @endif
+                                        </p>
                                         <p>投稿日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at))  }}</p>
                                     </div>
                                     <div class="col-md-3">
