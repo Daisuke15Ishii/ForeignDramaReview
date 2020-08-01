@@ -3,7 +3,6 @@
                             <div class="col-md-11 mx-auto bg-warning border p-0 m-0">
                                 <div class="row">
                                     <div class="col-md-2 border-right p-0 m-0">
-                                        {{-- 後で考える。灰色の星のボタンを押すとお気に入り登録される。既に登録されている場合は星の画像が光ってる --}}
                                         <form action="{{ route('my_favorite_set') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -39,9 +38,9 @@
                                         <p class="p-0 m-0">
                                             {{-- レビュータイトル・本文が投稿されている場合のみタイトル等を表示--}}
                                             @if(isset($review->review_title))
-                                                「<a href="{{ url('/drama/dramaID/review/reviewID') }}">{{ \Str::limit($review->review_title, 50) }}</a>」
+                                                「<a href="{{ route('reviewID_index', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">{{ \Str::limit($review->review_title, 50) }}</a>」
                                             @else
-                                                「<a href="{{ url('/drama/dramaID/review/reviewID') }}">コメントなし</a>」
+                                                「<a href="{{ route('reviewID_index', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">コメントなし</a>」
                                             @endif
                                         </p>
                                         <p class="p-0 m-0">

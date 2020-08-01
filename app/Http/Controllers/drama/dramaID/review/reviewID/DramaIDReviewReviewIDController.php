@@ -11,6 +11,7 @@ use App\User;
 use App\Score;
 use App\Favorite;
 use App\Like;
+use App\Follow;
 use Auth;
 
 class DramaIDReviewReviewIDController extends Controller
@@ -27,13 +28,17 @@ class DramaIDReviewReviewIDController extends Controller
         return view('drama.dramaID.index', ['drama' => $drama]);
     }
     
-    public function index(Request $request){
-        //メモ
-        return redirect('admin/news');
+    public function index(Request $request, $review_id){
+        //1つのレビューのみ表示
+        $review = Review::where('id', $request->review_id)->first();
+        if(empty($review)){
+            abort(404);
+        }
+        $drama = Drama::where('id', $review->drama()->first()->id)->first();
+        return view('drama.dramaID.review.reviewID.index',  ['drama' => $drama, 'review' => $review]);
     }
     
     public function edit(Request $request, $review_id, $drama_id){
-        //メモ
         $review = Review::find($request->review_id);
         if(empty($review)){
             abort(404);
@@ -154,14 +159,38 @@ class DramaIDReviewReviewIDController extends Controller
             $like->review_id = $request->review_id;
             
             $like->save();
-            return redirect(route('dramaID_index', ['drama_id' => $like->review()->first()->drama()->first()->id]));
+            return back();
         }else{
             //レビューのlikeを取消したときの処理
             $like = Like::where('user_id', $request->user_id)->where('review_id', $request->review_id)->first();
             $like->delete();
             unset($form['_token']);
     
-            return redirect(route('dramaID_index', ['drama_id' => Review::find(($request->review_id))->drama()->first()->id]));
+            return back();
+        }
+    }
+
+    public function follow(Request $request, $drama_id){
+        $form = $request->all();
+
+        //ユーザーをfollowしたときの処理
+        if($request->follow == 'フォロー'){
+            $this->validate($request, Follow::$rules);
+            $follow = new Follow;
+            unset($form['_token']);
+            
+            $follow->user_id = $request->user_id;
+            $follow->following_user_id = $request->following_user_id;
+            
+            $follow->save();
+            return back();
+        }else{
+            //ユーザーのfollowを解除したときの処理
+            $follow = Follow::where('user_id', $request->user_id)->where('following_user_id', $request->following_user_id)->first();
+            $follow->delete();
+            unset($form['_token']);
+    
+            return back();
         }
     }
 

@@ -4,10 +4,28 @@
                                         {{-- 仮でユーザー画像登録--}}
                                         <img src="{{ secure_asset('/images/person.jpeg') }}" alt="user画像" class="person">
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-7">
                                         <p><a href="#">{{ $review->user()->first()->penname }}</a></p>
                                         <p>20代・男性</p>
                                         <p>投稿日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at))  }}</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{-- follow機能。後程、URLを再設定予定なので、恐らく$drama_idを渡す必要なし--}}
+                                        @auth
+                                            <form action="{{ route('review_follow', ['drama_id' => $drama->id]) }}" method="POST" name="follow">
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                <input type="hidden" name="following_user_id" value="{{ $review->user()->first()->id }}">
+                                                <p>
+                                                    {{-- 既にフォロー済かの判定。レビューの人がauth::user()にフォローされているか調べる --}}
+                                                    @if (empty($review->user()->first()->followedUser()->where('user_id',Auth::user()->id)->first()))
+                                                        <input type="submit" value="フォロー" name="follow" alt="フォロー" class="follow">
+                                                    @else
+                                                        <input type="submit" value="フォロー解除" name="follow" alt="フォロー解除" class="follow">
+                                                    @endif
+                                                </p>
+                                            </form>
+                                        @endauth
                                     </div>
                                 </div>
                                 <div class="row">
@@ -15,7 +33,7 @@
                                         {{-- レビュータイトル・本文が投稿されている場合のみタイトル等を表示--}}
                                         @if(isset($review->review_title))
                                             {{-- countメソッドでレビューに対するいいね数を取得 --}}
-                                            <h4>{{ \Str::limit($review->review_title, 100) }}</h4><span class="">({{ $review->likes()->count() }}いいね！)</span>
+                                            <h4>「{{ \Str::limit($review->review_title, 100) }}」</h4><span class="">({{ $review->likes()->count() }}いいね！)</span>
                                         @endif
                                         <div class="row">
                                             <div class="col-md-10">
@@ -65,7 +83,6 @@
                                             </div>
                                             
                                             @auth
-                                                {{-- action内容は保留。取り合えずreturn viewが記述済のdramaID/indexに渡す,アクションでreview_id値を渡す --}}
                                                 <form action="{{ route('review_like', ['drama_id' => $drama->id]) }}" method="POST" name="like">
                                                     @csrf
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
