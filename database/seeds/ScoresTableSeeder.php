@@ -21,7 +21,7 @@ class ScoresTableSeeder extends Seeder
                 $socre->registers = $drama->reviews()->count();
                 $socre->favorites = $drama->favorites()->where('favorite', 1)->count();
                 //総合ランキングは保留
-                $socre->rank_average_total_evaluation = '1';
+                $socre->rank_average_total_evaluation = '9999';
                 $socre->previous_require = $drama->reviews()->where('previous', 2)->count();
                 $socre->previous_better = $drama->reviews()->where('previous', 1)->count();
                 $socre->previous_no = $drama->reviews()->where('previous', 0)->count();
@@ -55,7 +55,7 @@ class ScoresTableSeeder extends Seeder
                         'registers' => $drama->reviews()->count(),
                         'favorites' => $drama->favorites()->where('favorite', 1)->count(),
                         //総合ランキングは保留
-                        'rank_average_total_evaluation' => '1',
+                        'rank_average_total_evaluation' => '9999',
                         'previous_require' => $drama->reviews()->where('previous', 2)->count(),
                         'previous_better' => $drama->reviews()->where('previous', 1)->count(),
                         'previous_no' => $drama->reviews()->where('previous', 0)->count() 
@@ -68,7 +68,7 @@ class ScoresTableSeeder extends Seeder
                         'registers' => $drama->reviews()->count(),
                         'favorites' => $drama->favorites()->where('favorite', 1)->count(),
                         //総合ランキングは保留
-                        'rank_average_total_evaluation' => '1',
+                        'rank_average_total_evaluation' => '9999',
                         'previous_require' => $drama->reviews()->where('previous', 2)->count(),
                         'previous_better' => $drama->reviews()->where('previous', 1)->count(),
                         'previous_no' => $drama->reviews()->where('previous', 0)->count() 

@@ -22,16 +22,13 @@
                                 @endif
                             </div>
                             <div class="col-md-4">
-                                <form id="" action=""{{ url('/drama/dramaID') }}"" method="POST">
-                                    @csrf
-                                    <input type="submit" value="マイページに作品登録">
-                                </form>
+                                @include('layouts.component.mydrama-set')
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8">
                                 @if($drama->reviews()->count('total_evaluation') !== 0)
-                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->score()->first()->median_total_evaluation }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
+                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->score()->first()->median_total_evaluation }}点</span>(レビュー評価数：{{ $drama->reviews()->count('total_evaluation') }}人)
                                 @else
                                     総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
                                 @endif

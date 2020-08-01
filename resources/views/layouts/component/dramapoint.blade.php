@@ -23,35 +23,26 @@
                     </div>
                     <div class="col-md-9 bg-warning">
                         <div class="row">
-                            <h2>総合評価：</h2>
-                            {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
-                            @if($drama->reviews()->count('total_evaluation') !== 0)
-                                <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
-                            @else
-                                <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
-                            @endif
-                            <form id="" action=""{{ url('/drama/dramaID') }}"" method="POST">
-                                @csrf
-                                <input type="submit" value="マイページに作品登録">
-                            </form>
-                            
-                            {{-- 確認テスト用の表示 --}}
-                            @auth
-                                @if(empty($drama->favorites()->where('user_id',Auth::user()->id)->first()))
-                                    お気に入り登録の有無：レビューなし(会員)
-                                @else
-                                    お気に入り登録の有無：{{ $drama->favorites()->where('user_id',Auth::user()->id)->first()->favorite }}
-                                @endif
-                            @else
-                                お気に入り登録の有無：なし(ゲスト)
-                            @endauth
+                            <div class="col-md-12 mx-auto">
+                                <h2>総合評価：
+                                    {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
+                                    @if($drama->reviews()->count('total_evaluation') !== 0)
+                                        <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
+                                    @else
+                                        <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
+                                    @endif
+                                </h2>
+                                @include('layouts.component.mydrama-set')
+                            </div>
                         </div>
                         <div class="row">
-                            @if($drama->reviews()->count('total_evaluation') !== 0)
-                                総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count() }}人)
-                            @else
-                                総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
-                            @endif
+                            <div class="col-md-12 mx-auto">
+                                @if($drama->reviews()->count('total_evaluation') !== 0)
+                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count('total_evaluation') }}人)
+                                @else
+                                    総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
+                                @endif
+                            </div>
                         </div>
                         <div class="row">
                             {{-- 下記の各項目評価の表示は、点数によって星の個数で表現。数字で仮表示 --}}
@@ -117,8 +108,8 @@
                             @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
                                 <a href="{{ route('review_add', ['drama_id' => $drama->id]) }}"><button>レビューを書く！</button></a>
                             @else
-                                {{-- edit画面に飛ばす予定 --}}
                                 <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビューを編集する！</button></a>
+                                <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビュー削除(マイページから除外)</button></a>
                             @endif
                         @endguest
                     </div>

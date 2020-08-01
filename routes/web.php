@@ -71,7 +71,6 @@ Route::group(['prefix' => 'user/register'], function(){
 
 Route::group(['prefix' => 'drama/{drama_id}'], function(){
     Route::get('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_index');
-    //postはfollowしたときのルーティングも必要かも
     Route::post('/', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@like')->name("review_like");
     //followは仮でここに記述(後程、違うURLおよび違うコントローラに変更予定)
     Route::post('/follow', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@follow')->name("review_follow");
@@ -124,11 +123,6 @@ Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], fu
     Route::get('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit')->name("review_edit");
     Route::post('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update')->name("review_edit");
     Route::get('/{review_id}', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@index')->name("reviewID_index");
-/*
-    Route::get('/reviewID', function () {
-        return view('/drama/dramaID/review/reviewID/index');
-    });
-*/
 });
 
 
@@ -144,12 +138,10 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     });
     
     Route::get('/drama', 'user\mypage\MypageDramaController@index')->name("my_alldrama");
-    Route::post('/drama', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
-/*
-    Route::post('/drama', function () {
-        return view('/user/mypage/drama/index');
-    });
-*/
+    Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
+    Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
+    Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
+
     Route::get('/drama/favorite', function () {
         return view('/user/mypage/drama/favorite/index');
     });

@@ -8,21 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Favorite;
 use App\Score;
 use App\Drama;
-
+use App\Review;
 
 class MypageDramaController extends Controller
 {
-    //
-    public function add(){
-        //メモ
-        return view('admin.news.create');
-    }
-    
-    public function create(Request $request){
-        //メモ
-        return redirect('admin/news/create');
-    }
-
     public function index(Request $request){
         $auth = \Auth::user();
 //        $dramas = $auth->favoritesDrama()->get(); //マイページ登録されている作品
@@ -72,23 +61,13 @@ class MypageDramaController extends Controller
             $reviews = $reviews->orderBy('updated_at', 'desc');
         }
         
-        $allreviews = $reviews->get();
+        $allreviews = $reviews->count();
         //後程paginate(20)に変更予定
         $reviews = $reviews->Paginate(8);
         
         return view('user.mypage.drama.index', ['reviews' => $reviews, 'allreviews' => $allreviews]);
     }
 
-    public function edit(Request $request){
-        //メモ
-        return view('admin.news.edit',  ['news_form' => $news]);
-    }
-    
-    public function update(Request $request){
-        //メモ
-        return redirect('admin/news');
-    }
-    
     public function setfavorite(Request $request){
         //お気に入り登録
 //        $this->validate($request, Favorite::$rules);
@@ -109,8 +88,62 @@ class MypageDramaController extends Controller
         return back();
     }
     
+    public function setdrama(Request $request){
+        //マイページへ作品登録する処理
+        $this->validate($request, Review::$rules);
+
+        $review = new Review;
+        $favorite = new Favorite;
+
+        $review->user_id = $request->user_id;
+        $review->drama_id = $request->drama_id;
+        $review->score_id = $request->score_id;
+        $review->progress = 0; //未分類(初期値0なので入力不要)
+
+        $favorite->user_id = $request->user_id;
+        $favorite->drama_id = $request->drama_id;
+
+        $favorite->uncategorized = 1; //未分類(初期値0なので入力不要)
+
+        $review->save();
+        $favorite->review_id = $review->id;
+        $favorite->save();
+
+        //scoreテーブルのregistersを再集計
+        $score = Score::where('drama_id', $request->drama_id)->first();
+        $score->registers = Drama::find($request->drama_id)->reviews()->count();
+        $score->save();
+
+        return back();
+    }
+    
     public function delete(Request $request){
-        //メモ
-        return redirect('admin/news/');
+        //レビュー削除(マイページから除外)する処理
+        $review = Review::where('id', $request->review_id)->first();
+        $favorite = Favorite::where('review_id', $request->review_id)->first();
+        $review->delete();
+        $favorite->delete();
+
+        //scoreテーブルの集計値を保存
+        $score = Score::where('drama_id', $request->drama_id)->first();
+        $score->average_total_evaluation = Drama::find($request->drama_id)->reviews()->avg('total_evaluation');
+        $score->median_total_evaluation = Drama::find($request->drama_id)->reviews()->get()->median('total_evaluation');
+        $score->average_story_evaluation = Drama::find($request->drama_id)->reviews()->avg('story_evaluation');
+        $score->average_world_evaluation = Drama::find($request->drama_id)->reviews()->avg('world_evaluation');
+        $score->average_cast_evaluation = Drama::find($request->drama_id)->reviews()->avg('cast_evaluation');
+        $score->average_char_evaluation = Drama::find($request->drama_id)->reviews()->avg('char_evaluation');
+        $score->average_visual_evaluation = Drama::find($request->drama_id)->reviews()->avg('visual_evaluation');
+        $score->average_music_evaluation = Drama::find($request->drama_id)->reviews()->avg('music_evaluation');
+        $score->reviews = Drama::find($request->drama_id)->reviews()->count('total_evaluation');
+        $score->registers = Drama::find($request->drama_id)->reviews()->count();
+        $score->favorites = Drama::find($request->drama_id)->favorites()->where('favorite', 1)->count();
+        //総合ランキングは保留
+        $score->previous_require = Drama::find($request->drama_id)->reviews()->where('previous', 2)->count();
+        $score->previous_better = Drama::find($request->drama_id)->reviews()->where('previous', 1)->count();
+        $score->previous_no = Drama::find($request->drama_id)->reviews()->where('previous', 0)->count();
+
+        $score->save();
+
+        return back();
     }
 }

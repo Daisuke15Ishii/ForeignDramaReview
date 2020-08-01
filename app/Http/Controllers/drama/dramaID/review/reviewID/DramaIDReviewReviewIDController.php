@@ -16,18 +16,6 @@ use Auth;
 
 class DramaIDReviewReviewIDController extends Controller
 {
-    public function add(Request $request){
-        //画面表示確認のため仮設定
-        $drama = Drama::where('id', 1)->first();
-        return view('drama.dramaID.review.create', ['drama' => $drama]);
-    }
-    
-    public function create(Request $request){
-        //画面表示確認のため仮設定
-        $drama = Drama::where('id', 1)->first();
-        return view('drama.dramaID.index', ['drama' => $drama]);
-    }
-    
     public function index(Request $request, $review_id){
         //1つのレビューのみ表示
         $review = Review::where('id', $request->review_id)->first();
@@ -192,10 +180,5 @@ class DramaIDReviewReviewIDController extends Controller
     
             return back();
         }
-    }
-
-    public function delete(Request $request){
-        //メモ
-        return redirect('admin/news');
     }
 }

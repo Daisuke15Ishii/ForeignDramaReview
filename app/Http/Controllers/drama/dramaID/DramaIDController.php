@@ -22,7 +22,7 @@ class DramaIDController extends Controller
     public function index(Request $request,$drama_id){
         //画面表示確認のため仮設定
         $drama = Drama::find($drama_id);
-        $reviews = $drama->reviews();
+        $reviews = $drama->reviews()->whereNotNull('total_evaluation');
 
         //sorts(checkbox)によってレビュー表示の条件を絞る
         if ($request->sorts != '') {

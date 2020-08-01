@@ -16,13 +16,13 @@ use Auth;
 class DramaIDReviewController extends Controller
 {
     public function add(Request $request, $drama_id){
-        //画面表示確認のため仮設定
+        //レビュー投稿画面へ遷移
         $drama = Drama::find($drama_id);
         return view('drama.dramaID.review.create', ['drama' => $drama]);
     }
     
     public function create(Request $request){
-        //画面表示確認のため仮設定,とりあえず設定を色々終えているdramaID.indexへ飛ばす
+        //レビューを初投稿
         
         $this->validate($request, Review::$rules);
         //Favoriteモデルのバリデーションをかけるのがフォームの構造上難しい。とりあえず保留
@@ -142,25 +142,5 @@ class DramaIDReviewController extends Controller
         $score->save();
 
         return redirect(route('dramaID_index', ['drama_id' => $request->drama_id]));
-    }
-    
-    public function index(Request $request){
-        //メモ
-        return redirect('admin/news');
-    }
-    
-    public function edit(Request $request){
-        //メモ
-        return view('admin.news.edit',  ['news_form' => $news]);
-    }
-    
-    public function update(Request $request){
-        //メモ
-        return redirect('admin/news');
-    }
-    
-    public function delete(Request $request){
-        //メモ
-        return redirect('admin/news');
     }
 }

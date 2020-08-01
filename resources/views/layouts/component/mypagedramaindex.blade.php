@@ -47,7 +47,7 @@
                                             <button>
                                                 <a href="{{ route('review_edit', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー編集</a>
                                             </button>
-                                            {{-- 削除ボタンはどこに置くか検討中 --}}
+                                            {{-- 削除ボタンは未分類・未視聴の作品のみ表示させる予定 --}}
                                             <button>
                                                 <a href="{{ route('review_edit', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー削除？(js検討)</a>
                                             </button>

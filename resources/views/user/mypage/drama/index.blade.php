@@ -5,9 +5,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
-            <h2>すべての作品({{ $allreviews->count() }}件)<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
+            <h2>すべての作品({{ $allreviews }}件)<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
             
-            {{-- 右寄せしたい --}}
             <form method="get" action="{{ route('my_alldrama') }}">
                 @csrf
                 <div class="form-group row">
