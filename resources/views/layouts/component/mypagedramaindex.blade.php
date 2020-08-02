@@ -1,7 +1,7 @@
                     <div class="col-md-6 mx-auto">
                         <div class="row">
                             <div class="col-md-11 mx-auto bg-warning border p-0 m-0">
-                                <div class="row">
+                                <div class="row p-0 m-0">
                                     <div class="col-md-2 border-right p-0 m-0">
                                         <form action="{{ route('my_favorite_set') }}" method="POST">
                                             @csrf
@@ -47,13 +47,12 @@
                                             <button>
                                                 <a href="{{ route('review_edit', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー編集</a>
                                             </button>
-                                            {{-- 削除ボタンは未分類・未視聴の作品のみ表示させる予定 --}}
+                                            {{-- 削除ボタンは未分類・未視聴の作品のみ表示させる --}}
                                             @if($review->progress == '1' || $review->progress == '0')
-                                            <button>
-                                                <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー削除(マイページから除外)</a>
-                                            </button>
+                                                <button>
+                                                    <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー削除(マイページから除外)</a>
+                                                </button>
                                             @endif
-                                            
                                         </p>
                                         <p class="p-0 m-0">更新日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at)) }} / {{ $review->likes()->count() }}いいね</p>
                                     </div>

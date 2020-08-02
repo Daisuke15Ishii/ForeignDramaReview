@@ -1,43 +1,29 @@
 @extends('layouts.member')
 
-@section('title', 'お気に入りの作品｜マイページ')
+@section('title', 'お気に入りの作品｜' . Auth::user()->penname . 'さんのマイページ')
 
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
-            <h2>お気に入りの作品(変数でマイページの作品数を表示)<span class="">(1～20件目を表示)</span></h2>
+            <h2>お気に入りの作品({{ $allreviews }})<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
             
-            {{-- 右寄せしたい --}}
-            <form method="POST" action="{{ url('/user/mypage/drama/favorite') }}">
-                @csrf
-                <div class="form-group row">
-                    <div class="col-md-3 text-md-right">
-                        <select name="" class="" id="">
-                            <option value="title_desc" selected="selected">タイトル順</option>
-                            <option value="created_desc">投稿日が新しい順</option>
-                            <option value="created_asc">投稿日時が古い順</option>
-                            <option value="point_asc">総合評価が高い順</option>
-                            <option value="point_desc">総合評価が低い順</option>
-                            <option value="like_asc">他いろいろ実装予定</option>
-                        </select>
-                    </div>
-                </div>
+            <form method="get" action="{{ route('my_favorite_drama') }}">
+                @include('layouts.component.favoritedramaorder')
             </form>
             
-            ここにペジネーション配置
+            {{ $reviews->appends(request()->input())->links() }}
             
-            {{-- とりあえず仮でfor文 --}}
-            @for ($i = 1; $i <= 10; $i++)
-                <div class="row small my-3">
+            @foreach($reviews as $review)
+                <div class="row my-3">
                     {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                    
-                    第{{ $i }}位
-                    余白がたくさんあるので機能追加やデザインを検討中(一言コメント追加？)
+                    <div class="col-md-1">
+                        第{{ $i = $loop->iteration + (($reviews->currentPage() - 1) * $reviews->perPage()) }}位
+                    </div>
                     @include('layouts.component.favoritedramaindex')
                 </div>
-            @endfor
+            @endforeach
             
-            ここにペジネーション配置
+            {{ $reviews->appends(request()->input())->links() }}
         </div>
         
     </div>

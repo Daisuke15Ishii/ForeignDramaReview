@@ -39,7 +39,7 @@
             <span class="">{{ Auth::user()->penname }}さんの作品</span>
             <ul>
                 <li><a href="{{ route('my_drama', ['categorize' => 'all']) }}">すべての作品({{ Auth::user()->favoritesDrama()->count() }})</a></li>
-                <li><a href="{{ url('/user/mypage/drama/favorite') }}">お気に入り({{ Auth::user()->favoritesDrama()->where('favorite',1)->count() }})</a></li>
+                <li><a href="{{ route('my_favorite_drama') }}">お気に入り({{ Auth::user()->favoritesDrama()->where('favorite',1)->count() }})</a></li>
                 <li><a href="{{ route('my_drama', ['categorize' => 'wantto']) }}">未視聴({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})</a></li>
                 <li><a href="{{ route('my_drama', ['categorize' => 'watching']) }}">視聴中({{ Auth::user()->favoritesDrama()->where('watching',1)->count() }})</a></li>
                 <li><a href="{{ route('my_drama', ['categorize' => 'watched']) }}">視聴済({{ Auth::user()->favoritesDrama()->where('watched',1)->count() }})</a></li>

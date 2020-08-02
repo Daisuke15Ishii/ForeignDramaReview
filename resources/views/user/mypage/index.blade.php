@@ -2,7 +2,6 @@
 
 @section('title',  Auth::user()->penname . 'さんのマイページ')
 
-{{-- データベース作成後に諸々修正予定(とりあえず文章を手入力) --}}
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
@@ -55,16 +54,12 @@
             @foreach(Auth::user()->reviews()->wherehas('favorite', function($q){
                 $q->where('favorite', '1');
                 })->orderby('total_evaluation', 'desc')->get() as $review)
-                <div class="row small my-3">
+                <div class="row my-3">
                     {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                    {{-- 取り合えずid順？に表示しているだけなので、後で点数順に修正予定 --}}
                     <div class="col-md-1">
                         第{{ $loop->iteration }}位
                     </div>
                     @include('layouts.component.favoritedramaindex')
-                    <div class="col-md-4">
-                        余白がたくさんあるので機能追加やデザインを検討中(一言コメント追加？)
-                    </div>
                 </div>
                 @if($loop->iteration == 10)
                     {{-- 10作品だけ表示 --}}
