@@ -7,7 +7,7 @@
                                     <div class="col-md-7">
                                         <p><a href="#">{{ $review->user()->first()->penname }}</a></p>
                                         <p>
-                                            {{ round(Carbon\Carbon::parse($review->user()->first()->birth)->age,-1)}}代
+                                            {{ floor(Carbon\Carbon::parse($review->user()->first()->birth)->age / 10) * 10 }}代
                                             @if($review->user()->first()->gender == 'male')
                                                 ・男性
                                             @elseif($review->user()->first()->gender == 'female')
@@ -19,19 +19,21 @@
                                     <div class="col-md-3">
                                         {{-- follow機能。後程、URLを再設定予定なので、恐らく$drama_idを渡す必要なし--}}
                                         @auth
-                                            <form action="{{ route('review_follow', ['drama_id' => $drama->id]) }}" method="POST" name="follow">
-                                                @csrf
-                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                <input type="hidden" name="following_user_id" value="{{ $review->user()->first()->id }}">
-                                                <p>
-                                                    {{-- 既にフォロー済かの判定。レビューの人がauth::user()にフォローされているか調べる --}}
-                                                    @if (empty($review->user()->first()->followedUser()->where('user_id',Auth::user()->id)->first()))
-                                                        <input type="submit" value="フォロー" name="follow" alt="フォロー" class="follow">
-                                                    @else
-                                                        <input type="submit" value="フォロー解除" name="follow" alt="フォロー解除" class="follow">
-                                                    @endif
-                                                </p>
-                                            </form>
+                                            @if ( $review->user_id !== Auth::id() )
+                                                <form action="{{ route('review_follow', ['drama_id' => $review->drama_id]) }}" method="POST" name="follow">
+                                                    @csrf
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="following_user_id" value="{{ $review->user_id }}">
+                                                    <p>
+                                                        {{-- 既にフォロー済かの判定。レビューの人がauth::user()にフォローされているか調べる --}}
+                                                        @if (empty($review->user()->first()->followedUser()->where('user_id',Auth::id())->first()))
+                                                            <input type="submit" value="フォロー" name="follow" alt="フォロー" class="follow">
+                                                        @else
+                                                            <input type="submit" value="フォロー解除" name="follow" alt="フォロー解除" class="follow">
+                                                        @endif
+                                                    </p>
+                                                </form>
+                                            @endif
                                         @endauth
                                     </div>
                                 </div>
@@ -75,7 +77,7 @@
                                                 <p>言語：
                                                     @if($review->subtitles == 0)
                                                         吹替
-                                                    @else
+                                                    @elseif($review->subtitles == 1)
                                                         字幕
                                                     @endif
                                                 </p>
@@ -90,21 +92,23 @@
                                             </div>
                                             
                                             @auth
-                                                <form action="{{ route('review_like', ['drama_id' => $drama->id]) }}" method="POST" name="like">
-                                                    @csrf
-                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                    <input type="hidden" name="review_id" value="{{ $review->id }}">
-                                                    <p>
-                                                        {{-- 既にいいね済かの判定 --}}
-                                                        @if (empty($review->likes()->get()->where('user_id',Auth::user()->id)->first()))
-                                                            このレビュー→
-                                                            <input type="submit" value="いいね！" name="like" alt="いいね送信" class="like">
-                                                        @else
-                                                            このレビュー→
-                                                            <input type="submit" value="いいね取消" name="like" alt="いいね取消" class="like">
-                                                        @endif
-                                                    </p>
-                                                </form>
+                                                @if ( $review->user_id !== Auth::id() )
+                                                    <form action="{{ route('review_like', ['drama_id' => $review->drama_id]) }}" method="POST" name="like">
+                                                        @csrf
+                                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                        <input type="hidden" name="review_id" value="{{ $review->id }}">
+                                                        <p>
+                                                            {{-- 既にいいね済かの判定 --}}
+                                                            @if (empty($review->likes()->get()->where('user_id',Auth::id())->first()))
+                                                                このレビュー→
+                                                                <input type="submit" value="いいね！" name="like" alt="いいね送信" class="like">
+                                                            @else
+                                                                このレビュー→
+                                                                <input type="submit" value="いいね取消" name="like" alt="いいね取消" class="like">
+                                                            @endif
+                                                        </p>
+                                                    </form>
+                                                @endif
                                             @endauth
                                             {{-- 違反報告は実装保留 --}}
                                             <form id="" name="" action="{{ url('/drama/dramaID/index') }}" method="POST">

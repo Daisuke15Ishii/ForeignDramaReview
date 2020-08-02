@@ -69,6 +69,11 @@ Route::group(['prefix' => 'user/register'], function(){
     });
 });
 
+//['prefix' => 'drama/{drama_id}']より上に記述する必要あり
+Route::group(['prefix' => 'drama/review'], function(){
+    Route::get('/', 'drama\review\DramaReviewController@index')->name('review_index');
+});
+
 Route::group(['prefix' => 'drama/{drama_id}'], function(){
     Route::get('/', 'drama\dramaID\DramaIDController@index')->name('dramaID_index');
     Route::post('/', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@like')->name("review_like");
@@ -82,14 +87,6 @@ Route::group(['prefix' => 'drama/{drama_id}'], function(){
     });
 });
 
-Route::group(['prefix' => 'drama/review'], function(){
-    Route::get('/', function () {
-        return view('/drama/review/index');
-    });
-    Route::post('/', function () {
-        return view('/drama/review/index');
-    });
-});
 
 Route::group(['prefix' => 'search'], function(){
     Route::get('/', 'search\SearchController@index');
@@ -133,16 +130,8 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::post('/setting/edit', 'user\mypage\MypageSettingController@update')->name("setting_update");
     
     Route::get('/', 'user\mypage\MypageController@index');
-
-/*
+    Route::get('/like', 'user\mypage\MypageController@likeindex')->name('like_index');
     //favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
-    Route::get('/drama/favorite', function () {
-        return view('/user/mypage/drama/favorite/index');
-    });
-    Route::post('/drama/favorite', function () {
-        return view('/user/mypage/drama/favorite/index');
-    });
-*/
     Route::get('/drama/favorite', 'user\mypage\MypageDramaController@indexfavorite')->name("my_favorite_drama");
     Route::get('/drama/{categorize}', 'user\mypage\MypageDramaController@index')->name("my_drama");
     Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");

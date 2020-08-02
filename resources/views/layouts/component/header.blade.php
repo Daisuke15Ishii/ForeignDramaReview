@@ -103,7 +103,7 @@
                                     <a class="nav-link" href="{{ action('search\SearchController@index') }}">作品条件検索</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">最新レビュー</a>
+                                    <a class="nav-link" href="{{ route('review_index') }}">最新レビュー</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">おすすめドラマ</a>

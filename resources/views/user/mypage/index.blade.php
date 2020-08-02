@@ -45,7 +45,9 @@
                     @break
                 @endif
             @endforeach
-            <p class="text-right"><a href="#">レビュー一覧へ</a></p>
+            
+            {{-- 「評価済」にチェックが入った状態の「すべての作品」ページへのリンク--}}
+            <p class="text-right"><a href="{{ route('my_drama', ['categorize' => 'all', 'sorts' => array('review_total_evaluation')]) }}">すべての作品へ</a></p>
         </div>
         
         {{-- お気に入り作品表示 --}}

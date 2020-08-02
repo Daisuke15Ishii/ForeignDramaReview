@@ -64,13 +64,21 @@ class MypageDramaController extends Controller
             foreach($request->sorts as $sort){
                 // チェックがあれば絞り込み条件に追加。
                 switch($sort){
-                    case "review_total_evaluation":
+                    case "not_review_total_evaluation":
                         //未評価のみ検索
                         $reviews = $reviews->whereNull('total_evaluation');
                         break;
-                    case "review_comment":
+                    case "review_total_evaluation":
+                        //評価済のみ検索
+                        $reviews = $reviews->whereNotNull('total_evaluation');
+                        break;
+                    case "not_review_comment":
                         //レビューコメントなしのみ検索
                         $reviews = $reviews->whereNull('review_comment');
+                        break;
+                    case "review_comment":
+                        //レビューコメント有のみ検索
+                        $reviews = $reviews->whereNotNull('review_comment');
                         break;
                     case "favorite":
                         //お気に入り以外のみ検索

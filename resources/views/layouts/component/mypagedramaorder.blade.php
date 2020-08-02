@@ -18,10 +18,16 @@
                         <div class="form-group row">
                             <div class="col-md-12 text-md-right">
                                 <label>
-                                    <input type="checkbox" name="sorts[]" value="review_total_evaluation" @if(in_array('review_total_evaluation' ,$sorts)) checked @endif>未評価のみ
+                                    <input type="checkbox" name="sorts[]" value="not_review_total_evaluation" @if(in_array('not_review_total_evaluation' ,$sorts)) checked @endif>未評価のみ
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="sorts[]" value="review_comment" @if(in_array('review_comment' ,$sorts)) checked @endif>未コメントのみ
+                                    <input type="checkbox" name="sorts[]" value="review_total_evaluation" @if(in_array('review_total_evaluation' ,$sorts)) checked @endif>評価済のみ
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="sorts[]" value="not_review_comment" @if(in_array('not_review_comment' ,$sorts)) checked @endif>未コメントのみ
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="sorts[]" value="review_comment" @if(in_array('review_comment' ,$sorts)) checked @endif>コメント済のみ
                                 </label>
                                 <label>
                                     <input type="checkbox" name="sorts[]" value="favorite" @if(in_array('favorite' ,$sorts)) checked @endif>お気に入り以外
