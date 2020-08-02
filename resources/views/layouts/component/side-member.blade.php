@@ -13,7 +13,7 @@
     <div class="">
         <p>{{ Auth::user()->penname }}さん</p>
         <p>
-            {{ round(Carbon\Carbon::parse(Auth::user()->birth)->age,-1)}}代
+            {{ floor(Carbon\Carbon::parse(Auth::user()->birth)->age / 10) * 10 }}代
             @if(Auth::user()->gender == 'male')
                 ・男性
             @elseif(Auth::user()->gender == 'female')
@@ -23,9 +23,9 @@
         <p>フォロー：{{ Auth::user()->follows()->count() }}人　　フォロワー：{{ Auth::user()->followed()->count() }}人</p>
         <p>レビュー投稿数：{{ Auth::user()->reviews()->wherenotnull('total_evaluation')->count() }}</p>{{-- マイページに作品登録しただけのレビューを除く --}}
         <p>
-            いいね取得総数(修正予定)：{{-- 取得したいデータが取れていないので修正予定 --}}
-            {{ $iine = Auth::user()->reviews()->whereHas('likes', function($q){
-                $q->where('user_id', '=',  Auth::user()->id);
+            いいね取得総数
+            {{ $iike = App\Like::whereHas('review', function($q){
+                $q->where('user_id', '=',  Auth::id());
                 })->count()
             }}
         </p>
@@ -38,13 +38,13 @@
         <div class="">
             <span class="">{{ Auth::user()->penname }}さんの作品</span>
             <ul>
-                <li><a href="{{ route('my_alldrama') }}">すべての作品({{ Auth::user()->favoritesDrama()->count() }})</a></li>
+                <li><a href="{{ route('my_drama', ['categorize' => 'all']) }}">すべての作品({{ Auth::user()->favoritesDrama()->count() }})</a></li>
                 <li><a href="{{ url('/user/mypage/drama/favorite') }}">お気に入り({{ Auth::user()->favoritesDrama()->where('favorite',1)->count() }})</a></li>
-                <li><a href="#">未視聴({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})</a></li>
-                <li><a href="#">視聴中({{ Auth::user()->favoritesDrama()->where('watching',1)->count() }})</a></li>
-                <li><a href="#">視聴済({{ Auth::user()->favoritesDrama()->where('watched',1)->count() }})</a></li>
-                <li><a href="#">視聴断念({{ Auth::user()->favoritesDrama()->where('stop',1)->count() }})</a></li>
-                <li><a href="#">未分類({{ Auth::user()->favoritesDrama()->where('uncategorized',1)->count() }})</a></li>
+                <li><a href="{{ route('my_drama', ['categorize' => 'wantto']) }}">未視聴({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})</a></li>
+                <li><a href="{{ route('my_drama', ['categorize' => 'watching']) }}">視聴中({{ Auth::user()->favoritesDrama()->where('watching',1)->count() }})</a></li>
+                <li><a href="{{ route('my_drama', ['categorize' => 'watched']) }}">視聴済({{ Auth::user()->favoritesDrama()->where('watched',1)->count() }})</a></li>
+                <li><a href="{{ route('my_drama', ['categorize' => 'stop']) }}">視聴断念({{ Auth::user()->favoritesDrama()->where('stop',1)->count() }})</a></li>
+                <li><a href="{{ route('my_drama', ['categorize' => 'uncategorized']) }}">未分類({{ Auth::user()->favoritesDrama()->where('uncategorized',1)->count() }})</a></li>
             </ul>
         </div>
         <div class="">

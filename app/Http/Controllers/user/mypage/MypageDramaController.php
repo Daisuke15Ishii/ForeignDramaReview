@@ -12,16 +12,79 @@ use App\Review;
 
 class MypageDramaController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request, $categorize){
         $auth = \Auth::user();
-//        $dramas = $auth->favoritesDrama()->get(); //マイページ登録されている作品
         $reviews = $auth->reviews(); //レビュー投稿した作品。
         
-        //caseですべて、視聴済、未視聴などを分岐させる
-        $reviews = $reviews;
-        
+        //caseにより「すべて」「未視聴」「視聴中」「視聴済」「視聴断念」「未分類」に分岐させる
+        switch($categorize){
+            case "uncategorized":
+                //未分類
+                $reviews = $reviews->where('progress', '0');
+                $title = "未分類の作品";
+                $categorize = 'uncategorized';
+                break;
+            case "wantto":
+                //未視聴
+                $reviews = $reviews->where('progress', '1');
+                $title = "未視聴の作品";
+                $categorize = 'wantto';
+                break;
+            case "stop":
+                //視聴断念
+                $reviews = $reviews->where('progress', '2');
+                $title = "視聴断念の作品";
+                $categorize = 'stop';
+                break;
+            case "watching":
+                //視聴中
+                $reviews = $reviews->where('progress', '3');
+                $title = "視聴中の作品";
+                $categorize = 'watching';
+                break;
+            case "watched":
+                //視聴済
+                $reviews = $reviews->where('progress', '4');
+                $title = "視聴済の作品";
+                $categorize = 'watched';
+                break;
+            case "all":
+                //すべて
+                $title = "すべての作品";
+                $categorize = 'all';
+                break;
+        }
+
+        //sorts(checkbox)によってレビュー表示の条件を絞る
+        if ($request->sorts != '') {
+            $sorts = $request->sorts;
+            foreach($request->sorts as $sort){
+                // チェックがあれば絞り込み条件に追加。
+                switch($sort){
+                    case "review_total_evaluation":
+                        //未評価のみ検索
+                        $reviews = $reviews->whereNull('total_evaluation');
+                        break;
+                    case "review_comment":
+                        //レビューコメントなしのみ検索
+                        $reviews = $reviews->whereNull('review_comment');
+                        break;
+                    case "favorite":
+                        //お気に入り以外のみ検索
+                        $reviews = $reviews->whereHas('favorite', function($q){
+                            $q->where('favorite', '0');
+                        });
+                        break;
+                }
+            }
+        }else{
+            //全て未チェック(requestにsortsなし)時の「in_array」エラー回避のため記述
+            $sorts = array(-1);
+        }
+
         //sortbyの値に応じて並び変え
         if ($request->sortby != '') {
+            $sortby = $request->sortby;
             // 検索されたら絞り込み条件に追加
             switch($request['sortby']){
                 case "update_desc":
@@ -59,13 +122,14 @@ class MypageDramaController extends Controller
             }
         }else{
             $reviews = $reviews->orderBy('updated_at', 'desc');
+            $sortby = -1;
         }
         
         $allreviews = $reviews->count();
         //後程paginate(20)に変更予定
         $reviews = $reviews->Paginate(8);
         
-        return view('user.mypage.drama.index', ['reviews' => $reviews, 'allreviews' => $allreviews]);
+        return view('user.mypage.drama.index', ['reviews' => $reviews, 'allreviews' => $allreviews, 'title' => $title, 'categorize' => $categorize, 'sorts' => $sorts, 'sortby' => $sortby]);
     }
 
     public function setfavorite(Request $request){

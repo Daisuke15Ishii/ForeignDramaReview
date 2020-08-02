@@ -137,16 +137,18 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
         return view('/user/mypage/index');
     });
     
-    Route::get('/drama', 'user\mypage\MypageDramaController@index')->name("my_alldrama");
-    Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
-    Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
-    Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
-
+    //favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
     Route::get('/drama/favorite', function () {
         return view('/user/mypage/drama/favorite/index');
     });
     Route::post('/drama/favorite', function () {
         return view('/user/mypage/drama/favorite/index');
     });
+
+    Route::get('/drama/{categorize}', 'user\mypage\MypageDramaController@index')->name("my_drama");
+    Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
+    Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
+    Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
+
 
 });

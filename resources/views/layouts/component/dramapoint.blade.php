@@ -108,8 +108,12 @@
                             @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
                                 <a href="{{ route('review_add', ['drama_id' => $drama->id]) }}"><button>レビューを書く！</button></a>
                             @else
-                                <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビューを編集する！</button></a>
-                                <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}"><button>レビュー削除(マイページから除外)</button></a>
+                                <button>
+                                    <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}">レビューを編集する！</a>
+                                </button>
+                                <button>
+                                    <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}">レビュー削除(マイページから除外)</a>
+                                </button>
                             @endif
                         @endguest
                     </div>
