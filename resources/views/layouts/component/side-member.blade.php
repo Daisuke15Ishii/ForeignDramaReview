@@ -95,7 +95,7 @@
                 <li><a href="#">通知一覧</a></li>
                 <li>
                     @if(App\Like::where('user_id', \Auth::id())->count() !== 0)
-                        <a href="{{ route('like_index') }}">いいねしたレビュー一覧</a>
+                        <a href="{{ route('like_index') }}">いいねしたレビュー一覧{{ App\Like::where('user_id', \Auth::id())->count() }}</a>
                     @else
                         いいねしたレビュー一覧
                     @endif

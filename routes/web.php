@@ -69,7 +69,7 @@ Route::group(['prefix' => 'user/register'], function(){
     });
 });
 
-//['prefix' => 'drama/{drama_id}']より上に記述する必要あり
+//['prefix' => 'drama/review']を['prefix' => 'drama/{drama_id}']より上に記述する必要あり
 Route::group(['prefix' => 'drama/review'], function(){
     Route::get('/', 'drama\review\DramaReviewController@index')->name('review_index');
 });
@@ -79,26 +79,14 @@ Route::group(['prefix' => 'drama/{drama_id}'], function(){
     Route::post('/', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@like')->name("review_like");
     //followは仮でここに記述(後程、違うURLおよび違うコントローラに変更予定)
     Route::post('/follow', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@follow')->name("review_follow");
-    Route::get('/review/reviewID', function () {
-        return view('/drama/dramaID/review/reviewID/index');
-    });
-    Route::post('/review/reviewID', function () {
-        return view('/drama/dramaID/review/reviewID/index');
-    });
+    Route::get('/review/{review_id}', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@index')->name("reviewID_index");
 });
 
 
 Route::group(['prefix' => 'search'], function(){
     Route::get('/', 'search\SearchController@index');
-    Route::post('/', function () {
-        return view('/search//index');
-    });
-    
-    Route::get('/detailresult', 'search\SearchController@detailresult');
+    Route::get('/detailresult', 'search\SearchController@detailresult')->name('search_result');
     Route::get('/result', 'search\SearchController@result');
-    Route::post('/result', function () {
-        return view('/search/result/index');
-    });
 });
 
 
@@ -111,17 +99,12 @@ Route::group(['prefix' => 'user/userID'], function(){
     });
 });
 
-
-
 Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], function(){
     Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add')->name('review_add');
     Route::post('/', 'drama\dramaID\review\DramaIDReviewController@create')->name('review_create');
-
     Route::get('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@edit')->name("review_edit");
     Route::post('/{review_id}/edit', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@update')->name("review_edit");
-    Route::get('/{review_id}', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@index')->name("reviewID_index");
 });
-
 
 Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::get('/profile/edit', 'user\mypage\MypageProfileController@edit')->name("profile_edit");
@@ -131,12 +114,11 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     
     Route::get('/', 'user\mypage\MypageController@index');
     Route::get('/like', 'user\mypage\MypageController@likeindex')->name('like_index');
-    //favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
+    
+    // drama/favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
     Route::get('/drama/favorite', 'user\mypage\MypageDramaController@indexfavorite')->name("my_favorite_drama");
     Route::get('/drama/{categorize}', 'user\mypage\MypageDramaController@index')->name("my_drama");
     Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
     Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
     Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
-
-
 });

@@ -12,11 +12,12 @@ class MypageSettingController extends Controller
 {
 
     public function edit(Request $request){
+        //ユーザー情報の編集画面(setting)を表示するアクション
         return view('user.mypage.setting.edit');
     }
     
-    public function update(Request $request)
-    {
+    public function update(Request $request){
+        //ユーザー情報の編集(setting)を保存するアクション
         //validateは後で実装予定
         $user = \Auth::user();
 
@@ -34,6 +35,5 @@ class MypageSettingController extends Controller
         $user->save();
 
         return view('user.mypage.setting.complete');
-
     }
 }

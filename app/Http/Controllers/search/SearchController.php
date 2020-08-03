@@ -16,24 +16,14 @@ use App\Janre;
 
 class SearchController extends Controller
 {
-    //
-    public function add(){
-        //メモ
-        return view('admin.news.create');
-    }
-    
-    public function create(Request $request){
-        //メモ
-        return redirect('admin/news/create');
-    }
-
     public function index(Request $request){
-        //メモ
+        //詳細検索画面を表示するアクション
         $janre = Janre::all();
         return view('search.index', ['janre' => $janre]);
     }
 
     public function result(Request $request){
+        //簡易検索(header)からの検索結果を表示するアクション
         $cond_title = $request->cond_title;
         $janre = Janre::all();
 
@@ -41,11 +31,11 @@ class SearchController extends Controller
         if($request->mode == 'modetitle'){
             if ($cond_title != '') {
                 // 検索されたら検索結果(部分一致)を取得する
-                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->Paginate(5);
+                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->orderBy('created_at', 'desc')->Paginate(5);
                 $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->get();
             } else {
                 // それ以外はすべてのドラマを取得する
-                $drama = Drama::Paginate(5);
+                $drama = Drama::orderBy('created_at', 'desc')->Paginate(5);
                 $alldrama =  Drama::all();
             }
         }elseif($request->mode == 'modecomment'){
@@ -54,20 +44,24 @@ class SearchController extends Controller
                 // 検索されたら検索結果(部分一致)を取得する
                 $drama = Drama::whereHas('reviews', function($q) use($cond_title){
                     $q->where('review_comment', 'LIKE',  "%{$cond_title}%");
-                });
+                })->orderBy('created_at', 'desc');
                 $alldrama =  $drama->get();
                 $drama = $drama->Paginate(5);
             } else {
                 // それ以外はすべてのドラマを取得する
-                $drama = Drama::Paginate(5);
+                $drama = Drama::orderBy('created_at', 'desc')->Paginate(5);
                 $alldrama =  Drama::all();
             }
         }
 
-        return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama, 'janre' => $janre, 'cond_title' => $cond_title]);
+        //並び替え初期値は「新着順」
+        $sortby = "create_desc";
+
+        return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama, 'janre' => $janre, 'cond_title' => $cond_title, 'sortby' => $sortby]);
     }
 
     public function detailresult(Request $request){
+        //詳細条件検索からの検索結果を表示するアクション
         $cond_title = $request->cond_title;
         $janre = Janre::all();
         if ($cond_title != '') {
@@ -115,9 +109,8 @@ class SearchController extends Controller
         if ($request->janre != '') {
             // 検索されたら絞り込み条件に追加
             $j = $request->janre;
-            //「janre」はdramaモデルで定義したjanreメソッド。「use」はwhereHas内に変数を渡すために必要。$jは配列なのでforeachした方が良い？
             $drama = $drama->whereHas('janre', function($q) use($j){
-                $q->where('janre', $j);
+                $q->whereIn('janre', $j);
             });
         }
         
@@ -195,23 +188,32 @@ class SearchController extends Controller
         }
 
 /*
-        //前作視聴の有無。想定通りの動作しないので保留
+        //前作視聴の有無。想定通りの動作しないので保留(恐らくチェックが複数あるとorではなくandで検索されてしまうため)
         if ($request->previous != '') {
             // 検索されたら絞り込み条件に追加
-            $previous = $request->previous;
-            $drama = $drama->whereHas('score', function($q) use($previous){
-                //想定通りの動作しないので保留。
-                if($previous == 2){
-                    //「必須」が一番多い。
-                    $q->where('previous_require', 'previous_better')->where('previous_better', '>', 'previous_no');
-                }elseif($previous == 1){
-                    //「観た方が良い」が一番多い
-                    $q->where('previous_better', 'previous_require')->where('previous_better', '>', 'previous_no');
-                }else{
-                    //「不要」が一番多い
-                    $q->where('previous_no', 'previous_require')->where('previous_no', '>', 'previous_better');
+            foreach($request->previous as $previous){
+                // チェックがあれば絞り込み条件に追加。
+                switch($previous){
+                    case "2":
+                        //「必須」が一番多い。
+                        $drama = $drama->whereHas('score', function($q) use($previous){
+                            $q->where('previous_require', '>', 'previous_better')->where('previous_better', '>', 'previous_no');
+                        });
+                        break;
+                    case "1":
+                        //「観た方が良い」が一番多い
+                        $drama = $drama->whereHas('score', function($q) use($previous){
+                            $q->where('previous_better', '>', 'previous_require')->where('previous_better', '>', 'previous_no');
+                        });
+                        break;
+                    case "0":
+                        //「不要」が一番多い
+                        $drama = $drama->whereHas('score', function($q) use($previous){
+                            $q->where('previous_no', '>', 'previous_require')->where('previous_no', '>', 'previous_better');
+                        });
+                        break;
                 }
-            });
+            }
         }
 */
 
@@ -220,26 +222,56 @@ class SearchController extends Controller
             // 検索されたら絞り込み条件に追加
             $drama = $drama->where('season', "1");
         }
-        
+
+
+        //sortbyの値に応じて並び変え
+        if ($request->sortby != '') {
+            $sortby = $request->sortby;
+            // 検索されたら絞り込み条件に追加
+            switch($request['sortby']){
+                case "create_desc":
+                    //新着順
+                    $drama = $drama->orderBy('created_at', 'desc');
+                    break;
+                case "onair_desc":
+                    //投稿更新日が新しい順
+                    $drama = $drama->orderBy('onair', 'desc');
+                    break;
+                case "onair_asc":
+                    //投稿更新日が古い順
+                    $drama = $drama->orderBy('onair', 'asc');
+                    break;
+                case "title_asc":
+                    //タイトル昇順
+                    $drama = $drama->orderBy('title', 'asc');
+                    break;
+                case "title_asc":
+                    //タイトル降順
+                    $drama = $drama->orderBy('title', 'desc');
+                    break;
+                /* innerjoinを利用すると同カラム名が複数存在して、viewにて一部エラーとなるため保留。
+                case "total_evaluation_desc":
+                    //総合評価が高い順
+                    break;
+                case "total_evaluation_desc":
+                    //総合評価が低い順
+                    break;
+                */
+                case "registers_desc":
+                    //マイページ登録数が多い順
+                    $drama = $drama->withCount('reviews')->orderBy('reviews_count', 'desc');
+                    break;
+            }
+        }else{
+            //初期値は「新着順」
+            $drama = $drama->orderBy('created_at', 'desc');
+            $sortby = "create_desc";
+        }
+
         //途中でget()するとエラーになるので、最後に一度だけget() or paginate()
         $alldrama = $drama->get();
         $drama = $drama->paginate(5);
 
-        return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama,'janre' => $janre, 'cond_title' => $cond_title]);
-    }
-    
-    public function edit(Request $request){
-        //メモ
-        return view('admin.news.edit',  ['news_form' => $news]);
-    }
-    
-    public function update(Request $request){
-        //メモ
-        return redirect('admin/news');
-    }
-    
-    public function delete(Request $request){
-        //メモ
-        return redirect('admin/news/');
+        return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama,'janre' => $janre, 'cond_title' => $cond_title, 'sortby' => $sortby]);
     }
 }

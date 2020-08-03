@@ -75,7 +75,6 @@
                                 <p>お気に入り登録者数：<span class="bg-secondary">{{ $drama->favorites()->where('favorite',1)->count() }}人</span></p>
                             </div>
                             <div class="col-md-4">
-                                {{-- ランキング表示はメソッドだけでは難しいかもしれない --}}
                                 <p>総合評価ランキング：<span class="bg-secondary">{{ $drama->score()->first()->rank_average_total_evaluation }}位</span></p>
                             </div>
                         </div>

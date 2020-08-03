@@ -34,7 +34,7 @@
                                 @endif
                             </div>
                             <div class="col-md-4">
-                                <p>総合評価ランキング：<span class="bg-secondary">●●位</span></p>
+                                <p>総合評価ランキング：<span class="bg-secondary">{{ $drama->score()->first()->rank_average_total_evaluation }}位</span></p>
                             </div>
                         </div>
                         <div class="row">

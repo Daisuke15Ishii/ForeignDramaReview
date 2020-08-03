@@ -106,6 +106,7 @@ class MypageDramaController extends Controller
                     //投稿更新日が古い順
                     $reviews = $reviews->orderBy('updated_at', 'asc');
                     break;
+                /* innerjoinを利用すると同カラム名が複数存在して、viewにて一部エラーとなるため保留。
                 case "title_asc":
                     //タイトル昇順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'asc');
@@ -114,6 +115,7 @@ class MypageDramaController extends Controller
                     //タイトル降順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'desc');
                     break;
+                */
                 case "total_evaluation_desc":
                     //総合評価が高い順
                     $reviews = $reviews->orderBy('total_evaluation', 'desc');
@@ -184,6 +186,7 @@ class MypageDramaController extends Controller
                     //投稿更新日が古い順
                     $reviews = $reviews->orderBy('updated_at', 'asc');
                     break;
+                /* innerjoinを利用すると同カラム名が複数存在して、viewにて一部エラーとなるため保留。
                 case "title_asc":
                     //タイトル昇順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'asc');
@@ -192,6 +195,7 @@ class MypageDramaController extends Controller
                     //タイトル降順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'desc');
                     break;
+                */
                 case "total_evaluation_desc":
                     //総合評価が高い順
                     $reviews = $reviews->orderBy('total_evaluation', 'desc');
@@ -291,12 +295,21 @@ class MypageDramaController extends Controller
         $score->reviews = Drama::find($request->drama_id)->reviews()->count('total_evaluation');
         $score->registers = Drama::find($request->drama_id)->reviews()->count();
         $score->favorites = Drama::find($request->drama_id)->favorites()->where('favorite', 1)->count();
-        //総合ランキングは保留
         $score->previous_require = Drama::find($request->drama_id)->reviews()->where('previous', 2)->count();
         $score->previous_better = Drama::find($request->drama_id)->reviews()->where('previous', 1)->count();
         $score->previous_no = Drama::find($request->drama_id)->reviews()->where('previous', 0)->count();
 
         $score->save();
+
+
+        //総合ランキングを再計算
+        $ss = \App\Score::orderby('average_total_evaluation', 'desc')->get();
+        $i = 1; //順位
+        foreach($ss as $s){
+            $s->rank_average_total_evaluation = $i;
+            $s->save();
+            $i++;
+        }
 
         return back();
     }

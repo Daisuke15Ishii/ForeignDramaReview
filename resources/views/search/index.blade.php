@@ -167,13 +167,13 @@
                         <div class="form-group row">
                             <span class="col-md-4 text-md-right">前作視聴(未実装)：</span>
                             <div class="col-md-2">
-                                <label><input type="checkbox" name="previous" value="2">必須</label>
+                                <label><input type="checkbox" name="previous[]" value="2">必須</label>
                             </div>
                             <div class="col-md-2">
-                                <label><input type="checkbox" name="previous" value="1">観た方が楽しめる</label>
+                                <label><input type="checkbox" name="previous[]" value="1">観た方が楽しめる</label>
                             </div>
                             <div class="col-md-2">
-                                <label><input type="checkbox" name="previous" value="0">不要</label>
+                                <label><input type="checkbox" name="previous[]" value="0">不要</label>
                             </div>
                         </div>
 

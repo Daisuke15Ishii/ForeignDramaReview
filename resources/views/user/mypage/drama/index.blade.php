@@ -8,7 +8,7 @@
             <h2>{{ $title }}({{ $allreviews }}件)<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
             
             <form method="get" action="{{ route('my_drama', ['categorize' => $categorize]) }}">
-                    @include('layouts.component.mypagedramaorder')
+                @include('layouts.component.mypagedramaorder')
             </form>
             
             {{ $reviews->appends(request()->input())->links() }}

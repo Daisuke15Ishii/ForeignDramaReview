@@ -8,20 +8,16 @@ use App\Http\Controllers\Controller;
 use App\Drama;
 use App\Review;
 use App\User;
-use App\Score;
-use App\Favorite;
 use App\Like;
-use App\Janre;
 use App\Follow;
 use Auth;
 
 
 class DramaIDController extends Controller
 {
-    //
     public function index(Request $request,$drama_id){
-        //画面表示確認のため仮設定
-        $drama = Drama::find($drama_id);
+        //ドラマ詳細画面を表示するアクション
+        $drama = Drama::where('id', $drama_id)->first();
         $reviews = $drama->reviews()->whereNotNull('total_evaluation');
 
         //sorts(checkbox)によってレビュー表示の条件を絞る

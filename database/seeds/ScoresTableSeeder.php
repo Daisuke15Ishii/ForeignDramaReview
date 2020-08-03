@@ -77,5 +77,14 @@ class ScoresTableSeeder extends Seeder
             }
             $socre->save();
         }
+
+        //総合ランキングを計算
+        $ss = \App\Score::orderby('average_total_evaluation', 'desc')->get();
+        $i = 1; //順位
+        foreach($ss as $s){
+            $s->rank_average_total_evaluation = $i;
+            $s->save();
+            $i++;
+        }
     }
 }

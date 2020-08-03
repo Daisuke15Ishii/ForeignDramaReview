@@ -6,8 +6,8 @@
                                 <select name="sortby" class="" id="sortby">
                                     <option value="update_desc" @if($sortby=='update_desc') selected @endif>投稿日が新しい順</option>
                                     <option value="update_asc" @if($sortby=='update_asc') selected @endif>投稿日時が古い順</option>
-                                    <option value="title_asc" @if($sortby=='title_asc') selected @endif>タイトル昇順</option>
-                                    <option value="title_desc" @if($sortby=='title_desc') selected @endif>タイトル降順</option>
+                                    <option value="title_asc" @if($sortby=='title_asc') selected @endif>タイトル昇順(未実装)</option>
+                                    <option value="title_desc" @if($sortby=='title_desc') selected @endif>タイトル降順(未実装)</option>
                                     <option value="total_evaluation_desc" @if($sortby=='total_evaluation_desc') selected @endif>総合評価が高い順</option>
                                     <option value="total_evaluation_asc" @if($sortby=='total_evaluation_asc') selected @endif>総合評価が低い順</option>
                                     <option value="like_desc" @if($sortby=='like_desc') selected @endif>いいねが多い順</option>

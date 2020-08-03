@@ -17,7 +17,7 @@ class DramaIDReviewController extends Controller
 {
     public function add(Request $request, $drama_id){
         //レビュー投稿画面へ遷移
-        $drama = Drama::find($drama_id);
+        $drama = Drama::where('id', $drama_id)->first();
         return view('drama.dramaID.review.create', ['drama' => $drama]);
     }
     
@@ -116,7 +116,7 @@ class DramaIDReviewController extends Controller
             $score->reviews = 1;
             $score->registers = Drama::find($request->drama_id)->reviews()->count();
             $score->favorites = Drama::find($request->drama_id)->favorites()->where('favorite', 1)->count();
-            //総合ランキングは保留(default=0なので記述せず)
+            //総合ランキングは一番最後に別途処理(default=0)
             $score->previous_require = Drama::find($request->drama_id)->reviews()->where('previous', 2)->count();
             $score->previous_better = Drama::find($request->drama_id)->reviews()->where('previous', 1)->count();
             $score->previous_no = Drama::find($request->drama_id)->reviews()->where('previous', 0)->count();
@@ -134,12 +134,21 @@ class DramaIDReviewController extends Controller
             $score->reviews = Drama::find($request->drama_id)->reviews()->count('total_evaluation');
             $score->registers = Drama::find($request->drama_id)->reviews()->count();
             $score->favorites = Drama::find($request->drama_id)->favorites()->where('favorite', 1)->count();
-            //総合ランキングは保留
+            //総合ランキングは一番最後に別途処理
             $score->previous_require = Drama::find($request->drama_id)->reviews()->where('previous', 2)->count();
             $score->previous_better = Drama::find($request->drama_id)->reviews()->where('previous', 1)->count();
             $score->previous_no = Drama::find($request->drama_id)->reviews()->where('previous', 0)->count();
         }
         $score->save();
+
+        //総合ランキングを再計算
+        $ss = \App\Score::orderby('average_total_evaluation', 'desc')->get();
+        $i = 1; //順位
+        foreach($ss as $s){
+            $s->rank_average_total_evaluation = $i;
+            $s->save();
+            $i++;
+        }
 
         return redirect(route('dramaID_index', ['drama_id' => $request->drama_id]));
     }

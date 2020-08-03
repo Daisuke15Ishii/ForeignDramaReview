@@ -79,7 +79,6 @@
                                     </select>
                                 </div>
                                 <div class="">
-                                    {{--　後でvalue=cond_titleを二重括弧で囲む　--}}
                                     <input type="text" class="form-control" name="cond_title" value="" autocomplete="cond_title">
                                 </div>
                                 <div class="">
