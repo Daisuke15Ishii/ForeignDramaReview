@@ -14,7 +14,7 @@
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-4">
-                        <form method="get" action="{{ route('search_result') }}">
+                        <form method="get" action="{{ route('search_result_order') }}">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-md-9 text-md-right">

@@ -87,6 +87,7 @@ Route::group(['prefix' => 'search'], function(){
     Route::get('/', 'search\SearchController@index');
     Route::get('/detailresult', 'search\SearchController@detailresult')->name('search_result');
     Route::get('/result', 'search\SearchController@result');
+    Route::get('/orderresult', 'search\SearchController@orderresult')->name('search_result_order');
 });
 
 
