@@ -123,3 +123,7 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
     Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
 });
+
+Route::group(['prefix' => 'ranking'], function(){
+    Route::get('/', 'ranking\RankingController@index')->name("ranking_index");
+});

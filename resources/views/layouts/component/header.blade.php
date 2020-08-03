@@ -105,7 +105,7 @@
                                     <a class="nav-link" href="{{ route('review_index') }}">最新レビュー</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">おすすめドラマ</a>
+                                    <a class="nav-link" href="{{ route('ranking_index') }}">おすすめドラマ</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/about') }}">サイト情報</a>
