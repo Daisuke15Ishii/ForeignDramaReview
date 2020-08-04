@@ -22,7 +22,7 @@
                                             @if ( $review->user_id !== Auth::id() )
                                                 <form action="{{ route('review_follow', ['drama_id' => $review->drama_id]) }}" method="POST" name="follow">
                                                     @csrf
-                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                                     <input type="hidden" name="following_user_id" value="{{ $review->user_id }}">
                                                     <p>
                                                         {{-- 既にフォロー済かの判定。レビューの人がauth::user()にフォローされているか調べる --}}
@@ -99,7 +99,7 @@
                                                         <input type="hidden" name="review_id" value="{{ $review->id }}">
                                                         <p>
                                                             {{-- 既にいいね済かの判定 --}}
-                                                            @if (empty($review->likes()->get()->where('user_id',Auth::id())->first()))
+                                                            @if (empty($review->likes()->where('user_id',Auth::id())->first()))
                                                                 このレビュー→
                                                                 <input type="submit" value="いいね！" name="like" alt="いいね送信" class="like">
                                                             @else

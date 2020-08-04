@@ -68,7 +68,7 @@
                     @break
                 @endif
             @endforeach
-            <p class="text-right"><a href="#">お気に入り一覧へ</a></p>
+            <p class="text-right"><a href="{{ route('my_favorite_drama') }}">お気に入り一覧へ</a></p>
         </div>
         
     </div>

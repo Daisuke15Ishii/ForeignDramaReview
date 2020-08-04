@@ -91,14 +91,6 @@ Route::group(['prefix' => 'search'], function(){
 });
 
 
-Route::group(['prefix' => 'user/userID'], function(){
-    Route::get('/', function () {
-        return view('/user/userID/index');
-    });
-    Route::post('/', function () {
-        return view('/user/userID/index');
-    });
-});
 
 Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], function(){
     Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add')->name('review_add');
@@ -122,6 +114,15 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
     Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
     Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
+});
+
+//['prefix' => 'user/mypage']を['prefix' => 'user/{userID}']より上に記述する必要あり
+Route::group(['prefix' => 'user/{userID}'], function(){
+    Route::get('/', 'user\userID\OthersController@index')->name('Others_home');
+    
+});
+Route::group(['prefix' => 'user/{userID}', 'middleware' => 'auth'], function(){
+    Route::post('/follow', 'user\userID\OthersController@follow')->name('Others_follow');
 });
 
 Route::group(['prefix' => 'ranking'], function(){
