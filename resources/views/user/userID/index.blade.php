@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
             <h2>{{ $others->penname }}さんのプロフィール</h2>
-            @if( isset($others->profile) )
+            @if( !empty($others->profile) )
                 <p>{{ $others->profile }}</p>
             @else
                 <p>よろしくお願いします。(プロフィール未設定)</p>

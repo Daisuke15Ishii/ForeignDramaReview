@@ -120,7 +120,13 @@
                         いいねしたレビュー一覧
                     @endif
                 </li>
-                <li>フォロー一覧(実装予定)</li>
+                <li>
+                    @if(App\Follow::where('user_id', $others->id)->count() !== 0)
+                        <a href="{{ route('others_following_index', ['userID' => $others->id]) }}">フォロー一覧({{ App\Follow::where('user_id', $others->id)->count() }})</a>
+                    @else
+                        フォロー一覧
+                    @endif
+                </li>
                 <li>フォロワー一覧(実装予定)</li>
             </ul>
         </div>

@@ -56,4 +56,18 @@ class OthersController extends Controller
             return back();
         }
     }
+    
+    public function followingindex(Request $request, $userID){
+        //「フォロー中のユーザー一覧」を表示するアクション
+        $others = User::where('id', $userID)->first();
+        $followings = Follow::where('user_id', $userID); //フォロー中のユーザー
+
+        //フォローした順に並び変え
+        $followings = $followings->orderby('created_at', 'desc');
+
+        $allfollowings = $followings->count();
+        $followings = $followings->Paginate(10);
+        
+        return view('user.userID.followingindex', ['others' => $others, 'followings' => $followings, 'allfollowings' => $allfollowings]);
+    }
 }

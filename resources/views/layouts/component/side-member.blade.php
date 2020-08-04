@@ -93,7 +93,7 @@
         <div class="">
             <span class="">その他</span>
             <ul>
-                <li><a href="#">通知一覧</a></li>
+                <li>通知一覧(実装予定)</li>
                 <li>
                     @if(App\Like::where('user_id', \Auth::id())->count() !== 0)
                         <a href="{{ route('like_index') }}">いいねしたレビュー一覧({{ App\Like::where('user_id', \Auth::id())->count() }})</a>
@@ -101,7 +101,13 @@
                         いいねしたレビュー一覧
                     @endif
                 </li>
-                <li>フォロー一覧(実装予定)</li>
+                <li>
+                    @if(App\Follow::where('user_id', \Auth::id())->count() !== 0)
+                        <a href="{{ route('following_index') }}">フォロー一覧({{ App\Follow::where('user_id', \Auth::id())->count() }})</a>
+                    @else
+                        フォロー一覧
+                    @endif
+                </li>
                 <li>フォロワー一覧(実装予定)</li>
                 <li>作品の追加リクエスト(実装予定)</li>
                 <li><a href="{{ route('setting_edit') }}">設定変更</a></li>
