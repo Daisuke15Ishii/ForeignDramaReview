@@ -107,7 +107,8 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     
     Route::get('/', 'user\mypage\MypageController@index');
     Route::get('/like', 'user\mypage\MypageController@likeindex')->name('like_index');
-    
+    Route::get('/following', 'user\mypage\MypageController@followingindex')->name('following_index');
+
     // drama/favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
     Route::get('/drama/favorite', 'user\mypage\MypageDramaController@indexfavorite')->name("my_favorite_drama");
     Route::get('/drama/{categorize}', 'user\mypage\MypageDramaController@index')->name("my_drama");

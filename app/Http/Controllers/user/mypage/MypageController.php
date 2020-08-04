@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Like;
 use App\Review;
+use App\Follow;
 
 class MypageController extends Controller
 {
@@ -30,4 +31,18 @@ class MypageController extends Controller
         
         return view('user.mypage.likeindex', ['likes' => $likes, 'alllikes' => $alllikes]);
     }
+    
+    public function followingindex(Request $request){
+        //「フォロー中のユーザー一覧」を表示するアクション
+        $followings = Follow::where('user_id', \Auth::id()); //フォロー中のユーザー
+
+        //フォローした順に並び変え
+        $followings = $followings->orderby('created_at', 'desc');
+
+        $allfollowings = $followings->count();
+        $followings = $followings->Paginate(10);
+        
+        return view('user.mypage.followingindex', ['followings' => $followings, 'allfollowings' => $allfollowings]);
+    }
+    
 }
