@@ -44,5 +44,17 @@ class MypageController extends Controller
         
         return view('user.mypage.followingindex', ['followings' => $followings, 'allfollowings' => $allfollowings]);
     }
-    
+
+    public function followedindex(Request $request){
+        //「フォロワーのユーザー一覧」を表示するアクション
+        $followers = Follow::where('following_user_id', \Auth::id()); //フォロワー
+
+        //フォローされた順に並び変え
+        $followers = $followers->orderby('created_at', 'desc');
+
+        $allfollowers = $followers->count();
+        $followers = $followers->Paginate(10);
+        
+        return view('user.mypage.followedindex', ['followers' => $followers, 'allfollowers' => $allfollowers]);
+    }
 }

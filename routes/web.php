@@ -108,6 +108,7 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::get('/', 'user\mypage\MypageController@index');
     Route::get('/like', 'user\mypage\MypageController@likeindex')->name('like_index');
     Route::get('/following', 'user\mypage\MypageController@followingindex')->name('following_index');
+    Route::get('/followed', 'user\mypage\MypageController@followedindex')->name('followed_index');
 
     // drama/favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
     Route::get('/drama/favorite', 'user\mypage\MypageDramaController@indexfavorite')->name("my_favorite_drama");
@@ -122,6 +123,7 @@ Route::group(['prefix' => 'user/{userID}'], function(){
     Route::get('/', 'user\userID\OthersController@index')->name('others_home');
     Route::get('/like', 'user\userID\OthersController@likeindex')->name('others_like_index');
     Route::get('/following', 'user\userID\OthersController@followingindex')->name('others_following_index');
+    Route::get('/followed', 'user\userID\OthersController@followedindex')->name('others_followed_index');
     Route::get('/drama/favorite', 'user\userID\OthersDramaController@indexfavorite')->name("others_favorite_drama");
     Route::get('/drama/{categorize}', 'user\userID\OthersDramaController@index')->name("others_drama");
 });

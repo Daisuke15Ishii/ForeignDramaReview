@@ -70,4 +70,18 @@ class OthersController extends Controller
         
         return view('user.userID.followingindex', ['others' => $others, 'followings' => $followings, 'allfollowings' => $allfollowings]);
     }
+    
+    public function followedindex(Request $request, $userID){
+        //「フォロワーのユーザー一覧」を表示するアクション
+        $others = User::where('id', $userID)->first();
+        $followers = Follow::where('following_user_id', $userID); //フォロワー
+
+        //フォローされた順に並び変え
+        $followers = $followers->orderby('created_at', 'desc');
+
+        $allfollowers = $followers->count();
+        $followers = $followers->Paginate(10);
+        
+        return view('user.userID.followedindex', ['others' => $others, 'followers' => $followers, 'allfollowers' => $allfollowers]);
+    }
 }

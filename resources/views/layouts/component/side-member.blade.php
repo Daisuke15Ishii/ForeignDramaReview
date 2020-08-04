@@ -108,7 +108,13 @@
                         フォロー一覧
                     @endif
                 </li>
-                <li>フォロワー一覧(実装予定)</li>
+                <li>
+                    @if(App\Follow::where('following_user_id', \Auth::id())->count() !== 0)
+                        <a href="{{ route('followed_index') }}">フォロワー一覧({{ App\Follow::where('following_user_id', \Auth::id())->count() }})</a>
+                    @else
+                        フォロワー一覧
+                    @endif
+                </li>
                 <li>作品の追加リクエスト(実装予定)</li>
                 <li><a href="{{ route('setting_edit') }}">設定変更</a></li>
             </ul>
