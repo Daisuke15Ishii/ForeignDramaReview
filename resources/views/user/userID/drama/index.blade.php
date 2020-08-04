@@ -5,9 +5,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
-            <h2>{{ $title }}({{ $allreviews }}件)<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
+            <h2>{{ $others->penname }}さんの{{ $title }}({{ $allreviews }}件)<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
             
-            <form method="get" action="{{ route('my_drama', ['categorize' => $categorize]) }}">
+            <form method="get" action="{{ route('others_drama', ['userID' => $others->id, 'categorize' => $categorize]) }}">
                 @include('layouts.component.mypagedramaorder')
             </form>
             
@@ -18,7 +18,7 @@
                 @if($loop->odd)
                     {{-- ループが奇数回 --}}
                     <div class="row small my-3">
-                        @include('layouts.component.mypagedramaindex')
+                        @include('layouts.component.othersdramaindex')
                     @if($loop->last)
                         {{-- リストの最後 --}}
                         <div class="col-md-6 mx-auto">
@@ -27,7 +27,7 @@
                     @endif
                 @elseif($loop->even)
                     {{-- ループが偶数回 --}}
-                        @include('layouts.component.mypagedramaindex')
+                        @include('layouts.component.othersdramaindex')
                     </div>
                 @endif
                 @if($loop->iteration == 20)

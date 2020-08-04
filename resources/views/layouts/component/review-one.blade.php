@@ -94,11 +94,7 @@
                                         @if(isset($review->review_comment))
                                             <div class="row">
                                                 <div class="col-md-12 mx-auto bg-white" style="border:solid 1px">
-                                                    @if($review->spoiler_alert == 0 || in_array('spoiler_display' ,$sorts))
-                                                        {{ \Str::limit($review->review_comment, 1000) }}
-                                                    @elseif ($review->spoiler_alert == 1)
-                                                        <a href="{{ route('reviewID_index', ['drama_id' => $review->drama_id, 'review_id' => $review->id]) }}">ネタバレ有のレビューを読む</p>
-                                                    @endif
+                                                    {{ \Str::limit($review->review_comment, 1000) }}
                                                 </div>
                                             </div>
                                             

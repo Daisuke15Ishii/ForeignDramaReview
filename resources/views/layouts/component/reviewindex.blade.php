@@ -24,6 +24,9 @@
                                                 @else
                                                     「<a href="{{ route('reviewID_index', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">コメントなし</a>」
                                                 @endif
+                                                @if ($review->spoiler_alert == 1)
+                                                    <span class="spoiler_alert">ネタバレ有</span>
+                                                @endif
                                             </p>
                                             <p class="p-0 m-0">更新日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at)) }} / {{ $review->likes()->count() }}いいね</p>
                                         </div>
@@ -43,11 +46,14 @@
                                             </p>
                                         </div>
                                         <div class="col-md-2 p-0 m-0">
-                                            {{-- 仮でユーザー画像登録--}}
-                                            <img src="{{ secure_asset('/images/person.jpeg') }}" alt="user画像" class="person">
+                                            @if(isset($review->user()->first()->image_path))
+                                                <p class=""><img src="{{ secure_asset($review->user()->first()->image_path) }}" class="person" alt="{{ $review->user()->first()->penname}}さんアイコン画像" title="{ $review->user()->first()->penname }さん"></p>
+                                            @else
+                                                <p class=""><img src="{{ secure_asset('/images/person.jpeg') }}" class="person" alt="一般ユーザー画像" title="一般ユーザー"></p>
+                                            @endif
                                         </div>
                                         <div class="col-md-8 p-0 m-0">
-                                            <p class="p-0 m-0"><a href="#">{{ $review->user()->first()->penname }}</a></p>
+                                            <p class="p-0 m-0"><a href="{{ route('others_home', ['userID' => $review->user()->first()->id]) }}">{{ $review->user()->first()->penname }}</a></p>
                                             <p class="p-0 m-0">
                                                 {{ floor(Carbon\Carbon::parse($review->user()->first()->birth)->age / 10) * 10 }}代
                                                 @if($review->user()->first()->gender == 'male')
@@ -58,6 +64,7 @@
                                             </p>
                                             <p class="p-0 m-0">レビュー投稿数：
                                                 {{ $review->user()->first()->reviews()->wherenotnull('total_evaluation')->count() }}
+                                                (総合評価平均：{{ sprintf('%.1f',$review->user()->first()->reviews()->avg('total_evaluation')) }}点)
                                             </p>
                                             <p class="p-0 m-0">
                                                 いいね取得総数

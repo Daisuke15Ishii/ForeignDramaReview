@@ -22,6 +22,7 @@
         </p>
         <p>フォロー：{{ Auth::user()->follows()->count() }}人　　フォロワー：{{ Auth::user()->followed()->count() }}人</p>
         <p>レビュー投稿数：{{ Auth::user()->reviews()->wherenotnull('total_evaluation')->count() }}</p>{{-- マイページに作品登録しただけのレビューを除く --}}
+        <p>(総合評価平均：{{ sprintf('%.1f',Auth::user()->reviews()->avg('total_evaluation')) }}点)</p>
         <p>
             いいね取得総数
             {{ $iike = App\Like::whereHas('review', function($q){
@@ -100,9 +101,9 @@
                         いいねしたレビュー一覧
                     @endif
                 </li>
-                <li><a href="#">フォロー一覧</a></li>
-                <li><a href="#">フォロワー一覧</a></li>
-                <li><a href="#">作品の追加リクエスト</a></li>
+                <li>フォロー一覧(実装予定)</li>
+                <li>フォロワー一覧(実装予定)</li>
+                <li>作品の追加リクエスト(実装予定)</li>
                 <li><a href="{{ route('setting_edit') }}">設定変更</a></li>
             </ul>
         </div>

@@ -51,6 +51,9 @@
                                                         <input type="checkbox" name="sorts[]" value="review_comment" @if(in_array('review_comment' ,$sorts)) checked @endif>コメント有のみ
                                                     </label>
                                                     <label>
+                                                        <input type="checkbox" name="sorts[]" value="spoiler_display" @if(in_array('spoiler_display' ,$sorts)) checked @endif>ネタバレ表示
+                                                    </label>
+                                                    <label>
                                                         <input type="checkbox" name="sorts[]" value="following" @if(in_array('following' ,$sorts)) checked @endif>フォロー中のみ
                                                     </label>
                                                 </div>

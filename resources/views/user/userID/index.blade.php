@@ -17,7 +17,7 @@
                     {{-- follow機能--}}
                     @auth
                         @if ( $others->id !== Auth::id() )
-                            <form action="{{ route('Others_follow', ['userID' => $others->id]) }}" method="POST" name="follow">
+                            <form action="{{ route('others_follow', ['userID' => $others->id]) }}" method="POST" name="follow">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                 <input type="hidden" name="following_user_id" value="{{ $others->id }}">

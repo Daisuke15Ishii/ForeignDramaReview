@@ -1,11 +1,11 @@
-@extends('layouts.member')
+@extends('layouts.others')
 
-@section('title',  'いいねしたレビュー一覧｜' . Auth::user()->penname . 'さんのマイページ')
+@section('title',  'いいねしたレビュー一覧｜' . $others->penname . 'さんのマイページ')
 
 @section('content')
     <div class="row">
         <div class="col-md-12 mx-auto bg-white mb-4">
-            <h2>いいねしたレビュー一覧({{ $alllikes }}件)<span class="">({{ $likes->firstitem() }}~{{ $likes->lastitem() }}件目を表示)</span></h2>
+            <h2>{{ $others->penname }}さんがいいねしたレビュー一覧({{ $alllikes }}件)<span class="">({{ $likes->firstitem() }}~{{ $likes->lastitem() }}件目を表示)</span></h2>
 
             {{ $likes->appends(request()->input())->links() }}
             

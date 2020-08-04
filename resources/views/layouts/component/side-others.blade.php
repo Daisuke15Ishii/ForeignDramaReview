@@ -15,7 +15,7 @@
             {{-- follow機能--}}
             @auth
                 @if ( $others->id !== Auth::id() )
-                    <form action="{{ route('Others_follow', ['userID' => $others->id]) }}" method="POST" name="follow">
+                    <form action="{{ route('others_follow', ['userID' => $others->id]) }}" method="POST" name="follow">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <input type="hidden" name="following_user_id" value="{{ $others->id }}">
@@ -44,6 +44,7 @@
         </p>
         <p>フォロー：{{ $others->follows()->count() }}人　　フォロワー：{{ $others->followed()->count() }}人</p>
         <p>レビュー投稿数：{{ $others->reviews()->wherenotnull('total_evaluation')->count() }}</p>{{-- マイページに作品登録しただけのレビューを除く --}}
+        <p>(総合評価平均：{{ sprintf('%.1f',$others->reviews()->avg('total_evaluation')) }}点)</p>
         <p>
             いいね取得総数
             {{ $iike = App\Like::whereHas('review', function($q) use($others){
@@ -58,28 +59,69 @@
         <div class="">
             <span class="">{{ $others->penname }}さんの作品</span>
             <ul>
-                <li><a href="{{ url('/user/userID/drama') }}">すべての作品(100)</a></li>
-                <li><a href="{{ url('/user/userID/drama/favorite') }}">お気に入り(100)</a></li>
-                <li><a href="#">未視聴(100)</a></li>
-                <li><a href="#">視聴中(100)</a></li>
-                <li><a href="#">視聴済(100)</a></li>
-                <li><a href="#">視聴断念(100)</a></li>
-                <li><a href="#">未分類(100)</a></li>
+                <li>
+                    @if($others->favoritesDrama()->count() !== 0)
+                        <a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'all']) }}">すべての作品({{ $others->favoritesDrama()->count() }})</a>
+                    @else
+                        すべての作品({{ $others->favoritesDrama()->count() }})
+                    @endif
+                </li>
+                <li>
+                    @if($others->favoritesDrama()->where('favorite',1)->count() !== 0)
+                        <a href="{{ route('others_favorite_drama', ['userID' => $others->id]) }}">お気に入り({{ $others->favoritesDrama()->where('favorite',1)->count() }})</a>
+                    @else
+                        お気に入り({{ $others->favoritesDrama()->where('favorite',1)->count() }})
+                    @endif
+                </li>
+                <li>
+                    @if($others->favoritesDrama()->where('want',1)->count() !== 0)
+                        <a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'wantto']) }}">未視聴({{ $others->favoritesDrama()->where('want',1)->count() }})</a>
+                    @else
+                        未視聴({{ $others->favoritesDrama()->where('want',1)->count() }})
+                    @endif
+                </li>
+                <li>
+                    @if($others->favoritesDrama()->where('watching',1)->count() !== 0)
+                        <a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'watching']) }}">視聴中({{ $others->favoritesDrama()->where('watching',1)->count() }})</a>
+                    @else
+                        視聴中({{ $others->favoritesDrama()->where('watching',1)->count() }})
+                    @endif
+                </li>
+                <li>
+                    @if($others->favoritesDrama()->where('watched',1)->count() !== 0)
+                        <a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'watched']) }}">視聴済({{ $others->favoritesDrama()->where('watched',1)->count() }})</a>
+                    @else
+                        視聴済({{ $others->favoritesDrama()->where('watched',1)->count() }})
+                    @endif
+                </li>
+                <li>
+                    @if($others->favoritesDrama()->where('stop',1)->count() !== 0)
+                        <a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'stop']) }}">視聴断念({{ $others->favoritesDrama()->where('stop',1)->count() }})</a>
+                    @else
+                        視聴断念({{ $others->favoritesDrama()->where('stop',1)->count() }})
+                    @endif
+                </li>
+                <li>
+                    @if($others->favoritesDrama()->where('uncategorized',1)->count() !== 0)
+                        <a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'uncategorized']) }}">未分類({{ $others->favoritesDrama()->where('uncategorized',1)->count() }})</a>
+                    @else
+                        未分類({{ $others->favoritesDrama()->where('uncategorized',1)->count() }})
+                    @endif
+                </li>
             </ul>
         </div>
         <div class="">
             <span class="">その他</span>
             <ul>
-                <li><a href="#">レビュー一覧</a></li>
                 <li>
-                    @if(App\Like::where('user_id', \Auth::id())->count() !== 0)
-                        <a href="{{ route('like_index') }}">いいねしたレビュー一覧({{ App\Like::where('user_id', \Auth::id())->count() }})</a>
+                    @if(App\Like::where('user_id', $others->id)->count() !== 0)
+                        <a href="{{ route('others_like_index', ['userID' => $others->id]) }}">いいねしたレビュー一覧({{ App\Like::where('user_id', $others->id)->count() }})</a>
                     @else
                         いいねしたレビュー一覧
                     @endif
                 </li>
-                <li><a href="#">フォロー一覧</a></li>
-                <li><a href="#">フォロワー一覧</a></li>
+                <li>フォロー一覧(実装予定)</li>
+                <li>フォロワー一覧(実装予定)</li>
             </ul>
         </div>
     </div>

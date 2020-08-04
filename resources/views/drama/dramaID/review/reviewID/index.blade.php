@@ -13,7 +13,7 @@
                             <h3>{{ $review->user()->first()->penname }}さんのレビュー</h3>
                         </div>
                         <div class="row">
-                            @include('layouts.component.review')
+                            @include('layouts.component.review-one')
                         </div>
                     </div>
                 </div>

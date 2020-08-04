@@ -64,6 +64,9 @@
                                             @else
                                                 「<a href="{{ route('reviewID_index', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">コメントなし</a>」
                                             @endif
+                                            @if ($review->spoiler_alert == 1)
+                                                <span class="spoiler_alert">ネタバレ有</span>
+                                            @endif
                                             <span class="p-0 m-0">
                                                 {{-- いいね済の有無を表示させる --}}
                                                 @auth

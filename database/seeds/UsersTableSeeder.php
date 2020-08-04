@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
                         'drama_id' => $drama->id,
                         'user_id' => $user->id,
                         'score_id' => $drama->id, //dramaレコード作成時と同時にscoreレコードも作成するためidは同じ
-                        'total_evaluation' => $faker->numberBetween(10, 100) / 2, //二桁の乱数
+                        'total_evaluation' => $faker->numberBetween(10, 100), //二桁の乱数
                         'story_evaluation' => $faker->numberBetween(1, 10) / 2, //0～5の乱数(0.5刻み)
                         'world_evaluation' => $faker->numberBetween(1, 10) / 2,
                         'cast_evaluation' => $faker->numberBetween(1, 10) / 2,

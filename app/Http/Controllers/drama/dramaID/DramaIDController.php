@@ -34,6 +34,10 @@ class DramaIDController extends Controller
                         //レビューコメント有のみ検索
                         $reviews = $reviews->whereNotNull('review_comment');
                         break;
+                    case "spoiler_display":
+                        //ネタバレ表示
+                        //並び替えには影響しないため、breakのみ記述
+                        break;
                     case "following":
                         //フォローしているユーザーのみ検索
                         if(Auth::check()){
