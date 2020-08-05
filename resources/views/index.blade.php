@@ -20,35 +20,32 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>サイトからのお知らせ</h2>
-                {{-- @foreachでサイト更新履歴を引っ張ってくる予定 --}}
-                サイト更新履歴を↓こんな感じで↓
-                <p>2020/6/14　【作品追加】「ブレイキング・バッド　シーズン5」の作品情報を追加しました。</p>
-                <p>2020/6/14　【作品追加】「ブレイキング・バッド　シーズン5」の作品情報を追加しました。</p>
-                <p>2020/6/14　【作品追加】「ブレイキング・バッド　シーズン5」の作品情報を追加しました。</p>
-                <p style="text-align: right"><a href="#">お知らせ一覧へ</a></p>
+                {{-- 実装後回し。@foreach等でサイト更新履歴を引っ張ってくる予定 --}}
+                <p>サイトからのお知らせは現在準備中です。</p>
+                <p style="text-align: right">お知らせ一覧へ</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>おすすめドラマ(総合評価ランキング)</h2>
-                {{-- @foreachで総合評価点数上位3作品を引っ張ってくる予定 --}}
-                <p>作品1</p>
-                <p>作品2</p>
-                <p>作品3</p>
-                <p style="text-align: right"><a href="#">おすすめドラマ一覧へ</a></p>
+                <div class="row">
+                    <div class="col-md-11 mx-auto">
+                        @foreach($scores as $score )
+                            @include('layouts.component.rankingindex')
+                        @endforeach
+                        <p style="text-align: right"><a href="{{ route('ranking_index') }}">おすすめドラマ一覧へ</a></p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>最新レビュー</h2>
-                {{-- @foreachで最新レビュー投稿を6作品を引っ張ってくる予定 --}}
-                <p>作品1/投稿者1</p>
-                <p>作品2/投稿者1</p>
-                <p>作品3/投稿者1</p>
-                <p>作品4/投稿者1</p>
-                <p>作品5/投稿者1</p>
-                <p>作品6/投稿者1</p>
-                <p style="text-align: right"><a href="#">最新レビュー一覧へ</a></p>
+                @foreach($reviews as $review)
+                    {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
+                    @include('layouts.component.reviewindex')
+                @endforeach
+                <p style="text-align: right"><a href="{{ route('review_index') }}">最新レビュー一覧へ</a></p>
             </div>
         </div>
     </div>

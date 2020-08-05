@@ -11,7 +11,16 @@
     
     <div class="">
         <p>
-            {{ $others->penname }}さん
+            @guest
+                <a href="{{ route('others_home', ['userID' => $others->id]) }}">{{ $others->penname }}さん</a>
+            @else
+                @if(Auth::id() == $others->id)
+                    <a href="{{ url('/user/mypage') }}">{{ Auth::user()->penname }}さん</a>
+                @else
+                    <a href="{{ route('others_home', ['userID' => $others->id]) }}">{{ $others->penname }}さん</a>
+                @endif
+            @endguest
+            
             {{-- follow機能--}}
             @auth
                 @if ( $others->id !== Auth::id() )

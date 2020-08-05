@@ -16,8 +16,8 @@
                         </ul>
                     </li>
                     <li class="list-inline-item"><a href="{{ url('/search') }}">作品条件検索</a>
-                    <li class="list-inline-item"><a href="#">最新レビュー</a>
-                    <li class="list-inline-item"><a href="#">おすすめドラマ</a>
+                    <li class="list-inline-item"><a href="{{ route('review_index') }}">最新レビュー</a>
+                    <li class="list-inline-item"><a href="{{ route('ranking_index') }}">おすすめドラマ</a>
                     <li class="list-inline-item"><a href="{{ url('/about') }}">サイト情報</a>
                         <ul>
                             <li><a href="{{ url('/about') }}">サイト概要</a></li>

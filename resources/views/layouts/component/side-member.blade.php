@@ -11,7 +11,7 @@
     </div>
     
     <div class="">
-        <p>{{ Auth::user()->penname }}さん</p>
+        <p><a href="{{ url('/user/mypage') }}">{{ Auth::user()->penname }}さん</a></p>
         <p>
             {{ floor(Carbon\Carbon::parse(Auth::user()->birth)->age / 10) * 10 }}代
             @if(Auth::user()->gender == 'male')
@@ -30,7 +30,7 @@
                 })->count()
             }}
         </p>
-        <p><a href="#">プロフィールの表示確認</a></p>
+        <p><a href="{{ route('others_home', ['userID' => Auth::id()]) }}">プロフィールの表示確認</a></p>
         <p><a href="{{ route('profile_edit') }}">プロフィール変更</a></p>
         <p>アカウント登録日：{{ date('Y年m月d日', strtotime(Auth::user()->created_at)) }}</p>
     </div>
@@ -93,7 +93,7 @@
         <div class="">
             <span class="">その他</span>
             <ul>
-                <li>通知一覧(実装予定)</li>
+                <li>通知一覧(準備中)</li>
                 <li>
                     @if(App\Like::where('user_id', \Auth::id())->count() !== 0)
                         <a href="{{ route('like_index') }}">いいねしたレビュー一覧({{ App\Like::where('user_id', \Auth::id())->count() }})</a>
@@ -115,7 +115,7 @@
                         フォロワー一覧
                     @endif
                 </li>
-                <li>作品の追加リクエスト(実装予定)</li>
+                <li>作品の追加リクエスト(準備中)</li>
                 <li><a href="{{ route('setting_edit') }}">設定変更</a></li>
             </ul>
         </div>

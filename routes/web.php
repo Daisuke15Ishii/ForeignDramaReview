@@ -11,14 +11,12 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('/index');
 });
-
-//postは不要。画面確認用
-Route::post('/', function () {
-    return view('/index');
-});
+*/
+Route::get('/', 'IndexController@index');
 
 //下記がauth関連のルーティングのデフォルト
 Auth::routes();
@@ -82,15 +80,12 @@ Route::group(['prefix' => 'drama/{drama_id}'], function(){
     Route::get('/review/{review_id}', 'drama\dramaID\review\reviewID\DramaIDReviewReviewIDController@index')->name("reviewID_index");
 });
 
-
 Route::group(['prefix' => 'search'], function(){
     Route::get('/', 'search\SearchController@index');
     Route::get('/detailresult', 'search\SearchController@detailresult')->name('search_result');
     Route::get('/result', 'search\SearchController@result');
     Route::get('/orderresult', 'search\SearchController@orderresult')->name('search_result_order');
 });
-
-
 
 Route::group(['prefix' => 'drama/{drama_id}/review', 'middleware' => 'auth'], function(){
     Route::get('/', 'drama\dramaID\review\DramaIDReviewController@add')->name('review_add');
@@ -128,6 +123,7 @@ Route::group(['prefix' => 'user/{userID}'], function(){
     Route::get('/drama/{categorize}', 'user\userID\OthersDramaController@index')->name("others_drama");
 });
 Route::group(['prefix' => 'user/{userID}', 'middleware' => 'auth'], function(){
+    //OthersControllerに記述されているが、フォローにはログインが必要なので上記とはgroupを分けている
     Route::post('/follow', 'user\userID\OthersController@follow')->name('others_follow');
 });
 
