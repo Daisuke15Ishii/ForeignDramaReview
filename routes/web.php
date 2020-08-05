@@ -42,31 +42,15 @@ Route::group(['prefix' => 'register'], function(){
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-/*　これより下の記述は、画面表示のテスト確認用　*/
 Route::group(['prefix' => 'about'], function(){
     Route::get('/', 'about\AboutController@index');
     Route::get('/info', 'about\AboutController@info');
     Route::get('/terms-of-service', 'about\AboutController@terms_of_service');
     Route::get('/contact', 'about\AboutController@contactcreate');
-    Route::post('/contact', 'about\AboutController@contactupdate')->name('contact_update');
     
-/*
-    Route::get('/', function () {
-        return view('/about/index');
-    });
-    Route::get('/info', function () {
-        return view('/about/info/index');
-    });
-    Route::get('/terms-of-service', function () {
-        return view('/about/terms-of-service/index');
-    });
-    Route::get('/contact', function () {
-        return view('/about/contact/create');
-    });
-    Route::post('/contact', function () {
-        return view('/about/contact/thanks');
-    });
-*/
+//    Route::post('/contact', 'about\AboutController@contactsend')->name('contact_send');
+//    Route::get('/contact/result', 'about\AboutController@contactresult')->name('contact_result');
+    Route::post('/contact/result', 'about\AboutController@contactupdate')->name('contact_update');    
 });
 
 //['prefix' => 'drama/review']を['prefix' => 'drama/{drama_id}']より上に記述する必要あり
