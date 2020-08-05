@@ -3,7 +3,7 @@
 {{-- layouts/front.blade.phpを読み込む --}}
 @extends('layouts.front')
 
-@section('title', '新規アカウント登録完了｜洋ドラ会議(仮)')
+@section('title', '新規アカウント登録完了')
 
 @section('content')
     <div class="container">
@@ -13,8 +13,7 @@
                     <h1>新規アカウント登録完了</h1>
                 </div>
                 <div class="">
-                    <p>新規アカウント登録が完了いたしました。<br>
-                    ご登録メールアドレスに確認メールをお送りさせていただきます。</p>
+                    <p>ご登録いただきありがとうございます。新規アカウント登録が完了いたしました。</p>
                     <a class="" href="{{ url('/') }}"><img src="" alt="トップページに戻る"></a>
                 </div>
             </div>

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class MypageSettingController extends Controller
 {
-
     public function edit(Request $request){
         //ユーザー情報の編集画面(setting)を表示するアクション
         return view('user.mypage.setting.edit');
@@ -30,7 +29,7 @@ class MypageSettingController extends Controller
         $user->penname = $request['penname'];
         $user->gender = $request['gender'];
         $user->birth = $request['birthyear'] . '-' . $request['birthmonth'] . '-01';
-        $user->image = $request['image'];
+        $user->image = '/images/' . $request['image'];
 
         $user->save();
 

@@ -36,7 +36,7 @@
                     <ul>
                         <li>運営者：だいすけ</li>
                         <li>所在地：東京都</li>
-                        <li><a href="#">お問合せはこちら</a></li>
+                        <li><a href="{{ url('/about/contact') }}">お問合せはこちら</a></li>
                     </ul>
                 </div>
             </div>

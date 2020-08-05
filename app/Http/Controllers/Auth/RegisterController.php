@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'penname' => $data['penname'],
             'gender' => $data['gender'],
             'birth' => $data['birthyear'] . '-' . $data['birthmonth'] . '-01',
-            'image' => $data['image'],
+            'image' => '/images/' . $data['image'],
 //            'profile' => $data['profile'],
         ]);
     }

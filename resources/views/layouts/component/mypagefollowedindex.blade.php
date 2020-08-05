@@ -4,8 +4,8 @@
                             <div class="col-md-11 mx-auto bg-warning border p-0 m-0">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-2 p-0 m-0">
-                                        @if(isset($follower->followed()->first()->image_path))
-                                            <p class="person"><img src="{{ secure_asset($follower->followed()->first()->image_path) }}" alt="{{ $follower->followed()->first()->penname}}さんアイコン画像" title="{ $follower->followed()->first()->penname }さん"></p>
+                                        @if(isset($follower->followed()->first()->image))
+                                            <p class="person"><img src="{{ secure_asset($follower->followed()->first()->image) }}" alt="{{ $follower->followed()->first()->penname}}さんアイコン画像" title="{ $follower->followed()->first()->penname }さん"></p>
                                         @else
                                             <p class="person"><img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー"></p>
                                         @endif

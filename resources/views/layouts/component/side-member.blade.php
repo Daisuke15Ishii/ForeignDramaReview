@@ -3,10 +3,10 @@
 
 <div class="">
     <div class="">
-        @if(isset(Auth::user()->image_path))
-            <p class=""><img src="{{ secure_asset(Auth::user()->image_path) }}" alt="{{ Auth::user()->penname}}さんアイコン画像" title="{ Auth::user()->penname }さん"></p>
+        @if(isset(Auth::user()->image))
+            <p class="sideperson"><img src="{{ secure_asset(Auth::user()->image) }}" alt="{{ Auth::user()->penname}}さんアイコン画像" title="{ Auth::user()->penname }さん"></p>
         @else
-            <p class=""><img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー"></p>
+            <p class="sideperson"><img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー"></p>
         @endif
     </div>
     

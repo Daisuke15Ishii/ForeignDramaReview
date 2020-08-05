@@ -11,11 +11,6 @@
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('/index');
-});
-*/
 Route::get('/', 'IndexController@index');
 
 //下記がauth関連のルーティングのデフォルト
@@ -39,11 +34,23 @@ Route::get('user/password/reset/{token}', 'Auth\ResetPasswordController@showRese
 Route::post('user/password/reset', 'Auth\ResetPasswordController@reset');
 */
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'register'], function(){
+    Route::post('/complete', function () {
+        return view('/user/register/complete');
+    });
+});
 
+// Route::get('/home', 'HomeController@index')->name('home');
 
 /*　これより下の記述は、画面表示のテスト確認用　*/
 Route::group(['prefix' => 'about'], function(){
+    Route::get('/', 'about\AboutController@index');
+    Route::get('/info', 'about\AboutController@info');
+    Route::get('/terms-of-service', 'about\AboutController@terms_of_service');
+    Route::get('/contact', 'about\AboutController@contactcreate');
+    Route::post('/contact', 'about\AboutController@contactupdate')->name('contact_update');
+    
+/*
     Route::get('/', function () {
         return view('/about/index');
     });
@@ -59,12 +66,7 @@ Route::group(['prefix' => 'about'], function(){
     Route::post('/contact', function () {
         return view('/about/contact/thanks');
     });
-});
-
-Route::group(['prefix' => 'user/register'], function(){
-    Route::get('/complete', function () {
-        return view('/user/register/complete');
-    });
+*/
 });
 
 //['prefix' => 'drama/review']を['prefix' => 'drama/{drama_id}']より上に記述する必要あり

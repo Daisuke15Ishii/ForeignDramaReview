@@ -2,8 +2,8 @@
 
 <div class="">
     <div class="">
-        @if(isset($others->image_path))
-            <p class=""><img src="{{ secure_asset($others->image_path) }}" alt="{{ $others->penname}}さんアイコン画像" title="{ $others->penname }さん"></p>
+        @if(isset($others->image))
+            <p class=""><img src="{{ secure_asset($others->image) }}" alt="{{ $others->penname}}さんアイコン画像" title="{ $others->penname }さん"></p>
         @else
             <p class=""><img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー"></p>
         @endif

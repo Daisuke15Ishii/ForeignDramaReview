@@ -46,8 +46,8 @@
                                             </p>
                                         </div>
                                         <div class="col-md-2 p-0 m-0">
-                                            @if(isset($review->user()->first()->image_path))
-                                                <p class=""><img src="{{ secure_asset($review->user()->first()->image_path) }}" class="person" alt="{{ $review->user()->first()->penname}}さんアイコン画像" title="{ $review->user()->first()->penname }さん"></p>
+                                            @if(isset($review->user()->first()->image))
+                                                <p class=""><img src="{{ secure_asset($review->user()->first()->image) }}" class="person" alt="{{ $review->user()->first()->penname}}さんアイコン画像" title="{ $review->user()->first()->penname }さん"></p>
                                             @else
                                                 <p class=""><img src="{{ secure_asset('/images/person.jpeg') }}" class="person" alt="一般ユーザー画像" title="一般ユーザー"></p>
                                             @endif
