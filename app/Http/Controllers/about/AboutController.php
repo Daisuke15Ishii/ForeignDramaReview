@@ -42,4 +42,19 @@ class AboutController extends Controller
         
         return view('about.contact.thanks');
     }
+
+    public function contactsend(Request $request){
+        //問合せ内容を保存するアクション
+        
+        $this->validate($request, Contact::$rules);
+        $contact = new Contact;
+        $form = $request->all();
+        
+        unset($form['_token']);
+        $contact->fill($form);
+        $contact->save();
+        
+        return view('about.contact.thanks');
+    }
+    
 }
