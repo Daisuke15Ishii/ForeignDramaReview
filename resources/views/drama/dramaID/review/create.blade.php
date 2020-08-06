@@ -51,8 +51,8 @@
                                     <option value="0" selected>未分類</option>
                                     <option value="4">視聴済</option>
                                     <option value="3">視聴中</option>
-                                    <option value="2">視聴断念</option>
-                                    <option value="1">未視聴</option>
+                                    <option value="2">リタイア</option>
+                                    <option value="1">観たい</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">

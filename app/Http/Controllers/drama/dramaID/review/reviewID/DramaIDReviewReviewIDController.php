@@ -79,11 +79,11 @@ class DramaIDReviewReviewIDController extends Controller
                 $favorite->uncategorized = 1;
                 break;
             case 1:
-                //未視聴
+                //観たい
                 $favorite->want = 1;
                 break;
             case 2:
-                //視聴断念
+                //リタイア
                 $favorite->stop = 1;
                 break;
             case 3:

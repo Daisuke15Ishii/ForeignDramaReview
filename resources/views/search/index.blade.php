@@ -165,7 +165,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <span class="col-md-4 text-md-right">前作視聴(未実装)：</span>
+                            <span class="col-md-4 text-md-right">前作視聴(準備中)：</span>
                             <div class="col-md-2">
                                 <label><input type="checkbox" name="previous[]" value="2">必須</label>
                             </div>

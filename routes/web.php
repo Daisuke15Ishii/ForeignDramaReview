@@ -45,6 +45,7 @@ Route::group(['prefix' => 'register'], function(){
 Route::group(['prefix' => 'about'], function(){
     Route::get('/', 'about\AboutController@index');
     Route::get('/info', 'about\AboutController@info');
+    Route::get('/manual', 'about\AboutController@manual');
     Route::get('/terms-of-service', 'about\AboutController@terms_of_service');
     Route::get('/contact', 'about\AboutController@contactcreate');
     

@@ -68,10 +68,10 @@
                                                             未分類
                                                             @break
                                                         @case(1)
-                                                            未視聴
+                                                            観たい
                                                             @break
                                                         @case(2)
-                                                            視聴断念
+                                                            リタイア
                                                             @break
                                                         @case(3)
                                                             視聴中

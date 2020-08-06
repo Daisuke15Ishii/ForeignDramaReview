@@ -55,9 +55,9 @@
                 </li>
                 <li>
                     @if(Auth::user()->favoritesDrama()->where('want',1)->count() !== 0)
-                        <a href="{{ route('my_drama', ['categorize' => 'wantto']) }}">未視聴({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})</a>
+                        <a href="{{ route('my_drama', ['categorize' => 'wantto']) }}">観たい({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})</a>
                     @else
-                        未視聴({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})
+                        観たい({{ Auth::user()->favoritesDrama()->where('want',1)->count() }})
                     @endif
                 </li>
                 <li>
@@ -76,9 +76,9 @@
                 </li>
                 <li>
                     @if(Auth::user()->favoritesDrama()->where('stop',1)->count() !== 0)
-                        <a href="{{ route('my_drama', ['categorize' => 'stop']) }}">視聴断念({{ Auth::user()->favoritesDrama()->where('stop',1)->count() }})</a>
+                        <a href="{{ route('my_drama', ['categorize' => 'stop']) }}">リタイア({{ Auth::user()->favoritesDrama()->where('stop',1)->count() }})</a>
                     @else
-                        視聴断念({{ Auth::user()->favoritesDrama()->where('stop',1)->count() }})
+                        リタイア({{ Auth::user()->favoritesDrama()->where('stop',1)->count() }})
                     @endif
                 </li>
                 <li>

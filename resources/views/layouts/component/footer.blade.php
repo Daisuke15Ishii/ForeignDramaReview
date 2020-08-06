@@ -22,7 +22,7 @@
                         <ul>
                             <li><a href="{{ url('/about') }}">サイト概要</a></li>
                             <li><a href="{{ url('/about/info') }}">お知らせ</a></li>
-                            <li><a href="#">ガイドライン</a></li>
+                            <li><a href="{{ url('/about/manual') }}">マニュアル</a></li>
                             <li><a href="{{ url('/about/terms-of-service/') }}">利用規約等</a></li>
                             <li><a href="{{ url('/about/contact') }}">お問合せ</a></li>
                         </ul>

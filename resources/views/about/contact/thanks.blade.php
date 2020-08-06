@@ -1,7 +1,7 @@
 {{-- layouts/front.blade.phpを読み込む --}}
 @extends('layouts.front')
 
-@section('title', 'お問合せ送信完了')
+@section('title', 'お問合せ送信完了|サイト概要')
 
 @section('content')
     <div class="container">
@@ -17,7 +17,7 @@
                     <p>何卒よろしくお願いいたします。</p>
                     <ul>
                         <li>運営者：だいすけ</li>
-                        <li>所在地：東京都</li>
+                        <li>所在地：埼玉県</li>
                         <li>連絡先：<a href="#">だいすけ</a>(twitter)</a></li>
                     </ul>
                     <a class="" href="{{ url('/') }}"><img src="" alt="トップページに戻る"></a>

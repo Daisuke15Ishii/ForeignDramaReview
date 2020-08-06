@@ -20,7 +20,12 @@ class AboutController extends Controller
         //aboutトップを表示するアクション
         return view('about.info.index');
     }
-    
+
+    public function manual(Request $request){
+        //aboutトップを表示するアクション
+        return view('about.manual.index');
+    }
+
     public function terms_of_service(Request $request){
         //aboutトップを表示するアクション
         return view('about.terms-of-service.index');

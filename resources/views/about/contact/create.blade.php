@@ -1,7 +1,7 @@
 {{-- layouts/front.blade.phpを読み込む --}}
 @extends('layouts.front')
 
-@section('title', 'お問合せ')
+@section('title', 'お問合せ|サイト概要')
 
 @section('content')
     <div class="container">

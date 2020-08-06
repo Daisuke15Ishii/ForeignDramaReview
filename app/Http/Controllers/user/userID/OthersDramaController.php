@@ -16,12 +16,12 @@ use App\User;
 class OthersDramaController extends Controller
 {
     public function index(Request $request, $userID, $categorize){
-        //作品一覧を表示する(すべて、未視聴、視聴中、視聴断念、視聴済、未分類)。
+        //作品一覧を表示する(すべて、観たい、視聴中、リタイア、視聴済、未分類)。
         //お気に入り作品一覧は同コントローラの別アクションにて処理
         $others = User::where('id', $userID)->first();
         $reviews = $others->reviews(); //レビュー投稿した作品。
         
-        //caseにより「すべて」「未視聴」「視聴中」「視聴済」「視聴断念」「未分類」に分岐させる
+        //caseにより「すべて」「観たい」「視聴中」「視聴済」「リタイア」「未分類」に分岐させる
         switch($categorize){
             case "uncategorized":
                 //未分類
@@ -30,15 +30,15 @@ class OthersDramaController extends Controller
                 $categorize = 'uncategorized';
                 break;
             case "wantto":
-                //未視聴
+                //観たい
                 $reviews = $reviews->where('progress', '1');
-                $title = "未視聴の作品";
+                $title = "観たい作品";
                 $categorize = 'wantto';
                 break;
             case "stop":
-                //視聴断念
+                //リタイア
                 $reviews = $reviews->where('progress', '2');
-                $title = "視聴断念の作品";
+                $title = "リタイアした作品";
                 $categorize = 'stop';
                 break;
             case "watching":

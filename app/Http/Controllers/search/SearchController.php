@@ -30,9 +30,9 @@ class SearchController extends Controller
         //タイトルで検索
         if($request->mode == 'modetitle'){
             if ($cond_title != '') {
-                // 検索されたら検索結果(部分一致)を取得する
-                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->orderBy('created_at', 'desc')->Paginate(5);
-                $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->get();
+                // 検索されたら検索結果(部分一致)を取得する(日本語orアルファベット)
+                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->orWhere('title_en', 'LIKE',  "{$cond_title}%")->orderBy('created_at', 'desc')->Paginate(5);
+                $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->orWhere('title_en', 'LIKE',  "{$cond_title}%")->get();
             } else {
                 // それ以外はすべてのドラマを取得する
                 $drama = Drama::orderBy('created_at', 'desc')->Paginate(5);
@@ -72,8 +72,8 @@ class SearchController extends Controller
         $cond_title = $request->cond_title;
         $janres = Janre::all();
         if ($cond_title != '') {
-            // 検索されたら検索結果(前方一致)を取得する
-            $drama = Drama::where('title', 'LIKE',  "{$cond_title}%");
+            // 検索されたら検索結果(前方一致)を取得する(日本語orアルファベット)
+            $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->orWhere('title_en', 'LIKE',  "{$cond_title}%");
         } else {
             // それ以外はすべてのドラマを取得する。
             $drama = Drama::where('title', 'LIKE',  "%");

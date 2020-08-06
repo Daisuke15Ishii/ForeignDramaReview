@@ -55,8 +55,8 @@
                                     <option value="0" @if( $review->progress == 0 ) selected @endif>未分類</option>
                                     <option value="4" @if( $review->progress == 4 ) selected @endif>視聴済</option>
                                     <option value="3" @if( $review->progress == 3 ) selected @endif>視聴中</option>
-                                    <option value="2" @if( $review->progress == 2 ) selected @endif>視聴断念</option>
-                                    <option value="1" @if( $review->progress == 1 ) selected @endif>未視聴</option>
+                                    <option value="2" @if( $review->progress == 2 ) selected @endif>リタイア</option>
+                                    <option value="1" @if( $review->progress == 1 ) selected @endif>観たい</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
