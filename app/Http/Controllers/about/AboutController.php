@@ -17,17 +17,17 @@ class AboutController extends Controller
     }
     
     public function info(Request $request){
-        //aboutトップを表示するアクション
+        //お知らせページを表示するアクション
         return view('about.info.index');
     }
 
     public function manual(Request $request){
-        //aboutトップを表示するアクション
+        //マニュアルページを表示するアクション
         return view('about.manual.index');
     }
 
     public function terms_of_service(Request $request){
-        //aboutトップを表示するアクション
+        //利用規約等を表示するアクション
         return view('about.terms-of-service.index');
     }
     
