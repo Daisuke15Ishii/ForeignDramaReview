@@ -64,20 +64,22 @@
                                     @endif
                                 </div>
                                 <div class="">
-                                    <a class="btn btn-link" href="#">
+                                    <a class="btn btn-link" href="{{ route('register') }}">
                                         アカウント登録がまだお済みでない人はこちら
                                     </a>
                                 </div>
                             </div>
                         </div>
-
+                        
+                        {{-- パスワードリセット保留 --}}
+                        
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('messages.Login') }}
                                 </button>
                             </div>
-                        </div>
+                        </div>                        
                     </form>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', '洋ドラ会議(仮)')
+@section('title', 'TOP')
 
 @section('content')
     <div class="container">

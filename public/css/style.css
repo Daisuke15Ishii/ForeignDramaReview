@@ -31,3 +31,15 @@ img {
     color: red;
 }
 
+/* これより上は臨時で設定(後でSASSに書き直す)、これより下はSASS記述時の画面確認用(同時にSASSに記述し、後で削除予定) */
+
+body {
+  background-color: #fff; /* 白色 */
+  color: #000000;
+}
+
+.header-top{
+    background-color: #ffad50;
+    color: #fff;
+}
+

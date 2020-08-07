@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+body {
+  background-color: #fff;
+  /* 白色 */
+  color: #000000;
+  padding-top: 60px;
+  /* navをfixed-topにする場合必要 */
+}
+
+nav {
+  /* 適用されないので保留(htmlベタ打ち)*/
+}
+
+nav .bg-orange {
+  background-color: #ffad50 !important;
+  color: #fff !important;
+}
+
+.login-out {
+  padding: 0.05rem 0.5rem;
+  border-radius: 2rem;
+  background-color: #fff;
+  color: #000;
+  border: solid 1.5px #44558f;
+  font-weight: bold;
+}
+
+header p {
+  display: inline-block;
+  margin: 3px 0.25rem 3px 0;
+}
+
+header .header-search-group {
+  display: flex;
+}
+
+header .header-search-select {
+  /* bootstrapのform-control-smとほぼ同じ*/
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+header .header-search-input {
+  width: 100%;
+}
+
+.titlerogo {
+  width: 234px;
+  height: auto;
+}
+
+.bg-maincolor {
+  background-color: #ffad50;
+}
+
+.footer-bottom {
+  background-color: #000;
+  color: #fff;
+}
+
