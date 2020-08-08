@@ -1,0 +1,116 @@
+$main_color: #ffad50;
+$sub_color: #e6f7f7;
+$white: #fff;
+$black: #000;
+$darkgray: #707070; /* 主に枠線 */
+$lightgray: #F1F3F5; /* 主に枠中 */
+$skin: #FFF6E7; /* 他ユーザーの背景色 */
+
+
+body {
+  background-color: $white;
+  color: $black;
+  padding-top: 60px;  /* navをfixed-topにする場合必要 */
+  line-height: 1.2rem;
+}
+p{
+  margin-bottom: 0.8rem;
+}
+
+.bg-orange{
+  background-color: $main_color;
+  color: $black;
+  font-weight: bold;
+  li,a{
+    color: $black !important;
+  }
+}
+
+
+.login-out{
+  padding:0.05rem 0.5rem;
+  border-radius:2rem;
+  background-color: $white;
+  color: $black;
+  border:solid 1.5px #44558f;
+  font-weight: bold;
+  &:hover,:focus{
+    text-decoration: none;
+  }
+}
+
+header{
+  p{
+    display: inline-block;
+    margin:3px 0.25rem 3px 0;
+  }
+  .header-search-group{
+    display:flex;
+  }
+  .header-search-select{
+    /* bootstrapのform-control-smとほぼ同じ*/
+    height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+  }
+  .header-search-input{
+    width: 100%;
+  }
+}
+
+.titlerogo{
+  width: 234px;
+  height: auto;
+}
+
+.bg-maincolor{
+  background-color: $main-color;
+}
+
+.bg-otherscolor{
+  background-color: $skin;
+}
+
+.footer-bottom{
+  background-color: $black;
+  color: $white;
+}
+
+
+
+/* 下記は後でどこかに転記予定(作成中に仮でstyle.cssに記述していたもの) */
+
+img {
+  width: 100%;
+}
+
+.star {
+    height: 1.1em;
+    width: auto;
+}
+
+.like {
+    height: 1.5em;
+    width: auto;
+}
+
+.person {
+    width: 80%;
+}
+
+.mypageDrama{
+    height: 45;
+    width: 60;
+}
+
+.favorite{
+    height: auto;
+    width: 30px;
+}
+
+.spoiler_alert{
+    font: bold;
+    color: red;
+}

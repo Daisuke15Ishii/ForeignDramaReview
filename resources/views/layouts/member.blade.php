@@ -1,4 +1,4 @@
-@include('layouts.component.header')
+@include('layouts.component.header', ['bgcolor' => 'none'])
         <main class="py-4">
             <div class="container">
                 <div class="row p-0 m-0">
@@ -14,7 +14,6 @@
                 </div>
             </div>
         </main>
-        
         @include('layouts.component.footer')
     </body>
 </html>      

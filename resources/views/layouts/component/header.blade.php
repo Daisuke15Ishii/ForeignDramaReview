@@ -18,49 +18,49 @@
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css" />
 
-        {{-- Laravel標準で用意されているCSSを読み込みます --}}
+        {{-- Laravel標準で用意されているCSS＋自分で作成したSCSS --}}
         <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
-        
-        {{-- この章の後半で作成するCSSを読み込みます --}}
-        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
-
-        {{-- 取り合えず仮で --}}
-        <link rel="stylesheet" href="{{ secure_asset('css/member.css') }}">
 
     </head>
-    <body>
+    @if($bgcolor == 'none')
+        <body>
+    @else
+        <body class="bg-otherscolor">
+    @endif
         {{-- ナビゲーションバー --}}
-        <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color:#ffad50;">
-            <a class="navbar-brand" href="{{ url('/') }}">洋ドラ会議</a>
-            <span class="navbar-text">
-                @auth
-                    <a href="{{ url('/user/mypage') }}" class="login-out">マイページ</a>
-                @else
-                    <a  href="{{ route('login') }}" class="login-out">ログイン</a>
-                @endauth
-            </span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navimenu" aria-controls="navimenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navimenu">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">トップページ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('search\SearchController@index') }}">作品条件検索</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('review_index') }}">最新レビュー</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ranking_index') }}">おすすめドラマ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/about') }}">サイト情報</a>
-                    </li>
-                </ul>
+        <nav class="navbar navbar-expand-md navbar-light bg-orange fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">洋ドラ会議</a>
+                <span class="navbar-text">
+                    @auth
+                        <a href="{{ url('/user/mypage') }}" class="login-out">マイページ</a>
+                    @else
+                        <a  href="{{ route('login') }}" class="login-out">ログイン</a>
+                    @endauth
+                </span>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navimenu" aria-controls="navimenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse justify-content-end" id="navimenu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">トップページ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ action('search\SearchController@index') }}">作品条件検索</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('review_index') }}">最新レビュー</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('ranking_index') }}">おすすめドラマ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/about') }}">サイト情報</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
