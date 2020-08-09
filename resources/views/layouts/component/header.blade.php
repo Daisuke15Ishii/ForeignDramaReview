@@ -21,6 +21,10 @@
         {{-- Laravel標準で用意されているCSS＋自分で作成したSCSS --}}
         <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
 
+        {{-- 後で削除予定(仮) --}}
+        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
+
+
     </head>
     @if($bgcolor == 'none')
         <body>

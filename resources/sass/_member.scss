@@ -6,7 +6,6 @@ $darkgray: #707070; /* 主に枠線 */
 $lightgray: #F1F3F5; /* 主に枠中 */
 $skin: #FFF6E7; /* 他ユーザーの背景色 */
 
-
 body {
   background-color: $white;
   color: $black;
@@ -34,6 +33,9 @@ p{
   color: $black;
   border:solid 1.5px #44558f;
   font-weight: bold;
+  @media(max-width: 992px) {
+    font-size: 90%; /* ボタン内の文字折返しを回避 */
+  }
   &:hover,:focus{
     text-decoration: none;
   }
@@ -79,38 +81,54 @@ header{
 }
 
 
-
-/* 下記は後でどこかに転記予定(作成中に仮でstyle.cssに記述していたもの) */
-
-img {
-  width: 100%;
+/* 下記はfront(search.index)のcss */
+.content-frame{
+  border: solid 1px $darkgray;
+  background-color: $lightgray;
+  padding: 0;
+  .content-title{
+    background-color: $main_color;
+    color: $white;
+    margin-bottom: 0.4rem;
+    text-align: center;
+    padding: 0.2rem 1rem;
+    border-bottom: solid 1px $darkgray;
+  }
+  .main-content{
+    padding: 8px 2px 8px 4px;
+  }
+  p{
+    margin-bottom: 0.3rem;
+  }
 }
 
-.star {
-    height: 1.1em;
-    width: auto;
+
+/* 下記はsearch.indexのcss */
+
+.original-form-control{
+  /* bootstrapのform-controlから「display:block,width:100%」を除外したcss  */
+  height: calc(1.6em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.like {
-    height: 1.5em;
-    width: auto;
+.janre-check{
+  margin-right: 0.5rem;
 }
 
-.person {
-    width: 80%;
-}
-
-.mypageDrama{
-    height: 45;
-    width: 60;
-}
-
-.favorite{
-    height: auto;
-    width: 30px;
-}
-
-.spoiler_alert{
-    font: bold;
-    color: red;
+.form-group{
+  label,p{
+    padding-right: 0 !important;
+  }
+  select,input{
+    padding-left: 0 !important;
+  }
 }

@@ -1,0 +1,32 @@
+img {
+  width: 100%;
+}
+
+.star {
+    height: 1.1em;
+    width: auto;
+}
+
+.like {
+    height: 1.5em;
+    width: auto;
+}
+
+.person {
+    width: 80%;
+}
+
+.mypageDrama{
+    height: 45;
+    width: 60;
+}
+
+.favorite{
+    height: auto;
+    width: 30px;
+}
+
+.spoiler_alert{
+    font: bold;
+    color: red;
+}
