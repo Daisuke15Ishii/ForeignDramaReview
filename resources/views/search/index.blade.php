@@ -171,7 +171,7 @@
 
             <div class="form-group row">
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-accent-color large-text">
                         検索開始
                     </button>
                 </div>

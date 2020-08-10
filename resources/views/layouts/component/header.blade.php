@@ -119,7 +119,7 @@
                                         <input type="text" class="header-search-select header-search-input" name="cond_title" value="" autocomplete="cond_title">
                                     </div>
                                     <div class="col-2 mx-0 px-0">
-                                        <button type="submit" class="btn btn-primary">検索</button>
+                                        <button type="submit" class="btn btn-accent-color">検索</button>
                                     </div>
                                 </form>
                             </div>

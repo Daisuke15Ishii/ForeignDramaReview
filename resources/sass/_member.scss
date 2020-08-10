@@ -1,11 +1,20 @@
-$main_color: #ffad50;
-$sub_color: #e6f7f7;
+$main_color: #faac64;
+$main_color-light: #F1E9E0; /* メインカラーより薄め(枠内背景色) */
+$sub_color: #e6efbf;
+$accent-color: #4ac3be;
+$sub-accent-color: #a3dec9;
 $white: #fff;
 $black: #000;
 $darkgray: #707070; /* 主に枠線 */
-$lightgray: #F1F3F5; /* 主に枠中 */
+$lightgray: #F1F3F5; /* 主に枠内枠内背景 */
 $skin: #FFF6E7; /* 他ユーザーの背景色 */
+$pink: #FF00BC; /* 総合得点(強調) */
+$star: #25e450; /* 評点のスター色 */ 
+$favorite: #faac64; /* お気に入り登録ボタン色 */
+$delete-color: #707070;
 
+
+/* 主にbody,header,footer全般  */
 body {
   background-color: $white;
   color: $black;
@@ -25,7 +34,6 @@ p{
   }
 }
 
-
 .login-out{
   padding:0.05rem 0.5rem;
   border-radius:2rem;
@@ -36,7 +44,9 @@ p{
   @media(max-width: 992px) {
     font-size: 90%; /* ボタン内の文字折返しを回避 */
   }
-  &:hover,:focus{
+  &:hover,:focus,:active,:disabled{
+    background-color: $white;
+    color: $black;
     text-decoration: none;
   }
 }
@@ -50,12 +60,14 @@ header{
     display:flex;
   }
   .header-search-select{
-    /* bootstrapのform-control-smとほぼ同じ*/
-    height: calc(1.5em + 0.5rem + 2px);
-    padding: 0.25rem 0.5rem;
-    font-size: 0.7875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
+    /* bootstrapのform-controlとほぼ同じ*/
+    height: calc(1.6em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
   }
   .header-search-input{
     width: 100%;
@@ -81,7 +93,7 @@ header{
 }
 
 
-/* 下記はfront(search.index)のcss */
+/* 下記はfront全般のcss */
 .content-frame{
   border: solid 1px $darkgray;
   background-color: $lightgray;
@@ -104,7 +116,6 @@ header{
 
 
 /* 下記はsearch.indexのcss */
-
 .original-form-control{
   /* bootstrapのform-controlから「display:block,width:100%」を除外したcss  */
   height: calc(1.6em + 0.75rem + 2px);
@@ -130,5 +141,184 @@ header{
   }
   select,input{
     padding-left: 0 !important;
+  }
+}
+
+.btn-accent-color{
+  border: solid 1.2px $darkgray;
+  background-color: $accent-color;
+  color: $white;
+  &:hover,:focus,:active,:disabled{
+    background-color: $accent-color;
+    color: $white;
+  }
+  a{
+    color: $white;
+    &:hover,:focus,:active,:disabled{
+      background-color: $accent-color;
+      color: $white;
+    }
+  }
+}
+
+
+/* ペジネーションのデザイン */
+.page-link{
+  color: $accent-color;
+}
+
+.page-item.active{
+  .page-link{
+    background-color: $accent-color;
+    color: $white;
+    border: 1px solid $accent-color;
+  }  
+}
+
+.not-pc{
+  /* pc画面では非表示 */
+  @media(min-width: 576px){
+    display: none !important;
+  }
+}
+
+.pagination{
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+
+/* headerからほぼそのままコピー */
+.order-group{
+  display:flex;
+}
+.order-select{
+  /* bootstrapのform-controlとほぼ同じ*/
+  height: calc(1.6em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+
+/* dramaindexのcss*/
+.dramaindex-frame{
+  border: solid 2px $black;
+  background-color: $main-color-light;
+  h2{
+    a{
+      text-decoration: underline solid;
+    }
+  }
+}
+
+.eyecatch{
+  /*
+  width: 190px;
+  height: 260px;
+  */
+  width: 100%;
+  overflow: hidden;
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+.large-text{
+  /* h3と同じフォントサイズ */
+  font-size: 1.575rem;
+  display:inline;
+}
+
+.total-evaluation{
+  color: $pink;
+}
+
+.btn-register{
+  /* bootstrap「btn」から引用。登録関連のボタン*/
+  display: inline-block;
+  font-weight: 500;
+  color: $white;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-radius: 3rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.icon-total-evaluation{
+  height: 26px;
+  width: auto;
+}
+.bg-evaluation{
+  background-color: $lightgray;
+}
+
+blockquote{
+  margin: 0 0 0 0.3rem;
+  padding: 0 0 0 0.1rem;
+}
+.index-quote{
+  margin: 0 0 0 15px;
+  padding: 0 0 0 0.1rem;
+}
+
+.btn-favorite-color{
+  border: solid 1.2px $darkgray;
+  background-color: $favorite;
+  color: $white;
+  &:hover,:focus,:active,:disabled{
+    background-color: $favorite;
+    color: $white;
+  }
+  a{
+    color: $white;
+    &:hover,:focus,:active,:disabled{
+      background-color: $favorite;
+      color: $white;
+    }
+  }
+}
+
+.btn-delete-color{
+  border: solid 1.2px $darkgray;
+  background-color: $delete-color;
+  color: $white;
+  &:hover,:focus,:active,:disabled{
+    background-color: $delete-color;
+    color: $white;
+  }
+  a{
+    color: $white;
+    &:hover,:focus,:active,:disabled{
+      background-color: $delete-color;
+      color: $white;
+    }
+  }
+}
+
+
+/* どこかで使うが保留 */
+.submit-btn{
+  padding: 0.5rem 1.2rem;
+  margin: 0.6rem 0.8rem;
+  border: solid 1.2px $darkgray;
+  border-radius: 3rem;
+  background-color: $accent-color;
+  color: $white;
+  font-size: 1.575rem;
+  &:hover,:focus,:active,:disabled{
+    background-color: $accent-color;
+    color: $white;
   }
 }

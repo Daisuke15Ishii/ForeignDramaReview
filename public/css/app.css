@@ -11008,11 +11008,21 @@ a.text-dark:focus {
   }
 }
 
+/* メインカラーより薄め(枠内背景色) */
+
 /* 主に枠線 */
 
-/* 主に枠中 */
+/* 主に枠内枠内背景 */
 
 /* 他ユーザーの背景色 */
+
+/* 総合得点(強調) */
+
+/* 評点のスター色 */
+
+/* お気に入り登録ボタン色 */
+
+/* 主にbody,header,footer全般  */
 
 body {
   background-color: #fff;
@@ -11027,7 +11037,7 @@ p {
 }
 
 .bg-orange {
-  background-color: #ffad50;
+  background-color: #faac64;
   color: #000;
   font-weight: bold;
 }
@@ -11054,7 +11064,11 @@ p {
 }
 
 .login-out:hover,
-.login-out :focus {
+.login-out :focus,
+.login-out :active,
+.login-out :disabled {
+  background-color: #fff;
+  color: #000;
   text-decoration: none;
 }
 
@@ -11068,12 +11082,14 @@ header .header-search-group {
 }
 
 header .header-search-select {
-  /* bootstrapのform-control-smとほぼ同じ*/
-  height: calc(1.5em + 0.5rem + 2px);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.7875rem;
-  line-height: 1.5;
-  border-radius: 0.2rem;
+  /* bootstrapのform-controlとほぼ同じ*/
+  height: calc(1.6em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
 }
 
 header .header-search-input {
@@ -11086,7 +11102,7 @@ header .header-search-input {
 }
 
 .bg-maincolor {
-  background-color: #ffad50;
+  background-color: #faac64;
 }
 
 .bg-otherscolor {
@@ -11098,7 +11114,7 @@ header .header-search-input {
   color: #fff;
 }
 
-/* 下記はfront(search.index)のcss */
+/* 下記はfront全般のcss */
 
 .content-frame {
   border: solid 1px #707070;
@@ -11107,7 +11123,7 @@ header .header-search-input {
 }
 
 .content-frame .content-title {
-  background-color: #ffad50;
+  background-color: #faac64;
   color: #fff;
   margin-bottom: 0.4rem;
   text-align: center;
@@ -11154,11 +11170,219 @@ header .header-search-input {
   padding-left: 0 !important;
 }
 
-.form-group .season {
-  /* col-form-labelと同じにして上下揃える*/
-  padding-top: calc(0.375rem + 1px);
-  padding-bottom: calc(0.375rem + 1px);
-  margin-bottom: 0;
+.btn-accent-color {
+  border: solid 1.2px #707070;
+  background-color: #4ac3be;
+  color: #fff;
+}
+
+.btn-accent-color:hover,
+.btn-accent-color :focus,
+.btn-accent-color :active,
+.btn-accent-color :disabled {
+  background-color: #4ac3be;
+  color: #fff;
+}
+
+.btn-accent-color a {
+  color: #fff;
+}
+
+.btn-accent-color a:hover,
+.btn-accent-color a :focus,
+.btn-accent-color a :active,
+.btn-accent-color a :disabled {
+  background-color: #4ac3be;
+  color: #fff;
+}
+
+/* ペジネーションのデザイン */
+
+.page-link {
+  color: #4ac3be;
+}
+
+.page-item.active .page-link {
+  background-color: #4ac3be;
+  color: #fff;
+  border: 1px solid #4ac3be;
+}
+
+.not-pc {
+  /* pc画面では非表示 */
+}
+
+@media (min-width: 576px) {
+  .not-pc {
+    display: none !important;
+  }
+}
+
+.pagination {
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+/* headerからほぼそのままコピー */
+
+.order-group {
+  display: flex;
+}
+
+.order-select {
+  /* bootstrapのform-controlとほぼ同じ*/
+  height: calc(1.6em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+/* dramaindexのcss*/
+
+.dramaindex-frame {
+  border: solid 2px #000;
+  background-color: #F1E9E0;
+}
+
+.dramaindex-frame h2 a {
+  -webkit-text-decoration: underline solid;
+          text-decoration: underline solid;
+}
+
+.eyecatch {
+  /*
+  width: 190px;
+  height: 260px;
+  */
+  width: 100%;
+  overflow: hidden;
+}
+
+.eyecatch img {
+  width: 100%;
+  height: auto;
+}
+
+.large-text {
+  /* h3と同じフォントサイズ */
+  font-size: 1.575rem;
+  display: inline;
+}
+
+.total-evaluation {
+  color: #FF00BC;
+}
+
+.btn-register {
+  /* bootstrap「btn」から引用。登録関連のボタン*/
+  display: inline-block;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-radius: 3rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.icon-total-evaluation {
+  height: 26px;
+  width: auto;
+}
+
+.bg-evaluation {
+  background-color: #F1F3F5;
+}
+
+blockquote {
+  margin: 0 0 0 0.3rem;
+  padding: 0 0 0 0.1rem;
+}
+
+.index-quote {
+  margin: 0 0 0 15px;
+  padding: 0 0 0 0.1rem;
+}
+
+.btn-favorite-color {
+  border: solid 1.2px #707070;
+  background-color: #faac64;
+  color: #fff;
+}
+
+.btn-favorite-color:hover,
+.btn-favorite-color :focus,
+.btn-favorite-color :active,
+.btn-favorite-color :disabled {
+  background-color: #faac64;
+  color: #fff;
+}
+
+.btn-favorite-color a {
+  color: #fff;
+}
+
+.btn-favorite-color a:hover,
+.btn-favorite-color a :focus,
+.btn-favorite-color a :active,
+.btn-favorite-color a :disabled {
+  background-color: #faac64;
+  color: #fff;
+}
+
+.btn-delete-color {
+  border: solid 1.2px #707070;
+  background-color: #707070;
+  color: #fff;
+}
+
+.btn-delete-color:hover,
+.btn-delete-color :focus,
+.btn-delete-color :active,
+.btn-delete-color :disabled {
+  background-color: #707070;
+  color: #fff;
+}
+
+.btn-delete-color a {
+  color: #fff;
+}
+
+.btn-delete-color a:hover,
+.btn-delete-color a :focus,
+.btn-delete-color a :active,
+.btn-delete-color a :disabled {
+  background-color: #707070;
+  color: #fff;
+}
+
+/* どこかで使うが保留 */
+
+.submit-btn {
+  padding: 0.5rem 1.2rem;
+  margin: 0.6rem 0.8rem;
+  border: solid 1.2px #707070;
+  border-radius: 3rem;
+  background-color: #4ac3be;
+  color: #fff;
+  font-size: 1.575rem;
+}
+
+.submit-btn:hover,
+.submit-btn :focus,
+.submit-btn :active,
+.submit-btn :disabled {
+  background-color: #4ac3be;
+  color: #fff;
 }
 
 /* sidebar関連 */
