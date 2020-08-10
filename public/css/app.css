@@ -11132,7 +11132,7 @@ header .header-search-input {
 }
 
 .content-frame .main-content {
-  padding: 8px 2px 8px 4px;
+  padding: 8px 4px 8px 4px;
 }
 
 .content-frame p {
@@ -11365,6 +11365,22 @@ blockquote {
   color: #fff;
 }
 
+/* dramaID.indexのcss*/
+
+.icon-evaluation {
+  height: 1rem;
+  width: auto;
+}
+
+.list-horizontal {
+  margin-bottom: 0.5rem;
+}
+
+.list-horizontal-item {
+  display: inline-block;
+  margin: 0.25rem 1rem 0.25rem 1rem;
+}
+
 /* どこかで使うが保留 */
 
 .submit-btn {
@@ -11383,6 +11399,19 @@ blockquote {
 .submit-btn :disabled {
   background-color: #4ac3be;
   color: #fff;
+}
+
+.summary dt {
+  float: left;
+  width: 80px;
+}
+
+.summary dt dd {
+  margin: 0 0.25rem 0 1rem;
+}
+
+.summary .story {
+  width: 100%;
 }
 
 /* sidebar関連 */

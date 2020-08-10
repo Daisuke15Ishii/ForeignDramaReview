@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-11 mx-auto">
                         @foreach($scores as $score )
-                            @include('layouts.component.rankingindex')
+                            @include('layouts.component.dramaindex', ['drama' => $score->drama()->first()])
                         @endforeach
                         <p style="text-align: right"><a href="{{ route('ranking_index') }}">おすすめドラマ一覧へ</a></p>
                     </div>

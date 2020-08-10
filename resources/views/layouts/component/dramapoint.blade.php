@@ -1,119 +1,91 @@
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="">
-                            <p class="eyecatch overflow-hidden col-md-12"><img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}"></p>
-                        </div>
-                        <small>&copy; {{ $drama->copyright }}</small>
-                        <p>タイトル：<cite>{{ $drama->title }}({{ $drama->title_en }})</cite></p>
-                        <p>出演者：{{ $drama->cast1 }}、{{ $drama->cast2 }}、{{ $drama->cast3 }}</p>
-                        <p>監督等：{{ $drama->staff }}</p>
-                        <p>国：{{ $drama->country }}</p>
-                            <?php $date = $drama->onair; ?>
-                        @if($date)
-                            <p>{{ date('放映日：Y年m月～', strtotime($date)) }}</p>
-                        @else
-                            <p>放映日： 年 月～</p>
-                        @endif
-                        <p>話数：全{{ $drama->number }}話</p>
-                        <p>ジャンル：
-                            @foreach($drama->janre()->get() as $janre)
-                                {{ $janre->janre }}
-                            @endforeach
-                        </p>
-                    </div>
-                    <div class="col-md-9 bg-warning">
-                        <div class="row">
-                            <div class="col-md-12 mx-auto">
-                                <h2>総合評価：
-                                    {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
-                                    @if($drama->reviews()->count('total_evaluation') !== 0)
-                                        <span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('total_evaluation')) }}点<img src="#" alt="★評価"></span>
-                                    @else
-                                        <span class="bg-secondary">--点<img src="#" alt="★評価"></span>
-                                    @endif
-                                </h2>
-                                @include('layouts.component.mydrama-set')
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mx-auto">
-                                @if($drama->reviews()->count('total_evaluation') !== 0)
-                                    総合評価の中央値：<span class="bg-secondary">{{ $drama->reviews()->get()->median('total_evaluation') }}点</span>(レビュー評価数：{{ $drama->reviews()->count('total_evaluation') }}人)
-                                @else
-                                    総合評価の中央値：<span class="bg-secondary">--点</span>(レビュー評価数：0人)
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row">
-                            {{-- 下記の各項目評価の表示は、点数によって星の個数で表現。数字で仮表示 --}}
-                            <div class="col-md-4">
-                                <p>シナリオの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('story_evaluation')) }}<img class="star" src="{{ secure_asset('/images/star_yellow.png') }}" alt="★評価"></span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>演者の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('cast_evaluation')) }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>映像美の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('visual_evaluation')) }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>世界観の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('world_evaluation')) }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>キャラの評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('char_evaluation')) }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>音楽の評価：<span class="bg-secondary">{{ sprintf('%.2f', $drama->reviews()->avg('music_evaluation')) }}<img src="#" alt="★評価"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>作品登録者数：<span class="bg-secondary">{{ $drama->favorites()->count() }}人</span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>お気に入り登録者数：<span class="bg-secondary">{{ $drama->favorites()->where('favorite',1)->count() }}人</span></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>総合評価ランキング：<span class="bg-secondary">{{ $drama->score()->first()->rank_average_total_evaluation }}位</span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>作品成分分類</h3>
-                                <ul>
-                                    @if($previous_require = $drama->reviews()->where('previous',2)->count() !== 0)
-                                        <li>必須：<span class="bg-secondary">{{ sprintf('%.1f', $previous_require = $drama->reviews()->where('previous',2)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
-                                    @else
-                                        <li>必須：<span class="bg-secondary">0%</span></li>
-                                    @endif
-                                    @if($previous_require = $drama->reviews()->where('previous',1)->count() !== 0)
-                                        <li>観た方が良い：<span class="bg-secondary">{{ sprintf('%.1f', $previous_better = $drama->reviews()->where('previous',1)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
-                                    @else
-                                        <li>観た方が良い：<span class="bg-secondary">0%</span></li>
-                                    @endif
-                                    @if($previous_require = $drama->reviews()->where('previous',0)->count() !== 0)
-                                        <li>不要：<span class="bg-secondary">{{ sprintf('%.1f', $previous_no = $drama->reviews()->where('previous',0)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
-                                    @else
-                                        <li>不要：<span class="bg-secondary">0%</span></li>
-                                    @endif
-                                </ul>
-                            </div>
-                        </div>
-                        @guest
-                            <a href="{{ route('login') }}"><button>レビューを書く！</button></a>
-                        @else
-                            {{-- レビューを既に投稿したか判定 --}}
-                            @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
-                                <a href="{{ route('review_add', ['drama_id' => $drama->id]) }}"><button>レビューを書く！</button></a>
-                            @else
-                                <button>
-                                    <a href="{{ route('review_edit', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}">レビューを編集する！</a>
-                                </button>
-                                <button>
-                                    <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $drama->id, 'review_id' => $drama->reviews()->where('user_id',Auth::user()->id)->first()->id]) }}">レビュー削除(マイページから除外)</a>
-                                </button>
-                            @endif
-                        @endguest
-                    </div>
-                </div>
+<div class="row mb-4 p-2">
+    <div class="col-md-3 py-1">
+        <p class="eyecatch">
+            <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
+        </p>
+        <small>&copy; {{ $drama->copyright }}</small>
+        <p>タイトル：<cite>{{ $drama->title }} シーズン{{ $drama->season }}({{ $drama->title_en }})</cite></p>
+    </div>
+    <div class="col-md-9 dramaindex-frame">
+        <div class="row mb-0">
+            <div class="col-12 mx-auto mb-2 pt-2">
+                <h2>レビュー統計</h2>
+            </div>
+            {{-- ここから下はほぼsearch.result.indexと同様なのでパーツ化検討 --}}
+            <div class="col-lg-4 col-md-5 col-12 order-md-2 mb-2">
+                @include('layouts.component.mydrama-set')
+            </div>
+            <div class="col-lg-8 col-md-7 col-12 order-md-1 mb-2">
+                <p class="large-text">
+                    総合評価：
+                    {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
+                    @if($drama->reviews()->count('total_evaluation') !== 0)
+                        <span class="total-evaluation font-weight-bold bg-evaluation">{{ sprintf('%.2f', $drama->score()->first()->average_total_evaluation) }}点
+                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  $drama->score()->first()->average_total_evaluation])</span>
+                    @else
+                        <span class="total-evaluation font-weight-bold bg-evaluation">--点
+                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  '0'])</span>
+                    @endif
+                </p>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-lg-8 mb-1">
+                <p>
+                    総合評価の中央値：<span class="font-weight-bold bg-evaluation">
+                    @if($drama->reviews()->count('total_evaluation') !== 0)
+                        {{ $drama->score()->first()->median_total_evaluation }}点</span>(レビュー評価数：{{ $drama->reviews()->count('total_evaluation') }}人)
+                    @else
+                        --点</span>(レビュー評価数：0人)
+                    @endif
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <p>総合評価ランキング：<span class="total-evaluation font-weight-bold bg-evaluation">{{ $drama->score()->first()->rank_average_total_evaluation }}位</span></p>
+            </div>
+        </div>
+        
+        <div class="row mx-0 mb-2">
+            {{-- 下記の各項目評価の表示は、点数によって星アイコンが増減 --}}
+            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('story_evaluation'), 'item' => 'シナリオ', 'order' => 'order-md-1'])
+            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('world_evaluation'), 'item' => '世界観', 'order' => 'order-md-3'])
+            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('cast_evaluation'), 'item' => '演者', 'order' => 'order-md-5'])
+            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('char_evaluation'), 'item' => 'キャラ', 'order' => 'order-md-2'])
+            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('visual_evaluation'), 'item' => '映像美', 'order' => 'order-md-4'])
+            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('music_evaluation'), 'item' => '音楽', 'order' => 'order-md-6'])
+            <div class="col-lg-6 mb-1 order-md-7">
+                <p>作品登録者数：<span class="total-evaluation font-weight-bold bg-evaluation">{{ $drama->favorites()->count() }}人</span></p>
+            </div>
+            <div class="col-lg-6 mb-1 order-md-8">
+                <p>お気に入り登録者数：<span class="total-evaluation font-weight-bold bg-evaluation">{{ $drama->favorites()->where('favorite',1)->count() }}人</span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="large-text mb-2">前作視聴</p>
+                <ul class="list-horizontal">
+                    @if($previous_require = $drama->reviews()->where('previous',2)->count() !== 0)
+                        <li class="list-horizontal-item">必須：<span class="font-weight-bold bg-evaluation">{{ sprintf('%.1f', $previous_require = $drama->reviews()->where('previous',2)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                    @else
+                        <li class="list-horizontal-item">必須：<span class="font-weight-bold bg-evaluation">0%</span></li>
+                    @endif
+                    @if($previous_require = $drama->reviews()->where('previous',1)->count() !== 0)
+                        <li class="list-horizontal-item">観た方が良い：<span class="font-weight-bold bg-evaluation">{{ sprintf('%.1f', $previous_better = $drama->reviews()->where('previous',1)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                    @else
+                        <li class="list-horizontal-item">観た方が良い：<span class="font-weight-bold bg-evaluation">0%</span></li>
+                    @endif
+                    @if($previous_require = $drama->reviews()->where('previous',0)->count() !== 0)
+                        <li class="list-horizontal-item">不要：<span class="font-weight-bold bg-evaluation">{{ sprintf('%.1f', $previous_no = $drama->reviews()->where('previous',0)->count() * 100 / $drama->reviews()->whereIn('previous',[0,1,2])->count()) }}%</span></li>
+                    @else
+                        <li class="list-horizontal-item">不要：<span class="font-weight-bold bg-evaluation">0%</span></li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12 text-right">
+                @include('layouts.component.createbutton', ['delete' => 'on'])
+            </div>
+        </div>
+    </div>
+</div>

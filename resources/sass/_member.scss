@@ -107,7 +107,7 @@ header{
     border-bottom: solid 1px $darkgray;
   }
   .main-content{
-    padding: 8px 2px 8px 4px;
+    padding: 8px 4px 8px 4px;
   }
   p{
     margin-bottom: 0.3rem;
@@ -306,6 +306,35 @@ blockquote{
     }
   }
 }
+
+
+/* dramaID.indexのcss*/
+.icon-evaluation{
+  height: 1rem;
+  width: auto;
+}
+
+.list-horizontal{
+  margin-bottom: 0.5rem;
+}
+.list-horizontal-item{
+  display: inline-block;
+  margin: 0.25rem 1rem 0.25rem 1rem;
+}
+
+.summary{
+  dt{
+    float: left;
+    width: 80px;
+    dd{
+      margin: 0 0.25rem 0 1rem;
+    }
+  }
+  .story{
+    width: 100%;
+  }
+}
+
 
 
 /* どこかで使うが保留 */
