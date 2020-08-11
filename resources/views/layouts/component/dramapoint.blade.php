@@ -1,7 +1,9 @@
 <div class="row mb-4 p-2">
     <div class="col-md-3 py-1">
         <p class="eyecatch">
-            <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
+            <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
+                <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
+            </a>
         </p>
         <small>&copy; {{ $drama->copyright }}</small>
         <p>タイトル：<cite>{{ $drama->title }} シーズン{{ $drama->season }}({{ $drama->title_en }})</cite></p>
@@ -47,12 +49,12 @@
         
         <div class="row mx-0 mb-2">
             {{-- 下記の各項目評価の表示は、点数によって星アイコンが増減 --}}
-            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('story_evaluation'), 'item' => 'シナリオ', 'order' => 'order-md-1'])
-            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('world_evaluation'), 'item' => '世界観', 'order' => 'order-md-3'])
-            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('cast_evaluation'), 'item' => '演者', 'order' => 'order-md-5'])
-            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('char_evaluation'), 'item' => 'キャラ', 'order' => 'order-md-2'])
-            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('visual_evaluation'), 'item' => '映像美', 'order' => 'order-md-4'])
-            @include('layouts.component.evaluation', ['evaluation' =>  $drama->reviews()->avg('music_evaluation'), 'item' => '音楽', 'order' => 'order-md-6'])
+            @include('layouts.component.evaluationdisplay', ['evaluation' =>  $drama->reviews()->avg('story_evaluation'), 'item' => 'シナリオ', 'order' => 'order-md-1'])
+            @include('layouts.component.evaluationdisplay', ['evaluation' =>  $drama->reviews()->avg('world_evaluation'), 'item' => '世界観', 'order' => 'order-md-3'])
+            @include('layouts.component.evaluationdisplay', ['evaluation' =>  $drama->reviews()->avg('cast_evaluation'), 'item' => '演者', 'order' => 'order-md-5'])
+            @include('layouts.component.evaluationdisplay', ['evaluation' =>  $drama->reviews()->avg('char_evaluation'), 'item' => 'キャラ', 'order' => 'order-md-2'])
+            @include('layouts.component.evaluationdisplay', ['evaluation' =>  $drama->reviews()->avg('visual_evaluation'), 'item' => '映像美', 'order' => 'order-md-4'])
+            @include('layouts.component.evaluationdisplay', ['evaluation' =>  $drama->reviews()->avg('music_evaluation'), 'item' => '音楽', 'order' => 'order-md-6'])
             <div class="col-lg-6 mb-1 order-md-7">
                 <p>作品登録者数：<span class="total-evaluation font-weight-bold bg-evaluation">{{ $drama->favorites()->count() }}人</span></p>
             </div>

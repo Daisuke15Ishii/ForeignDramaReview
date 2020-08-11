@@ -2,7 +2,8 @@
     <div class="col-md-3 py-1">
         <p class="eyecatch">
             <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
-            <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}"></a>
+                <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
+            </a>
         </p>
         <small>&copy; {{ $drama->copyright }}</small>
     </div>

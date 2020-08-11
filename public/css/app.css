@@ -11038,6 +11038,10 @@ p {
   margin-bottom: 0.8rem;
 }
 
+h1 a {
+  color: inherit;
+}
+
 .bg-orange {
   background-color: #faac64;
   color: #000;
@@ -11156,6 +11160,8 @@ header .header-search-input {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  vertical-align: middle;
+  /* 追加 */
 }
 
 .janre-check {
@@ -11473,6 +11479,22 @@ blockquote {
   height: 1rem;
   width: auto;
   vertical-align: middle;
+}
+
+/* review.createのcss  */
+
+.parent-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.parent-checkbox label {
+  margin-bottom: 0;
+}
+
+.review-title-create {
+  width: 100%;
+  border: solid 2px #000;
 }
 
 /* sidebar関連 */
