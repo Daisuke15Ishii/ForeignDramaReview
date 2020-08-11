@@ -21,10 +21,10 @@
                     {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
                     @if($drama->reviews()->count('total_evaluation') !== 0)
                         <span class="total-evaluation font-weight-bold bg-evaluation">{{ sprintf('%.2f', $drama->score()->first()->average_total_evaluation) }}点
-                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  $drama->score()->first()->average_total_evaluation])</span>
+                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  $drama->score()->first()->average_total_evaluation, 'size' => ''])</span>
                     @else
                         <span class="total-evaluation font-weight-bold bg-evaluation">--点
-                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  '0'])</span>
+                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  '0', 'size' => ''])</span>
                     @endif
                 </p>
             </div>

@@ -12,6 +12,7 @@ $pink: #FF00BC; /* 総合得点(強調) */
 $star: #25e450; /* 評点のスター色 */ 
 $favorite: #faac64; /* お気に入り登録ボタン色 */
 $delete-color: #707070;
+$red: red; /* 主にネタバレ警告色 */
 
 
 /* 主にbody,header,footer全般  */
@@ -350,4 +351,61 @@ blockquote{
     background-color: $accent-color;
     color: $white;
   }
+}
+
+.review-profile{
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: solid 2px $black;
+  background-color: $white;
+  float: left;
+  margin-right: 10px;
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+.review-title-h3{
+  display: inline-block;
+}
+
+/* ネタバレ警告 */
+.spoiler_alert{
+    font: bold;
+    color: $red;
+}
+
+.review-evaluation-display{
+  span{
+    margin-right: 0.5rem;
+    display: inline-block;
+    width: 80px;
+  }
+}
+
+.parent{
+ position: relative; 
+}
+.child{
+  position: absolute;
+  right: 1.5rem;
+  bottom: 0.5rem;
+}
+
+.review-comment-display{
+  border:solid 2px $black;
+  background-color: $white;
+  min-height: 100px;
+  .spoiler{
+    font-size: 1.575rem;
+    padding-top: 1rem;
+  }
+}
+
+.icon-like{
+  height: 1rem;
+  width: auto;
+  vertical-align: middle;
 }

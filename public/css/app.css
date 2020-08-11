@@ -11022,6 +11022,8 @@ a.text-dark:focus {
 
 /* お気に入り登録ボタン色 */
 
+/* 主にネタバレ警告色 */
+
 /* 主にbody,header,footer全般  */
 
 body {
@@ -11381,6 +11383,19 @@ blockquote {
   margin: 0.25rem 1rem 0.25rem 1rem;
 }
 
+.summary dt {
+  float: left;
+  width: 80px;
+}
+
+.summary dt dd {
+  margin: 0 0.25rem 0 1rem;
+}
+
+.summary .story {
+  width: 100%;
+}
+
 /* どこかで使うが保留 */
 
 .submit-btn {
@@ -11401,17 +11416,63 @@ blockquote {
   color: #fff;
 }
 
-.summary dt {
+.review-profile {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: solid 2px #000;
+  background-color: #fff;
   float: left;
+  margin-right: 10px;
+}
+
+.review-profile img {
+  width: 100%;
+  height: auto;
+}
+
+.review-title-h3 {
+  display: inline-block;
+}
+
+/* ネタバレ警告 */
+
+.spoiler_alert {
+  font: bold;
+  color: red;
+}
+
+.review-evaluation-display span {
+  margin-right: 0.5rem;
+  display: inline-block;
   width: 80px;
 }
 
-.summary dt dd {
-  margin: 0 0.25rem 0 1rem;
+.parent {
+  position: relative;
 }
 
-.summary .story {
-  width: 100%;
+.child {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 0.5rem;
+}
+
+.review-comment-display {
+  border: solid 2px #000;
+  background-color: #fff;
+  min-height: 100px;
+}
+
+.review-comment-display .spoiler {
+  font-size: 1.575rem;
+  padding-top: 1rem;
+}
+
+.icon-like {
+  height: 1rem;
+  width: auto;
+  vertical-align: middle;
 }
 
 /* sidebar関連 */

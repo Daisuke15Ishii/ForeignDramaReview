@@ -20,10 +20,10 @@
                     @if($drama->reviews()->count('total_evaluation') !== 0)
                         {{-- sprintf('%.2f', 変数)は、変数を小数点2桁まで表示する --}}
                         <span class="total-evaluation font-weight-bold bg-evaluation">{{ sprintf('%.2f', $drama->score()->first()->average_total_evaluation) }}点
-                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  $drama->score()->first()->average_total_evaluation])</span>
+                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  $drama->score()->first()->average_total_evaluation, 'size' => ''])</span>
                     @else
                         <span class="total-evaluation font-weight-bold bg-evaluation">--点
-                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  '0'])</span>
+                        @include('layouts.component.totalevaluation', ['total_evaluation' =>  '0', 'size' => ''])</span>
                     @endif
                 </p>
             </div>
@@ -78,9 +78,9 @@
             </div>
             <div class="col-lg-3 text-right">
                 @include('layouts.component.createbutton', ['delete' => 'off'])
-                <button class="btn btn-accent-color mt-2 mr-0 ml-1">
-                    <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">作品情報を見る</a>
-                </button>
+                <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
+                    <button class="btn btn-accent-color mt-2 mr-0 ml-1">作品情報を見る</button>
+                </a>
             </div>
         </div>
     </div>
