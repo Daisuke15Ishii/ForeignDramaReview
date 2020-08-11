@@ -50,7 +50,7 @@
                                             {{-- 削除ボタンは未分類・未視聴の作品のみ表示させる --}}
                                             @if($review->progress == '1' || $review->progress == '0')
                                                 <button>
-                                                    <a href="{{ action('user\mypage\MypageDramaController@delete', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー削除(マイページから除外)</a>
+                                                    <a href="{{ route('review_delete', ['drama_id' => $review->drama()->first()->id, 'review_id' => $review->id]) }}">レビュー削除(マイページから除外)</a>
                                                 </button>
                                             @endif
                                         </p>

@@ -92,12 +92,12 @@ Route::group(['prefix' => 'user/mypage', 'middleware' => 'auth'], function(){
     Route::get('/following', 'user\mypage\MypageController@followingindex')->name('following_index');
     Route::get('/followed', 'user\mypage\MypageController@followedindex')->name('followed_index');
 
-    // drama/favoriteのルーティングを{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
+    // drama/~のルーティングをdrama/{categorize}より上に記述しないと、{categorize}でルーティングされてエラーになるため注意
     Route::get('/drama/favorite', 'user\mypage\MypageDramaController@indexfavorite')->name("my_favorite_drama");
-    Route::get('/drama/{categorize}', 'user\mypage\MypageDramaController@index')->name("my_drama");
     Route::post('/drama/my_favorite_set', 'user\mypage\MypageDramaController@setfavorite')->name("my_favorite_set");
     Route::post('/drama/my_drama_set', 'user\mypage\MypageDramaController@setdrama')->name("my_drama_set");
     Route::get('/drama/review_delete', 'user\mypage\MypageDramaController@delete')->name("review_delete");
+    Route::get('/drama/{categorize}', 'user\mypage\MypageDramaController@index')->name("my_drama");
 });
 
 //['prefix' => 'user/mypage']を['prefix' => 'user/{userID}']より上に記述する必要あり
