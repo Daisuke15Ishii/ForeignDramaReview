@@ -62,7 +62,7 @@
             <hr>
             <div class="row mb-4 p-2">
                 <div class="col-12 mx-auto dramaindex-frame mb-2 pt-2">
-                    <h2>{{ $drama->title }}のレビュー</h2>
+                    <h2>{{ $drama->title }} シーズン{{ $drama->season }}のレビュー</h2>
                     <div class="row main-content m-0">
                         <div class="col-12 mb-2">
                             <form method="get" action="{{ route('dramaID_index', ['drama_id' => $drama->id]) }}">
@@ -103,7 +103,7 @@
                         </div>
 
                         @foreach($reviews as $review)
-                            @include('layouts.component.review')
+                            @include('layouts.component.review', ['only_page' => 'no'])
                         @endforeach
                         
                         <div class="col-12 mx-auto">
