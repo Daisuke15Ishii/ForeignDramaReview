@@ -26,26 +26,8 @@
         </p>
             
         {{-- follow機能--}}
-        @auth
-            @if ( $others->id !== Auth::id() )
-                <form action="{{ route('others_follow', ['userID' => $others->id]) }}" method="POST" name="follow">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                    <input type="hidden" name="following_user_id" value="{{ $others->id }}">
-                    {{-- 既にフォロー済かの判定。レビューの人がauth::user()にフォローされているか調べる --}}
-                    @if (empty($others->followedUser()->where('user_id',Auth::id())->first()))
-                        <input type="submit" value="フォロー" name="follow" alt="フォロー" class="follow">
-                    @else
-                        <input type="submit" value="フォロー解除" name="follow" alt="フォロー解除" class="follow">
-                    @endif
-                </form>
-            @endif
-        @else
-            {{-- まずはログインに遷移--}}
-            <button>
-                <a href="{{ route('login') }}">フォロー</a>
-            </button>
-        @endauth
+        @include('layouts.component.createfollowbutton', ['class' => ''])
+
         <p>
             {{ floor(Carbon\Carbon::parse($others->birth)->age / 10) * 10 }}代
             @if($others->gender == 'male')

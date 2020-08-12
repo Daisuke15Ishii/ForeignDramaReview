@@ -23,27 +23,8 @@
                 </p>
                 <p>投稿日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at))  }}</p>
             </div>
-            @auth
-                @if ( $review->user_id !== Auth::id() )
-                    <form action="{{ route('review_follow', ['drama_id' => $review->drama_id]) }}" method="POST" name="follow" class="float-left">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                        <input type="hidden" name="following_user_id" value="{{ $review->user_id }}">
-                        {{-- 既にフォロー済かの判定。レビューの人がauth::user()にフォローされているか調べる --}}
-                        @if (empty($review->user()->first()->followedUser()->where('user_id',Auth::id())->first()))
-                            <input type="hidden" value="フォロー" name="follow">
-                            <button type="submit" class="btn-register btn-accent-color m-0">
-                                フォローする
-                            </button>
-                        @else
-                            <input type="hidden" value="フォロー解除" name="follow">
-                            <button type="submit" class="btn-register btn-delete-color m-0">
-                                フォロー解除
-                            </button>
-                        @endif
-                    </form>
-                @endif
-            @endauth
+            {{-- もしレイアウトが崩れたら、createfollowbuttonのformにclass="float-left"を追加 --}}
+            @include('layouts.component.createfollowbutton', ['others' => $review->user()->first(), 'class' => ''])
         </div>
     </div>
     
