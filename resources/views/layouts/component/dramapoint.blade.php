@@ -88,7 +88,7 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 text-right">
-                @include('layouts.component.createbutton', ['delete' => 'on'])
+                @include('layouts.component.createbutton', ['delete' => 'on', 'small' => 'off'])
             </div>
         </div>
     </div>

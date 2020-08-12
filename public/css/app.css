@@ -11497,6 +11497,8 @@ blockquote {
   border: solid 2px #000;
 }
 
+/* mypage.dramaindexのscss */
+
 .icon-favorite {
   height: 1.2rem;
   width: auto;
@@ -11505,6 +11507,7 @@ blockquote {
 
 .small-drama {
   overflow: hidden;
+  margin-left: 1px;
 }
 
 @media (max-width: 768px) {
@@ -11531,6 +11534,21 @@ blockquote {
 .small-drama img {
   width: 100%;
   height: auto;
+}
+
+.btn-small {
+  padding: 1px 6px !important;
+  font-size: inherit !important;
+}
+
+.vertical-text {
+  -ms-writing-mode: tb-rl;
+      writing-mode: vertical-rl;
+  background-color: #F1F3F5;
+}
+
+.solid-border {
+  border: solid 1px #000;
 }
 
 /* sidebar関連 */

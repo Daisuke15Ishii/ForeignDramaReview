@@ -11,7 +11,7 @@
             @include('layouts.component.mypagedramaorder')
         </form>
         
-        <div class="col-12 not-2">
+        <div class="col-12">
             {{ $reviews->appends(request()->input())->links() }}
         </div>
         

@@ -2,6 +2,7 @@
 {{-- component.dramapoint.indexにて利用 --}}
 {{-- component.review.indexにて利用 --}}
 {{-- component.mypage.dramaindexにて利用 --}}
+{{-- user.mypage.likeindexにて利用 --}}
 
 @for($i=0; $i<=10; $i++)
     @if($total_evaluation == 0)

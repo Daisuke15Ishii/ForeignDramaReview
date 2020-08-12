@@ -2,7 +2,7 @@
 {{--　※会員ログイン状態のときのみ利用可能　--}}
 
 <div class="row m-0 p-0">
-    <div class="col-lg-12 col-md-6 col-sm-7 col-7 m-0 p-0 mx-auto">
+    <div class="col-lg-12 col-4 m-0 p-0 mx-auto">
         <div class="rect-wrap">
             <div class="rect">
                 @if(isset(Auth::user()->image))
@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-md-6 col-12 m-0 p-0">
+    <div class="col-lg-12 col-8 m-0 p-0">
         <p><a href="{{ url('/user/mypage') }}">{{ Auth::user()->penname }}さん</a></p>
         <p>
             {{ floor(Carbon\Carbon::parse(Auth::user()->birth)->age / 10) * 10 }}代

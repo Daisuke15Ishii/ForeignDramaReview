@@ -1,4 +1,5 @@
 {{-- mypage.drama.indexにて利用 --}}
+{{-- others.drama.indexにて利用 --}}
 
 @csrf
 <div class="order-group row">

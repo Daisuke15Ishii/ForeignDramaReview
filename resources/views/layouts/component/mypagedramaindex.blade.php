@@ -1,4 +1,5 @@
 {{-- mypage.drama.indexにて利用--}}
+{{-- mypage.indexにて利用--}}
 
 <div class="col-md-6 mb-2 px-2 mx-auto">
     <div class="row">
@@ -46,7 +47,7 @@
                         @endif
                     </p>
                     <p class="p-0 m-0">
-                        @include('layouts.component.createbutton', ['delete' => 'on' ,'drama' => $review->drama()->first()])
+                        @include('layouts.component.createbutton', ['delete' => 'on' , 'small' => 'on', 'drama' => $review->drama()->first()])
                     </p>
                     <p class="p-0 m-0">更新日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at)) }} / {{ $review->likes()->count() }}いいね</p>
                 </div>

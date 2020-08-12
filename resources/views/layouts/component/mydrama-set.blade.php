@@ -1,5 +1,8 @@
 {{-- 「ログイン済」かつ「レビュー投稿済(マイページに作品登録済)」の場合、お気に入り登録(or解除)ボタンを表示 --}}
 {{-- 上記以外(「未ログイン」または「レビュー未投稿(マイページに作品未登録)」)の場合、マイページ作品登録ボタンを表示 --}}
+{{-- component.dramaindexにて利用 --}}
+{{-- component.dramapointにて利用 --}}
+
 @auth
     @if(empty($drama->reviews()->where('user_id',Auth::user()->id)->first()))
         <form action="{{ route('my_drama_set') }}" method="POST" class="text-right">

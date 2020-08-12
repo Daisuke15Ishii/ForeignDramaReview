@@ -20,18 +20,18 @@
             <p class="text-right">通知一覧へ</p>
         </div>
         
-        <div class="col-md-12 mx-auto bg-white mb-4">
-            <h2>最新投稿レビュー</h2>
+            <div class="col-12 content-frame">
+            <h2 class="content-title">最新投稿レビュー</h2>
             {{-- 投稿更新日が新しい順に表示 --}}
             @foreach(Auth::user()->reviews()->orderBy('updated_at', 'desc')->get() as $review)
-                {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
                 @if($loop->odd)
                     {{-- ループが奇数回 --}}
-                    <div class="row small my-3">
+                        <div class="row small mb-2 mx-0">
                         @include('layouts.component.mypagedramaindex')
                     @if($loop->last)
                         {{-- リストの最後 --}}
-                        <div class="col-md-6 mx-auto">
+                            <div class="col-md-6 mx-auto">
+                            </div>
                         </div>
                         @break
                     @endif

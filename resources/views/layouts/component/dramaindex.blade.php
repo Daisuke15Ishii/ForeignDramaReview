@@ -81,7 +81,7 @@
                 </dl>
             </div>
             <div class="col-lg-3 text-right">
-                @include('layouts.component.createbutton', ['delete' => 'off'])
+                @include('layouts.component.createbutton', ['delete' => 'off', 'small' => 'off'])
                 <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
                     <button class="btn btn-accent-color mt-2 mr-0 ml-1">作品情報を見る</button>
                 </a>

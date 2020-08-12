@@ -1,8 +1,7 @@
 {{--　他ユーザーのサイドバー　--}}
 
-
 <div class="row m-0 p-0">
-    <div class="col-lg-12 col-md-6 col-sm-7 col-7 m-0 p-0 mx-auto">
+    <div class="col-lg-12 col-4 m-0 p-0 mx-auto">
         <div class="rect-wrap">
             <div class="rect">
                 @if(isset($others->image))
@@ -13,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-md-6 col-12 m-0 p-0">
+    <div class="col-lg-12 col-8 m-0 p-0">
         <p>
             @guest
                 <a href="{{ route('others_home', ['userID' => $others->id]) }}">{{ $others->penname }}さん</a>
@@ -55,7 +54,7 @@
                 ・女性
             @endif
         </p>
-        <p>フォロー：<span class="font-weight-bold">{{ $others->follows()->count() }}</span>人　　<span class="font-weight-bold">フォロワー：{{ $others->followed()->count() }}</span>人</p>
+        <p>フォロー：<span class="font-weight-bold">{{ $others->follows()->count() }}</span>人　　フォロワー：<span class="font-weight-bold">{{ $others->followed()->count() }}</span>人</p>
         <p>レビュー投稿数：<span class="font-weight-bold">{{ $others->reviews()->wherenotnull('total_evaluation')->count() }}</span></p>{{-- マイページに作品登録しただけのレビューを除く --}}
         <p>(総合評価平均：<span class="font-weight-bold">{{ sprintf('%.1f',$others->reviews()->avg('total_evaluation')) }}点)</span></p>
         <p>

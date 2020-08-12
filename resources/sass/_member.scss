@@ -452,8 +452,25 @@ blockquote{
     height: 136.25px;
   }
   overflow: hidden;
+  margin-left: 1px;
   img{
     width: 100%;
     height: auto;
   }
+}
+
+.btn-small{
+  padding: 1px 6px !important;
+  font-size: inherit !important;
+}
+
+
+/* mypage.likeindexのcss  */
+.vertical-text{
+  writing-mode: vertical-rl;
+  background-color: $lightgray;
+}
+
+.solid-border{
+  border: solid 1px $black;
 }

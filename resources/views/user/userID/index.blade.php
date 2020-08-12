@@ -68,7 +68,7 @@
             @endforeach
             
             {{-- 「評価済」にチェックが入った状態の「すべての作品」ページへのリンク--}}
-            <p class="text-right"><a href="{{ route('my_drama', ['categorize' => 'all', 'sorts' => array('review_total_evaluation')]) }}">すべての作品へ</a></p>
+            <p class="text-right"><a href="{{ route('others_drama', ['userID' => $others->id, 'categorize' => 'all', 'sorts' => array('review_total_evaluation')]) }}">すべての作品へ</a></p>
         </div>
         
         {{-- お気に入り作品表示 --}}
@@ -89,7 +89,7 @@
                     @break
                 @endif
             @endforeach
-            <p class="text-right"><a href="{{ route('my_favorite_drama') }}">お気に入り一覧へ</a></p>
+            <p class="text-right"><a href="{{ route('others_favorite_drama', ['userID' => $others->id]) }}">お気に入り一覧へ</a></p>
         </div>
         
     </div>
