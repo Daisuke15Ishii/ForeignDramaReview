@@ -1,3 +1,4 @@
+{{-- indexにて利用 --}}
 {{-- search.result.indexにて利用 --}}
 {{-- ranking.indexにて利用 --}}
 

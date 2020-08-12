@@ -11606,6 +11606,26 @@ blockquote {
   height: 100%;
 }
 
+.alert {
+  font-size: 3rem;
+  color: red;
+  line-height: 4rem;
+}
+
+ol {
+  list-style-type: upper-roman;
+  list-style-position: inside;
+}
+
+li {
+  padding: 3px 2px 2px 4px;
+}
+
+.about-ul {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
 /* sidebar関連 */
 
 /* サイドバーのプロフィール画像を横幅100%の正方形で表示 */

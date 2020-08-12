@@ -58,19 +58,13 @@
         @foreach($others->reviews()->wherehas('favorite', function($q){
             $q->where('favorite', '1');
             })->orderby('total_evaluation', 'desc')->get() as $review)
-            <div class="row my-3">
-                {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                <div class="col-md-1">
-                    第{{ $loop->iteration }}位
-                </div>
-                @include('layouts.component.othersfavoritedramaindex')
-            </div>
+                @include('layouts.component.favoritedramaindex', ['top' => 'yes', 'user' => 'other'])
             @if($loop->iteration == 10)
                 {{-- 10作品だけ表示 --}}
                 @break
             @endif
         @endforeach
-        <p class="text-right"><a href="{{ route('others_favorite_drama', ['userID' => $others->id]) }}">お気に入り一覧へ</a></p>
+        <p class="text-right mr-2 mb-2"><a href="{{ route('others_favorite_drama', ['userID' => $others->id]) }}">お気に入り一覧へ</a></p>
     </div>
     
 </div>

@@ -14,7 +14,7 @@
         {{ $reviews->appends(request()->input())->links() }}
         
         @foreach($reviews as $review)
-            @include('layouts.component.favoritedramaindex', ['top' => 'no'])
+            @include('layouts.component.favoritedramaindex', ['top' => 'no', 'user' => 'mypage'])
         @endforeach
         
         {{ $reviews->appends(request()->input())->links() }}

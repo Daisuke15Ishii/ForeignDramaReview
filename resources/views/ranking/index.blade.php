@@ -11,14 +11,14 @@
         <div class="col-12 not-pc">
             {{ $scores->appends(request()->input())->links() }}
         </div>
-    </div>
     
-    <div class="col-md-11 mx-auto">
-        @foreach($scores as $score)
-            @include('layouts.component.dramaindex', ['drama' => $score->drama()->first()])
-        @endforeach
-        
-        {{ $scores->appends(request()->input())->links() }}
+        <div class="col-11 mx-auto">
+            @foreach($scores as $score)
+                @include('layouts.component.dramaindex', ['drama' => $score->drama()->first()])
+            @endforeach
+            
+            {{ $scores->appends(request()->input())->links() }}
+        </div>
     </div>
 </div>
 @endsection

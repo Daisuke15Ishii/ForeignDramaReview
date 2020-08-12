@@ -1,3 +1,8 @@
+{{-- user.mypage.drama.favorite.indexにて利用--}}
+{{-- user.mypage.indexにて利用--}}
+{{-- user.userID.drama.favorite.indexにて利用--}}
+{{-- user.userID.indexにて利用--}}
+
 <div class="row mb-2 mx-0">
     <div class="col-12 mx-auto px-0 mb-2">
         <div class="row mx-3">
@@ -26,17 +31,29 @@
                             <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
                             <input type="hidden" name="review_id" value="{{ $review->id }}">
                             @if($review->favorite()->first()->favorite !== 1)
-                                <input type="hidden" name="favorite" value="1">
-                                <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/star_grey.png') }}" alt="お気に入り登録">
-                                <p class="mb-0">
-                                    お気に入り登録
-                                </label>
+                                @if($user == 'mypage')
+                                    <input type="hidden" name="favorite" value="1">
+                                    <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/star_grey.png') }}" alt="お気に入り登録">
+                                    <p class="mb-0">
+                                        お気に入り登録
+                                    </p>
+                                @else
+                                    <img class="icon-large-favorite" src="{{ asset('/images/star_grey.png') }}" alt="非お気に入り">
+                                    <p class="mb-0"></p>
+                                @endif
                             @else
-                                <input type="hidden" name="favorite" value="0">
-                                <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り解除">
-                                <p class="mb-0">
-                                    お気に入り解除
-                                </label>
+                                @if($user == 'mypage')
+                                    <input type="hidden" name="favorite" value="0">
+                                    <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り解除">
+                                    <p class="mb-0">
+                                        お気に入り解除
+                                    </p>
+                                @else
+                                    <img class="icon-large-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り">
+                                    <p class="mb-0">
+                                        お気に入り
+                                    </p>
+                                @endif
                             @endif
                         </form>
                     </div>
@@ -88,10 +105,24 @@
                             @if ($review->spoiler_alert == 1)
                                 <span class="spoiler_alert">ネタバレ有</span>
                             @endif
+                            
+                            @if($user !== 'mypage')
+                                <span class="p-0 m-0">
+                                    {{-- いいね済の有無を表示させる --}}
+                                    @auth
+                                        {{-- 既にいいね済かの判定　→　authのレビューではない、かつ、likesテーブルにレコードがある場合 --}}
+                                        @if ( $review->user_id !== Auth::id() && !empty($review->likes()->where('user_id',Auth::id())->first()))
+                                            (いいね済)
+                                        @endif
+                                    @endauth
+                                </span>
+                            @endif
                         </p>
-                        <p class="p-0 m-0">
-                            @include('layouts.component.createbutton', ['delete' => 'on' , 'small' => 'on', 'drama' => $review->drama()->first()])
-                        </p>
+                        @if($user == 'mypage')
+                            <p class="p-0 m-0">
+                                @include('layouts.component.createbutton', ['delete' => 'on' , 'small' => 'on', 'drama' => $review->drama()->first()])
+                            </p>
+                        @endif
                         <p class="p-0 m-0">更新日：{{ date('Y年m月d日H時i分', strtotime($review->updated_at)) }} / {{ $review->likes()->count() }}いいね</p>
                     </div>
                 </div>

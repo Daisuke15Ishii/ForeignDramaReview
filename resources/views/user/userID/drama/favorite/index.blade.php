@@ -14,15 +14,9 @@
             {{ $reviews->appends(request()->input())->links() }}
             
             @foreach($reviews as $review)
-                <div class="row my-3">
-                    {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                    <div class="col-md-1">
-                        第{{ $i = $loop->iteration + (($reviews->currentPage() - 1) * $reviews->perPage()) }}位
-                    </div>
-                    @include('layouts.component.othersfavoritedramaindex')
-                </div>
+                @include('layouts.component.favoritedramaindex', ['top' => 'yes', 'user' => 'other'])
             @endforeach
-            
+
             {{ $reviews->appends(request()->input())->links() }}
         </div>
         

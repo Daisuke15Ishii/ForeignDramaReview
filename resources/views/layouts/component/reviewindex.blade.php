@@ -1,3 +1,4 @@
+{{--  indexにて利用 --}}
 {{--  drama.review.indexにて利用 --}}
 {{--  component.likeindexにて利用 --}}
 

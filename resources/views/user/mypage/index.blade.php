@@ -58,7 +58,7 @@
         @foreach(Auth::user()->reviews()->wherehas('favorite', function($q){
             $q->where('favorite', '1');
             })->orderby('total_evaluation', 'desc')->get() as $review)
-                @include('layouts.component.favoritedramaindex', ['top' => 'yes'])
+                @include('layouts.component.favoritedramaindex', ['top' => 'yes', 'user' => 'mypage'])
             @if($loop->iteration == 10)
                 {{-- 10作品だけ表示 --}}
                 @break
