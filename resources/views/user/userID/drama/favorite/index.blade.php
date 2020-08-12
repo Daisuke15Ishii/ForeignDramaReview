@@ -8,7 +8,7 @@
             <h2>お気に入りの作品({{ $allreviews }})<span class="">({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目を表示)</span></h2>
             
             <form method="get" action="{{ route('others_favorite_drama', ['userID' => $others->id]) }}">
-                @include('layouts.component.favoritedramaorder')
+                @include('layouts.component.mypagedramaorder', ['favor' => 'yes'])
             </form>
             
             {{ $reviews->appends(request()->input())->links() }}

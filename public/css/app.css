@@ -11541,6 +11541,8 @@ blockquote {
   font-size: inherit !important;
 }
 
+/* mypage.likeindexのcss  */
+
 .vertical-text {
   -ms-writing-mode: tb-rl;
       writing-mode: vertical-rl;
@@ -11549,6 +11551,59 @@ blockquote {
 
 .solid-border {
   border: solid 1px #000;
+}
+
+/* mypage.drama.favoriteのcss  */
+
+.large {
+  font-size: 1.575rem;
+}
+
+.icon-large-favorite {
+  width: 80%;
+  height: auto;
+}
+
+.middle-drama {
+  width: 100%;
+  overflow: hidden;
+  margin-left: 1px;
+  margin-bottom: 0px !important;
+}
+
+@media (max-width: 576px) {
+  .middle-drama {
+    height: 160px;
+  }
+}
+
+@media (min-width: 576px) {
+  .middle-drama {
+    height: 240px;
+  }
+}
+
+@media (min-width: 768px) {
+  .middle-drama {
+    height: 160px;
+  }
+}
+
+@media (min-width: 992px) {
+  .middle-drama {
+    height: 160px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .middle-drama {
+    height: 160px;
+  }
+}
+
+.middle-drama img {
+  width: auto;
+  height: 100%;
 }
 
 /* sidebar関連 */

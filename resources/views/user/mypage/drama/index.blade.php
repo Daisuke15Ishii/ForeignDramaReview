@@ -8,13 +8,11 @@
         <h1 class="content-title">{{ $title }}({{ $allreviews }}件)({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目)</h1>
         
         <form method="get" action="{{ route('my_drama', ['categorize' => $categorize]) }}">
-            @include('layouts.component.mypagedramaorder')
+            @include('layouts.component.mypagedramaorder', ['favor' => 'no'])
         </form>
         
-        <div class="col-12">
-            {{ $reviews->appends(request()->input())->links() }}
-        </div>
-        
+        {{ $reviews->appends(request()->input())->links() }}
+
         @foreach($reviews as $review)
             @if($loop->odd)
                 {{-- ループが奇数回 --}}
@@ -38,9 +36,7 @@
             @endif
         @endforeach
         
-        <div class="col-12 mx-auto">
-            {{ $reviews->appends(request()->input())->links() }}
-        </div>
+        {{ $reviews->appends(request()->input())->links() }}
     </div>
 </div>
 @endsection

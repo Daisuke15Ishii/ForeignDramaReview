@@ -53,25 +53,18 @@
     </div>
     
     {{-- お気に入り作品表示 --}}
-    <div class="col-md-12 mx-auto bg-white mb-4">
-        <h2>お気に入り作品</h2>
+    <div class="col-12 content-frame mb-4">
+        <h2 class="content-title">お気に入り作品</h2>
         @foreach(Auth::user()->reviews()->wherehas('favorite', function($q){
             $q->where('favorite', '1');
             })->orderby('total_evaluation', 'desc')->get() as $review)
-            <div class="row my-3">
-                {{-- マージンがマイナスになってて表示がおかしいので後で修正 --}}
-                <div class="col-md-1">
-                    第{{ $loop->iteration }}位
-                </div>
-                @include('layouts.component.favoritedramaindex')
-            </div>
+                @include('layouts.component.favoritedramaindex', ['top' => 'yes'])
             @if($loop->iteration == 10)
                 {{-- 10作品だけ表示 --}}
                 @break
             @endif
         @endforeach
-        <p class="text-right"><a href="{{ route('my_favorite_drama') }}">お気に入り一覧へ</a></p>
+        <p class="text-right mr-2 mb-2"><a href="{{ route('my_favorite_drama') }}">お気に入り一覧へ</a></p>
     </div>
-    
 </div>
 @endsection

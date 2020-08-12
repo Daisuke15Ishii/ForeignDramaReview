@@ -1,7 +1,8 @@
 {{-- component.dramaindex.indexにて利用 --}}
 {{-- component.dramapoint.indexにて利用 --}}
 {{-- component.review.indexにて利用 --}}
-{{-- component.mypage.dramaindexにて利用 --}}
+{{-- component.mypagedramaindexにて利用 --}}
+{{-- component.favoritedramaindexにて利用 --}}
 {{-- user.mypage.likeindexにて利用 --}}
 
 @for($i=0; $i<=10; $i++)

@@ -8,7 +8,7 @@
         <h1 class="content-title">{{ $title }}({{ $allreviews }}件)({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目)</h1>
         
         <form method="get" action="{{ route('others_drama', ['userID' => $others->id, 'categorize' => $categorize]) }}">
-            @include('layouts.component.mypagedramaorder')
+            @include('layouts.component.mypagedramaorder', ['favor' => 'no'])
         </form>
         
         <div class="col-12">

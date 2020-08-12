@@ -1,5 +1,7 @@
-{{-- mypage.drama.indexにて利用 --}}
-{{-- others.drama.indexにて利用 --}}
+{{-- user.mypage.drama.indexにて利用 --}}
+{{-- user.userID.drama.indexにて利用 --}}
+{{-- user.mypage.drama.favorite.indexにて利用 --}}
+{{-- user.userID.drama.favorite.indexにて利用 --}}
 
 @csrf
 <div class="order-group row">
@@ -7,18 +9,22 @@
         <label>
             <input type="checkbox" name="sorts[]" value="not_review_total_evaluation" @if(in_array('not_review_total_evaluation' ,$sorts)) checked @endif>未評価のみ
         </label>
-        <label>
-            <input type="checkbox" name="sorts[]" value="review_total_evaluation" @if(in_array('review_total_evaluation' ,$sorts)) checked @endif>評価済のみ
-        </label>
+        @if($favor == 'no')
+            <label>
+                <input type="checkbox" name="sorts[]" value="review_total_evaluation" @if(in_array('review_total_evaluation' ,$sorts)) checked @endif>評価済のみ
+            </label>
+        @endif
         <label>
             <input type="checkbox" name="sorts[]" value="not_review_comment" @if(in_array('not_review_comment' ,$sorts)) checked @endif>未コメントのみ
         </label>
-        <label>
-            <input type="checkbox" name="sorts[]" value="review_comment" @if(in_array('review_comment' ,$sorts)) checked @endif>コメント済のみ
-        </label>
-        <label>
-            <input type="checkbox" name="sorts[]" value="favorite" @if(in_array('favorite' ,$sorts)) checked @endif>お気に入り以外
-        </label>
+        @if($favor == 'no')
+            <label>
+                <input type="checkbox" name="sorts[]" value="review_comment" @if(in_array('review_comment' ,$sorts)) checked @endif>コメント済のみ
+            </label>
+            <label>
+                <input type="checkbox" name="sorts[]" value="favorite" @if(in_array('favorite' ,$sorts)) checked @endif>お気に入り以外
+            </label>
+        @endif
     </div>
     <div class="col-sm-12 text-right">
         <select name="sortby" class="order-select" id="sortby">

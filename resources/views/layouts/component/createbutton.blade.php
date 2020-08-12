@@ -2,6 +2,7 @@
 {{-- component.dramaindexにて利用 --}}
 {{-- component.dramapointにて利用 --}}
 {{-- component.mypagedramaindexにて利用 --}}
+{{-- component.favoritedramaindexにて利用 --}}
 
 @guest
     <a href="{{ route('login') }}">

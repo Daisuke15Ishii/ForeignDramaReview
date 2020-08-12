@@ -53,8 +53,8 @@
     </div>
     
     {{-- お気に入り作品表示 --}}
-    <div class="col-md-12 mx-auto bg-white mb-4">
-        <h2>お気に入り作品</h2>
+    <div class="col-12 content-frame mb-4">
+        <h2 class="content-title">お気に入り作品</h2>
         @foreach($others->reviews()->wherehas('favorite', function($q){
             $q->where('favorite', '1');
             })->orderby('total_evaluation', 'desc')->get() as $review)
