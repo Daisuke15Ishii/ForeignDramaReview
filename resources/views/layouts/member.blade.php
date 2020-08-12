@@ -1,7 +1,7 @@
 @include('layouts.component.header', ['bgcolor' => 'none'])
         <main class="py-4">
             <div class="container">
-                <div class="row p-0 m-0">
+                <div class="row p-0">
                     {{-- 576px(スマホ)以下でサイドバーを下(右)に表示(order-sm-xxx) --}}
                     <div class="col-lg-9 order-lg-2">
                         {{-- @yieldでコンテンツ挿入。 --}}

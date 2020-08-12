@@ -1,3 +1,6 @@
+{{-- search.result.indexにて利用 --}}
+{{-- ranking.indexにて利用 --}}
+
 <div class="row mb-4 p-2 dramaindex-frame">
     <div class="col-md-3 py-1">
         <p class="eyecatch">

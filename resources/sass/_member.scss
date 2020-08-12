@@ -430,3 +430,30 @@ blockquote{
   border: solid 2px $black;
 }
 
+
+/* mypage.dramaindexのscss */
+.icon-favorite{
+  height: 1.2rem;
+  width: auto;
+  vertical-align: middle;
+}
+
+.small-drama{
+  @media (max-width: 768px){
+    width: 100%;
+    height: auto;
+  }
+  @media (min-width: 768px){
+    width: 81px;
+    height: 114px;
+  }
+  @media (min-width: 1200px){
+    width: 96.5px;
+    height: 136.25px;
+  }
+  overflow: hidden;
+  img{
+    width: 100%;
+    height: auto;
+  }
+}

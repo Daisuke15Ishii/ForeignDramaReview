@@ -11497,6 +11497,42 @@ blockquote {
   border: solid 2px #000;
 }
 
+.icon-favorite {
+  height: 1.2rem;
+  width: auto;
+  vertical-align: middle;
+}
+
+.small-drama {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .small-drama {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .small-drama {
+    width: 81px;
+    height: 114px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .small-drama {
+    width: 96.5px;
+    height: 136.25px;
+  }
+}
+
+.small-drama img {
+  width: 100%;
+  height: auto;
+}
+
 /* sidebar関連 */
 
 /* サイドバーのプロフィール画像を横幅100%の正方形で表示 */
