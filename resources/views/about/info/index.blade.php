@@ -1,9 +1,7 @@
-{{-- layouts/front.blade.phpを読み込む --}}
 @extends('layouts.front')
 
-@section('title', 'サイトからのお知らせ|サイト概要')
+@section('title', 'サイトからのお知らせ｜サイト概要')
 
-{{-- front.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
 <div class="col-lg-8 mx-auto content-frame mb-4">
     <h1 class="content-title">サイトからのお知らせ</h1>

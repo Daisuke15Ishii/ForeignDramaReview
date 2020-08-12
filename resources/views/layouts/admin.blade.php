@@ -1,3 +1,5 @@
+{{-- 未着手、保留 --}}
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>

@@ -1,9 +1,7 @@
-{{-- layouts/front.blade.phpを読み込む --}}
 @extends('layouts.front')
 
 @section('title', 'サイト概要')
 
-{{-- front.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
 <div class="col-lg-8 mx-auto content-frame mb-4">
     <h1 class="content-title">サイト概要</h1>
@@ -20,12 +18,7 @@
         <p><a href="{{ url('/about/manual') }}">マニュアルはこちら</a></p>
         <p><a href="{{ url('/about/terms-of-service/') }}">利用規約等はこちら</a></p>
         
-        <ul class="mb-3 text-right">
-            <li>運営者：だいすけ</li>
-            <li>所在地：埼玉県</li>
-            <li>連絡先：<a href="#">だいすけ</a>(twitter)</a></li>
-            <li><a href="{{ url('/about/contact') }}">お問合せはこちら</a></li>
-        </ul>
+        @include('layouts.component.address', ['contact' => 'yes'])
     </div>
 </div>
 @endsection

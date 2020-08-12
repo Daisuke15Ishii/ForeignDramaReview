@@ -9,7 +9,7 @@ class MypageProfileController extends Controller
 {
     public function edit(Request $request){
         //プロフィール編集画面を表示するアクション
-        return view('user.mypage.profile.edit');
+        return view('user.mypage.profile.edit', ['update' => 'no']);
     }
     
     public function update(Request $request){
