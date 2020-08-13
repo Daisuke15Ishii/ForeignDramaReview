@@ -10,6 +10,7 @@
                 <div class="card-header">設定の変更</div>
 
                 <div class="card-body">
+                    <p class="alert">(注意)現在準備中のため、ご変更はお控えください。</p>
                     <form method="POST" action="{{ route('setting_update') }}">
                         @csrf
 
@@ -132,7 +133,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('messages.Password') }}：</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">新しいパスワード：</label>
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 

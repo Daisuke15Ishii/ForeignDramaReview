@@ -10,7 +10,7 @@
                 <div class="card-header">会員ログイン</div>
 
                 <div class="card-body">
-                    <p>ご登録のメールアドレスとパスワードをご入力ください。</p>
+                    <p class="text-center">ご登録のメールアドレスとパスワードをご入力ください。</p>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -56,13 +56,16 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <div class="">
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('messages.Forgot Your Password?') }}
-                                        </a>
-                                    @endif
-                                </div>
+                                {{-- パスワードリセット保留 --}}
+                                @unless(1)
+                                    <div class="">
+                                        @if (Route::has('password.request'))
+                                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                {{ __('messages.Forgot Your Password?') }}
+                                            </a>
+                                        @endif
+                                    </div>
+                                @endunless
                                 <div class="">
                                     <a class="btn btn-link" href="{{ route('register') }}">
                                         アカウント登録がまだお済みでない人はこちら
@@ -71,7 +74,6 @@
                             </div>
                         </div>
                         
-                        {{-- パスワードリセット保留 --}}
                         
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

@@ -37,8 +37,7 @@ class DramaIDReviewReviewIDController extends Controller
     
     public function update(Request $request, $review_id, $drama_id){
         //DramaIDReviewControllerのcreateメソッドとほぼ同じ
-        //画面表示確認のため仮設定,とりあえず設定を色々終えているdramaID.indexへ飛ばす
-        
+
         $this->validate($request, Review::$rules);
         //Favoriteモデルのバリデーションをかけるのがフォームの構造上難しい。とりあえず保留
         

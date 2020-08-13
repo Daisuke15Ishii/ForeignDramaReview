@@ -8,7 +8,6 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
-        {{-- 各ページごとにtitleタグを入れるために@yieldで空けておきます。 --}}
         <title>@yield('title')｜洋ドラ会議</title>
         
         {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
@@ -20,10 +19,6 @@
 
         {{-- Laravel標準で用意されているCSS＋自分で作成したSCSS --}}
         <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
-
-        {{-- 後で削除予定(仮) --}}
-        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
-
 
     </head>
     @if($bgcolor == 'none')

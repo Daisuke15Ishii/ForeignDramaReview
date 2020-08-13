@@ -6,7 +6,6 @@
 <div class="col-lg-8 mx-auto content-frame mb-4">
     <h1 class="content-title">サイト概要</h1>
     <div class="px-4 pt-1 pb-3">
-        <p class="alert">(注意)当サイトは、現在準備中のため、ご利用はお控えください。</p>
         @include('layouts.component.about')
 
         <p>当サイトは2020年8月よりサービスを開始しており、機能および作品を順次充実させていく予定です。 </p>
