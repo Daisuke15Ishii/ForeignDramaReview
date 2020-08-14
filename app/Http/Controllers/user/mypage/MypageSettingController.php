@@ -24,7 +24,7 @@ class MypageSettingController extends Controller
 /*バリデーション実装後に保存可能にする(想定しないアドレス,パスワードに変更するとログインできなくなるため)
         $user->email = $request['email'];
         $user->password = Hash::make($request['password']);
-*/        
+*/
         //追加カラム分
         $user->name_kana = $request['name_kana'];
         $user->penname = $request['penname'];

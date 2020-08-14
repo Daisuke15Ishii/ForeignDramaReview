@@ -20,11 +20,11 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name . '(test)',
                 'email' => $faker->safeEmail,
                 'password' => 'fakertest1',
-                'name_kana' => $faker->kanaName,
+                'name_kana' => 'シーダーテスト',
                 'penname' => $faker->kanaName . '(test)',
                 'gender' => $faker->randomElement($gender=['male','female']),
                 'birth' => $faker->dateTimeBetween('-80 years', '-20years')->format('Y-m-d'),
-                'profile' => $faker->realText(rand(30,200))
+                'profile' => '(test文)' . $faker->realText(rand(30,200))
             ]);
             $user->save();
             
