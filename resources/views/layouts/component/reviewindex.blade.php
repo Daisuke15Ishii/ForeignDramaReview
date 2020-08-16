@@ -57,13 +57,7 @@
                                 </p>
                             </div>
                             <div class="col-3 p-0 m-0">
-                                <p class="eyecatch">
-                                    @if(isset($review->user()->first()->image))
-                                        <img src="{{ secure_asset($review->user()->first()->image) }}" alt="{{ $review->user()->first()->penname}}さんアイコン画像" title="{ $review->user()->first()->penname }さん">
-                                    @else
-                                        <img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー">
-                                    @endif
-                                </p>
+                                @include('layouts.component.imgperson', ['user' => $review->user()->first(), 'class' => 'eyecatch'])
                             </div>
                             <div class="col-8 p-0 m-0">
                                 <p class="p-0 m-0"><a href="{{ route('others_home', ['userID' => $review->user()->first()->id]) }}">{{ $review->user()->first()->penname }}</a></p>

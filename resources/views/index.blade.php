@@ -35,7 +35,7 @@
             </div>
         </div>
         
-        <div class="col-lg-9 content-frame mb-4">
+        <div class="col-12 content-frame mb-4">
             <h2 class="content-title">最新レビュー</h2>
             <div class="row main-content m-0">
                 <div class="col-12 mb-2">

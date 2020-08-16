@@ -213,7 +213,7 @@ header{
 
 /* dramaindexのcss*/
 .dramaindex-frame{
-  border: solid 2px $black;
+  border: solid 2px $darkgray;
   background-color: $main-color-light;
   h2{
     a{
@@ -535,4 +535,14 @@ li{
 
 .p-left{
   padding-left: 1rem !important;
+}
+
+/* フォロー一覧・フォロワー一覧ページのcss */
+.min-height{
+  @media (min-width: 768px){
+    min-height: 223.2px;
+  }
+  @media (min-width: 1200px){
+    min-height: 204.1px;
+  }
 }

@@ -11251,7 +11251,7 @@ header .header-search-input {
 /* dramaindexのcss*/
 
 .dramaindex-frame {
-  border: solid 2px #000;
+  border: solid 2px #707070;
   background-color: #F1E9E0;
 }
 
@@ -11630,6 +11630,20 @@ li {
 
 .p-left {
   padding-left: 1rem !important;
+}
+
+/* フォロー一覧・フォロワー一覧ページのcss */
+
+@media (min-width: 768px) {
+  .min-height {
+    min-height: 223.2px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .min-height {
+    min-height: 204.1px;
+  }
 }
 
 /* sidebar関連 */

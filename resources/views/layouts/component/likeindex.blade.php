@@ -2,7 +2,7 @@
 {{-- user.userID.likeindexにて利用 --}}
 
 <div class="row justify-content-center p-0 m-0">
-    <div class="col-12 content-frame">
+    <div class="col-12 content-frame mb-2">
         <h1 class="content-title">
             @if($users !== "")
                 {{ $users->penname }}さんがいいねしたレビュー一覧({{ $alllikes }}件)<span class="">({{ $likes->firstitem() }}~{{ $likes->lastitem() }}件目)
@@ -15,8 +15,6 @@
             @include('layouts.component.reviewindex', ['review' => $like->review()->first(), 'iine' => 'yes'])
         @endforeach
         
-        <div class="col-12 mx-auto">
-            {{ $likes->appends(request()->input())->links() }}
-        </div>
+        {{ $likes->appends(request()->input())->links() }}
     </div>
 </div>

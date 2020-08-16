@@ -1,15 +1,11 @@
-{{--　会員のサイドバー　--}}
+{{--　会員のサイドバー(user.mypage配下のbladeに適用)　--}}
 {{--　※会員ログイン状態のときのみ利用可能　--}}
 
 <div class="row m-0 p-0">
     <div class="col-lg-12 col-4 m-0 p-0 mx-auto">
         <div class="rect-wrap">
             <div class="rect">
-                @if(isset(Auth::user()->image))
-                    <img src="{{ secure_asset(Auth::user()->image) }}" alt="{{ Auth::user()->penname}}さんアイコン画像" title="{ Auth::user()->penname }さん">
-                @else
-                    <img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー">
-                @endif
+                @include('layouts.component.imgperson', ['user' => Auth::user(), 'class' => 'm-0 p-0'])
             </div>
         </div>
     </div>

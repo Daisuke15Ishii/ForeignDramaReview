@@ -1,14 +1,10 @@
-{{--　他ユーザーのサイドバー　--}}
+{{--　他ユーザーのサイドバー(user.userID配下のbladeに適用)　--}}
 
 <div class="row m-0 p-0">
     <div class="col-lg-12 col-4 m-0 p-0 mx-auto">
         <div class="rect-wrap">
             <div class="rect">
-                @if(isset($others->image))
-                    <img src="{{ secure_asset($others->image) }}" alt="{{ $others->penname}}さんアイコン画像" title="{ $others->penname }さん">
-                @else
-                    <img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー">
-                @endif
+                @include('layouts.component.imgperson', ['user' => $others, 'class' => 'm-0 p-0'])
             </div>
         </div>
     </div>

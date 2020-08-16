@@ -1,6 +1,7 @@
 {{-- component.reviewにて利用 --}}
 {{-- user.userID.indexにて利用 --}}
 {{-- component.side-othersにて利用 --}}
+{{-- component.mypagefollowingindexにて利用 --}}
 
 @auth
     @if ( $others->id !== Auth::id() )

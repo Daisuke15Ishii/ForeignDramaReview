@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="row justify-content-center p-0 m-0">
-    <div class="col-12 content-frame">
-        <h1 class="content-title">お気に入りの作品({{ $allreviews }})({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目</h1>
+    <div class="col-12 content-frame mb-2">
+        <h1 class="content-title">お気に入りの作品({{ $allreviews }})({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目)</h1>
         
         <form method="get" action="{{ route('my_favorite_drama') }}">
             @include('layouts.component.mypagedramaorder', ['favor' => 'yes'])
@@ -19,6 +19,5 @@
         
         {{ $reviews->appends(request()->input())->links() }}
     </div>
-    
 </div>
 @endsection
