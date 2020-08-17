@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             $user = new \App\User([
                 'name' => $faker->name . '(test)',
                 'email' => $faker->safeEmail,
-                'password' => 'fakertest1',
+                'password' => Hash::make('fakertest1'),
                 'name_kana' => 'シーダーテスト',
                 'penname' => $faker->kanaName . '(test)',
                 'gender' => $faker->randomElement($gender=['male','female']),

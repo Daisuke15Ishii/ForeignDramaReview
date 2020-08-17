@@ -13,6 +13,13 @@
                     <p class="alert">(注意)現在準備中のため、ご変更はお控えください。</p>
                     <form method="POST" action="{{ route('setting_update') }}">
                         @csrf
+                        @if(count($errors) > 0)
+                            <ul>
+                                @foreach($errors->all() as $e)
+                                    <li>{{ $e }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('messages.Name') }}：</label>

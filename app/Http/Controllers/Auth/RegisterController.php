@@ -57,10 +57,9 @@ class RegisterController extends Controller
             'name_kana' => ['required', 'string', 'max:40'],
             'penname' => ['required', 'string', 'max:40', 'unique:users,penname'],
             'gender' => ['required', 'in:male,female'],
-            
-            //下記を記述すると上手くいかないので除外
+            //画像のバリデートも後で記述予定
             'birthyear' => ['required'],
-//            'profile' => ['max:4000'],
+//            'profile' => ['max:4000']
 
         ]);
     }

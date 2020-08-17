@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 
 class MypageSettingController extends Controller
 {
@@ -18,13 +18,27 @@ class MypageSettingController extends Controller
     public function update(Request $request){
         //ユーザー情報の編集(setting)を保存するアクション
         //validateは後で実装予定
-        $user = \Auth::user();
+        $user = Auth::user();
+
+        //App\Http\Controllers\Auth\RegisterControllerのvalidatorメソッドから内容ほぼコピペ(継承が上手くいかなかったため仕方なく)
+        //auth関連の整備等は保留(後日)
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id . ',id'], //自分以外でユニーク
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+            //追加カラム分
+            'name_kana' => ['required', 'string', 'max:40'],
+            'penname' => ['required', 'string', 'max:40', 'unique:users,penname,' . $user->id . ',id'], //自分以外でユニーク
+            'gender' => ['required', 'in:male,female'],
+            //画像のバリデートも後で記述予定
+            'birthyear' => ['required'],
+        ]);
 
         $user->name = $request['name'];
-/*バリデーション実装後に保存可能にする(想定しないアドレス,パスワードに変更するとログインできなくなるため)
         $user->email = $request['email'];
         $user->password = Hash::make($request['password']);
-*/
+        
         //追加カラム分
         $user->name_kana = $request['name_kana'];
         $user->penname = $request['penname'];

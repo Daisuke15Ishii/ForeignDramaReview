@@ -14,7 +14,10 @@ class MypageProfileController extends Controller
     
     public function update(Request $request){
         //プロフィール編集を保存するアクション
-        //validateは後で実装予定
+        $this->validate($request, [
+            'profile' => ['max:4000']
+        ]);
+
         $user = \Auth::user();
         $user->profile = $request['profile'];
 

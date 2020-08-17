@@ -9,7 +9,7 @@
             @if($update == 'complete')
                 プロフィール変更完了
             @else
-                プロフィール変更完了
+                プロフィール変更
             @endif
         </h1>
         <form method="POST" action="{{ route('profile_update') }}" class="text-center">
@@ -22,10 +22,17 @@
                     @else
                         <p class="text-left">{{ Auth::user()->penname }}さんのプロフィールを自由に入力してください。</p>
                     @endif
+                    @if(count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     @if(Auth::user()->profile !== null )
-                        <textarea name="profile" class="review-title-create" rows=15 id="profile" placeholder="自由にプロフィールを書いてみよう！">{{ Auth::user()->profile }}</textarea>
+                        <textarea name="profile" class="review-title-create" rows=15 id="profile" placeholder="自由にプロフィールを書いてみよう(4000字以内)！">{{ Auth::user()->profile }}</textarea>
                     @else
-                        <textarea name="profile" class="review-title-create" rows=15 id="profile" placeholder="自由にプロフィールを書いてみよう！"></textarea>
+                        <textarea name="profile" class="review-title-create" rows=15 id="profile" placeholder="自由にプロフィールを書いてみよう(4000字以内)！"></textarea>
                     @endif
                 </div>
             </div>
