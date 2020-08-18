@@ -31,11 +31,11 @@ class SearchController extends Controller
         if($request->mode == 'modetitle'){
             if ($cond_title != '') {
                 // 検索されたら検索結果(部分一致)を取得する(日本語orアルファベット)
-                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->orWhere('title_en', 'LIKE',  "{$cond_title}%")->orderBy('created_at', 'desc')->orderBy('season', 'asc')->Paginate(5);
+                $drama = Drama::where('title', 'LIKE',  "{$cond_title}%")->orWhere('title_en', 'LIKE',  "{$cond_title}%")->orderBy('created_at', 'desc')->orderBy('title', 'asc')->orderBy('season', 'asc')->Paginate(10);
                 $alldrama =  Drama::where('title', 'LIKE',  "{$cond_title}%")->orWhere('title_en', 'LIKE',  "{$cond_title}%")->get();
             } else {
                 // それ以外はすべてのドラマを取得する
-                $drama = Drama::orderBy('created_at', 'desc')->orderBy('season', 'asc')->Paginate(5);
+                $drama = Drama::orderBy('created_at', 'desc')->orderBy('title', 'asc')->orderBy('season', 'asc')->Paginate(10);
                 $alldrama =  Drama::all();
             }
             
@@ -48,12 +48,12 @@ class SearchController extends Controller
                 // 検索されたら検索結果(部分一致)を取得する
                 $drama = Drama::whereHas('reviews', function($q) use($cond_title){
                     $q->where('review_comment', 'LIKE',  "%{$cond_title}%");
-                })->orderBy('created_at', 'desc');
+                });
                 $alldrama =  $drama->get();
-                $drama = $drama->orderBy('season', 'asc')->Paginate(5);
+                $drama = $drama->orderBy('created_at', 'desc')->orderBy('title', 'asc')->orderBy('season', 'asc')->Paginate(10);
             } else {
                 // それ以外はすべてのドラマを取得する
-                $drama = Drama::orderBy('created_at', 'desc')->orderBy('season', 'asc')->Paginate(5);
+                $drama = Drama::orderBy('created_at', 'desc')->orderBy('title', 'asc')->orderBy('season', 'asc')->Paginate(10);
                 $alldrama =  Drama::all();
             }
             //並び替え機能(orderresultアクション)のためにセッション保存
@@ -270,14 +270,14 @@ class SearchController extends Controller
                     break;
             }
         }else{
-            //初期値は「新着順」
-            $drama = $drama->orderBy('created_at', 'desc');
+            //初期値は「新着順→タイトル順→シーズン順」
+            $drama = $drama->orderBy('created_at', 'desc')->orderBy('title', 'asc')->orderBy('season', 'asc');
             $sortby = "create_desc";
         }
 
         //途中でget()するとエラーになるので、最後に一度だけget() or paginate()
         $alldrama = $drama->get();
-        $drama = $drama->paginate(5);
+        $drama = $drama->paginate(10);
         
         //並び替え機能(orderresultアクション)のためにセッション保存
         $request->session()->forget('input');
@@ -533,14 +533,14 @@ class SearchController extends Controller
                     break;
             }
         }else{
-            //初期値は「新着順」
-            $drama = $drama->orderBy('created_at', 'desc');
+            //初期値は「新着順→タイトル順→シーズン順」
+            $drama = $drama->orderBy('created_at', 'desc')->orderBy('title', 'asc')->orderBy('season', 'asc');
             $sortby = "create_desc";
         }
 
         //途中でget()するとエラーになるので、最後に一度だけget() or paginate()
         $alldrama = $drama->get();
-        $drama = $drama->orderBy('season', 'asc')->paginate(5);
+        $drama = $drama->orderBy('season', 'asc')->paginate(10);
 
         return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama,'janre' => $janres, 'cond_title' => $cond_title, 'sortby' => $sortby]);
     }
