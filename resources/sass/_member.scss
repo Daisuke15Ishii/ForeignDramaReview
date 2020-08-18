@@ -363,7 +363,7 @@ blockquote{
   width: 70px;
   height: 70px;
   overflow: hidden;
-  border: solid 2px $black;
+  border: solid 2px $darkgray;
   background-color: $white;
   float: left;
   margin-right: 10px;
@@ -401,7 +401,7 @@ blockquote{
 }
 
 .review-comment-display{
-  border:solid 2px $black;
+  border:solid 2px $darkgray;
   background-color: $white;
   min-height: 100px;
   .spoiler{
@@ -427,7 +427,7 @@ blockquote{
 
 .review-title-create{
   width: 100%;
-  border: solid 2px $black;
+  border: solid 2px $darkgray;
 }
 
 
@@ -472,7 +472,7 @@ blockquote{
 }
 
 .solid-border{
-  border: solid 1px $black;
+  border: solid 1px $darkgray;
 }
 
 /* mypage.drama.favoriteのcss  */
@@ -545,4 +545,9 @@ li{
   @media (min-width: 1200px){
     min-height: 204.1px;
   }
+}
+
+.e-message{
+  list-style-type: disc;
+  list-style-position: inside;
 }

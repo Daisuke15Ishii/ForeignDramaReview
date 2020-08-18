@@ -13,6 +13,15 @@
                 <input type="hidden" name="drama_id" value="{{ $drama->id }}">
                 <input type="hidden" name="score_id" value="{{ $drama->score()->first()->id }}">
                 <div class="row mx-0">
+                    @if(count($errors) > 0)
+                        <div class="col-11">
+                            <ul class="e-message">
+                                @foreach($errors->all() as $e)
+                                    <li>{{ $e }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="col-md-3">
                         <p class="eyecatch">
                             <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
@@ -35,14 +44,14 @@
                                     <select name="total_evaluation" class="original-form-control" id="total_evaluation">
                                         <option value="">点数選択</option>
                                         @for($i = 100; $i > 0; $i--)
-                                            <option value="{{ $i }}" @if(old('total_evaluation')=='$i') selected @endif>{{ $i }}点</option>
+                                            <option value="{{ $i }}" @if(old('total_evaluation')==$i) selected @endif>{{ $i }}点</option>
                                         @endfor
                                     </select>
                                 </label>
                             </div>
                             <div class="col-sm-5 col-md-4 parent-checkbox">
                                 <label for="favorite" class="bg-evaluation mr-2">
-                                    <input type="checkbox" id="favorite" name="favorite"  value="1">お気に入り登録
+                                    <input type="checkbox" id="favorite" name="favorite" value="1" @if(old('favorite')=="1") checked @endif>お気に入り登録
                                 </label>
                             </div>
                         </div>
@@ -51,19 +60,19 @@
                             <div class="form-group col-sm-6 mb-2">
                                 <label for="progress" class="control-label bg-evaluation">現在の進捗
                                     <select class="original-form-control" id="progress" name="progress">
-                                        <option value="0" selected>未分類</option>
-                                        <option value="4">視聴済</option>
-                                        <option value="3">視聴中</option>
-                                        <option value="2">リタイア</option>
-                                        <option value="1">観たい</option>
+                                        <option value="0" @if(old('progress')== "0") selected @endif>未分類</option>
+                                        <option value="4" @if(old('progress')== "4") selected @endif>視聴済</option>
+                                        <option value="3" @if(old('progress')== "3") selected @endif>視聴中</option>
+                                        <option value="2" @if(old('progress')== "2") selected @endif>リタイア</option>
+                                        <option value="1" @if(old('progress')== "1") selected @endif>観たい</option>
                                     </select>
                                 </label>
                             </div>
                             <div class="form-group col-sm-6 mb-2">
                                 <label for="subtitles" class="control-label bg-evaluation">字幕・吹替
                                     <select class="original-form-control" id="subtitles" name="subtitles">
-                                        <option value="0" selected>吹替</option>
-                                        <option value="1">字幕</option>
+                                        <option value="0" @if(old('subtitles')== "0") selected @endif>吹替</option>
+                                        <option value="1" @if(old('subtitles')== "1") selected @endif>字幕</option>
                                     </select>
                                 </label>
                             </div>
@@ -96,7 +105,7 @@
                         <div class="row">
                             <div class="col-12 mx-auto mb-2">
                                 <h3>レビュー内容</h3>
-                                <textarea name="review_comment" class="review-title-create" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
+                                <textarea name="review_comment" class="review-title-create px-1" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
                             </div>
                             <div class="col-12 mx-auto">
                                 <label class="mr-2">

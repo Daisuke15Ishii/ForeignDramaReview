@@ -39,8 +39,7 @@ class DramaIDReviewReviewIDController extends Controller
         //DramaIDReviewControllerのcreateメソッドとほぼ同じ
 
         $this->validate($request, Review::$rules);
-        //Favoriteモデルのバリデーションをかけるのがフォームの構造上難しい。とりあえず保留
-        
+
         $review = Review::find($request->review_id);
         $favorite = Favorite::where('user_id', $request->user_id)->where('drama_id', $request->drama_id)->first();
         $form = $request->all();

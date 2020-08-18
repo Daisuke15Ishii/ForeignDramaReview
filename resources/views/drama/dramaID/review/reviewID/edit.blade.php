@@ -95,9 +95,9 @@
                             <div class="col-12 mx-auto mb-2">
                                 <h2>レビュータイトル</h2>
                                 @if(isset($review->review_title) )
-                                    <input type="text" class="review-title-create" value="{{ $review->review_title }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
+                                    <input type="text" class="review-title-create px-1" value="{{ $review->review_title }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
                                 @else
-                                    <input type="text" class="review-title-create" value="{{ old('review_title') }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
+                                    <input type="text" class="review-title-create px-1" value="{{ old('review_title') }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
                                 @endif
                             </div>
                         </div>
@@ -105,9 +105,9 @@
                             <div class="col-12 mx-auto mb-2">
                                 <h3>レビュー内容</h3>
                                 @if(isset($review->review_title) )
-                                    <textarea name="review_comment" class="review-title-create" rows="20" placeholder="感想を自由に書きましょう！">{{ $review->review_comment }}</textarea>
+                                    <textarea name="review_comment" class="review-title-create px-1" rows="20" placeholder="感想を自由に書きましょう！">{{ $review->review_comment }}</textarea>
                                 @else
-                                    <textarea name="review_comment" class="review-title-create" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
+                                    <textarea name="review_comment" class="review-title-create px-1" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
                                 @endif
                             </div>
                             <div class="col-12 mx-auto">

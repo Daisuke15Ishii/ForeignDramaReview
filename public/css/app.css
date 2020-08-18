@@ -11426,7 +11426,7 @@ blockquote {
   width: 70px;
   height: 70px;
   overflow: hidden;
-  border: solid 2px #000;
+  border: solid 2px #707070;
   background-color: #fff;
   float: left;
   margin-right: 10px;
@@ -11465,7 +11465,7 @@ blockquote {
 }
 
 .review-comment-display {
-  border: solid 2px #000;
+  border: solid 2px #707070;
   background-color: #fff;
   min-height: 100px;
 }
@@ -11494,7 +11494,7 @@ blockquote {
 
 .review-title-create {
   width: 100%;
-  border: solid 2px #000;
+  border: solid 2px #707070;
 }
 
 /* mypage.dramaindexのscss */
@@ -11550,7 +11550,7 @@ blockquote {
 }
 
 .solid-border {
-  border: solid 1px #000;
+  border: solid 1px #707070;
 }
 
 /* mypage.drama.favoriteのcss  */
@@ -11644,6 +11644,11 @@ li {
   .min-height {
     min-height: 204.1px;
   }
+}
+
+.e-message {
+  list-style-type: disc;
+  list-style-position: inside;
 }
 
 /* sidebar関連 */

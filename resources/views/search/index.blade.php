@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-3 col-form-label text-sm-right">
+                <div class="col-sm-3 col-form-label text-sm-right pr-0">
                     放映開始日：
                 </div>
                 <div class="col-sm-7">
