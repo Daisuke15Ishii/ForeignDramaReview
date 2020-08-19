@@ -20,7 +20,7 @@ class DramaJanreTableSeeder extends Seeder
         $dramaJanre->save();
 */        
         
-        //ブレイキング・バッド(drama_id=1~5)(janre=1,19,,20,21,26)
+        //ブレイキング・バッド(drama_id=1~5)(janre=1,19,20,21,26)
         for($home_id=1; $home_id < 6; $home_id++){
             $dramaJanre = new \App\DramaJanre([
                 'drama_id' => $home_id,

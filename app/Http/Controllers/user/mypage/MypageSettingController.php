@@ -35,6 +35,14 @@ class MypageSettingController extends Controller
             'birthyear' => ['required'],
         ]);
 
+        if($request['image'] !== null){
+            //画像ファイルの保存場所
+            $img = '/images/';
+        }else{
+            $img = '';
+        }
+
+
         $user->name = $request['name'];
         $user->email = $request['email'];
         $user->password = Hash::make($request['password']);
@@ -44,7 +52,7 @@ class MypageSettingController extends Controller
         $user->penname = $request['penname'];
         $user->gender = $request['gender'];
         $user->birth = $request['birthyear'] . '-' . $request['birthmonth'] . '-01';
-        $user->image = '/images/' . $request['image'];
+        $user->image = $img . $request['image'];
 
         $user->save();
 

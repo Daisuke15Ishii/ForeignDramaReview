@@ -15,8 +15,8 @@
                             <option value="create_desc" @if($sortby=='create_desc') selected @endif>新着順</option>
                             <option value="onair_desc" @if($sortby=='onair_desc') selected @endif>公開日が新しい順</option>
                             <option value="onair_asc" @if($sortby=='onair_asc') selected @endif>公開日が古い順</option>
-                            <option value="title_asc" @if($sortby=='title_asc') selected @endif>タイトル昇順</option>
-                            <option value="title_desc" @if($sortby=='title_desc') selected @endif>タイトル降順</option>
+                            <option value="title_asc" @if($sortby=='title_asc') selected @endif>タイトル昇順(準備中)</option>
+                            <option value="title_desc" @if($sortby=='title_desc') selected @endif>タイトル降順(準備中)</option>
                             <option value="total_evaluation_desc" @if($sortby=='total_evaluation_desc') selected @endif>総合評価が高い順(準備中)</option>
                             <option value="total_evaluation_asc" @if($sortby=='total_evaluation_asc') selected @endif>総合評価が低い順(準備中)</option>
                             <option value="registers_desc" @if($sortby=='registers_desc') selected @endif>マイページ登録数が多い順</option>

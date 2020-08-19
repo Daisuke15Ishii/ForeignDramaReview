@@ -248,6 +248,7 @@ class SearchController extends Controller
                     //投稿更新日が古い順
                     $drama = $drama->orderBy('onair', 'asc');
                     break;
+                // タイトル順は想定通りに並び変わらない(文字コード等が影響していると考えられる)、保留。
                 case "title_asc":
                     //タイトル昇順
                     $drama = $drama->orderBy('title', 'asc');
@@ -417,7 +418,7 @@ class SearchController extends Controller
         //総合評価
         if ($total_evaluation != '') {
             // 検索されたら絞り込み条件に追加
-            $total = $$total_evaluation;
+            $total = $total_evaluation;
             //集計値を保存するテーブル(scores)を用意しないと、集計値を元にした検索機能のコードが複雑化してしまう
             $drama = $drama->whereHas('score', function($q) use($total){
                 $q->where('average_total_evaluation', '>=', $total);
@@ -511,6 +512,7 @@ class SearchController extends Controller
                     //投稿更新日が古い順
                     $drama = $drama->orderBy('onair', 'asc');
                     break;
+                // タイトル順は想定通りに並び変わらない(文字コード等が影響していると考えられる)、保留。
                 case "title_asc":
                     //タイトル昇順
                     $drama = $drama->orderBy('title', 'asc');
@@ -544,5 +546,5 @@ class SearchController extends Controller
 
         return view('search.result.index', ['dramas' => $drama, 'alldrama' => $alldrama,'janre' => $janres, 'cond_title' => $cond_title, 'sortby' => $sortby]);
     }
-    
+
 }

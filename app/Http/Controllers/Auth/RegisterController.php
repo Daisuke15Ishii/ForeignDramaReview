@@ -72,6 +72,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['image'] !== null){
+            //画像ファイルの保存場所
+            $img = '/images/';
+        }else{
+            $img = '';
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -82,7 +88,7 @@ class RegisterController extends Controller
             'penname' => $data['penname'],
             'gender' => $data['gender'],
             'birth' => $data['birthyear'] . '-' . $data['birthmonth'] . '-01',
-            'image' => '/images/' . $data['image'],
+            'image' => $img . $data['image'],
 //            'profile' => $data['profile'],
         ]);
     }
