@@ -8,6 +8,6 @@
     @if(!empty($user->image))
         <img src="{{ secure_asset($user->image) }}" alt="{{ $user->penname}}さんアイコン画像" title="{ $user->penname }さん">
     @else
-        <img src="{{ secure_asset('/images/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー">
+        <img src="{{ secure_asset('/images/user/person.jpeg') }}" alt="一般ユーザー画像" title="一般ユーザー">
     @endif
 </p>

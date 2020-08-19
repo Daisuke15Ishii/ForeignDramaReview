@@ -33,23 +33,23 @@
                             @if($review->favorite()->first()->favorite !== 1)
                                 @if($user == 'mypage')
                                     <input type="hidden" name="favorite" value="1">
-                                    <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/star_grey.png') }}" alt="お気に入り登録">
+                                    <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="お気に入り登録">
                                     <p class="mb-0">
                                         お気に入り登録
                                     </p>
                                 @else
-                                    <img class="icon-large-favorite" src="{{ asset('/images/star_grey.png') }}" alt="非お気に入り">
+                                    <img class="icon-large-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="非お気に入り">
                                     <p class="mb-0"></p>
                                 @endif
                             @else
                                 @if($user == 'mypage')
                                     <input type="hidden" name="favorite" value="0">
-                                    <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り解除">
+                                    <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/icon/star_yellow.png') }}" alt="お気に入り解除">
                                     <p class="mb-0">
                                         お気に入り解除
                                     </p>
                                 @else
-                                    <img class="icon-large-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り">
+                                    <img class="icon-large-favorite" src="{{ asset('/images/icon/star_yellow.png') }}" alt="お気に入り">
                                     <p class="mb-0">
                                         お気に入り
                                     </p>

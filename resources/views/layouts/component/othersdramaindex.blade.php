@@ -8,12 +8,12 @@
             <div class="bg-orange">
                 @if($review->favorite()->first()->favorite !== 1)
                     <label class="mb-0">
-                        <img class="icon-favorite" src="{{ asset('/images/star_grey.png') }}" alt="通常">
+                        <img class="icon-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="通常">
                         通常
                     </label>
                 @else
                     <label class="mb-0">
-                        <img class="icon-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り">
+                        <img class="icon-favorite" src="{{ asset('/images/icon/star_yellow.png') }}" alt="お気に入り">
                         お気に入り
                     </label>
                 @endif

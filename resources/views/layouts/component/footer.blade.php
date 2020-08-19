@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-3">
                 <a class="titlerogo" href="{{ url('/') }}">
-                    <img src="{{ asset('images/titlerogo.png') }}" alt="洋ドラ会議ロゴ">
+                    <img src="{{ asset('images/icon/titlerogo.png') }}" alt="洋ドラ会議ロゴ">
                 </a>
             </div>
             

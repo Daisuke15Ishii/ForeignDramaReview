@@ -15,7 +15,7 @@ class DramasTableSeeder extends Seeder
         //dramaレコードを作成すると同時に、janresテーブルと紐づけ(中間テーブルのdrama_janreテーブルにレコード作成)
 
         //画像ファイルの保存場所
-        $img = '/images/';
+        $img = '/images/drama/';
         
         //janresテーブルに登録されている総数(登録idの最後)
         $total_jan = 27;

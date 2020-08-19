@@ -242,7 +242,8 @@ header{
 }
 
 .total-evaluation{
-  color: $pink;
+  // 強調したいが色が多くなるためとりあえずブラック
+  color: $black;
 }
 
 .btn-register{
@@ -268,7 +269,8 @@ header{
   width: auto;
 }
 .bg-evaluation{
-  background-color: $lightgray;
+  // 色を変えて見やすくしたかったが、ごちゃごちゃするので取り合えず背景色と同じにする
+  background-color: $main_color-light;
 }
 
 blockquote{

@@ -13,13 +13,13 @@
                 @if($review->favorite()->first()->favorite !== 1)
                     <input type="hidden" name="favorite" value="1">
                     <label class="mb-0">
-                        <input type="image" name="submit" class="icon-favorite" src="{{ asset('/images/star_grey.png') }}" alt="お気に入り登録">
+                        <input type="image" name="submit" class="icon-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="お気に入り登録">
                         通常
                     </label>
                 @else
                     <input type="hidden" name="favorite" value="0">
                     <label class="mb-0">
-                        <input type="image" name="submit" class="icon-favorite" src="{{ asset('/images/star_yellow.png') }}" alt="お気に入り解除">
+                        <input type="image" name="submit" class="icon-favorite" src="{{ asset('/images/icon/star_yellow.png') }}" alt="お気に入り解除">
                         お気に入り
                     </label>
                 @endif
