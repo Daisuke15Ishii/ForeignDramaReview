@@ -27,11 +27,11 @@
                     <div class="col-6 col-md-2 order-md-1 small">
                         <form action="{{ route('my_favorite_set') }}" method="POST" class="mx-auto">
                             @csrf
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
-                            <input type="hidden" name="review_id" value="{{ $review->id }}">
                             @if($review->favorite()->first()->favorite !== 1)
                                 @if($user == 'mypage')
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
+                                    <input type="hidden" name="review_id" value="{{ $review->id }}">
                                     <input type="hidden" name="favorite" value="1">
                                     <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="お気に入り登録">
                                     <p class="mb-0">
@@ -43,6 +43,9 @@
                                 @endif
                             @else
                                 @if($user == 'mypage')
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
+                                    <input type="hidden" name="review_id" value="{{ $review->id }}">
                                     <input type="hidden" name="favorite" value="0">
                                     <input type="image" name="submit" class="icon-large-favorite" src="{{ asset('/images/icon/star_yellow.png') }}" alt="お気に入り解除">
                                     <p class="mb-0">

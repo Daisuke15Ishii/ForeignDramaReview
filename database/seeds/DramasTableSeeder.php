@@ -85,7 +85,7 @@ class DramasTableSeeder extends Seeder
         for($i=1; $i < 8; $i++){
             $drama = new \App\Drama([
                 'title' => 'ホームランド',
-                'season' => '1',
+                'season' => $i,
                 'title_en' => 'HOMELAND',
                 'cast1' => 'クレア・デインズ',
                 'cast2' => 'ダミアン・ルイス',

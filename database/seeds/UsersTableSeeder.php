@@ -49,8 +49,8 @@ class UsersTableSeeder extends Seeder
             
                         'progress' => $faker->numberBetween(0, 4),
                         'subtitles' => $faker->randomElement($subtitles=['0','1']),
-                        'review_title' => $faker->realText(rand(10,40)),
-                        'review_comment' => $faker->realText(rand(30,200)),
+                        'review_title' => '(test文)' . $faker->realText(rand(10,40)),
+                        'review_comment' => '(test文)' . $faker->realText(rand(30,200)),
                         'spoiler_alert' => $faker->randomElement($spoiler_alert=['0','1']),
                         'previous' => $faker->numberBetween(0, 3)
                     ]);
