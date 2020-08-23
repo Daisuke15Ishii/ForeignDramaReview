@@ -57,7 +57,6 @@ class RegisterController extends Controller
             'name_kana' => ['required', 'string', 'max:40'],
             'penname' => ['required', 'string', 'max:40', 'unique:users,penname'],
             'gender' => ['required', 'in:male,female'],
-            //画像のバリデートも後で記述予定
             'birthyear' => ['required'],
 //            'profile' => ['max:4000']
 
@@ -72,12 +71,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['image'] !== null){
-            //画像ファイルの保存場所
-            $img = '/images/';
-        }else{
-            $img = '';
-        }
+        //アカウント登録時にプロフィール画像を登録する機能は後日実装(ファイル名にuserIDを使用するため、一度user保存後に再度imageのみ保存する必要あり)
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -88,7 +82,7 @@ class RegisterController extends Controller
             'penname' => $data['penname'],
             'gender' => $data['gender'],
             'birth' => $data['birthyear'] . '-' . $data['birthmonth'] . '-01',
-            'image' => $img . $data['image'],
+            'image' => '',
 //            'profile' => $data['profile'],
         ]);
     }

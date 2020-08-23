@@ -139,7 +139,9 @@
             <label for="image" class="col-md-4 col-form-label text-md-right">アイコン画像：</label>
             <div class="col-md-6">
                 @if($page == "register")
-                    <input type="file" class="form-control-file" id="image" name="image">
+                    <p>アカウント登録後、マイページ「設定の変更」よりご登録いただけます。</p>
+                    {{-- 後日実装予定 --}}
+                    {{-- <input type="file" class="form-control-file" id="image" name="image"> --}}
                 @elseif($page == "edit")
                     <input type="file" class="form-control-file" id="image" name="image">
                     <label class="form-check-label">

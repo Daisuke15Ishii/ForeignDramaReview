@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class MypageSettingController extends Controller
 {
@@ -38,12 +39,20 @@ class MypageSettingController extends Controller
 
         if($request['image'] !== null){
             //画像ファイルの保存場所
-            $img = $request->file('image')->store('public/images/user'); //一旦仮の名前で保存
-            $img = \File::extension($img); //ファイルの拡張子取得
-            Storage::move($old_img, 'public/images/user/' . 'userID' . Auth::id() . '.' .$img); //ファイル名変更
+            $file = $request->file('image');
+/*
+            //画像のリサイズは保留
+            $image = Image::make($file)->resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+*/
+            $old_img = $file->store('public/images/user'); //一旦仮の名前で保存
+            $img = \File::extension($old_img); //ファイルの拡張子取得
+            if(Auth::user()->image !== null){
+                Storage::delete('public/images/user/' . Auth::user()->image);
+            }
+            Storage::move($old_img, 'public/images/user/' . 'icon_userID' . Auth::id() . '.' .$img); //ファイル名変更
             $img = 'icon_userID' . Auth::id() . '.' .$img; //データベースに保存するファイル名
-        }else{
-            $img = '';
         }
         if($request->remove){
             Storage::delete('public/images/user/' . Auth::user()->image);
