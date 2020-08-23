@@ -27,7 +27,7 @@ class MypageController extends Controller
         $likes = $likes->orderby('updated_at', 'desc');
 
         $alllikes = $likes->count();
-        $likes = $likes->Paginate(10);
+        $likes = $likes->Paginate(20);
         
         return view('user.mypage.likeindex', ['likes' => $likes, 'alllikes' => $alllikes]);
     }
@@ -40,7 +40,7 @@ class MypageController extends Controller
         $followings = $followings->orderby('created_at', 'desc');
 
         $allfollowings = $followings->count();
-        $followings = $followings->Paginate(10);
+        $followings = $followings->Paginate(20);
         
         return view('user.mypage.followingindex', ['followings' => $followings, 'allfollowings' => $allfollowings]);
     }
@@ -53,7 +53,7 @@ class MypageController extends Controller
         $followers = $followers->orderby('created_at', 'desc');
 
         $allfollowers = $followers->count();
-        $followers = $followers->Paginate(10);
+        $followers = $followers->Paginate(20);
         
         return view('user.mypage.followedindex', ['followers' => $followers, 'allfollowers' => $allfollowers]);
     }

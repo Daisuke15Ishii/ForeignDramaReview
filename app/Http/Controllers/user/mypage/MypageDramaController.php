@@ -139,8 +139,7 @@ class MypageDramaController extends Controller
         }
         
         $allreviews = $reviews->count();
-        //後程paginate(20)に変更予定
-        $reviews = $reviews->Paginate(8);
+        $reviews = $reviews->Paginate(20);
         
         return view('user.mypage.drama.index', ['reviews' => $reviews, 'allreviews' => $allreviews, 'title' => $title, 'categorize' => $categorize, 'sorts' => $sorts, 'sortby' => $sortby]);
     }
@@ -220,8 +219,7 @@ class MypageDramaController extends Controller
         }
 
         $allreviews = $reviews->count();
-        //後程paginate(10)に変更予定
-        $reviews = $reviews->Paginate(5);
+        $reviews = $reviews->Paginate(10);
         
         return view('user.mypage.drama.favorite.index', ['reviews' => $reviews, 'allreviews' => $allreviews, 'sorts' => $sorts, 'sortby' => $sortby]);
     }

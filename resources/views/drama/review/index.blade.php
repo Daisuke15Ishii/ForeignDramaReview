@@ -3,11 +3,11 @@
 @section('title', '最新レビュー')
 
 @section('content')
-<div class="col-lg-9 content-frame">
+<div class="col-12 content-frame">
     <h1 class="content-title">最新レビュー一覧({{ $allreviews }}件)({{ $reviews->firstitem() }}~{{ $reviews->lastitem() }}件目)</h1>
     <div class="row main-content m-0">
         <div class="col-12 mb-2">
-            <form method="get" action="{{ route('review_index') }}">
+            <form method="get" action="{{ route('review_index') }}" class="mb-2">
                 @csrf
                 <div class="order-group row">
                     <div class="col-sm-12 text-right">

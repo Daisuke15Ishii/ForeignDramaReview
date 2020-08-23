@@ -6,7 +6,7 @@
         <div class="col-11 mx-auto dramaindex-frame pb-1 px-0 mb-2">
             
             <div class="bg-orange">
-                @if($review->favorite()->first()->favorite !== 1)
+                @if($review->favorite()->first()->favorite == false)
                     <label class="mb-0">
                         <img class="icon-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="通常">
                         通常

@@ -27,7 +27,7 @@
                     <div class="col-6 col-md-2 order-md-1 small">
                         <form action="{{ route('my_favorite_set') }}" method="POST" class="mx-auto">
                             @csrf
-                            @if($review->favorite()->first()->favorite !== 1)
+                            @if($review->favorite()->first()->favorite == false)
                                 @if($user == 'mypage')
                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
@@ -39,7 +39,7 @@
                                     </p>
                                 @else
                                     <img class="icon-large-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="非お気に入り">
-                                    <p class="mb-0"></p>
+                                    <p class="mb-0">通常</p>
                                 @endif
                             @else
                                 @if($user == 'mypage')
@@ -68,32 +68,32 @@
                         <div class="row p-0 m-0 small">
                             <div class="col-4 p-0 m-0">
                                 <p class="p-0 m-0">
-                                    シナリオ：{{ $review->story_evaluation }}点
+                                    シナリオ：{{ sprintf('%.1f',$review->story_evaluation) }}点
                                 </p>
                             </div>
                             <div class="col-4 p-0 m-0">
                                 <p class="p-0 m-0">
-                                    世界観：{{ $review->world_evaluation }}点
+                                    世界観：{{ sprintf('%.1f',$review->world_evaluation) }}点
                                 </p>
                             </div>
                             <div class="col-4 p-0 m-0">
                                 <p class="p-0 m-0">
-                                    演者：{{ $review->cast_evaluation }}点
+                                    演者：{{ sprintf('%.1f',$review->cast_evaluation) }}点
                                 </p>
                             </div>
                             <div class="col-4 p-0 m-0">
                                 <p class="p-0 m-0">
-                                    キャラ：{{ $review->char_evaluation }}点
+                                    キャラ：{{ sprintf('%.1f',$review->char_evaluation) }}点
                                 </p>
                             </div>
                             <div class="col-4 p-0 m-0">
                                 <p class="p-0 m-0">
-                                    映像美：{{ $review->visual_evaluation }}点
+                                    映像美：{{ sprintf('%.1f',$review->visual_evaluation) }}点
                                 </p>
                             </div>
                             <div class="col-4 p-0 m-0">
                                 <p class="p-0 m-0">
-                                    音楽：{{ $review->music_evaluation }}点
+                                    音楽：{{ sprintf('%.1f',$review->music_evaluation) }}点
                                 </p>
                             </div>
                         </div>

@@ -10,7 +10,7 @@
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="drama_id" value="{{ $review->drama()->first()->id }}">
                 <input type="hidden" name="review_id" value="{{ $review->id }}">
-                @if($review->favorite()->first()->favorite !== 1)
+                @if($review->favorite()->first()->favorite == false)
                     <input type="hidden" name="favorite" value="1">
                     <label class="mb-0">
                         <input type="image" name="submit" class="icon-favorite" src="{{ asset('/images/icon/star_grey.png') }}" alt="お気に入り登録">

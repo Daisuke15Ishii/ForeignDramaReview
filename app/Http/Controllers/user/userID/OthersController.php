@@ -29,7 +29,7 @@ class OthersController extends Controller
         $likes = $likes->orderby('updated_at', 'desc');
 
         $alllikes = $likes->count();
-        $likes = $likes->Paginate(10);
+        $likes = $likes->Paginate(20);
         
         return view('user.userID.likeindex', ['others' => $others, 'likes' => $likes, 'alllikes' => $alllikes]);
     }
@@ -66,7 +66,7 @@ class OthersController extends Controller
         $followings = $followings->orderby('created_at', 'desc');
 
         $allfollowings = $followings->count();
-        $followings = $followings->Paginate(10);
+        $followings = $followings->Paginate(20);
         
         return view('user.userID.followingindex', ['others' => $others, 'followings' => $followings, 'allfollowings' => $allfollowings]);
     }
@@ -80,7 +80,7 @@ class OthersController extends Controller
         $followers = $followers->orderby('created_at', 'desc');
 
         $allfollowers = $followers->count();
-        $followers = $followers->Paginate(10);
+        $followers = $followers->Paginate(20);
         
         return view('user.userID.followedindex', ['others' => $others, 'followers' => $followers, 'allfollowers' => $allfollowers]);
     }

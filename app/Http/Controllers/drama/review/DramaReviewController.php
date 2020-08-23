@@ -37,7 +37,7 @@ class DramaReviewController extends Controller
         $reviews = $reviews->orderby('updated_at', 'desc');
 
         $allreviews = $reviews->count();
-        $reviews = $reviews->Paginate(10);
+        $reviews = $reviews->Paginate(20);
         
         return view('drama.review.index', ['reviews' => $reviews, 'allreviews' => $allreviews, 'sorts' => $sorts]);
     }
