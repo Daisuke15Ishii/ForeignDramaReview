@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
 
         //fakerでテストユーザー作成(users,reviews,favorites,likes,followsの各テーブルへ登録)
         $faker = Faker\Factory::create('ja_JP');
-        for($i=1; $i <= 20; $i++){
+        for($i=1; $i <= 1; $i++){
             //user作成
             $user = new \App\User([
                 'name' => $faker->name . '(test)',
