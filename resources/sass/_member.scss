@@ -507,6 +507,7 @@ blockquote{
   overflow: hidden;
   margin-left: 1px;
   margin-bottom: 0px !important;
+  padding: 1px 0;
   img{
     width: auto;
     height: 100%;
@@ -537,6 +538,12 @@ li{
 
 .p-left{
   padding-left: 1rem !important;
+  dd{
+    padding-left: 1rem !important;
+  }
+  li{
+    list-style:disc inside;
+  }
 }
 
 /* フォロー一覧・フォロワー一覧ページのcss */
