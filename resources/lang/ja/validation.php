@@ -56,7 +56,7 @@ return [
         'string' => 'The :attribute must be greater than or equal :value characters.',
         'array' => 'The :attribute must have :value items or more.',
     ],
-    'image' => 'The :attribute must be an image.',
+    'image' => ':attributeが画像をご選択ください.',
     'in' => ':attributeは選択肢の中からご入力ください',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => 'The :attribute must be an integer.',
@@ -82,7 +82,7 @@ return [
         'string' => ':attributeは:max文字以内でご入力ください',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => '拡張子が:valuesの:attributeをご選択ください',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',

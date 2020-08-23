@@ -7,9 +7,9 @@
 </h1>
 <div class="main-content">
     @if($page == "register")
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
     @elseif($page == "edit")
-        <form method="POST" action="{{ route('setting_update') }}">
+        <form method="POST" action="{{ route('setting_update') }}" enctype="multipart/form-data">
     @endif
         @csrf
         @if(count($errors) > 0)
@@ -142,11 +142,8 @@
                     <input type="file" class="form-control-file" id="image" name="image">
                 @elseif($page == "edit")
                     <input type="file" class="form-control-file" id="image" name="image">
-                    <div class="form-text text-info">
-                        設定中: {{ Auth::user()->image }}
-                    </div>
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="remove" value="true">画像を削除
+                        <input type="checkbox" class="form-check-input" name="remove" value="true">設定中画像を削除
                     </label>
                 @endif
             </div>

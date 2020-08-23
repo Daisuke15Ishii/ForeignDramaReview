@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MypageSettingController extends Controller
 {
@@ -31,17 +32,23 @@ class MypageSettingController extends Controller
             'name_kana' => ['required', 'string', 'max:40'],
             'penname' => ['required', 'string', 'max:40', 'unique:users,penname,' . $user->id . ',id'], //自分以外でユニーク
             'gender' => ['required', 'in:male,female'],
-            //画像のバリデートも後で記述予定
+            'image' => ['image', 'mimes:jpeg,jpg,png'],
             'birthyear' => ['required'],
         ]);
 
         if($request['image'] !== null){
             //画像ファイルの保存場所
-            $img = '/images/';
+            $img = $request->file('image')->store('public/images/user'); //一旦仮の名前で保存
+            $img = \File::extension($img); //ファイルの拡張子取得
+            Storage::move($old_img, 'public/images/user/' . 'userID' . Auth::id() . '.' .$img); //ファイル名変更
+            $img = 'icon_userID' . Auth::id() . '.' .$img; //データベースに保存するファイル名
         }else{
             $img = '';
         }
-
+        if($request->remove){
+            Storage::delete('public/images/user/' . Auth::user()->image);
+            $img = '';
+        }
 
         $user->name = $request['name'];
         $user->email = $request['email'];
@@ -52,7 +59,7 @@ class MypageSettingController extends Controller
         $user->penname = $request['penname'];
         $user->gender = $request['gender'];
         $user->birth = $request['birthyear'] . '-' . $request['birthmonth'] . '-01';
-        $user->image = $img . $request['image'];
+        $user->image = $img;
 
         $user->save();
 
