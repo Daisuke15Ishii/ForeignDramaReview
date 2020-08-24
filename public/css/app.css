@@ -11660,6 +11660,10 @@ li {
   list-style-position: inside;
 }
 
+.pre {
+  white-space: pre-wrap;
+}
+
 /* sidebar関連 */
 
 /* サイドバーのプロフィール画像を横幅100%の正方形で表示 */

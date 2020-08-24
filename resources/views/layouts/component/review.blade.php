@@ -90,9 +90,9 @@
                     <div class="col-md-12 mx-auto review-comment-display">
                         {{-- レビューの個別ページでは$only_pageがyes,作品詳細ページではno--}}
                         @if($only_page == 'yes')
-                            <p>{{ $review->review_comment }}</p>
+                            <p class="pre">{{ $review->review_comment }}</p>
                         @elseif($review->spoiler_alert == 0 || in_array('spoiler_display' ,$sorts))
-                            <p>{{ \Str::limit($review->review_comment, 1000) }}</p>
+                            <p class="pre">{{ \Str::limit($review->review_comment, 1000) }}</p>
                         @elseif ($review->spoiler_alert == 1)
                             <p class="spoiler"><a href="{{ route('reviewID_index', ['drama_id' => $review->drama_id, 'review_id' => $review->id]) }}">ネタバレ有のレビューを読む</a></p>
                         @endif

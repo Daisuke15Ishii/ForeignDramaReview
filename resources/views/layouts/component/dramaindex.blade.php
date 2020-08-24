@@ -75,7 +75,7 @@
                     <dt>あらすじ(引用)</dt>
                     <dd>
                         <blockquote class="index-quote" cite="{{ $drama->url }}">
-                            <p>{{ \Str::limit($drama->introduction, 250) }}</p>
+                            <p class="pre">{{ \Str::limit($drama->introduction, 250) }}</p>
                         </blockquote>
                         <p>引用元：<cite><a href="{{ $drama->url }}" target="_blank">{{ $drama->title }}</a></cite></p>
                     </dd>

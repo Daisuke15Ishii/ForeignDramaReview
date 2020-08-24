@@ -49,7 +49,7 @@
                                 <dt class="story">あらすじ(引用)</dt>
                                 <dd>
                                     <blockquote class="index-quote" cite="{{ $drama->url }}">
-                                        <p>{{ $drama->introduction }}</p>
+                                        <p class="pre">{{ $drama->introduction }}</p>
                                     </blockquote>
                                     <p>引用元：<cite><a href="{{ $drama->url }}" target="_blank">{{ $drama->title }}</a></cite></p>
                                 </dd>

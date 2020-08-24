@@ -8,7 +8,7 @@
         <h2 class="content-title">{{ $others->penname }}さんのプロフィール</h2>
         <div class="main-content">
             @if( !empty($others->profile) )
-                <p>{{ $others->profile }}</p>
+                <p class="pre">{{ $others->profile }}</p>
             @else
                 <p>よろしくお願いします。(プロフィール未設定)</p>
             @endif
