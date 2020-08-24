@@ -16,7 +16,7 @@
                     <div class="col-md-3">
                         <p class="eyecatch">
                             <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
-                                <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
+                                @include('layouts.component.imgdrama')
                             </a>
                         </p>
                         <small>&copy; {{ $drama->copyright }}</small>
@@ -33,20 +33,16 @@
                             <div class="col-sm-7 col-md-8 col-form-label">
                                 <label for="total_evaluation" class="form-control-label large-text bg-evaluation">総合評価
                                     <select name="total_evaluation" class="original-form-control" id="total_evaluation">
-                                        <option value="" @if( $review->total_evaluation == null ) selected @endif>点数選択</option>
+                                        <option value="" @if( $review->total_evaluation == null  && old('total_evaluation') == null) selected @endif>点数選択</option>
                                         @for($i = 100; $i > 0; $i--)
-                                            @if( $review->total_evaluation == $i)
-                                                <option value="{{ $i }}" selected>{{ $i }}点</option>
-                                            @else
-                                                <option value="{{ $i }}">{{ $i }}点</option>
-                                            @endif
+                                            <option value="{{ $i }}" @if(old('total_evaluation')==$i) selected @elseif( $review->total_evaluation == $i  && old('total_evaluation') == null) selected @endif>{{ $i }}点</option>
                                         @endfor
                                     </select>
                                 </label>
                             </div>
                             <div class="col-sm-5 col-md-4 parent-checkbox">
                                 <label for="favorite" class="bg-evaluation mr-2">
-                                    <input type="checkbox" id="favorite" name="favorite" value="1" @if( $drama->favorites()->where('user_id',Auth::user()->id)->first()->favorite == 1) checked @endif>お気に入り登録
+                                    <input type="checkbox" id="favorite" name="favorite" value="1" @if(old('favorite')=="1") checked @elseif( $drama->favorites()->where('user_id',Auth::user()->id)->first()->favorite == 1) checked @endif>お気に入り登録
                                 </label>
                             </div>
                         </div>
@@ -55,19 +51,19 @@
                             <div class="form-group col-sm-6 mb-2">
                                 <label for="progress" class="control-label bg-evaluation">現在の進捗
                                     <select class="original-form-control" id="progress" name="progress">
-                                        <option value="0" @if( $review->progress == 0 ) selected @endif>未分類</option>
-                                        <option value="4" @if( $review->progress == 4 ) selected @endif>視聴済</option>
-                                        <option value="3" @if( $review->progress == 3 ) selected @endif>視聴中</option>
-                                        <option value="2" @if( $review->progress == 2 ) selected @endif>リタイア</option>
-                                        <option value="1" @if( $review->progress == 1 ) selected @endif>観たい</option>
+                                        <option value="0" @if(old('progress')=="0") selected @elseif( $review->progress == 0 ) selected @endif>未分類</option>
+                                        <option value="4" @if(old('progress')=="4") selected @elseif( $review->progress == 4 ) selected @endif>視聴済</option>
+                                        <option value="3" @if(old('progress')=="3") selected @elseif( $review->progress == 3 ) selected @endif>視聴中</option>
+                                        <option value="2" @if(old('progress')=="2") selected @elseif( $review->progress == 2 ) selected @endif>リタイア</option>
+                                        <option value="1" @if(old('progress')=="1") selected @elseif( $review->progress == 1 ) selected @endif>観たい</option>
                                     </select>
                                 </label>
                             </div>
                             <div class="form-group col-sm-6 mb-2">
                                 <label for="subtitles" class="control-label bg-evaluation">字幕・吹替
                                     <select class="original-form-control" id="subtitles" name="subtitles">
-                                        <option value="0" @if( $review->subtitles == 0 ) selected @endif>吹替</option>
-                                        <option value="1" @if( $review->subtitles == 1 ) selected @endif>字幕</option>
+                                        <option value="0" @if(old('subtitles')=="0") selected @elseif( $review->subtitles == 0 ) selected @endif>吹替</option>
+                                        <option value="1" @if(old('subtitles')=="1") selected @elseif( $review->subtitles == 1 ) selected @endif>字幕</option>
                                     </select>
                                 </label>
                             </div>
@@ -94,7 +90,7 @@
                         <div class="row">
                             <div class="col-12 mx-auto mb-2">
                                 <h2>レビュータイトル</h2>
-                                @if(isset($review->review_title) )
+                                @if(isset($review->review_title) || empty(old('review_title')) )
                                     <input type="text" class="review-title-create px-1" value="{{ $review->review_title }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
                                 @else
                                     <input type="text" class="review-title-create px-1" value="{{ old('review_title') }}" name="review_title" maxlength="80" placeholder="最も伝えたいポイントは何ですか？" size="80">
@@ -104,7 +100,7 @@
                         <div class="row">
                             <div class="col-12 mx-auto mb-2">
                                 <h3>レビュー内容</h3>
-                                @if(isset($review->review_title) )
+                                @if(isset($review->review_comment) || empty(old('review_comment')))
                                     <textarea name="review_comment" class="review-title-create px-1" rows="20" placeholder="感想を自由に書きましょう！">{{ $review->review_comment }}</textarea>
                                 @else
                                     <textarea name="review_comment" class="review-title-create px-1" rows="20" placeholder="感想を自由に書きましょう！">{{ old('review_comment') }}</textarea>
@@ -112,10 +108,10 @@
                             </div>
                             <div class="col-12 mx-auto">
                                 <label class="mr-2">
-                                    <span class="bg-evaluation">レビューにネタバレあり</span><input type="radio" name="spoiler_alert" value="1" @if( $review->spoiler_alert == 1) checked @endif>
+                                    <span class="bg-evaluation">レビューにネタバレあり</span><input type="radio" name="spoiler_alert" value="1"  @if(old('spoiler_alert')=="1") checked @elseif( $review->spoiler_alert == 1 && old('spoiler_alert') == null) checked @endif>
                                 </label>
                                 <label class="mr-2">
-                                    <span class="bg-evaluation">レビューにネタバレなし</span><input type="radio" name="spoiler_alert" value="0" @if( $review->spoiler_alert == 0) checked @endif>
+                                    <span class="bg-evaluation">レビューにネタバレなし</span><input type="radio" name="spoiler_alert" value="0"  @if(old('spoiler_alert')=="0") checked @elseif( $review->spoiler_alert == 0 && old('spoiler_alert') == null) checked @endif>
                                 </label>
                             </div>
                         </div>
@@ -123,13 +119,13 @@
                             <div class="col-12 mx-auto mb-2">
                                 <h3>前作視聴</h3>
                                 <label class="mr-2">
-                                    <span class="bg-evaluation">必須</span><input type="radio" name="previous" value="2" @if( $review->previous == 2) checked @endif>
+                                    <span class="bg-evaluation">必須</span><input type="radio" name="previous" value="2"  checked @if(old('previous') == 2) checked @elseif( $review->previous == 2 && old('previous') == null) checked @endif>
                                 </label>
                                 <label class="mr-2">
-                                    <span class="bg-evaluation">観た方が楽しめる</span><input type="radio" name="previous" value="1" @if( $review->previous == 1) checked @endif>
+                                    <span class="bg-evaluation">観た方が楽しめる</span><input type="radio" name="previous" value="1" @if(old('previous') == 1) checked @elseif( $review->previous == 1 && old('previous') == null) checked @endif>
                                 </label>
                                 <label class="mr-2">
-                                    <span class="bg-evaluation">不要</span><input type="radio" name="previous" value="0" @if( $review->previous == 0) checked @endif>
+                                    <span class="bg-evaluation">不要</span><input type="radio" name="previous" value="0" @if(old('previous') == 0) checked @elseif( $review->previous == 0  && old('previous') == null) checked @endif>
                                 </label>
                             </div>
                         </div>

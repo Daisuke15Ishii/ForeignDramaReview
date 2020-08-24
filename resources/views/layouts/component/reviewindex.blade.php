@@ -57,9 +57,9 @@
                                 </p>
                             </div>
                             <div class="col-3 p-0 m-0">
-                                @include('layouts.component.imgperson', ['user' => $review->user()->first(), 'class' => 'eyecatch'])
+                                @include('layouts.component.imgperson', ['user' => $review->user()->first(), 'class' => 'eyecatch solid-bold-border p-0'])
                             </div>
-                            <div class="col-8 p-0 m-0">
+                            <div class="col-8 pr-0 pl-1 m-0">
                                 <p class="p-0 m-0"><a href="{{ route('others_home', ['userID' => $review->user()->first()->id]) }}">{{ $review->user()->first()->penname }}</a></p>
                                 <p class="p-0 m-0">
                                     {{ floor(Carbon\Carbon::parse($review->user()->first()->birth)->age / 10) * 10 }}代

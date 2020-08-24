@@ -4,6 +4,8 @@
 {{-- component.mypagedramaindexにて利用 --}}
 {{-- component.othersdramaindexにて利用 --}}
 {{-- component.reviewindexにて利用 --}}
+{{-- drama.dramaID.review.createにて利用 --}}
+{{-- drama.dramaID.review.reviewID.editにて利用 --}}
 
 
 @if(file_exists( __DIR__ . '/../../../public' . $drama->image_path))

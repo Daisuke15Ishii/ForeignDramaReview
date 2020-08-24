@@ -21,7 +21,7 @@
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <input type="hidden" name="drama_id" value="{{ $drama->id }}">
             <input type="hidden" name="review_id" value="{{ $drama->reviews->where('user_id', Auth::id())->first()->id }}">
-            @if($drama->favorites()->where('user_id', Auth::id())->first()->favorite !== 1)
+            @if($drama->favorites()->where('user_id', Auth::id())->first()->favorite == false)
                 <input type="hidden" name="favorite" value="1">
                 <button type="submit" class="btn-register btn-favorite-color m-0">
                     お気に入り登録

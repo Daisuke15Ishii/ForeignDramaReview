@@ -25,7 +25,7 @@
                     <div class="col-md-3">
                         <p class="eyecatch">
                             <a href="{{ route('dramaID_index', ['drama_id' => $drama->id] ) }}">
-                                <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
+                                @include('layouts.component.imgdrama')
                             </a>
                         </p>
                         <small>&copy; {{ $drama->copyright }}</small>

@@ -11267,11 +11267,16 @@ header .header-search-input {
   */
   width: 100%;
   overflow: hidden;
+  padding-right: 1rem;
 }
 
 .eyecatch img {
   width: 100%;
   height: auto;
+}
+
+.solid-bold-border {
+  border: solid 2px #000;
 }
 
 .large-text {
