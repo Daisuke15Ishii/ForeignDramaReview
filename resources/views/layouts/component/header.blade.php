@@ -110,10 +110,10 @@
                                             <option value="modecomment">レビューコメントから検索</option>
                                         </select>
                                     </div>
-                                    <div class="col-6 mx-0 px-0">
+                                    <div class="col-8 col-sm-6 mx-0 px-0">
                                         <input type="text" class="header-search-select header-search-input" name="cond_title" value="" autocomplete="cond_title">
                                     </div>
-                                    <div class="col-2 mx-0 px-0">
+                                    <div class="col-12 col-sm-2 text-right text-sm-left mx-0 px-0">
                                         <button type="submit" class="btn btn-accent-color">検索</button>
                                     </div>
                                 </form>
