@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', '新規アカウント登録')
+@section('title', '新規アカウント登録｜')
 
 @section('content')
 <div class="col-lg-8 col-12 content-frame">

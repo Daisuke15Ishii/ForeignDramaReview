@@ -98,6 +98,16 @@ header{
   color: $white;
 }
 
+.footer-nav{
+  @media (min-width: 768px){
+    display: flex;
+    flex-wrap: wrap;
+    li{
+      display: inline-block;
+      width: 50%;
+    }
+  }
+}
 
 /* 下記はfront全般のcss */
 .content-frame{
@@ -192,6 +202,9 @@ header{
 .pagination{
   justify-content: center;
   margin-bottom: 0.5rem;
+  display: flex;
+  //スマホ画面時にwrap指定ないと横がはみ出る
+  flex-wrap: wrap;
 }
 
 
@@ -569,3 +582,11 @@ li{
 .pre{
   white-space: pre-wrap;
 }
+
+/*
+//スマホ画面時にpagenationリンクが横にはみ出る問題
+.page-link-width{
+  //応急処置(後で綺麗に修正予定)
+  overflow: hidden;
+}
+*/

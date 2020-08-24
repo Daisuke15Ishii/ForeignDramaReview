@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'お問合せ送信完了｜サイト概要')
+@section('title', 'お問合せ送信完了｜サイト概要｜')
 
 @section('content')
 <div class="col-lg-8 mx-auto content-frame mb-4">

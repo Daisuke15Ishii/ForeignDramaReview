@@ -1,6 +1,6 @@
 @extends('layouts.member')
 
-@section('title', 'お気に入りの作品｜' . Auth::user()->penname . 'さんのマイページ')
+@section('title', 'お気に入りの作品｜' . Auth::user()->penname . 'さんのマイページ｜')
 
 @section('content')
 <div class="row justify-content-center p-0 m-0">

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', '検索結果')
+@section('title', '検索結果｜')
 
 @section('content')
 <div class="col-12 mx-auto content-frame">
@@ -28,7 +28,7 @@
         </div>
         
         {{-- スマホ時のみ上部にペジネーション表示 --}}
-        <div class="col-12 not-pc">
+        <div class="col-12 not-pc page-link-width">
             {{ $dramas->appends(request()->input())->links() }}
         </div>
 
@@ -36,7 +36,7 @@
             @foreach($dramas as $drama )
                 @include('layouts.component.dramaindex')
             @endforeach
-            
+
             {{ $dramas->appends(request()->input())->links() }}
         </div>
     </div>

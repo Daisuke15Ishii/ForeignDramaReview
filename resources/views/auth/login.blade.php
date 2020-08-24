@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', '会員ログイン')
+@section('title', '会員ログイン｜')
 
 @section('content')
 <div class="col-lg-8 col-12 content-frame">

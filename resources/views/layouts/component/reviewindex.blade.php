@@ -3,7 +3,7 @@
 {{--  component.likeindexにて利用 --}}
 
 <div class="row small mb-2 mx-0">
-    <div class="col-11 mx-auto dramaindex-frame">
+    <div class="col-12 col-md-11 mx-auto dramaindex-frame">
         <div class="row">
             
             {{-- 作品レビュー側(左側) --}}

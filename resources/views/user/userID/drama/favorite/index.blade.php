@@ -1,6 +1,6 @@
 @extends('layouts.others')
 
-@section('title', 'お気に入りの作品｜' . $others->penname . 'さんのマイページ')
+@section('title', 'お気に入りの作品｜' . $others->penname . 'さんのマイページ｜')
 
 @section('content')
 <div class="row justify-content-center p-0 m-0">

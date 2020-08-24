@@ -1,6 +1,6 @@
 @extends('layouts.member')
 
-@section('title', '設定の変更完了')
+@section('title', '設定の変更完了｜')
 
 @section('content')
 <div class="row justify-content-center p-0 m-0">

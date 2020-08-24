@@ -1,6 +1,6 @@
 @extends('layouts.member')
 
-@section('title',  Auth::user()->penname . 'さんのマイページ')
+@section('title',  Auth::user()->penname . 'さんのマイページ｜')
 
 @section('content')
 <div class="row">

@@ -1,6 +1,6 @@
 @extends('layouts.member')
 
-@section('title', 'レビュー編集｜'.$drama->title . "シーズン" . $drama->season)
+@section('title', 'レビュー編集｜'.$drama->title . "シーズン" . $drama->season. "｜")
 
 @section('content')
 <div class="row justify-content-center p-0 m-0">

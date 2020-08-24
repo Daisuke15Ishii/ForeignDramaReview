@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', $drama->title . 'シーズン' . $drama->season . 'に関する' . $review->user()->first()->penname . 'さんのレビュー')
+@section('title', $drama->title . 'シーズン' . $drama->season . 'に関する' . $review->user()->first()->penname . 'さんのレビュー｜')
 
 @section('content')
 <div class="col-12 mx-auto content-frame">

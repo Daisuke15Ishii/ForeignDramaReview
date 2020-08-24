@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'マニュアル｜サイト概要')
+@section('title', 'マニュアル｜サイト概要｜')
 
 @section('content')
 <div class="col-lg-8 mx-auto content-frame mb-4">

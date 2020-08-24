@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', '最新レビュー')
+@section('title', '最新レビュー｜')
 
 @section('content')
 <div class="col-12 content-frame">
@@ -20,16 +20,14 @@
             </form>
 
             <div class="col-12 not-pc">
-                {{ $reviews->appends(request()->input())->links() }}
+                {{ $reviews->onEachSide(2)->appends(request()->input())->links() }}
             </div>
 
             @foreach($reviews as $review)
                 @include('layouts.component.reviewindex')
             @endforeach
             
-            <div class="col-12">
-                {{ $reviews->appends(request()->input())->links() }}
-            </div>
+            {{ $reviews->appends(request()->input())->links() }}
         </div>
     </div>
 </div>

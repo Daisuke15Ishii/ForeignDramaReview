@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', $drama->title . "シーズン" . $drama->season)
+@section('title', $drama->title . "シーズン" . $drama->season . "｜")
 
 @section('content')
 <div class="col-12 mx-auto content-frame">
@@ -98,7 +98,7 @@
                         </div>
                         
                         {{-- スマホ時のみ上部にペジネーション表示 --}}
-                        <div class="col-12 not-2">
+                        <div class="col-12 not-pc page-link-width">
                             {{ $reviews->appends(request()->input())->links() }}
                         </div>
 

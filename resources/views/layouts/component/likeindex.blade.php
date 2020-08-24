@@ -16,5 +16,6 @@
         @endforeach
         
         {{ $likes->appends(request()->input())->links() }}
+        
     </div>
 </div>

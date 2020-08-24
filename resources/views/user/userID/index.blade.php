@@ -1,6 +1,6 @@
 @extends('layouts.others')
 
-@section('title', $others->penname . 'さんのマイページ')
+@section('title', $others->penname . 'さんのマイページ｜')
 
 @section('content')
 <div class="row">

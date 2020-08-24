@@ -1,6 +1,6 @@
 @extends('layouts.member')
 
-@section('title',  $title . '｜' . Auth::user()->penname . 'さんのマイページ')
+@section('title',  $title . '｜' . Auth::user()->penname . 'さんのマイページ｜')
 
 @section('content')
 <div class="row justify-content-center p-0 m-0">

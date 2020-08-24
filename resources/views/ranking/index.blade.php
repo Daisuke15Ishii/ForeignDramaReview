@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'おすすめドラマ')
+@section('title', 'おすすめドラマ｜')
 
 @section('content')
 {{-- search.result.indexとほぼ全て同じ。違いは「テーブルの参照元($socres,$dramas)」「並び替えの有無」「includeするときに渡す引数」 --}}
@@ -16,7 +16,7 @@
             @foreach($scores as $score)
                 @include('layouts.component.dramaindex', ['drama' => $score->drama()->first()])
             @endforeach
-            
+
             {{ $scores->appends(request()->input())->links() }}
         </div>
     </div>

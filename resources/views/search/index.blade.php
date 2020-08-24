@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', '作品条件検索')
+@section('title', '作品条件検索｜')
 
 @section('content')
 <div class="col-lg-8 col-12 content-frame">

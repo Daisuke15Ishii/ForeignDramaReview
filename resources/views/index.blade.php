@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'TOP')
+@section('title', '')
 
 @section('content')
 <div class="col-12 mx-auto p-0 m-0">

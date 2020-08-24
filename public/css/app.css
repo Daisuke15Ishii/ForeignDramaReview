@@ -11120,6 +11120,18 @@ header .header-search-input {
   color: #fff;
 }
 
+@media (min-width: 768px) {
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer-nav li {
+    display: inline-block;
+    width: 50%;
+  }
+}
+
 /* 下記はfront全般のcss */
 
 .content-frame {
@@ -11229,6 +11241,8 @@ header .header-search-input {
 .pagination {
   justify-content: center;
   margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* headerからほぼそのままコピー */
@@ -11668,6 +11682,14 @@ li {
 .pre {
   white-space: pre-wrap;
 }
+
+/*
+//スマホ画面時にpagenationリンクが横にはみ出る問題
+.page-link-width{
+  //応急処置(後で綺麗に修正予定)
+  overflow: hidden;
+}
+*/
 
 /* sidebar関連 */
 

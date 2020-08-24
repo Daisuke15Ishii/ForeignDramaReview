@@ -8,7 +8,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
-        <title>@yield('title')｜洋ドラ会議</title>
+        <title>@yield('title')洋ドラ会議</title>
         
         {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
@@ -67,7 +67,7 @@
             <div class="container">
                 {{-- タイトルロゴ、ログイン・ログアウトボタン、検索バー--}}
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 text-md-left text-center">
                         <a class="titlerogo" href="{{ url('/') }}">
                             <img src="{{ asset('images/icon/titlerogo.png') }}" alt="洋ドラ会議ロゴ">
                         </a>
