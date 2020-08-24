@@ -19,7 +19,7 @@
                             <div class="col-3 p-0 m-0">
                                 <p class="eyecatch">
                                     <a href="{{ route('dramaID_index', ['drama_id' => $review->drama()->first()->id]) }}">
-                                        <img src="{{ secure_asset($review->drama()->first()->image_path) }}" alt="{{ $review->drama()->first()->title }}画像">
+                                        @include('layouts.component.imgdrama', ['drama' => $review->drama()->first()])
                                     </a>
                                 </p>
                             </div>

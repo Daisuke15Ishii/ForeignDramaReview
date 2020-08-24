@@ -67,12 +67,12 @@
             <div class="container">
                 {{-- タイトルロゴ、ログイン・ログアウトボタン、検索バー--}}
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <a class="titlerogo" href="{{ url('/') }}">
                             <img src="{{ asset('images/icon/titlerogo.png') }}" alt="洋ドラ会議ロゴ">
                         </a>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-lg-9">
                         <div class="row">
                             {{-- ログイン・ログアウト --}}
                             <div class="col-md-12 mx-auto">
@@ -102,7 +102,7 @@
                             
                             {{-- 検索バー --}}
                             <div class="col-12">
-                                <form class="row header-search-group" action="{{ action('search\SearchController@result') }}" method="get">
+                                <form class="row header-search-group mx-0" action="{{ action('search\SearchController@result') }}" method="get">
                                     @csrf
                                     <div class="col-4 mx-0 px-0">
                                         <select class="header-search-select header-search-input text-right" name="mode" id="mode">

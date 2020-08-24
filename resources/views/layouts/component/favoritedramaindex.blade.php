@@ -20,7 +20,7 @@
                     <div class="col-6 col-md-3 order-md-2 p-0 m-0">
                         <p class="middle-drama">
                             <a href="{{ route('dramaID_index', ['drama_id' => $review->drama()->first()->id]) }}">
-                                <img src="{{ secure_asset($review->drama()->first()->image_path) }}" alt="{{ $review->drama()->first()->title }}画像">
+                                @include('layouts.component.imgdrama', ['drama' => $review->drama()->first()])
                             </a>
                         </p>
                     </div>
