@@ -111,7 +111,7 @@ class MypageDramaController extends Controller
                     //タイトル昇順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'asc');
                     break;
-                case "title_asc":
+                case "title_desc":
                     //タイトル降順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'desc');
                     break;
@@ -120,7 +120,7 @@ class MypageDramaController extends Controller
                     //総合評価が高い順
                     $reviews = $reviews->orderBy('total_evaluation', 'desc');
                     break;
-                case "total_evaluation_desc":
+                case "total_evaluation_asc":
                     //総合評価が低い順
                     $reviews = $reviews->orderBy('total_evaluation', 'asc');
                     break;
@@ -130,7 +130,7 @@ class MypageDramaController extends Controller
                     break;
                 case "like_asc":
                     //いいねが少ない順
-                    $reviews = $reviews->withCount('likes')->orderBy('likes_count', 'desc');
+                    $reviews = $reviews->withCount('likes')->orderBy('likes_count', 'asc');
                     break;
             }
         }else{
@@ -190,7 +190,7 @@ class MypageDramaController extends Controller
                     //タイトル昇順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'asc');
                     break;
-                case "title_asc":
+                case "title_desc":
                     //タイトル降順
                     $reviews = $reviews->join('dramas', 'dramas.id', '=', 'reviews.drama_id')->orderBy('title', 'desc');
                     break;
@@ -199,7 +199,7 @@ class MypageDramaController extends Controller
                     //総合評価が高い順
                     $reviews = $reviews->orderBy('total_evaluation', 'desc');
                     break;
-                case "total_evaluation_desc":
+                case "total_evaluation_asc":
                     //総合評価が低い順
                     $reviews = $reviews->orderBy('total_evaluation', 'asc');
                     break;
@@ -209,7 +209,7 @@ class MypageDramaController extends Controller
                     break;
                 case "like_asc":
                     //いいねが少ない順
-                    $reviews = $reviews->withCount('likes')->orderBy('likes_count', 'desc');
+                    $reviews = $reviews->withCount('likes')->orderBy('likes_count', 'asc');
                     break;
             }
         }else{

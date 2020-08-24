@@ -75,7 +75,7 @@ class DramaIDController extends Controller
                     //総合評価が高い順
                     $reviews = $reviews->orderBy('total_evaluation', 'desc');
                     break;
-                case "total_evaluation_desc":
+                case "total_evaluation_asc":
                     //総合評価が低い順
                     $reviews = $reviews->orderBy('total_evaluation', 'asc');
                     break;
@@ -85,7 +85,7 @@ class DramaIDController extends Controller
                     break;
                 case "like_asc":
                     //いいねが少ない順
-                    $reviews = $reviews->withCount('likes')->orderBy('likes_count', 'desc');
+                    $reviews = $reviews->withCount('likes')->orderBy('likes_count', 'asc');
                     break;
             }
         }else{
@@ -94,7 +94,7 @@ class DramaIDController extends Controller
         }
         
         $allreviews = $reviews->count();
-        $reviews = $reviews->Paginate(5);
+        $reviews = $reviews->Paginate(10);
         
         return view('drama.dramaID.index', ['drama' => $drama, 'reviews' => $reviews, 'allreviews' => $allreviews, 'sorts' => $sorts, 'sortby' => $sortby]);
     }

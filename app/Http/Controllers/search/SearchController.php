@@ -517,7 +517,7 @@ class SearchController extends Controller
                     //タイトル昇順
                     $drama = $drama->orderBy('title', 'asc');
                     break;
-                case "title_asc":
+                case "title_desc":
                     //タイトル降順
                     $drama = $drama->orderBy('title', 'desc');
                     break;
@@ -525,7 +525,7 @@ class SearchController extends Controller
                 case "total_evaluation_desc":
                     //総合評価が高い順
                     break;
-                case "total_evaluation_desc":
+                case "total_evaluation_asc":
                     //総合評価が低い順
                     break;
                 */
