@@ -6,10 +6,8 @@
 {{-- component.reviewindexにて利用 --}}
 
 
-@if(file_exists('public' . $drama->image_path))
+@if(file_exists( __DIR__ . '/../../../public' . $drama->image_path))
     <img src="{{ secure_asset($drama->image_path) }}" alt="{{ $drama->title }}画像" title="{{ $drama->title }}">
-    {{ 'public' . $drama->image_path }}
 @else
     <img src="{{ secure_asset('/images/drama/preparation.png') }}" alt="画像準備中" title="画像準備中">
-    {{ 'public' . $drama->image_path }}
 @endif
