@@ -49,9 +49,9 @@ Route::group(['prefix' => 'about'], function(){
     Route::get('/terms-of-service', 'about\AboutController@terms_of_service');
     Route::get('/contact', 'about\AboutController@contactcreate');
     
-//    Route::post('/contact', 'about\AboutController@contactsend')->name('contact_send');
-//    Route::get('/contact/result', 'about\AboutController@contactresult')->name('contact_result');
-    Route::post('/contact/result', 'about\AboutController@contactupdate')->name('contact_update');    
+    Route::post('/contact', 'about\AboutController@contactsend')->name('contact_send');
+    Route::get('/contact/result', 'about\AboutController@contactresult')->name('contact_result');
+//    Route::post('/contact/result', 'about\AboutController@contactupdate')->name('contact_update');    
 });
 
 //['prefix' => 'drama/review']を['prefix' => 'drama/{drama_id}']より上に記述する必要あり

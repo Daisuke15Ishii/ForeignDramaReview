@@ -6,7 +6,7 @@
 <div class="col-lg-8 col-12 content-frame">
     <h1 class="content-title">お問合せ</h1>
     <div class="main-content">
-        <form method="POST" action="{{ route('contact_update') }}">
+        <form method="POST" action="{{ route('contact_send') }}">
             @csrf
             @if(count($errors) > 0)
                 <div class="row p-0">

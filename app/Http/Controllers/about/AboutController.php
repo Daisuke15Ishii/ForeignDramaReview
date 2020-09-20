@@ -58,7 +58,6 @@ class AboutController extends Controller
             ['email' => $request->mail, 'name' => $request->name]
         ];        
 
-
         $data = $request->all();
         Mail::to($to)->send(new Contact2($data));
 
