@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'), //変更する必要あり
+        'address' => env('MAIL_FROM_ADDRESS', 'customer@fdrama-meeting.com'),
         'name' => env('MAIL_FROM_NAME', '洋ドラ会議(仮)'),
     ],
 

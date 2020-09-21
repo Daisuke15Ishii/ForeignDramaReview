@@ -30,6 +30,6 @@ class Contact2 extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact')->with($this->data);
+        return $this->subject('お問合せ受付完了')->view('emails.contact')->with($this->data);
     }
 }

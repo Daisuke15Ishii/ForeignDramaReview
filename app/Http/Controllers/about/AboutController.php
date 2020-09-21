@@ -51,15 +51,17 @@ class AboutController extends Controller
     }
 
     public function contactsend(Request $request){
-        //問合せ内容を保存するアクション
         //問合せ内容を管理者にメール送信するアクション(エラー中のため実装保留)
 
         $to = [
             ['email' => $request->mail, 'name' => $request->name]
         ];        
+        $bcc = [
+            ['email' => env('MAIL_FROM_ADDRESS', 'sample@fdrama-meeting.com'), 'name' => $request->name]
+        ];        
 
         $data = $request->all();
-        Mail::to($to)->send(new Contact2($data));
+        Mail::to($to)->bcc($bcc)->send(new Contact2($data));
 
         return redirect()->route('contact_result');
     }
